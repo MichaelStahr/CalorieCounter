@@ -10,26 +10,36 @@
         <!-- Place new controls here -->
         <StackLayout Orientation="Horizontal">
             <Image Aspect="AspectFill" HeightRequest="50" Source="miami.jpg"></Image>
-            <Label Text="Miami University"/>
+            <StackLayout>
+                <Label Text="Miami University"/>
+                <Label Text="Oxford, Ohio"/>
+            </StackLayout>
         </StackLayout>
         <ScrollView VerticalScrollBarVisibility="Always" Orientation="Vertical">
             <StackLayout>
                 <BoxView Margin="10" BackgroundColor="Red" HeightRequest="100"></BoxView>
-                <Label Text="Calories: 1000"></Label>
-                <Label Text="Sugar: 5g"></Label>
-                <Label Text="Carbs: 10g"></Label>
-                <Label Margin ="0,0,10,0" Text="Protein: 5g"></Label>
+                <Label HorizontalOptions="Center" Text="Calories: 1000"></Label>
+                <Label HorizontalOptions="Center" Text="Sugar: 5g"></Label>
+                <Label HorizontalOptions="Center" Text="Carbs: 10g"></Label>
+                <Label HorizontalOptions="Center" Text="Protein: 5g"></Label>
 
-                <Label Text="Foods"></Label>
-                <Entry Placeholder="Enter your food!"></Entry>
-
-                <Label Text="Exercise"></Label>
-                <Entry Placeholder="Enter your workouts!"></Entry>
+                <Label HorizontalOptions="Center" Text="Foods"></Label>
+                <Label x:Name ="foodLabel"></Label>
+                <StackLayout Orientation="Horizontal">
+                    <Entry x:Name ="foodEntry" Placeholder="Enter your food!"></Entry>
+                    <Button x:Name ="addFood" Text="Add" BackgroundColor="Aqua" Clicked="Button_Clicked" ></Button>
+                </StackLayout>
+                <Label HorizontalOptions="Center" Text="Exercise"></Label>
+                <Label x:Name ="exerciseLabel"></Label>
+                <StackLayout Orientation="Horizontal">
+                    <Entry x:Name ="exerciseEntry" Placeholder="Enter your exercise!"></Entry>
+                    <Button x:Name ="addExercise" Text="Add" BackgroundColor="Aqua" Clicked="Button_Clicked" ></Button>
+                </StackLayout>
+                
             </StackLayout>
         </ScrollView>
         <!--<Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>

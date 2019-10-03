@@ -17,5 +17,17 @@ namespace CalorieCounter
         {
             InitializeComponent();
         }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            if (button.Equals(addFood))
+            {
+                foodLabel.Text += foodEntry.Text + "\n";
+            } else
+            {
+                exerciseLabel.Text += exerciseLabel.Text + "\n";
+            }
+        }
     }
 }
