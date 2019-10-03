@@ -8,7 +8,36 @@
 
     <StackLayout>
         <!-- Place new controls here -->
-        <Label Text="TEST" />
+        <StackLayout Orientation="Horizontal">
+            <Image Aspect="AspectFill" HeightRequest="50" Source="miami.jpg"></Image>
+            <Label Text="Miami University"/>
+        </StackLayout>
+        <ScrollView VerticalScrollBarVisibility="Always" Orientation="Vertical">
+            <StackLayout>
+                <BoxView Margin="10" BackgroundColor="Red" HeightRequest="100"></BoxView>
+                <Label Text="Calories: 1000"></Label>
+                <Label Text="Sugar: 5g"></Label>
+                <Label Text="Carbs: 10g"></Label>
+                <Label Margin ="0,0,10,0" Text="Protein: 5g"></Label>
+
+                <Label Text="Foods"></Label>
+                <Entry Placeholder="Enter your food!"></Entry>
+
+                <Label Text="Exercise"></Label>
+                <Entry Placeholder="Enter your workouts!"></Entry>
+            </StackLayout>
+        </ScrollView>
+        <!--<Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+        </Grid>-->
     </StackLayout>
 
 </ContentPage>
