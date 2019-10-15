@@ -1,16 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
+            xmlns:local="clr-namespace:CalorieCounter"
+            mc:Ignorable="d"
              x:Class="CalorieCounter.MainPage">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-    </StackLayout>
+    <ContentPage Title="Home">
+        <StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Image Aspect="AspectFill" HeightRequest="50" Source="miami.jpg"></Image>
+                <StackLayout>
+                    <Label Text="Miami University"/>
+                    <Label Text="Oxford, Ohio"/>
+                </StackLayout>
+            </StackLayout>
+            <ScrollView VerticalScrollBarVisibility="Always" Orientation="Vertical">
+                <StackLayout>
+                    <BoxView Margin="10" BackgroundColor="Red" HeightRequest="100"></BoxView>
+                    <Label HorizontalOptions="Center" Text="Calories: 1000"></Label>
+                    <Label HorizontalOptions="Center" Text="Sugar: 5g"></Label>
+                    <Label HorizontalOptions="Center" Text="Carbs: 10g"></Label>
+                    <Label HorizontalOptions="Center" Text="Protein: 5g"></Label>
 
-</ContentPage>
+                    <Label HorizontalOptions="Center" Text="Foods"></Label>
+                    <Label x:Name ="foodLabel"></Label>
+                    <StackLayout Orientation="Horizontal">
+                        <Entry x:Name ="foodEntry" Placeholder="Enter your food!"></Entry>
+                        <Button x:Name ="addFood" Text="Add" BackgroundColor="Aqua" Clicked="Button_Clicked" ></Button>
+                    </StackLayout>
+                    <Label HorizontalOptions="Center" Text="Exercise"></Label>
+                    <Label x:Name ="exerciseLabel"></Label>
+                    <StackLayout Orientation="Horizontal">
+                        <Entry x:Name ="exerciseEntry" Placeholder="Enter your exercise!"></Entry>
+                        <Button x:Name ="addExercise" Text="Add" BackgroundColor="Aqua" Clicked="Button_Clicked" ></Button>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage>
+    <local:Page1 Title="1"></local:Page1>
+    <local:Page2 Title="2"></local:Page2>
+    <local:Page3 Title="3"></local:Page3>
+</TabbedPage>
