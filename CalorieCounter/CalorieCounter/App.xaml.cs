@@ -8,6 +8,7 @@ namespace CalorieCounter
     {
         public App()
         {
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTU4MzE3QDMxMzcyZTMzMmUzMGtxYThmb2NzaGxuMWJhZy9Eemk5WUhnMmZ2S3N3ZUZNU2VTdTdvWjRWaDg9");
             InitializeComponent();
 
             MainPage = new MainPage();
