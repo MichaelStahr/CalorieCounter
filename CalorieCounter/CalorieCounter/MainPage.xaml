@@ -1,13 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:syncfusion="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            BarBackgroundColor="LightBlue"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             xmlns:local="clr-namespace:CalorieCounter"
+            xmlns:syncTheme="clr-namespace:Syncfusion.XForms.Themes;assembly=Syncfusion.Core.XForms"
             mc:Ignorable="d"
-             x:Class="CalorieCounter.MainPage">
+                x:Class="CalorieCounter.MainPage">
 
-    <ContentPage Title="Home">
+    <TabbedPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <syncfusion:SfCalendarStyles />
+                <ResourceDictionary>
+                    <Color x:Key="SfCalendarHeaderTextColor">Red</Color>
+                    <Color x:Key="SfCalendarPreviousMonthBackgroundColor">Purple</Color>
+                    <Color x:Key="SfCalendarCurrentMonthBackgroundColor">Pink</Color>
+                    <Color x:Key="SfCalendarWeekEndBackgroundColor">Pink</Color>
+                    <Color x:Key="SelectedDayBackgroundColor">Aqua</Color>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </TabbedPage.Resources>
+    <ContentPage IconImageSource="home.png">
         <StackLayout>
             <StackLayout Orientation="Horizontal">
                 <Image Aspect="AspectFill" HeightRequest="50" Source="miami.jpg"></Image>
@@ -18,8 +37,16 @@
             </StackLayout>
             <ScrollView VerticalScrollBarVisibility="Always" Orientation="Vertical">
                 <StackLayout>
-                    <BoxView Margin="10" BackgroundColor="Red" HeightRequest="100"></BoxView>
-                    <Label HorizontalOptions="Center" Text="Calories: 1000"></Label>
+                    <syncfusion:SfCalendar x:Name="Calendar" ViewMode="MonthView" ShowLeadingAndTrailingDays="True" OnCalendarTapped="Calendar_OnCalendarTapped"/>
+                        
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                        
+                        <Button x:Name="GoBack" Text="left" BackgroundColor="Aqua" Clicked="Button_Clicked_1"></Button>
+                        <Label x:Name="DateLabel" FontSize="Medium" Text="Today"  FontAttributes="Bold"></Label>
+                        <Button x:Name="GoForward" Text="right" BackgroundColor="Aqua" Clicked="Button_Clicked_1"></Button>
+                        
+                    </StackLayout>
+                    <Label Text="Calories: 1000" HorizontalOptions="Center"></Label>
                     <Label HorizontalOptions="Center" Text="Sugar: 5g"></Label>
                     <Label HorizontalOptions="Center" Text="Carbs: 10g"></Label>
                     <Label HorizontalOptions="Center" Text="Protein: 5g"></Label>
@@ -40,7 +67,7 @@
             </ScrollView>
         </StackLayout>
     </ContentPage>
-    <local:Page1 Title="1"></local:Page1>
-    <local:Page2 Title="2"></local:Page2>
-    <local:Page3 Title="3"></local:Page3>
+    <local:Page1 IconImageSource="user.png"></local:Page1>
+    <local:Page2 IconImageSource="plus.png"></local:Page2>
+    <local:Page3 IconImageSource="settings.png"></local:Page3>
 </TabbedPage>
