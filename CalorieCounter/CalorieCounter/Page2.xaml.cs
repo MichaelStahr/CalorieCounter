@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace CalorieCounter
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Page2 : ContentPage
+    public partial class Page2 : TabbedPage
     {
         public Page2()
         {
