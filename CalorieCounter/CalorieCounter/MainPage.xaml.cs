@@ -20,19 +20,6 @@ namespace CalorieCounter
 
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-
-            Button button = (Button)sender;
-            if (button.Equals(addFood))
-            {
-                foodLabel.Text += foodEntry.Text + "\n";
-            } else
-            {
-                exerciseLabel.Text += exerciseLabel.Text + "\n";
-            }
-        }
-
         private void Calendar_OnCalendarTapped(object sender, CalendarTappedEventArgs e)
         {            
             DateLabel.Text = e.DateTime.Date.ToShortDateString();
