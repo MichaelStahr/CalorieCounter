@@ -15,6 +15,34 @@ namespace CalorieCounter
         public Page1()
         {
             InitializeComponent();
+            genPicker();
+            genFeetPicker();
+            genInchesPicker();
+
+        }
+
+        private void genPicker()
+        {
+            for (int i = 1; i <= 700; i++)
+            {
+                weightPicker.Items.Add(i + "");
+            }
+        }
+
+        private void genFeetPicker()
+        {
+            for (int i = 1; i <= 10; i++)
+            {
+                feetPicker.Items.Add(i + "");
+            }
+        }
+
+        private void genInchesPicker()
+        {
+            for (int i = 1; i <= 11; i++)
+            {
+                inchesPicker.Items.Add(i + "");
+            }
         }
     }
 }
