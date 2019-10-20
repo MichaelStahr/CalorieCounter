@@ -59,6 +59,7 @@
         </ResourceDictionary>
     </TabbedPage.Resources>
     <ContentPage IconImageSource="home.png">
+        
         <StackLayout>
             <StackLayout Orientation="Horizontal">
                 <Image Aspect="AspectFill" HeightRequest="50" Source="miami.jpg"></Image>

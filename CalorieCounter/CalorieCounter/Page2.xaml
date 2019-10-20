@@ -47,7 +47,8 @@
                 <Entry Placeholder="Search Foods" 
                    PlaceholderColor="LightGray"
                    Margin="20"
-                   WidthRequest="450"/>
+                   WidthRequest="200"
+                   HorizontalOptions="Start"/>
 
                 <Frame HeightRequest="20">
                     <Picker>
