@@ -17,7 +17,6 @@ namespace CalorieCounter
         public MainPage()
         {
             InitializeComponent();
-
         }
 
         private void Calendar_OnCalendarTapped(object sender, CalendarTappedEventArgs e)
@@ -41,5 +40,10 @@ namespace CalorieCounter
             Calendar.SelectedDate = newDate;
             DateLabel.Text = newDate.Date.ToShortDateString();
         }
+
+        //async void Button_Clicked(object sender, EventArgs e)
+        //{
+        //    await Navigation.PushAsync(new Page2());
+        //}
     }
 }
