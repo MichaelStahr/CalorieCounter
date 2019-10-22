@@ -5,11 +5,50 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="CalorieCounter.ExtraDetailsPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="HomePage">
+                <On Platform="Android" Value="Acme-Regular.ttf#Acme Regular" />
+            </OnPlatform>
+            <Style x:Key="CalorieDetailFrame" TargetType="Frame">
+                <Setter Property="BorderColor" Value="DeepSkyBlue"></Setter>
+                <Setter Property="HasShadow" Value="True"></Setter>
+                <Setter Property="CornerRadius" Value="10"></Setter>
+                <Setter Property="Margin" Value="5,5,5,5"></Setter>
+            </Style>
+            <Style x:Key="Item" TargetType="Label">
+                <Setter Property="FontSize" Value="15"></Setter>
+                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                <Setter Property="TextColor" Value="Red"></Setter>
+                <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
+            </Style>
+            <Style x:Key="Titles" TargetType="Label">
+                <Setter Property="FontSize" Value="25"></Setter>
+                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                <Setter Property="TextColor" Value="Black"></Setter>
+                <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Frame Style="{StaticResource CalorieDetailFrame}">
+                <StackLayout HorizontalOptions="Center">
+                    <Label Text="Food" Style="{StaticResource Titles}"></Label>
+                    <Label Text="Cheeesburger" Style="{StaticResource Item}"></Label>
+                    <Label Text="Salad" Style="{StaticResource Item}"></Label>
+                    <Label Text="Peanut Butter Cookie" Style="{StaticResource Item}"></Label>
+                </StackLayout>
+            </Frame>
+            <Frame Style="{StaticResource CalorieDetailFrame}">
+                <StackLayout HorizontalOptions="Center">
+                    <Label Text="Exercise" Style="{StaticResource Titles}"></Label>
+                    <Label Text="Running" Style="{StaticResource Item}"></Label>
+                    <Label Text="Lifting" Style="{StaticResource Item}"></Label>
+                    <Label Text="Yoga" Style="{StaticResource Item}"></Label>
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
