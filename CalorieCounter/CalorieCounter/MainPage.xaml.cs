@@ -17,11 +17,43 @@ namespace CalorieCounter
         public MainPage()
         {
             InitializeComponent();
+            NavigationPage.SetBackButtonTitle(this, "Home");
+
+            StackLayout header = new StackLayout
+            {
+                Orientation = StackOrientation.Horizontal,
+                HorizontalOptions = LayoutOptions.EndAndExpand,
+                Spacing = 3,
+                Children =
+                {
+                    new StackLayout
+                    {
+                        Orientation = StackOrientation.Vertical,
+                        Spacing = 0,
+                        Children =
+                        {
+                            new Label {Text = "Miami University",
+                            FontSize = 25,
+                            FontFamily = Device.RuntimePlatform == Device.Android ? "Acme-Regular.ttf#Acme-Regular" : null,
+                            HorizontalOptions = LayoutOptions.EndAndExpand},
+
+                            new Label {Text = "Oxford",
+                            FontSize = 20,
+                            FontFamily = Device.RuntimePlatform == Device.Android ? "Acme-Regular.ttf#Acme-Regular" : null,
+                            HorizontalOptions = LayoutOptions.EndAndExpand},
+                        }
+                    },
+                    new Image {Source = "miami.jpg", HeightRequest = 50, HorizontalOptions = LayoutOptions.End},
+                }
+            };
+            NavigationPage.SetTitleView(this, header);
+
         }
 
         private void Calendar_OnCalendarTapped(object sender, CalendarTappedEventArgs e)
         {            
             DateLabel.Text = e.DateTime.Date.ToShortDateString();
+           
         }
 
         private void Button_Clicked_1(object sender, EventArgs e)
@@ -41,9 +73,9 @@ namespace CalorieCounter
             DateLabel.Text = newDate.Date.ToShortDateString();
         }
 
-        //async void Button_Clicked(object sender, EventArgs e)
-        //{
-        //    await Navigation.PushAsync(new Page2());
-        //}
+        async void Button_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ExtraDetailsPage(), true);
+        }
     }
 }

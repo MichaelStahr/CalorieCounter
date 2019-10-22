@@ -80,15 +80,8 @@
         </ResourceDictionary>
     </TabbedPage.Resources>
     <ContentPage IconImageSource="home.png">
-        
+
         <StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Image Aspect="AspectFill" HeightRequest="50" Source="miami.jpg"></Image>
-                <StackLayout>
-                    <Label Text="Miami University"/>
-                    <Label Text="Oxford, Ohio"/>
-                </StackLayout>
-            </StackLayout>
             <ScrollView VerticalScrollBarVisibility="Always" Orientation="Vertical">
                 <StackLayout>
                     <syncfusion:SfCalendar x:Name="Calendar" 
@@ -173,7 +166,7 @@
                     </Frame>
 
                     <Editor Style="{d:StaticResource NotesEditor}" x:Name="Notes"></Editor>
-                    <Button Text="Extra Details" Style="{StaticResource Buttons}"></Button>
+                    <Button Text="Extra Details" Style="{StaticResource Buttons}" Clicked="Button_Clicked"></Button>
                 </StackLayout>
             </ScrollView>
         </StackLayout>
