@@ -14,16 +14,16 @@
                     <Label Text="Oxford, Ohio"/>
                 </StackLayout>
             </StackLayout>
-                <Image Aspect="AspectFill" HeightRequest="50" Source="profileimage.png"
-                       HorizontalOptions="Center"></Image>
+                <Image Aspect="AspectFill" HeightRequest="70" Source="profileimage.png"
+                       HorizontalOptions="Center" Margin="0, 40, 0, 0"></Image>
                 <Button Text="Change Image" FontSize="Micro" HorizontalOptions="Center"></Button>
                 <Label Text="UniqueID: dillonis" HorizontalOptions="CenterAndExpand" FontSize="Small" FontAttributes="Bold"></Label>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <Label Text="Weight:" FontSize="Small"></Label>
+                    <Label Text="Weight:" FontSize="Small" VerticalOptions="Center" ></Label>
                     <Picker x:Name="weightPicker" Title="pounds" VerticalOptions="Center" FontSize="Small"></Picker>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <Label Text="Height:" FontSize="Small"></Label>
+                    <Label Text="Height:" FontSize="Small" VerticalOptions="Center"></Label>
                     <Picker x:Name="feetPicker" Title="feet" VerticalOptions="Center" FontSize="Small"></Picker>
                     <Picker x:Name="inchesPicker" Title="inches" VerticalOptions="Center" FontSize="Small"></Picker>
                 </StackLayout>
