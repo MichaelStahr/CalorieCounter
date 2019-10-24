@@ -89,7 +89,6 @@
                                            ShowLeadingAndTrailingDays="True" 
                                            OnCalendarTapped="Calendar_OnCalendarTapped"
                                            SelectionMode="SingleSelection"
-                                           SelectedDate="{Binding Source=Notes, Path=Text, Mode=TwoWay}"
                                            >
                         <syncfusion:SfCalendar.MonthViewSettings>
                             <syncfusion:MonthViewSettings
@@ -165,7 +164,7 @@
                         </Grid>
                     </Frame>
 
-                    <Editor Style="{d:StaticResource NotesEditor}" x:Name="Notes"></Editor>
+                    <Editor Style="{d:StaticResource NotesEditor}" x:Name="Notes" TextChanged="Notes_TextChanged" ></Editor>
                     <Button Text="Extra Details" Style="{StaticResource Buttons}" Clicked="Button_Clicked"></Button>
                 </StackLayout>
             </ScrollView>

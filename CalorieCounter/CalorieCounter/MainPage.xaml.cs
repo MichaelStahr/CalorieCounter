@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace CalorieCounter
@@ -48,12 +49,24 @@ namespace CalorieCounter
             };
             NavigationPage.SetTitleView(this, header);
 
+            //Preferences.Clear();
+            DateTime datetime = Calendar.SelectedDate.Value;
+            string date = datetime.ToShortDateString();
+            //Notes.Text = Preferences.Get(date, "No notes yet!");
         }
 
         private void Calendar_OnCalendarTapped(object sender, CalendarTappedEventArgs e)
-        {            
+        {
+            string date = e.DateTime.Date.ToShortDateString();
             DateLabel.Text = e.DateTime.Date.ToShortDateString();
-           
+
+            //if (Preferences.ContainsKey(date))
+            //{
+            //    Notes.Text = Preferences.Get(date, "No notes yet");
+            //} else
+            //{
+            //    Preferences.Set(date, "");
+            //}
         }
 
         private void Button_Clicked_1(object sender, EventArgs e)
@@ -76,6 +89,15 @@ namespace CalorieCounter
         async void Button_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new ExtraDetailsPage(), true);
+        }
+
+        private void Notes_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            DateTime datetime = Calendar.SelectedDate.Value;
+            string date = datetime.ToShortDateString();
+
+            //Preferences.Set(date, Notes.Text);
+            
         }
     }
 }
