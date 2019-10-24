@@ -19,6 +19,8 @@ namespace CalorieCounter
             genFeetPicker();
             genInchesPicker();
 
+            NavigationPage.SetHasNavigationBar(this, false);
+
         }
 
         private void genPicker()

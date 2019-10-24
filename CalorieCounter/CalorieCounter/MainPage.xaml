@@ -9,115 +9,163 @@
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             xmlns:local="clr-namespace:CalorieCounter"
             xmlns:syncTheme="clr-namespace:Syncfusion.XForms.Themes;assembly=Syncfusion.Core.XForms"
+            
             mc:Ignorable="d"
                 x:Class="CalorieCounter.MainPage">
 
     <TabbedPage.Resources>
+
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <syncfusion:SfCalendarStyles />
-                <ResourceDictionary>
-                    <Color x:Key="SfCalendarHeaderTextColor">Red</Color>
-                    <Color x:Key="SfCalendarPreviousMonthBackgroundColor">Pink</Color>
-                    <Color x:Key="SfCalendarCurrentMonthBackgroundColor">Pink</Color>
-                    <Color x:Key="SfCalendarBorderColor">Black</Color>
-                    <Color x:Key="SfCalendarWeekEndBackgroundColor">Pink</Color>
-                    <Color x:Key="SfCalendarSelectedDayTextColor">Red</Color>
-                    <Color x:Key="SfCalendarDateSelectionColor">Aqua</Color>
-                    <Color x:Key="SfCalendarSelectedDayBackgroundColor">Aqua</Color>
+            <OnPlatform x:TypeArguments="x:String" x:Key="HomePage">
+                <On Platform="Android" Value="Acme-Regular.ttf#Acme Regular" />
+            </OnPlatform>
 
+            <Style x:Key="CaloriesLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="20"></Setter>
+                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                <Setter Property="TextColor" Value="Black"></Setter>
+                <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
+            </Style>
+            <Style x:Key="CaloriesAmount" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
+                <Setter Property="FontSize" Value="20"></Setter>
+                <Setter Property="TextColor" Value="Red"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+                <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
+            </Style>
+            <Style x:Key="AmountLabel" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
+                <Setter Property="FontSize" Value="Medium"></Setter>
+                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                <Setter Property="TextColor" Value="Red"></Setter>
+                <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
+            </Style>
+            <Style x:Key="FactLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="20"></Setter>
+                <Setter Property="HorizontalOptions" Value="Start"></Setter>
+                <Setter Property="TextColor" Value="Black"></Setter>
+                <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
+            </Style>
+            <Style x:Key="NotesEditor" TargetType="Editor">
+                <Setter Property="HeightRequest" Value="100"></Setter>
+                <Setter Property="VerticalOptions" Value="Start"></Setter>
+                <Setter Property="BackgroundColor" Value="DeepSkyBlue"></Setter>
+                <Setter Property="Placeholder" Value="Enter your notes here!"></Setter>
+            </Style>
+            <Style x:Key="Buttons" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Aqua"></Setter>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+                <Setter Property="BorderColor" Value="Black"></Setter>
+                <Setter Property="BorderWidth" Value="2"></Setter>
+                <Setter Property="CornerRadius" Value="10"></Setter>
+                <Setter Property="FontFamily" Value="{d:StaticResource HomePage}"></Setter>
+            </Style>
+            <Style x:Key="DateLabel" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+                <Setter Property="WidthRequest" Value="100"></Setter>
+                <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+                <Setter Property="FontSize" Value="Medium"></Setter>
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
+                <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
+                <Setter Property="TextColor" Value="Red"></Setter>
+            </Style>
+            <Style x:Key="CalorieDetailFrame" TargetType="Frame">
+                <Setter Property="BorderColor" Value="DeepSkyBlue"></Setter>
+                <Setter Property="HasShadow" Value="True"></Setter>
+                <Setter Property="CornerRadius" Value="10"></Setter>
+                <Setter Property="Margin" Value="5,0,5,0"></Setter>
+            </Style>
 
-                    <Style x:Key="CaloriesLabel" TargetType="Label">
-                        <Setter Property="FontSize" Value="20"></Setter>
-                        <Setter Property="HorizontalOptions" Value="Center"></Setter>
-                        <Setter Property="TextColor" Value="Black"></Setter>
-                    </Style>
-                    <Style x:Key="CaloriesAmount" TargetType="Label">
-                        <Setter Property="FontAttributes" Value="Bold"></Setter>
-                        <Setter Property="FontSize" Value="20"></Setter>
-                        <Setter Property="TextColor" Value="Red"></Setter>
-                        <Setter Property="VerticalOptions" Value="Center"></Setter>
-                    </Style>
-                    <Style x:Key="AmountLabel" TargetType="Label">
-                        <Setter Property="FontAttributes" Value="Bold"></Setter>
-                        <Setter Property="FontSize" Value="Medium"></Setter>
-                        <Setter Property="HorizontalOptions" Value="End"></Setter>
-                    </Style>
-                    <Style x:Key="FactLabel" TargetType="Label">
-                        <Setter Property="FontSize" Value="20"></Setter>
-                        <Setter Property="HorizontalOptions" Value="Center"></Setter>
-                        <Setter Property="TextColor" Value="Black"></Setter>
-                    </Style>
-                    <Style x:Key="NotesEditor" TargetType="Editor">
-                        <Setter Property="HeightRequest" Value="100"></Setter>
-                        <Setter Property="VerticalOptions" Value="Start"></Setter>
-                        <Setter Property="BackgroundColor" Value="LightBlue"></Setter>
-                        <Setter Property="Placeholder" Value="Enter your notes here!"></Setter>
-                    </Style>
-                </ResourceDictionary>
-            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </TabbedPage.Resources>
     <ContentPage IconImageSource="home.png">
-        
+
         <StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Image Aspect="AspectFill" HeightRequest="50" Source="miami.jpg"></Image>
-                <StackLayout>
-                    <Label Text="Miami University"/>
-                    <Label Text="Oxford, Ohio"/>
-                </StackLayout>
-            </StackLayout>
             <ScrollView VerticalScrollBarVisibility="Always" Orientation="Vertical">
                 <StackLayout>
-                    <syncfusion:SfCalendar x:Name="Calendar" ViewMode="MonthView" ShowLeadingAndTrailingDays="True" OnCalendarTapped="Calendar_OnCalendarTapped"/>
-
+                    <syncfusion:SfCalendar x:Name="Calendar" 
+                                           ViewMode="MonthView" 
+                                           ShowLeadingAndTrailingDays="True" 
+                                           OnCalendarTapped="Calendar_OnCalendarTapped"
+                                           SelectionMode="SingleSelection"
+                                           >
+                        <syncfusion:SfCalendar.MonthViewSettings>
+                            <syncfusion:MonthViewSettings
+                                HeaderTextColor="Red"
+                                HeaderFontAttributes="Bold"
+                                HeaderFontSize="30"
+                                CurrentMonthBackgroundColor="DeepSkyBlue"
+                                PreviousMonthBackgroundColor="LightBlue"
+                                TodaySelectionBackgroundColor="Red"
+                                SelectedDayTextColor="White"
+                                DateSelectionColor="DarkRed"
+                                DayHeaderTextColor="Red"
+                                TodayBorderColor="Red">
+                               
+                                <syncfusion:MonthViewSettings.HeaderFontFamily>
+                                    <OnPlatform x:TypeArguments="x:String" Android="Acme-Regular.ttf" />
+                                </syncfusion:MonthViewSettings.HeaderFontFamily>
+                                <syncfusion:MonthViewSettings.DayCellFontFamily>
+                                    <OnPlatform x:TypeArguments="x:String" Android="Acme-Regular.ttf" />
+                                </syncfusion:MonthViewSettings.DayCellFontFamily>
+                            </syncfusion:MonthViewSettings>
+                        </syncfusion:SfCalendar.MonthViewSettings>
+                    </syncfusion:SfCalendar>
 
                     <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
 
-                        <Button x:Name="GoBack" Text="left" BackgroundColor="Aqua" Clicked="Button_Clicked_1"></Button>
-                        <Label x:Name="DateLabel" FontSize="Medium" Text="Today" HorizontalTextAlignment="Center" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" WidthRequest="100"></Label>
-                        <Button x:Name="GoForward" Text="right" BackgroundColor="Aqua" Clicked="Button_Clicked_1"></Button>
-
+                        <Button x:Name="GoBack" Text="left" Clicked="Button_Clicked_1" Style="{StaticResource Buttons}"></Button>
+                        <Label x:Name="DateLabel" Text="Today" Style="{StaticResource DateLabel}"></Label>
+                        <Button x:Name="GoForward" Text="right" Clicked="Button_Clicked_1" Style="{StaticResource Buttons}"></Button>
+    
                     </StackLayout>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                        <Label Text="Total Calories" HorizontalOptions="Center" FontSize="25" TextColor="Black" FontAttributes="Bold"></Label>
-                        <Label Text="400g" HorizontalOptions="Center" VerticalOptions="Center" FontSize="25" FontAttributes="Bold" TextColor="Red"></Label>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                        <Label Text="Consumed" Grid.Row="0" Grid.Column="0"  Style="{StaticResource CaloriesLabel}"></Label>
-                        <Label Text="500g" Grid.Row="0" Grid.Column="1" Style="{StaticResource CaloriesAmount}" Margin="0,0,10,0"></Label>
-                        <Label Text="Burned" Grid.Row="0" Grid.Column="3" Style="{StaticResource CaloriesLabel}"></Label>
-                        <Label Text="100g" Grid.Row="0" Grid.Column="4" Style="{StaticResource CaloriesAmount}"></Label>
-                    </StackLayout>
+                    <Frame Style="{StaticResource CalorieDetailFrame}">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                            <Label Text="Total Calories" HorizontalOptions="Center" FontSize="25" TextColor="Black" FontAttributes="Bold" FontFamily="{StaticResource HomePage}"></Label>
+                            <Label Text="400g" HorizontalOptions="Center" VerticalOptions="Center" FontSize="25" FontAttributes="Bold" TextColor="Red" FontFamily="{StaticResource HomePage}"></Label>
+                        </StackLayout>
+                    </Frame>
 
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        
-                        <Label Text="Sugar" Grid.Row="0" Grid.Column="0" Style="{StaticResource FactLabel}"></Label>
-                        <Label Text="5g" Grid.Row="0" Grid.Column="1" Style="{StaticResource AmountLabel}"></Label>
+                    <Frame Style="{StaticResource CalorieDetailFrame}">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                            <Label Text="Consumed" Grid.Row="0" Grid.Column="0"  Style="{StaticResource CaloriesLabel}"></Label>
+                            <Label Text="500g" Grid.Row="0" Grid.Column="1" Style="{StaticResource CaloriesAmount}" Margin="0,0,10,0"></Label>
+                            <Label Text="Burned" Grid.Row="0" Grid.Column="3" Style="{StaticResource CaloriesLabel}"></Label>
+                            <Label Text="100g" Grid.Row="0" Grid.Column="4" Style="{StaticResource CaloriesAmount}"></Label>
+                        </StackLayout>
+                    </Frame>
 
-                        <Label Text="Carbs" Grid.Row="0" Grid.Column="2" Style="{StaticResource FactLabel}"></Label>
-                        <Label Text="10g" Grid.Row="0" Grid.Column="3" Style="{StaticResource AmountLabel}"></Label>
+                    <Frame Style="{StaticResource CalorieDetailFrame}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
 
-                        <Label Text="Protein" Grid.Row="1" Grid.Column="0" Style="{StaticResource FactLabel}"></Label>
-                        <Label Text="5g" Grid.Row="1" Grid.Column="1" Style="{StaticResource AmountLabel}"></Label>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
 
-                        <Label Text="Fats" Grid.Row="1" Grid.Column="2" Style="{StaticResource FactLabel}"></Label>
-                        <Label Text="5g" Grid.Row="1" Grid.Column="3" Style="{StaticResource AmountLabel}"></Label>
-                    </Grid>
-                    <Editor Style="{d:StaticResource NotesEditor}"></Editor>
-                    <Button Text="Extra Details" HorizontalOptions="Center" BackgroundColor="Aqua"></Button>
+                            <Label Text="Sugar" Grid.Row="0" Grid.Column="0" Style="{StaticResource FactLabel}"></Label>
+                            <Label Text="5g" Grid.Row="0" Grid.Column="1" Style="{StaticResource AmountLabel}"></Label>
+
+                            <Label Text="Carbs" Grid.Row="0" Grid.Column="2" Style="{StaticResource FactLabel}"></Label>
+                            <Label Text="10g" Grid.Row="0" Grid.Column="3" Style="{StaticResource AmountLabel}"></Label>
+
+                            <Label Text="Protein" Grid.Row="1" Grid.Column="0" Style="{StaticResource FactLabel}"></Label>
+                            <Label Text="5g" Grid.Row="1" Grid.Column="1" Style="{StaticResource AmountLabel}"></Label>
+
+                            <Label Text="Fats" Grid.Row="1" Grid.Column="2" Style="{StaticResource FactLabel}"></Label>
+                            <Label Text="5g" Grid.Row="1" Grid.Column="3" Style="{StaticResource AmountLabel}"></Label>
+                        </Grid>
+                    </Frame>
+
+                    <Editor Style="{d:StaticResource NotesEditor}" x:Name="Notes" TextChanged="Notes_TextChanged" ></Editor>
+                    <Button Text="Extra Details" Style="{StaticResource Buttons}" Clicked="Button_Clicked"></Button>
                 </StackLayout>
             </ScrollView>
         </StackLayout>
