@@ -19,12 +19,10 @@ namespace CalorieCounter
     [DesignTimeVisible(false)]
     public partial class MainPage : TabbedPage
     {
-        SfPopupLayout popupLayout;
         public MainPage()
         {
             InitializeComponent();
             NavigationPage.SetBackButtonTitle(this, "Home");
-            popupLayout = new SfPopupLayout();
             StackLayout header = new StackLayout
             {
                 Orientation = StackOrientation.Horizontal,
@@ -55,6 +53,7 @@ namespace CalorieCounter
             NavigationPage.SetTitleView(this, header);
             Color labelColor = Color.FromHex("503047");
             //Preferences.Clear();
+            
             DateTime datetime = Calendar.SelectedDate.Value;
             string date = datetime.ToShortDateString();
             //Notes.Text = Preferences.Get(date, "No notes yet!");
@@ -77,10 +76,11 @@ namespace CalorieCounter
 
         private void Button_Clicked_1(object sender, EventArgs e)
         {
+            
             Button button = (Button)sender;
+            
             DateTime currentDate = Calendar.SelectedDate.Value;
             DateTime newDate;
-            Calendar.IsVisible = true;
             if (button.Equals(GoBack))
             {
                 newDate = currentDate.AddDays(-1);
@@ -109,7 +109,8 @@ namespace CalorieCounter
         }
         private void ClickToShowPopup_Clicked(object sender, EventArgs e)
         {
-            popupLayout.Show();
+            
+            popup.Show();
         }
     }
 }

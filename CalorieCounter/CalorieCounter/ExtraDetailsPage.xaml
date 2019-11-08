@@ -13,7 +13,7 @@
                 <On Platform="Android" Value="Acme-Regular.ttf#Acme Regular" />
             </OnPlatform>
             <Style x:Key="CalorieDetailFrame" TargetType="Frame">
-                <Setter Property="BorderColor" Value="DeepSkyBlue"></Setter>
+                <Setter Property="BorderColor" Value="#C05746"></Setter>
                 <Setter Property="HasShadow" Value="True"></Setter>
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="Margin" Value="5,5,5,5"></Setter>
@@ -21,13 +21,13 @@
             <Style x:Key="Item" TargetType="Label">
                 <Setter Property="FontSize" Value="15"></Setter>
                 <Setter Property="HorizontalOptions" Value="Center"></Setter>
-                <Setter Property="TextColor" Value="Red"></Setter>
+                <Setter Property="TextColor" Value="#DDA448"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
             </Style>
             <Style x:Key="Titles" TargetType="Label">
                 <Setter Property="FontSize" Value="25"></Setter>
                 <Setter Property="HorizontalOptions" Value="Center"></Setter>
-                <Setter Property="TextColor" Value="Black"></Setter>
+                <Setter Property="TextColor" Value="#537D8D"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
             </Style>
         </ResourceDictionary>
@@ -50,22 +50,6 @@
                     <Label Text="Yoga" Style="{StaticResource Item}"></Label>
                 </StackLayout>
             </Frame>
-            <chart:SfChart VerticalOptions="FillAndExpand">
-                <chart:SfChart.PrimaryAxis>
-                    <chart:CategoryAxis>
-                        <chart:CategoryAxis.Title>
-                            <chart:ChartAxisTitle Text="Day"></chart:ChartAxisTitle>
-                        </chart:CategoryAxis.Title>
-                    </chart:CategoryAxis>
-                </chart:SfChart.PrimaryAxis>
-                <chart:SfChart.SecondaryAxis>
-                    <chart:NumericalAxis>
-                        <chart:NumericalAxis.Title>
-                            <chart:ChartAxisTitle Text="# of Cals"></chart:ChartAxisTitle>
-                        </chart:NumericalAxis.Title>
-                    </chart:NumericalAxis>
-                </chart:SfChart.SecondaryAxis>
-            </chart:SfChart>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

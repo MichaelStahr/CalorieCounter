@@ -17,19 +17,11 @@ namespace CalorieCounter
         public Page3()
         {
             InitializeComponent();
-            SfChart chart = new SfChart();
-            //Initializing Primary Axis
-            CategoryAxis primaryAxis = new CategoryAxis();
 
-            chart.PrimaryAxis = primaryAxis;
+        }
 
-            //Initializing Secondary Axis
-            NumericalAxis secondaryAxis = new NumericalAxis();
-
-            chart.SecondaryAxis = secondaryAxis;
-            //this.Content = chart;
-
-            
+        private void Button_Clicked(object sender, EventArgs e)
+        {
 
         }
     }

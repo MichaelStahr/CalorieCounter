@@ -16,11 +16,12 @@ namespace CalorieCounter
             Calories = new ObservableCollection<ChartDataPoint>();
             DateTime today = DateTime.Today;
             
-            Calories.Add(new ChartDataPoint(today, 100));
-            Calories.Add(new ChartDataPoint(today.AddDays(1), 200));
-            Calories.Add(new ChartDataPoint(today.AddDays(2), 300));
-            Calories.Add(new ChartDataPoint(today.AddDays(3), 145));
-            Calories.Add(new ChartDataPoint(today.AddDays(4), 78));
+           
+            Calories.Add(new ChartDataPoint(today.AddDays(-2), 200));
+            Calories.Add(new ChartDataPoint(today.AddDays(-1), 300));
+            Calories.Add(new ChartDataPoint(today, 400));
+            Calories.Add(new ChartDataPoint(today.AddDays(1), 145));
+            Calories.Add(new ChartDataPoint(today.AddDays(2), 78));
         }
 
     }

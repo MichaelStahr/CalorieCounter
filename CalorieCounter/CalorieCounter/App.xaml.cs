@@ -14,8 +14,10 @@ namespace CalorieCounter
             Color.FromHex("ADC698");
             MainPage = new NavigationPage(new MainPage())
             {
-                
-                BarBackgroundColor = Color.FromHex("ADC698"),
+
+                //#CBDFBD
+                //#437C90
+                BarBackgroundColor = Color.FromHex("#CBDFBD"),
             
             };
         }
