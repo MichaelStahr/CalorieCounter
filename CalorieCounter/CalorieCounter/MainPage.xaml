@@ -9,10 +9,14 @@
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             xmlns:local="clr-namespace:CalorieCounter"
             xmlns:syncTheme="clr-namespace:Syncfusion.XForms.Themes;assembly=Syncfusion.Core.XForms"
-            
+            xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+            xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
             mc:Ignorable="d"
                 x:Class="CalorieCounter.MainPage">
 
+    <TabbedPage.BindingContext>
+        <local:ChartData/>
+    </TabbedPage.BindingContext>
     <TabbedPage.Resources>
 
         <ResourceDictionary>
@@ -29,7 +33,7 @@
             <Style x:Key="CaloriesAmount" TargetType="Label">
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
                 <Setter Property="FontSize" Value="20"></Setter>
-                <Setter Property="TextColor" Value="Red"></Setter>
+                <Setter Property="TextColor" Value="#503047"></Setter>
                 <Setter Property="VerticalOptions" Value="Center"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
             </Style>
@@ -37,7 +41,7 @@
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
                 <Setter Property="FontSize" Value="Medium"></Setter>
                 <Setter Property="HorizontalOptions" Value="Center"></Setter>
-                <Setter Property="TextColor" Value="Red"></Setter>
+                <Setter Property="TextColor" Value="#503047"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
             </Style>
             <Style x:Key="FactLabel" TargetType="Label">
@@ -53,7 +57,7 @@
                 <Setter Property="Placeholder" Value="Enter your notes here!"></Setter>
             </Style>
             <Style x:Key="Buttons" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="Aqua"></Setter>
+                <Setter Property="BackgroundColor" Value="#C05746"></Setter>
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
                 <Setter Property="BorderColor" Value="Black"></Setter>
                 <Setter Property="BorderWidth" Value="2"></Setter>
@@ -68,10 +72,10 @@
                 <Setter Property="FontSize" Value="Medium"></Setter>
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
-                <Setter Property="TextColor" Value="Red"></Setter>
+                <Setter Property="TextColor" Value="#503047"></Setter>
             </Style>
             <Style x:Key="CalorieDetailFrame" TargetType="Frame">
-                <Setter Property="BorderColor" Value="DeepSkyBlue"></Setter>
+                <Setter Property="BorderColor" Value="#ADC698"></Setter>
                 <Setter Property="HasShadow" Value="True"></Setter>
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="Margin" Value="5,0,5,0"></Setter>
@@ -79,17 +83,18 @@
 
         </ResourceDictionary>
     </TabbedPage.Resources>
+    
     <ContentPage IconImageSource="home.png">
-
-        <StackLayout>
-            <ScrollView VerticalScrollBarVisibility="Always" Orientation="Vertical">
+        
+        <ContentPage.Content>
+            <ScrollView Orientation="Vertical">
                 <StackLayout>
                     <syncfusion:SfCalendar x:Name="Calendar" 
                                            ViewMode="MonthView" 
                                            ShowLeadingAndTrailingDays="True" 
                                            OnCalendarTapped="Calendar_OnCalendarTapped"
                                            SelectionMode="SingleSelection"
-                                           >
+                                           IsVisible="False">
                         <syncfusion:SfCalendar.MonthViewSettings>
                             <syncfusion:MonthViewSettings
                                 HeaderTextColor="Red"
@@ -102,7 +107,7 @@
                                 DateSelectionColor="DarkRed"
                                 DayHeaderTextColor="Red"
                                 TodayBorderColor="Red">
-                               
+
                                 <syncfusion:MonthViewSettings.HeaderFontFamily>
                                     <OnPlatform x:TypeArguments="x:String" Android="Acme-Regular.ttf" />
                                 </syncfusion:MonthViewSettings.HeaderFontFamily>
@@ -112,18 +117,47 @@
                             </syncfusion:MonthViewSettings>
                         </syncfusion:SfCalendar.MonthViewSettings>
                     </syncfusion:SfCalendar>
+                    
+                    <chart:SfChart x:Name="chart" HeightRequest="400" Margin="5">
+                        <chart:SfChart.PrimaryAxis>
+                            <chart:CategoryAxis>
+                                <chart:CategoryAxis.Title>
+                                    <chart:ChartAxisTitle Text="Day" FontAttributes="Bold"></chart:ChartAxisTitle>
+                                </chart:CategoryAxis.Title>
+                            </chart:CategoryAxis>
+                        </chart:SfChart.PrimaryAxis>
+                        <chart:SfChart.SecondaryAxis>
+                            <chart:NumericalAxis>
+                                <chart:NumericalAxis.Title>
+                                    <chart:ChartAxisTitle Text="# of Cals" FontAttributes="Bold"></chart:ChartAxisTitle>
+                                </chart:NumericalAxis.Title>
+                            </chart:NumericalAxis>
+                        </chart:SfChart.SecondaryAxis>
+                        
+                        <chart:SfChart.BindingContext>
+                            <local:ChartData/>
+                        </chart:SfChart.BindingContext>
+                        <chart:SfChart.Series>
+                            <chart:LineSeries ItemsSource ="{Binding Calories}"/>
+                        </chart:SfChart.Series>
+                    </chart:SfChart>
 
                     <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
 
                         <Button x:Name="GoBack" Text="left" Clicked="Button_Clicked_1" Style="{StaticResource Buttons}"></Button>
                         <Label x:Name="DateLabel" Text="Today" Style="{StaticResource DateLabel}"></Label>
                         <Button x:Name="GoForward" Text="right" Clicked="Button_Clicked_1" Style="{StaticResource Buttons}"></Button>
-    
+
                     </StackLayout>
+                    <Button x:Name="showCalendar" Text="Show Calendar" 
+                            VerticalOptions="Start" HorizontalOptions="FillAndExpand"
+                            Clicked="ClickToShowPopup_Clicked"></Button>
+
+
                     <Frame Style="{StaticResource CalorieDetailFrame}">
                         <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                             <Label Text="Total Calories" HorizontalOptions="Center" FontSize="25" TextColor="Black" FontAttributes="Bold" FontFamily="{StaticResource HomePage}"></Label>
-                            <Label Text="400g" HorizontalOptions="Center" VerticalOptions="Center" FontSize="25" FontAttributes="Bold" TextColor="Red" FontFamily="{StaticResource HomePage}"></Label>
+                            <Label Text="400g" HorizontalOptions="Center" VerticalOptions="Center" FontSize="25" FontAttributes="Bold" TextColor="#503047" FontFamily="{StaticResource HomePage}"></Label>
                         </StackLayout>
                     </Frame>
 
@@ -166,9 +200,10 @@
 
                     <Editor Style="{d:StaticResource NotesEditor}" x:Name="Notes" TextChanged="Notes_TextChanged" ></Editor>
                     <Button Text="Extra Details" Style="{StaticResource Buttons}" Clicked="Button_Clicked"></Button>
+
                 </StackLayout>
             </ScrollView>
-        </StackLayout>
+        </ContentPage.Content>
     </ContentPage>
     <local:Page1 IconImageSource="user.png"></local:Page1>
     <local:Page2 IconImageSource="plus.png"></local:Page2>

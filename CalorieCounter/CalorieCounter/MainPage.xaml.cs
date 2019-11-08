@@ -1,4 +1,8 @@
-﻿using Syncfusion.SfCalendar.XForms;
+﻿using Android;
+using Android.OS;
+using Syncfusion.SfCalendar.XForms;
+using Syncfusion.SfChart.XForms;
+using Syncfusion.XForms.PopupLayout;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,11 +19,12 @@ namespace CalorieCounter
     [DesignTimeVisible(false)]
     public partial class MainPage : TabbedPage
     {
+        SfPopupLayout popupLayout;
         public MainPage()
         {
             InitializeComponent();
             NavigationPage.SetBackButtonTitle(this, "Home");
-
+            popupLayout = new SfPopupLayout();
             StackLayout header = new StackLayout
             {
                 Orientation = StackOrientation.Horizontal,
@@ -48,11 +53,12 @@ namespace CalorieCounter
                 }
             };
             NavigationPage.SetTitleView(this, header);
-
+            Color labelColor = Color.FromHex("503047");
             //Preferences.Clear();
             DateTime datetime = Calendar.SelectedDate.Value;
             string date = datetime.ToShortDateString();
             //Notes.Text = Preferences.Get(date, "No notes yet!");
+
         }
 
         private void Calendar_OnCalendarTapped(object sender, CalendarTappedEventArgs e)
@@ -74,17 +80,19 @@ namespace CalorieCounter
             Button button = (Button)sender;
             DateTime currentDate = Calendar.SelectedDate.Value;
             DateTime newDate;
-
+            Calendar.IsVisible = true;
             if (button.Equals(GoBack))
             {
                 newDate = currentDate.AddDays(-1);
-            } else
+            }
+            else
             {
                 newDate = currentDate.AddDays(1);
             }
             Calendar.SelectedDate = newDate;
             DateLabel.Text = newDate.Date.ToShortDateString();
         }
+
 
         async void Button_Clicked(object sender, EventArgs e)
         {
@@ -97,7 +105,11 @@ namespace CalorieCounter
             string date = datetime.ToShortDateString();
 
             //Preferences.Set(date, Notes.Text);
-            
+
+        }
+        private void ClickToShowPopup_Clicked(object sender, EventArgs e)
+        {
+            popupLayout.Show();
         }
     }
 }
