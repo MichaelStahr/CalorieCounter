@@ -10,12 +10,19 @@ namespace CalorieCounter
         {
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTU4MzE3QDMxMzcyZTMzMmUzMGtxYThmb2NzaGxuMWJhZy9Eemk5WUhnMmZ2S3N3ZUZNU2VTdTdvWjRWaDg9");
             InitializeComponent();
-
+            ColorTypeConverter color = new ColorTypeConverter();
+            Color.FromHex("ADC698");
             MainPage = new NavigationPage(new MainPage())
             {
-                BarBackgroundColor = Color.Aqua,
+
+                //#CBDFBD
+                //#437C90
+                BarBackgroundColor = Color.FromHex("#CBDFBD"),
+            
             };
         }
+
+        
 
         protected override void OnStart()
         {

@@ -7,13 +7,7 @@
              x:Class="CalorieCounter.Page1">
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Image Aspect="AspectFill" HeightRequest="50" Source="miami.jpg"></Image>
-                <StackLayout>
-                    <Label Text="Miami University"/>
-                    <Label Text="Oxford, Ohio"/>
-                </StackLayout>
-            </StackLayout>
+           
                 <Image Aspect="AspectFill" HeightRequest="70" Source="profileimage.png"
                        HorizontalOptions="Center" Margin="0, 40, 0, 0"></Image>
                 <Button Text="Change Image" FontSize="Micro" HorizontalOptions="Center"></Button>

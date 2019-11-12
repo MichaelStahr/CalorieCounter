@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
              mc:Ignorable="d"
              x:Class="CalorieCounter.ExtraDetailsPage">
 
@@ -12,7 +13,7 @@
                 <On Platform="Android" Value="Acme-Regular.ttf#Acme Regular" />
             </OnPlatform>
             <Style x:Key="CalorieDetailFrame" TargetType="Frame">
-                <Setter Property="BorderColor" Value="DeepSkyBlue"></Setter>
+                <Setter Property="BorderColor" Value="#C05746"></Setter>
                 <Setter Property="HasShadow" Value="True"></Setter>
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="Margin" Value="5,5,5,5"></Setter>
@@ -20,13 +21,13 @@
             <Style x:Key="Item" TargetType="Label">
                 <Setter Property="FontSize" Value="15"></Setter>
                 <Setter Property="HorizontalOptions" Value="Center"></Setter>
-                <Setter Property="TextColor" Value="Red"></Setter>
+                <Setter Property="TextColor" Value="#DDA448"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
             </Style>
             <Style x:Key="Titles" TargetType="Label">
                 <Setter Property="FontSize" Value="25"></Setter>
                 <Setter Property="HorizontalOptions" Value="Center"></Setter>
-                <Setter Property="TextColor" Value="Black"></Setter>
+                <Setter Property="TextColor" Value="#537D8D"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
             </Style>
         </ResourceDictionary>

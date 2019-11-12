@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Syncfusion.SfChart.XForms;
+using System.Collections.ObjectModel;
 
 namespace CalorieCounter
 {
@@ -15,6 +17,12 @@ namespace CalorieCounter
         public Page3()
         {
             InitializeComponent();
+
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+
         }
     }
 }

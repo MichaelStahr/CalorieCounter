@@ -1,4 +1,8 @@
-﻿using System;
+using Syncfusion.XForms.UWP.PopupLayout;
+using Syncfusion.SfCalendar.XForms.UWP;
+using Syncfusion.SfChart.XForms.UWP;
+using System.Reflection;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -52,7 +56,11 @@ namespace CalorieCounter.UWP
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                Xamarin.Forms.Forms.Init(e);
+List<Assembly> assembliesToInclude = new List<Assembly>();
+assembliesToInclude.Add(typeof(SfPopupLayoutRenderer).GetTypeInfo().Assembly);
+assembliesToInclude.Add(typeof(SfCalendarRenderer).GetTypeInfo().Assembly);
+assembliesToInclude.Add(typeof(SfChartRenderer).GetTypeInfo().Assembly);
+Xamarin.Forms.Forms.Init(e, assembliesToInclude);
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
