@@ -18,7 +18,19 @@ xmlns:calendar="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.S
         <ScrollView>
             <StackLayout>
                 <Button Text="About"></Button>
-                <Button Text="Theme" Clicked="Button_Clicked"></Button>
+                <Frame BorderColor="#C05746">
+                    <StackLayout>
+                        <Label Text="Theme" FontSize="15"></Label>
+                        <StackLayout Orientation="Horizontal">
+                            <Button Text="Dark" BackgroundColor="DarkSlateGray" TextColor="White"></Button>
+                            <Button Text="Light" BackgroundColor="White"></Button>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Button Text="Subtle" BackgroundColor="#DDA448"></Button>
+                            <Button Text="Vibrant" BackgroundColor="DeepSkyBlue" TextColor="White"></Button>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
