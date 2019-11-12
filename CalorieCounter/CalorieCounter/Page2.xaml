@@ -9,9 +9,17 @@
         <StackLayout>
             <StackLayout Orientation="Horizontal">
                 <Entry Placeholder="Search Foods" 
+                       x:Name="SearchingFoods"
+                       ReturnType="Search"
+                     
                    PlaceholderColor="LightGray"
                    Margin="20"
-                   WidthRequest="450"/>
+                   WidthRequest="450"
+                   TextChanged="Entry_TextChanged"/>
+
+                <Label x:Name="TextNewValue"></Label>
+
+                <Label x:Name="textCompleted" FontSize="Large"></Label>
 
                 <Frame HeightRequest="20">
                     <Picker>
@@ -23,11 +31,23 @@
                     </Picker>
                 </Frame>
             </StackLayout>
-
             <StackLayout>
                 <Frame BorderColor="LightGray" HeightRequest="250">
                     <ScrollView>
-                        <Label Text="History" FontSize="Small"/>
+                        <StackLayout>
+                            <Label x:Name="TextOldValue" FontSize="Small"/>
+                            <ListView x:Name="foodItemslv"></ListView>
+                        </StackLayout>
+                    </ScrollView>
+                </Frame>
+            </StackLayout>
+            <StackLayout>
+                <Frame BorderColor="LightGray" HeightRequest="250">
+                    <ScrollView>
+                        <StackLayout>
+                            <Label Text="History" FontSize="Small"/>
+                            
+                        </StackLayout>
                     </ScrollView>
                 </Frame>
 
@@ -39,8 +59,8 @@
             </StackLayout>
         </StackLayout>
     </ContentPage>
-    
-    
+
+
     <ContentPage Title="Miami Campus" >
         <StackLayout>
             <StackLayout Orientation="Horizontal">
