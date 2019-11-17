@@ -32,6 +32,11 @@
                 </Frame>
             </StackLayout>
             <StackLayout>
+                <Entry x:Name="testEntry"></Entry>
+                <Button x:Name="queryClick" Text="Click ME" Clicked="QueryClick_Clicked"></Button>
+                <Label x:Name="output" Text="{Binding Calories}"></Label>
+            </StackLayout>
+            <StackLayout>
                 <Frame BorderColor="LightGray" HeightRequest="250">
                     <ScrollView>
                         <StackLayout>
@@ -45,7 +50,7 @@
                 <Frame BorderColor="LightGray" HeightRequest="250">
                     <ScrollView>
                         <StackLayout>
-                            <Label Text="History" FontSize="Small"/>
+                            <Label x:Name="History" Text="History" FontSize="Small"/>
                             
                         </StackLayout>
                     </ScrollView>

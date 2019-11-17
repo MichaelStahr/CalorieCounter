@@ -1,26 +1,68 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
 using System.Data;
-using System.Linq;
 using System.Data.SqlClient;
-using System.Collections;
+using Newtonsoft.Json;
 
 namespace CalorieCounter
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Page2 : TabbedPage
     {
+        public static string BaseAddress =
+            Device.RuntimePlatform == Device.Android ? "https://10.0.2.2:44341" : "https://localhost:44341";
+        public static string apiEndpoint = $"{BaseAddress}/api.asmx/";
+        RestService _restService;
+
         public Page2()
         {
             InitializeComponent();
+            _restService = new RestService();
             //SearchingFoods.Text = "Searching Foods";
+        }
+        
+        string CreateFoodQuery()
+        {
+            //api.asmx/GetCaloriesByFood?food=string
+            //? id = string & date = string & token = string
+            //string food = testEntry.Text.Replace(" ", string.Empty);
+            string food = Uri.EscapeUriString(testEntry.Text);
+            string requestUri = apiEndpoint;
+            //requestUri += $"/GetCaloriesByFood";
+            requestUri += "GetCaloriesByFood";
+            requestUri += $"?food={food}";
+            //requestUri += $"?id={id}";
+            //requestUri += $"&date={date}";
+            //requestUri += $"&token={token}";
+
+
+            return requestUri;
+        }
+
+        async void QueryClick_Clicked(object sender, EventArgs e)
+        {
+            //ProcessFoodQuery();
+            if (!string.IsNullOrWhiteSpace(testEntry.Text))
+            {
+                FoodItem foodItem = await _restService.GetFoodDataAsync(CreateFoodQuery());
+                BindingContext = foodItem;
+            }
+        }
+
+        public void ProcessFoodQuery()
+        {
+            FoodItem data = new FoodItem
+            {
+                Calories = 8,
+               
+            };
+
+            string stringData = JsonConvert.SerializeObject(data);
+            FoodItem jsonData = JsonConvert.DeserializeObject<FoodItem>(stringData);
+            Console.WriteLine(stringData);
+            Console.WriteLine(jsonData);
+
         }
 
 
@@ -30,6 +72,8 @@ namespace CalorieCounter
             textCompleted.Text = ((Entry)sender).Text;
 
         }
+
+
 
         private void Entry_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -44,6 +88,7 @@ namespace CalorieCounter
 
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
+                
                 sqlConnection.Open();
                 Console.WriteLine("Connection Open  !");
 
@@ -51,7 +96,7 @@ namespace CalorieCounter
 
                 TextNewValue.Text = "Connection Open!";
                 SqlCommand command = new SqlCommand("Select * from Food where foodname like '%" + e.OldTextValue + "%' order by FoodName", sqlConnection);
-
+                 
                 SqlDataReader reader = null;
                 reader = command.ExecuteReader();
                 DataTable schemaTable = reader.GetSchemaTable();
@@ -120,10 +165,11 @@ namespace CalorieCounter
 
                 //(String.Format("ID{0}  Loc{1} Type{2} Cal{3} Trans{4} Sat{5} chol{6} Sodium{",
                 //  column.ColumnName, row[column]));
-
                 TextOldValue.Text = output2;
                 sqlConnection.Close();
             }//end using
         }//end emthod entrychanged
+
+        
     }
 }
