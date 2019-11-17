@@ -39,10 +39,13 @@
                     <ScrollView>
                         <StackLayout>
                             <Label x:Name="TextOldValue" FontSize="Small"/>
-                            <ListView x:Name="foodItemslv" ></ListView>
+                            <ListView x:Name="foodItemslv"></ListView>
                         </StackLayout>
                     </ScrollView>
                 </Frame>
+            </StackLayout>
+            <StackLayout>
+                <Button x:Name="addFoodToLog" Text="Add" Clicked="AddFoodToLog_Clicked"></Button>
             </StackLayout>
             <StackLayout>
                 <Frame BorderColor="LightGray" HeightRequest="250">
