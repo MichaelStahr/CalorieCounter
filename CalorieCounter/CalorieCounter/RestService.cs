@@ -21,6 +21,8 @@ namespace CalorieCounter
 
         }
 
+
+
         public HttpClientHandler GetInsecureHandler()
         {
             var handler = new HttpClientHandler();
@@ -33,7 +35,45 @@ namespace CalorieCounter
             return handler;
         }
 
-        public async Task<FoodItem> GetFoodDataAsync(string uri)
+        public async Task<FoodItem> GetFoodCaloriesAsync(string uri)
+        {
+            List<FoodItem> foodItems = null;
+            FoodItem item = null;
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                HttpStatusCode i = response.StatusCode;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    //FoodItem item = new FoodItem
+                    //{
+                    //    Calories = 8,
+                    //};
+                    //string c = JsonConvert.SerializeObject(item);
+
+                    string c = await response.Content.ReadAsStringAsync();
+
+                    foodItems = JsonConvert.DeserializeObject<List<FoodItem>>(c);
+
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.InnerException.Message);
+            }
+            if (foodItems == null)
+            {
+                return item;
+            }
+            else
+            {
+                return foodItems[0];
+            }
+
+        }
+
+        public async Task<List<FoodItem>> GetFoodDataAsync(string uri)
         {
             List<FoodItem> listFood = null;
             FoodItem foodItem = null;
@@ -60,14 +100,9 @@ namespace CalorieCounter
             {
                 Console.WriteLine(e.InnerException.Message);
             }
-            if (listFood.Count == 0)
-            {
-                return foodItem;
-            }
-            else
-            {
-                return listFood[0];
-            }
+            
+             return listFood;
+            
         }
     }
 }

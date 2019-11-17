@@ -41,7 +41,7 @@
                     <ScrollView>
                         <StackLayout>
                             <Label x:Name="TextOldValue" FontSize="Small"/>
-                            <ListView x:Name="foodItemslv"></ListView>
+                            <ListView x:Name="foodItemslv" ItemsSource="{Binding FoodName}"></ListView>
                         </StackLayout>
                     </ScrollView>
                 </Frame>
