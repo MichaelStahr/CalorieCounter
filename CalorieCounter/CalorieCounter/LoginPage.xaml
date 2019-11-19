@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="CalorieCounter.LoginPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="CalorieDetailFrame" TargetType="Frame">
+                <Setter Property="BorderColor" Value="#C05746"></Setter>
+                <Setter Property="HasShadow" Value="True"></Setter>
+                <Setter Property="CornerRadius" Value="10"></Setter>
+                <Setter Property="Margin" Value="5,0,5,0"></Setter>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"></Setter>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        
+        <StackLayout>
+            <Frame Style="{StaticResource CalorieDetailFrame}">
+                <StackLayout>
+                    <Button x:Name="login" Text="Sign in with Google" Clicked="OnLoginClicked"></Button>
+                    <Label x:Name="required" Text="Miami University email account required" FontSize="Subtitle"></Label>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

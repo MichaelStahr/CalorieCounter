@@ -1,5 +1,6 @@
 ﻿using Android;
 using Android.OS;
+using Xamarin.Auth;
 using Syncfusion.SfCalendar.XForms;
 using Syncfusion.SfChart.XForms;
 using Syncfusion.XForms.PopupLayout;
@@ -11,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Newtonsoft.Json;
 
 namespace CalorieCounter
 {
@@ -19,6 +21,8 @@ namespace CalorieCounter
     [DesignTimeVisible(false)]
     public partial class MainPage : TabbedPage
     {
+       
+
         public MainPage()
         {
             InitializeComponent();
@@ -59,6 +63,7 @@ namespace CalorieCounter
             //Notes.Text = Preferences.Get(date, "No notes yet!");
 
         }
+
 
         private void Calendar_OnCalendarTapped(object sender, CalendarTappedEventArgs e)
         {

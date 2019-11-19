@@ -131,6 +131,7 @@
                             VerticalOptions="Start" HorizontalOptions="FillAndExpand"
                             Clicked="ClickToShowPopup_Clicked" BackgroundColor="#537D8D" TextColor="White">
                 </Button>
+                
                 <sfPopup:SfPopupLayout x:Name="popup">
                     <sfPopup:SfPopupLayout.PopupView>
                         <sfPopup:PopupView HeightRequest="400"
