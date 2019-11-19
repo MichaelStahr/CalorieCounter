@@ -25,8 +25,8 @@
                             <x:String>Dividend$</x:String>
                             <x:String>Garden Commons</x:String>
                             <x:String>King Cafe</x:String>
-                            <x:String>Market Street Cafe</x:String>
-                            <x:String>Martin Dining Hall</x:String>
+                            <x:String>Martin</x:String>
+                            <x:String>Martin</x:String>
                             <x:String>Scoreboard Market</x:String>
                             <x:String>MapleStreet Commons</x:String>
                         </Picker.Items>

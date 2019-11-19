@@ -17,6 +17,8 @@ namespace CalorieCounter
         public static string apiEndpoint = $"{BaseAddress}/api.asmx/";
         RestService _restService;
 
+        public static string miamiApiEndpoint = "https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php";
+
 
         public Page2()
         {
@@ -59,6 +61,22 @@ namespace CalorieCounter
             return requestUri;
         }
 
+        public string GetMiamiFoodByNameAndLocation(string location)
+        {
+
+            //https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php?ThisLocation=Martin
+
+           
+            string food = Uri.EscapeUriString(SearchingFoods.Text);
+            string requestUri = miamiApiEndpoint;
+            requestUri += $"?ThisLocation={location}";
+            requestUri += $"&ThisItem={food}";
+
+            return requestUri;
+        }
+
+
+
         //async void QueryClick_Clicked(object sender, EventArgs e)
         //{
         //    if (!string.IsNullOrWhiteSpace(testEntry.Text))
@@ -77,6 +95,24 @@ namespace CalorieCounter
         private void Locations_SelectedIndexChanged(object sender, EventArgs e)
         {
             FoodLookup();
+            //MiamiFoodLookup();
+        }
+
+        async void MiamiFoodLookup()
+        {
+            string foods = null;
+            if (!string.IsNullOrWhiteSpace(SearchingFoods.Text))
+            {
+               
+                foods = await _restService.GetMiamiFoodDataAsync(GetMiamiFoodByNameAndLocation(locations.SelectedItem.ToString()));
+                
+                // parse foods and store in our db
+
+            }
+            else
+            {
+                //foodItemslv.ItemsSource = foodItem;
+            }
         }
 
         async void FoodLookup()

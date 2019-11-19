@@ -3,10 +3,13 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace CalorieCounter
 {
@@ -103,6 +106,39 @@ namespace CalorieCounter
             
              return listFood;
             
+        }
+
+        public async Task<string> GetMiamiFoodDataAsync(string uri)
+        {
+            string foods = null;
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                HttpStatusCode i = response.StatusCode;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    //FoodItem item = new FoodItem
+                    //{
+                    //    Calories = 8,
+                    //};
+                    //string c = JsonConvert.SerializeObject(item);
+                    string c = await response.Content.ReadAsStringAsync();
+                    string file = "<items>\n" + c + "\n</items>";
+                    string newFile = file.Replace("&", "and");
+                    XElement items = XElement.Parse(newFile);
+                    List<XElement> itemNodes = items.Elements("item").ToList();
+                    var s = itemNodes[0].Element("formal_name");
+
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.InnerException.Message);
+            }
+
+            return foods;
+
         }
     }
 }
