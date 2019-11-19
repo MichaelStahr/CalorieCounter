@@ -94,7 +94,9 @@ namespace CalorieCounter
 
         private void Locations_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // access our db
             FoodLookup();
+            // access Miami API and pull from db
             //MiamiFoodLookup();
         }
 

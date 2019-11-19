@@ -49,12 +49,6 @@ namespace CalorieCounter
 
                 if (response.IsSuccessStatusCode)
                 {
-                    //FoodItem item = new FoodItem
-                    //{
-                    //    Calories = 8,
-                    //};
-                    //string c = JsonConvert.SerializeObject(item);
-
                     string c = await response.Content.ReadAsStringAsync();
 
                     foodItems = JsonConvert.DeserializeObject<List<FoodItem>>(c);
@@ -87,11 +81,6 @@ namespace CalorieCounter
                 
                 if (response.IsSuccessStatusCode)
                 {
-                    //FoodItem item = new FoodItem
-                    //{
-                    //    Calories = 8,
-                    //};
-                    //string c = JsonConvert.SerializeObject(item);
 
                     string c = await response.Content.ReadAsStringAsync();
 
@@ -108,6 +97,7 @@ namespace CalorieCounter
             
         }
 
+        // not complete yet but does access Miami API
         public async Task<string> GetMiamiFoodDataAsync(string uri)
         {
             string foods = null;
@@ -118,11 +108,7 @@ namespace CalorieCounter
 
                 if (response.IsSuccessStatusCode)
                 {
-                    //FoodItem item = new FoodItem
-                    //{
-                    //    Calories = 8,
-                    //};
-                    //string c = JsonConvert.SerializeObject(item);
+                    
                     string c = await response.Content.ReadAsStringAsync();
                     string file = "<items>\n" + c + "\n</items>";
                     string newFile = file.Replace("&", "and");
