@@ -1,15 +1,6 @@
-﻿using Android;
-using Android.OS;
-using Syncfusion.SfCalendar.XForms;
-using Syncfusion.SfChart.XForms;
-using Syncfusion.XForms.PopupLayout;
+﻿using Syncfusion.SfCalendar.XForms;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace CalorieCounter

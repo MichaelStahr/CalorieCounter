@@ -9,25 +9,51 @@
         <StackLayout>
             <StackLayout Orientation="Horizontal">
                 <Entry Placeholder="Search Foods" 
-                   PlaceholderColor="LightGray"
-                   Margin="20"
-                   WidthRequest="450"/>
+                       x:Name="SearchingFoods"
+                       ReturnType="Search"
+                       PlaceholderColor="LightGray"
+                       Margin="20"
+                       WidthRequest="450"
+                       TextChanged="Entry_TextChanged"/>
 
                 <Frame HeightRequest="20">
-                    <Picker>
+                    <Picker x:Name="locations" Title="Locations" SelectedIndexChanged="Locations_SelectedIndexChanged">
                         <Picker.Items>
-                            <x:String>Ingredients</x:String>
-                            <x:String>Recipes</x:String>
+                            <x:String>All</x:String>
+                            <x:String>UDF</x:String>
+                            <x:String>Bell Tower</x:String>
+                            <x:String>Dividend$</x:String>
+                            <x:String>Garden Commons</x:String>
+                            <x:String>King Cafe</x:String>
+                            <x:String>Martin</x:String>
+                            <x:String>Martin Dining Hall</x:String>
+                            <x:String>Scoreboard Market</x:String>
+                            <x:String>MapleStreet Commons</x:String>
                         </Picker.Items>
                         <Picker.SelectedIndex>0</Picker.SelectedIndex>
                     </Picker>
                 </Frame>
             </StackLayout>
-
             <StackLayout>
                 <Frame BorderColor="LightGray" HeightRequest="250">
                     <ScrollView>
-                        <Label Text="History" FontSize="Small"/>
+                        <StackLayout>
+                            <Label x:Name="TextOldValue" FontSize="Small"/>
+                            <ListView x:Name="foodItemslv"></ListView>
+                        </StackLayout>
+                    </ScrollView>
+                </Frame>
+            </StackLayout>
+            <StackLayout>
+                <Button x:Name="addFoodToLog" Text="Add" Clicked="AddFoodToLog_Clicked"></Button>
+            </StackLayout>
+            <StackLayout>
+                <Frame BorderColor="LightGray" HeightRequest="250">
+                    <ScrollView>
+                        <StackLayout>
+                            <Label x:Name="History" Text="History" FontSize="Small"/>
+                            
+                        </StackLayout>
                     </ScrollView>
                 </Frame>
 
@@ -39,8 +65,8 @@
             </StackLayout>
         </StackLayout>
     </ContentPage>
-    
-    
+
+
     <ContentPage Title="Miami Campus" >
         <StackLayout>
             <StackLayout Orientation="Horizontal">
