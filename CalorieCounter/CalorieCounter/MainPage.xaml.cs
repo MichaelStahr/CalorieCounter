@@ -1,4 +1,5 @@
-﻿using Syncfusion.SfCalendar.XForms;
+﻿using Newtonsoft.Json.Linq;
+using Syncfusion.SfCalendar.XForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,10 +12,20 @@ namespace CalorieCounter
     [DesignTimeVisible(false)]
     public partial class MainPage : TabbedPage
     {
-       
+
+        const string token = "ddgfdfgdfgdfg";
+        const string dateString = "2019-11-13";
+        const string uniqueId = "Hornsl2";
+        public static string BaseAddress =
+        Device.RuntimePlatform == Device.Android ? "https://10.0.2.2:44341" : "https://localhost:44341";
+        public static string apiEndpoint = $"{BaseAddress}/api.asmx/";
+        RestService _restService;
+
+
         public MainPage()
         {
             InitializeComponent();
+            _restService = new RestService();
             NavigationPage.SetBackButtonTitle(this, "Home");
             StackLayout header = new StackLayout
             {
@@ -50,7 +61,37 @@ namespace CalorieCounter
             DateTime datetime = Calendar.SelectedDate.Value;
             string date = datetime.ToShortDateString();
             //Notes.Text = Preferences.Get(date, "No notes yet!");
+        }
 
+        public string DisplayDailyValuesByUserDay()
+        {
+            // /api.asmx/DisplayDailyValuesByUserDay
+            string requestUri = apiEndpoint;
+            requestUri += "DisplayDailyValuesByUserDay";
+            requestUri += $"?uniqueId={uniqueId}";
+            requestUri += $"&date={dateString}";
+            requestUri += $"&token={token}";
+
+            return requestUri;
+        }
+
+        protected override void OnAppearing()
+        {
+            FoodLookup();
+        }
+        async void FoodLookup()
+        {
+            List<DailyValues> foodItem = null;
+            foodItem = await _restService.DisplayDailyValuesByUserDayAsync(DisplayDailyValuesByUserDay());
+            totalCal.Text = foodItem[0].TotalCalories.ToString() + "g";
+            transFat.Text = foodItem[0].TotalTrans_Fat.ToString() + "g";
+            satFat.Text = foodItem[0].TotalSat_Fat.ToString() + "g";
+            cholesterol.Text = foodItem[0].TotalCholesterol.ToString() + "g";
+            sodium.Text = foodItem[0].TotalSodium.ToString() + "g";
+            carbs.Text = foodItem[0].TotalCarbs.ToString() + "g";
+            fiber.Text = foodItem[0].TotalFiber.ToString() + "g";
+            sugar.Text = foodItem[0].TotalSugars.ToString() + "g";
+            protein.Text = foodItem[0].TotalProtein.ToString() + "g";
         }
 
         private void Calendar_OnCalendarTapped(object sender, CalendarTappedEventArgs e)
@@ -102,7 +143,6 @@ namespace CalorieCounter
         }
         private void ClickToShowPopup_Clicked(object sender, EventArgs e)
         {
-            
             popup.Show();
         }
     }

@@ -93,9 +93,7 @@ namespace CalorieCounter
             {
                 Console.WriteLine(e.InnerException.Message);
             }
-            
-             return listFood;
-            
+             return listFood; 
         }
 
         // not complete yet but does access Miami API
@@ -163,34 +161,8 @@ namespace CalorieCounter
             }
             return inserted;
         }
-
-        public async Task<List<UserLogData>> GetDailyValuesForUser(string uri)
-        {
-            List<UserLogData> logData = null;
-            UserLogData data = null;
-            try
-            {
-                HttpResponseMessage response = await _client.GetAsync(uri);
-                HttpStatusCode i = response.StatusCode;
-
-                if (response.IsSuccessStatusCode)
-                {
-
-                    string content = await response.Content.ReadAsStringAsync();
-
-                    logData = JsonConvert.DeserializeObject<List<UserLogData>>(content);
-
-                }
-            }
-            catch (HttpRequestException e)
-            {
-                Console.WriteLine(e.InnerException.Message);
-            }
-
-            return logData;
-
-        }
-
+        
+        // not implemted yet
         public async Task UpDailyValuesForUser(string uri)
         {
             List<UserLogData> logData = null;
@@ -213,6 +185,36 @@ namespace CalorieCounter
             {
                 Console.WriteLine(e.InnerException.Message);
             }
+        }
+
+        public async Task<List<DailyValues>> DisplayDailyValuesByUserDayAsync(string uri)
+        {
+            List<DailyValues> listFood = null;
+
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                HttpStatusCode i = response.StatusCode;
+
+                if (response.IsSuccessStatusCode)
+                {
+
+                   
+                    string c = await response.Content.ReadAsStringAsync();
+
+                    listFood = JsonConvert.DeserializeObject<List<DailyValues>>(c);
+
+
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.InnerException.Message);
+            }
+
+
+            return listFood;
+
         }
     }
 }
