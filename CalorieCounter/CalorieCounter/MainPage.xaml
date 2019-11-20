@@ -85,7 +85,7 @@
         </ResourceDictionary>
     </TabbedPage.Resources>
 
-    <ContentPage IconImageSource="home.png">
+    <ContentPage IconImageSource="home.png" Title="Main Page">
 
 
         <ScrollView Orientation="Vertical">
@@ -174,11 +174,11 @@
                 <Frame Style="{StaticResource CalorieDetailFrame}">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                         <Label Text="Total Calories" HorizontalOptions="Center" FontSize="25" TextColor="#537D8D" FontAttributes="Bold" FontFamily="{StaticResource HomePage}"></Label>
-                        <Label Text="400g" HorizontalOptions="Center" VerticalOptions="Center" FontSize="25" FontAttributes="Bold" TextColor="#DDA448" FontFamily="{StaticResource HomePage}"></Label>
+                        <Label x:Name="totalCal" Text="400g" HorizontalOptions="Center" VerticalOptions="Center" FontSize="25" FontAttributes="Bold" TextColor="#DDA448" FontFamily="{StaticResource HomePage}"></Label>
                     </StackLayout>
                 </Frame>
 
-                <Frame Style="{StaticResource CalorieDetailFrame}">
+                <Frame Style="{StaticResource CalorieDetailFrame}" IsVisible="False">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                         <Label Text="Consumed" Grid.Row="0" Grid.Column="0"  Style="{StaticResource CaloriesLabel}"></Label>
                         <Label Text="500g" Grid.Row="0" Grid.Column="1" Style="{StaticResource CaloriesAmount}" Margin="0,0,10,0"></Label>
@@ -192,6 +192,8 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
 
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
@@ -201,17 +203,29 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Label Text="Sugar" Grid.Row="0" Grid.Column="0" Style="{StaticResource FactLabel}"></Label>
-                        <Label Text="5g" Grid.Row="0" Grid.Column="1" Style="{StaticResource AmountLabel}"></Label>
+                        <Label Text="Total Trans Fat" Grid.Row="0" Grid.Column="0" Style="{StaticResource FactLabel}"></Label>
+                        <Label x:Name="transFat" Text="5g" Grid.Row="0" Grid.Column="1" Style="{StaticResource AmountLabel}"></Label>
 
-                        <Label Text="Carbs" Grid.Row="0" Grid.Column="2" Style="{StaticResource FactLabel}"></Label>
-                        <Label Text="10g" Grid.Row="0" Grid.Column="3" Style="{StaticResource AmountLabel}"></Label>
+                        <Label Text="Total Saturated Fat" Grid.Row="0" Grid.Column="2" Style="{StaticResource FactLabel}"></Label>
+                        <Label x:Name="satFat" Text="10g" Grid.Row="0" Grid.Column="3" Style="{StaticResource AmountLabel}"></Label>
 
-                        <Label Text="Protein" Grid.Row="1" Grid.Column="0" Style="{StaticResource FactLabel}"></Label>
-                        <Label Text="5g" Grid.Row="1" Grid.Column="1" Style="{StaticResource AmountLabel}"></Label>
+                        <Label Text="Total Cholesterol" Grid.Row="1" Grid.Column="0" Style="{StaticResource FactLabel}"></Label>
+                        <Label x:Name="cholesterol" Text="5g" Grid.Row="1" Grid.Column="1" Style="{StaticResource AmountLabel}"></Label>
 
-                        <Label Text="Fats" Grid.Row="1" Grid.Column="2" Style="{StaticResource FactLabel}"></Label>
-                        <Label Text="5g" Grid.Row="1" Grid.Column="3" Style="{StaticResource AmountLabel}"></Label>
+                        <Label Text="Total Sodium" Grid.Row="1" Grid.Column="2" Style="{StaticResource FactLabel}"></Label>
+                        <Label x:Name="sodium" Text="5g" Grid.Row="1" Grid.Column="3" Style="{StaticResource AmountLabel}"></Label>
+
+                        <Label Text="Total Carbs" Grid.Row="2" Grid.Column="0" Style="{StaticResource FactLabel}"></Label>
+                        <Label x:Name="carbs" Text="5g" Grid.Row="2" Grid.Column="1" Style="{StaticResource AmountLabel}"></Label>
+
+                        <Label Text="Total Fiber" Grid.Row="2" Grid.Column="2" Style="{StaticResource FactLabel}"></Label>
+                        <Label x:Name="fiber" Text="5g" Grid.Row="2" Grid.Column="3" Style="{StaticResource AmountLabel}"></Label>
+
+                        <Label Text="Total Sugar" Grid.Row="3" Grid.Column="0" Style="{StaticResource FactLabel}"></Label>
+                        <Label x:Name="sugar" Text="5g" Grid.Row="3" Grid.Column="1" Style="{StaticResource AmountLabel}"></Label>
+
+                        <Label Text="Total Protein" Grid.Row="3" Grid.Column="2" Style="{StaticResource FactLabel}"></Label>
+                        <Label x:Name="protein" Text="5g" Grid.Row="3" Grid.Column="3" Style="{StaticResource AmountLabel}"></Label>
                     </Grid>
                 </Frame>
 
@@ -223,7 +237,7 @@
 
     </ContentPage>
 
-    <local:Page1 IconImageSource="user.png"></local:Page1>
-    <local:Page2 IconImageSource="plus.png"></local:Page2>
-    <local:Page3 IconImageSource="settings.png"></local:Page3>
+    <local:Page1 IconImageSource="user.png" Title="User"></local:Page1>
+    <local:Page2 IconImageSource="plus.png" Title="Add Food"></local:Page2>
+    <local:Page3 IconImageSource="settings.png" Title="Settings"></local:Page3>
 </TabbedPage>

@@ -13,7 +13,7 @@ namespace CalorieCounter
     public partial class Page2 : TabbedPage
     {
         public static string BaseAddress =
-            Device.RuntimePlatform == Device.Android ? "https://10.0.2.2:44341" : "https://localhost:44341";
+        Device.RuntimePlatform == Device.Android ? "https://10.0.2.2:44341" : "https://localhost:44341";
         public static string apiEndpoint = $"{BaseAddress}/api.asmx/";
         RestService _restService;
 
@@ -26,8 +26,12 @@ namespace CalorieCounter
             _restService = new RestService();
             //SearchingFoods.Text = "Searching Foods";
         }
-        
-        
+
+        protected override void OnAppearing()
+        {
+            searchFrame.IsVisible = false;
+        }
+
         public string GetFoodBySearch(string token)
         {
             // /api.asmx/GetFoodBySearch?food=string&token=string
@@ -75,8 +79,6 @@ namespace CalorieCounter
             return requestUri;
         }
 
-
-
         //async void QueryClick_Clicked(object sender, EventArgs e)
         //{
         //    if (!string.IsNullOrWhiteSpace(testEntry.Text))
@@ -90,6 +92,20 @@ namespace CalorieCounter
         private void Entry_TextChanged(object sender, TextChangedEventArgs e)
         {
             FoodLookup();
+            
+            if(SearchingFoods.Text != "")
+            {
+                searchFrame.IsVisible = true;
+                addFoodToLog.IsVisible = true;
+                historyFrame.IsVisible = false;
+                favoritesFrame.IsVisible = false;
+            } else
+            {
+                searchFrame.IsVisible = false;
+                addFoodToLog.IsVisible = false;
+                historyFrame.IsVisible = true;
+                favoritesFrame.IsVisible = true;
+            }
         }
 
         private void Locations_SelectedIndexChanged(object sender, EventArgs e)
@@ -122,9 +138,11 @@ namespace CalorieCounter
             List<FoodItem> foodItem = null;
             if (!string.IsNullOrWhiteSpace(SearchingFoods.Text))
             {
+
                 if (locations.SelectedIndex > 0)
                 {
                     foodItem = await _restService.GetFoodDataAsync(GetFoodBySearchAndLocation(locations.SelectedIndex, "token"));
+
                 }
                 else
                 {
@@ -145,6 +163,5 @@ namespace CalorieCounter
             int food_Id = item.Food_Id;
             int location_Id = item.FL_Id;
         }
-
     }
 }
