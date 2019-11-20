@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
@@ -125,9 +126,47 @@ namespace CalorieCounter
 
         }
 
-        public async Task<List<DailyValues>> DisplayDailyValuesByUserDayAsync(string uri)
+        public async Task<string> InsertFoodIntoLogForUser(string uri, FoodEaten data)
         {
-            List<DailyValues> listFood = null;
+            string inserted = "false";
+            try
+            {
+                var json = JsonConvert.SerializeObject(data);
+                using (var message = new HttpRequestMessage(HttpMethod.Post, uri))
+                {
+                    message.Version = HttpVersion.Version10;
+                    message.Content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    using (var response = await _client.SendAsync(message))
+                    {
+                        string result = await response.Content.ReadAsStringAsync();
+                        if (response.IsSuccessStatusCode)
+                        {
+                            inserted = "success";
+                        }
+                    }
+                }
+                //var content = new StringContent(data, Encoding.UTF8, "application/json");
+                //HttpResponseMessage response = await _client.PostAsync(uri, content);
+                //HttpStatusCode i = response.StatusCode;
+                //string result = response.Content.ReadAsStringAsync().Result;
+                //if (response.IsSuccessStatusCode)
+                //{
+                //    inserted = "success";
+                //}
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.InnerException.Message);
+            }
+            return inserted;
+        }
+        
+        // not implemted yet
+        public async Task UpDailyValuesForUser(string uri)
+        {
+            List<UserLogData> logData = null;
+            UserLogData data = null;
             try
             {
                 HttpResponseMessage response = await _client.GetAsync(uri);
@@ -136,9 +175,9 @@ namespace CalorieCounter
                 if (response.IsSuccessStatusCode)
                 {
 
-                    string c = await response.Content.ReadAsStringAsync();
+                    //string content = await response.Content.ReadAsStringAsync();
 
-                    listFood = JsonConvert.DeserializeObject<List<DailyValues>>(c);
+                    //logData = JsonConvert.DeserializeObject<List<UserLogData>>(content);
 
                 }
             }
@@ -146,7 +185,36 @@ namespace CalorieCounter
             {
                 Console.WriteLine(e.InnerException.Message);
             }
+        }
+
+        public async Task<List<DailyValues>> DisplayDailyValuesByUserDayAsync(string uri)
+        {
+            List<DailyValues> listFood = null;
+
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                HttpStatusCode i = response.StatusCode;
+
+                if (response.IsSuccessStatusCode)
+                {
+
+                   
+                    string c = await response.Content.ReadAsStringAsync();
+
+                    listFood = JsonConvert.DeserializeObject<List<DailyValues>>(c);
+
+
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.InnerException.Message);
+            }
+
+
             return listFood;
+
         }
     }
 }

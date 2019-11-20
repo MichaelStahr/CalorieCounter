@@ -12,6 +12,7 @@ namespace CalorieCounter
     [DesignTimeVisible(false)]
     public partial class MainPage : TabbedPage
     {
+
         const string token = "ddgfdfgdfgdfg";
         const string dateString = "2019-11-13";
         const string uniqueId = "Hornsl2";
@@ -19,6 +20,7 @@ namespace CalorieCounter
         Device.RuntimePlatform == Device.Android ? "https://10.0.2.2:44341" : "https://localhost:44341";
         public static string apiEndpoint = $"{BaseAddress}/api.asmx/";
         RestService _restService;
+
 
         public MainPage()
         {

@@ -19,6 +19,9 @@ namespace CalorieCounter
 
         public static string miamiApiEndpoint = "https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php";
 
+        public const string unique_id = "hornsl2";
+        public const string eatsDate = "2019-11-13";
+        public const string userToken = "dasgfdszfe";
 
         public Page2()
         {
@@ -79,6 +82,20 @@ namespace CalorieCounter
             return requestUri;
         }
 
+
+        public string UpDailyValuesForUser()
+        {
+            // /api.asmx / UpdateDailyValuesByUserDay ? uniqueId = string & date = string & token = string
+
+            string requestUri = apiEndpoint;
+            requestUri += "UpdateDailyValuesByUserDay";
+            requestUri += $"?uniqueId={unique_id}";
+            requestUri += $"&date={eatsDate}";
+            requestUri += $"&token={userToken}";
+
+            return requestUri;
+        }
+
         //async void QueryClick_Clicked(object sender, EventArgs e)
         //{
         //    if (!string.IsNullOrWhiteSpace(testEntry.Text))
@@ -116,6 +133,7 @@ namespace CalorieCounter
             //MiamiFoodLookup();
         }
 
+        //get
         async void MiamiFoodLookup()
         {
             string foods = null;
@@ -133,6 +151,7 @@ namespace CalorieCounter
             }
         }
 
+        //get
         async void FoodLookup()
         {
             List<FoodItem> foodItem = null;
@@ -157,11 +176,47 @@ namespace CalorieCounter
             }
         }
 
+        //not implemented yet
+        async void UpdateDailyLog()
+        {
+            List<UserLogData> logData = null;
+
+            await _restService.UpDailyValuesForUser(UpDailyValuesForUser());
+            //string data = logData[0].TotalCalories.ToString();
+            //getCalories.Text = data;            
+        }
+
+        //post
+        async void InsertFood(int food_Id, int location_Id)
+        {
+            
+            if (!string.IsNullOrWhiteSpace(SearchingFoods.Text))
+            {
+                //string foodEaten = "{\"uniqueId\": \"Hornsl2\",\"foodId\": \"19\",\"eatsDate\": \"2019-11-13\",\"location_Id\": \"2\"," +
+                //    "\"multiplier\": \"0\",\"token\": \"dksajlfhds\"}";
+                FoodEaten foodAdded = new FoodEaten
+                {
+                    UniqueID = unique_id,
+                    FoodID = food_Id,
+                    EatsDate = eatsDate,
+                    LocationID = location_Id,
+                    Multiplier = 1,
+                    Token = userToken,
+                };
+                await _restService.InsertFoodIntoLogForUser(apiEndpoint + "InsertUserEatsFood", foodAdded);
+                
+            }
+            
+        }
+
         private void AddFoodToLog_Clicked(object sender, EventArgs e)
         {
             FoodItem item = (FoodItem)foodItemslv.SelectedItem;
             int food_Id = item.Food_Id;
             int location_Id = item.FL_Id;
+            // insert food to log
+            InsertFood(food_Id, location_Id);
+            //UpdateDailyLog();
         }
     }
 }

@@ -175,6 +175,7 @@
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                         <Label Text="Total Calories" HorizontalOptions="Center" FontSize="25" TextColor="#537D8D" FontAttributes="Bold" FontFamily="{StaticResource HomePage}"></Label>
                         <Label x:Name="totalCal" Text="400g" HorizontalOptions="Center" VerticalOptions="Center" FontSize="25" FontAttributes="Bold" TextColor="#DDA448" FontFamily="{StaticResource HomePage}"></Label>
+
                     </StackLayout>
                 </Frame>
 
