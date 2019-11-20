@@ -13,7 +13,7 @@
                        ReturnType="Search"
                        PlaceholderColor="LightGray"
                        Margin="20"
-                       WidthRequest="450"
+                       WidthRequest="300"
                        TextChanged="Entry_TextChanged"/>
 
                 <Frame HeightRequest="20">
@@ -35,7 +35,7 @@
                 </Frame>
             </StackLayout>
             <StackLayout>
-                <Frame BorderColor="LightGray" HeightRequest="250">
+                <Frame x:Name="searchFrame" BorderColor="LightGray" HeightRequest="500" IsVisible="true">
                     <ScrollView>
                         <StackLayout>
                             <Label x:Name="TextOldValue" FontSize="Small"/>
@@ -45,10 +45,10 @@
                 </Frame>
             </StackLayout>
             <StackLayout>
-                <Button x:Name="addFoodToLog" Text="Add" Clicked="AddFoodToLog_Clicked"></Button>
+                <Button x:Name="addFoodToLog" Text="Add" Clicked="AddFoodToLog_Clicked" IsVisible="False"></Button>
             </StackLayout>
             <StackLayout>
-                <Frame BorderColor="LightGray" HeightRequest="250">
+                <Frame x:Name="historyFrame" BorderColor="LightGray" HeightRequest="250" IsVisible="true">
                     <ScrollView>
                         <StackLayout>
                             <Label x:Name="History" Text="History" FontSize="Small"/>
@@ -57,7 +57,7 @@
                     </ScrollView>
                 </Frame>
 
-                <Frame BorderColor="Red" HeightRequest="250">
+                <Frame x:Name="favoritesFrame" BorderColor="Red" HeightRequest="250" IsVisible="true">
                     <ScrollView>
                         <Label Text="Favorites" FontSize="Small"/>
                     </ScrollView>
