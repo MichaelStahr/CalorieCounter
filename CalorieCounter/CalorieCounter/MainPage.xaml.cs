@@ -51,6 +51,11 @@ namespace CalorieCounter
 
         }
 
+        protected override void OnAppearing()
+        {
+            
+        } 
+
         private void Calendar_OnCalendarTapped(object sender, CalendarTappedEventArgs e)
         {
             string date = e.DateTime.Date.ToShortDateString();

@@ -19,6 +19,9 @@ namespace CalorieCounter
 
         public static string miamiApiEndpoint = "https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php";
 
+        public const string unique_id = "hornsl2";
+        public const string eatsDate = "2019-11-13";
+        public const string userToken = "dasgfdszfe";
 
         public Page2()
         {
@@ -75,6 +78,19 @@ namespace CalorieCounter
             return requestUri;
         }
 
+        public string DisplayDailyValuesForUser()
+        {
+            // /api.asmx / DisplayDailyValuesByUserDay ? uniqueId = string & date = string & token = string
+
+            string requestUri = apiEndpoint;
+            requestUri += "DisplayDailyValuesByUserDay";
+            requestUri += $"?uniqueId={unique_id}";
+            requestUri += $"&date={eatsDate}";
+            requestUri += $"&token={userToken}";
+
+            return requestUri;
+        }
+
 
 
         //async void QueryClick_Clicked(object sender, EventArgs e)
@@ -100,6 +116,7 @@ namespace CalorieCounter
             //MiamiFoodLookup();
         }
 
+        //get
         async void MiamiFoodLookup()
         {
             string foods = null;
@@ -117,6 +134,7 @@ namespace CalorieCounter
             }
         }
 
+        //get
         async void FoodLookup()
         {
             List<FoodItem> foodItem = null;
@@ -139,11 +157,50 @@ namespace CalorieCounter
             }
         }
 
+        //get
+        async void LogLookup()
+        {
+            List<UserLogData> logData = null;
+
+            logData = await _restService.GetDailyValuesForUser(DisplayDailyValuesForUser());
+            BindingContext = logData[0];
+            string data = logData[0].TotalCalories.ToString();
+            getCalories.Text = data;            
+        }
+
+        //post
+        async void InsertFood(int food_Id, int location_Id)
+        {
+            
+            if (!string.IsNullOrWhiteSpace(SearchingFoods.Text))
+            {
+                //string foodEaten = "{\"uniqueId\": \"Hornsl2\",\"foodId\": \"19\",\"eatsDate\": \"2019-11-13\",\"location_Id\": \"2\"," +
+                //    "\"multiplier\": \"0\",\"token\": \"dksajlfhds\"}";
+                FoodEaten foodAdded = new FoodEaten
+                {
+                    UniqueID = unique_id,
+                    FoodID = food_Id,
+                    EatsDate = eatsDate,
+                    LocationID = location_Id,
+                    Multiplier = 1,
+                    Token = userToken,
+                };
+                added.Text = await _restService.InsertFoodIntoLogForUser(apiEndpoint + "InsertUserEatsFood", foodAdded);
+                
+            }
+            
+        }
+
         private void AddFoodToLog_Clicked(object sender, EventArgs e)
         {
             FoodItem item = (FoodItem)foodItemslv.SelectedItem;
             int food_Id = item.Food_Id;
             int location_Id = item.FL_Id;
+            // insert food to log
+            InsertFood(food_Id, location_Id);
+            // lookup new log info and update data on home page
+            LogLookup();
+            
         }
 
     }

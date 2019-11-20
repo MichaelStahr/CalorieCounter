@@ -46,6 +46,8 @@
             </StackLayout>
             <StackLayout>
                 <Button x:Name="addFoodToLog" Text="Add" Clicked="AddFoodToLog_Clicked"></Button>
+                <Label x:Name="added" Text="False"></Label>
+                <Label x:Name="getCalories" Text="5"></Label>
             </StackLayout>
             <StackLayout>
                 <Frame BorderColor="LightGray" HeightRequest="250">
