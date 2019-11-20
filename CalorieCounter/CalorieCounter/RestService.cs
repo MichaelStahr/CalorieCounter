@@ -190,5 +190,29 @@ namespace CalorieCounter
             return logData;
 
         }
+
+        public async Task UpDailyValuesForUser(string uri)
+        {
+            List<UserLogData> logData = null;
+            UserLogData data = null;
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                HttpStatusCode i = response.StatusCode;
+
+                if (response.IsSuccessStatusCode)
+                {
+
+                    //string content = await response.Content.ReadAsStringAsync();
+
+                    //logData = JsonConvert.DeserializeObject<List<UserLogData>>(content);
+
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.InnerException.Message);
+            }
+        }
     }
 }

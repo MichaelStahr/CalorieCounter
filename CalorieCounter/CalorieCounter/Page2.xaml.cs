@@ -78,12 +78,12 @@ namespace CalorieCounter
             return requestUri;
         }
 
-        public string DisplayDailyValuesForUser()
+        public string UpDailyValuesForUser()
         {
-            // /api.asmx / DisplayDailyValuesByUserDay ? uniqueId = string & date = string & token = string
+            // /api.asmx / UpdateDailyValuesByUserDay ? uniqueId = string & date = string & token = string
 
             string requestUri = apiEndpoint;
-            requestUri += "DisplayDailyValuesByUserDay";
+            requestUri += "UpdateDailyValuesByUserDay";
             requestUri += $"?uniqueId={unique_id}";
             requestUri += $"&date={eatsDate}";
             requestUri += $"&token={userToken}";
@@ -157,15 +157,14 @@ namespace CalorieCounter
             }
         }
 
-        //get
-        async void LogLookup()
+        //not implemented yet
+        async void UpdateDailyLog()
         {
             List<UserLogData> logData = null;
 
-            logData = await _restService.GetDailyValuesForUser(DisplayDailyValuesForUser());
-            BindingContext = logData[0];
-            string data = logData[0].TotalCalories.ToString();
-            getCalories.Text = data;            
+            await _restService.UpDailyValuesForUser(UpDailyValuesForUser());
+            //string data = logData[0].TotalCalories.ToString();
+            //getCalories.Text = data;            
         }
 
         //post
@@ -185,7 +184,7 @@ namespace CalorieCounter
                     Multiplier = 1,
                     Token = userToken,
                 };
-                added.Text = await _restService.InsertFoodIntoLogForUser(apiEndpoint + "InsertUserEatsFood", foodAdded);
+                await _restService.InsertFoodIntoLogForUser(apiEndpoint + "InsertUserEatsFood", foodAdded);
                 
             }
             
@@ -198,9 +197,7 @@ namespace CalorieCounter
             int location_Id = item.FL_Id;
             // insert food to log
             InsertFood(food_Id, location_Id);
-            // lookup new log info and update data on home page
-            LogLookup();
-            
+            //UpdateDailyLog();
         }
 
     }

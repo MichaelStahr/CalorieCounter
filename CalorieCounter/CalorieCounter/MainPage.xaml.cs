@@ -1,5 +1,6 @@
 ﻿using Syncfusion.SfCalendar.XForms;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using Xamarin.Forms;
 
@@ -10,6 +11,7 @@ namespace CalorieCounter
     [DesignTimeVisible(false)]
     public partial class MainPage : TabbedPage
     {
+       
         public MainPage()
         {
             InitializeComponent();
@@ -50,11 +52,6 @@ namespace CalorieCounter
             //Notes.Text = Preferences.Get(date, "No notes yet!");
 
         }
-
-        protected override void OnAppearing()
-        {
-            
-        } 
 
         private void Calendar_OnCalendarTapped(object sender, CalendarTappedEventArgs e)
         {
