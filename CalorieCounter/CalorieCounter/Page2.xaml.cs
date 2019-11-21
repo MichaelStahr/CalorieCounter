@@ -20,7 +20,7 @@ namespace CalorieCounter
         public static string miamiApiEndpoint = "https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php";
 
         public const string unique_id = "hornsl2";
-        public const string eatsDate = "2019-11-13";
+        public const string eatsDate = "2019-11-15";
         public const string userToken = "dasgfdszfe";
 
         public Page2()
@@ -83,12 +83,12 @@ namespace CalorieCounter
         }
 
 
-        public string UpDailyValuesForUser()
+        public string UpdateDailyLogByUser()
         {
             // /api.asmx / UpdateDailyValuesByUserDay ? uniqueId = string & date = string & token = string
 
             string requestUri = apiEndpoint;
-            requestUri += "UpdateDailyValuesByUserDay";
+            requestUri += "UpdateDailyLogByUserDay";
             requestUri += $"?uniqueId={unique_id}";
             requestUri += $"&date={eatsDate}";
             requestUri += $"&token={userToken}";
@@ -176,14 +176,17 @@ namespace CalorieCounter
             }
         }
 
-        //not implemented yet
+        //post
         async void UpdateDailyLog()
         {
-            List<UserLogData> logData = null;
-
-            await _restService.UpDailyValuesForUser(UpDailyValuesForUser());
-            //string data = logData[0].TotalCalories.ToString();
-            //getCalories.Text = data;            
+            UserLogData data = new UserLogData
+            {
+                UniqueId = unique_id,
+                Date = eatsDate,
+                Token = userToken,
+            };
+            await _restService.UpdateDailyLogForUser(UpdateDailyLogByUser(), data);
+            
         }
 
         //post
@@ -192,8 +195,7 @@ namespace CalorieCounter
             
             if (!string.IsNullOrWhiteSpace(SearchingFoods.Text))
             {
-                //string foodEaten = "{\"uniqueId\": \"Hornsl2\",\"foodId\": \"19\",\"eatsDate\": \"2019-11-13\",\"location_Id\": \"2\"," +
-                //    "\"multiplier\": \"0\",\"token\": \"dksajlfhds\"}";
+                
                 FoodEaten foodAdded = new FoodEaten
                 {
                     UniqueID = unique_id,
@@ -216,7 +218,12 @@ namespace CalorieCounter
             int location_Id = item.FL_Id;
             // insert food to log
             InsertFood(food_Id, location_Id);
-            //UpdateDailyLog();
+            UpdateDailyLog();
+        }
+
+        private void UpdateFood_Clicked(object sender, EventArgs e)
+        {
+            UpdateDailyLog();
         }
     }
 }
