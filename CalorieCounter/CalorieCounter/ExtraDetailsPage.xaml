@@ -38,7 +38,7 @@
             <Frame Style="{StaticResource CalorieDetailFrame}">
                 <StackLayout HorizontalOptions="Center">
                     <Label Text="Food" Style="{StaticResource Titles}"></Label>
-                    <ListView x:Name="foodLog"></ListView>
+                    <ListView x:Name="foodLog" BackgroundColor="Beige" Margin="10,20,10,20" ></ListView>
                 </StackLayout>
             </Frame>
             <Frame Style="{StaticResource CalorieDetailFrame}">

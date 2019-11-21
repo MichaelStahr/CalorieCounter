@@ -217,5 +217,33 @@ namespace CalorieCounter
             return listFood;
 
         }
+
+        public async Task<List<UserItemsByDay>> GetFoodEatenByUserDayAsync(string uri)
+        {
+            List<UserItemsByDay> listFood = null;
+
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                HttpStatusCode i = response.StatusCode;
+
+                if (response.IsSuccessStatusCode)
+                {
+
+                    string c = await response.Content.ReadAsStringAsync();
+
+                    listFood = JsonConvert.DeserializeObject<List<UserItemsByDay>>(c);
+
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.InnerException.Message);
+            }
+
+
+            return listFood;
+
+        }
     }
 }

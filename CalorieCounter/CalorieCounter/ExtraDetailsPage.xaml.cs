@@ -27,16 +27,15 @@ namespace CalorieCounter
             InitializeComponent();
             _restService = new RestService();
             dateString = date;
-            
         }
 
-        public string DisplayDailyValuesByUserDay(string date)
+        public string GetFoodEatenByUserDay(string date)
         {
             // /api.asmx/GetFoodEatenByUserDay?uniqueId=string&date=string&token=string
             string requestUri = apiEndpoint;
             requestUri += "GetFoodEatenByUserDay";
             requestUri += $"?uniqueId={uniqueId}";
-            requestUri += $"&date={date}";
+            requestUri += $"&eatDate={date}";
             requestUri += $"&token={token}";
 
             return requestUri;
@@ -49,9 +48,58 @@ namespace CalorieCounter
 
         async void GetFoodForDay()
         {
-            List<FoodItem> foodItems;
-            foodItems = await _restService.GetFoodDataAsync(DisplayDailyValuesByUserDay(dateString));
+            List<UserItemsByDay> foodItems;
+            foodItems = await _restService.GetFoodEatenByUserDayAsync(GetFoodEatenByUserDay(dateString));
             foodLog.ItemsSource = foodItems;
+            int i = 0;
+
+            foodLog.ItemTemplate = new DataTemplate(() =>
+            {
+                Label name = new Label();
+                name.Text = foodItems[i].Foodname.ToString();
+                name.FontSize = 20;
+
+                Label calsText = new Label();
+                calsText.Text = "Calories: " + foodItems[i].Calories.ToString() + "g";
+
+                Label carbsText = new Label();
+                carbsText.Text = "Carbs: " + foodItems[i].Carbs.ToString() + "g";
+
+                Label sugarsText = new Label();
+                sugarsText.Text = "Sugars: " + foodItems[i].Sugars.ToString() + "g";
+
+                Label proteinsText = new Label();
+                proteinsText.Text = "Protein: " + foodItems[i].Protein.ToString() + "g";
+
+                i++;
+                return new ViewCell
+                {
+                    View = new StackLayout
+                    {
+                        Padding = 25,
+                        Children =
+                        {
+                            new StackLayout
+                            {
+                                Children =
+                                {
+                                    name,
+                                }
+                            },
+                            new StackLayout
+                            {
+                                Orientation = StackOrientation.Horizontal,
+                                Spacing = 30,
+                                Children =
+                                {
+                                    calsText, carbsText, sugarsText, proteinsText,
+                                }
+                            },
+                            
+                        }
+                    }
+                };
+            });
         }
     }
 }
