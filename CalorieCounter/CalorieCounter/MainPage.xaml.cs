@@ -14,7 +14,7 @@ namespace CalorieCounter
     {
 
         const string token = "dasgfdszfe";
-        const string dateString = "2019-11-15";
+        public string dateString = "2019-11-15";
         const string uniqueId = "hornsl2";
         public static string BaseAddress =
         Device.RuntimePlatform == Device.Android ? "https://10.0.2.2:44341" : "https://localhost:44341";
@@ -58,8 +58,11 @@ namespace CalorieCounter
             Color labelColor = Color.FromHex("503047");
             //Preferences.Clear();
             
-            DateTime datetime = Calendar.SelectedDate.Value;
-            string date = datetime.ToShortDateString();
+            DateTime date = Calendar.SelectedDate.Value;
+            string year = date.Year.ToString();
+            string month = date.Month.ToString();
+            string day = date.Day.ToString();
+            dateString = year + "-" + month + "-" + day;
             //Notes.Text = Preferences.Get(date, "No notes yet!");
 
         }
@@ -69,38 +72,31 @@ namespace CalorieCounter
             base.OnCurrentPageChanged();
             if (_restService != null && this.CurrentPage is ContentPage)
             {
-                FoodLookup();
+                FoodLookup(dateString);
             }
         }
 
+        protected override void OnAppearing()
+        {
+            FoodLookup(dateString);
+        } 
 
-        public string DisplayDailyValuesByUserDay()
+        public string DisplayDailyValuesByUserDay(string date)
         {
             // /api.asmx/DisplayDailyValuesByUserDay
             string requestUri = apiEndpoint;
             requestUri += "DisplayDailyValuesByUserDay";
             requestUri += $"?uniqueId={uniqueId}";
-            requestUri += $"&date={dateString}";
+            requestUri += $"&date={date}";
             requestUri += $"&token={token}";
 
             return requestUri;
         }
-
-
-        void PageChanged(object sender, EventArgs args)
-        {
-            var currentPage = CurrentPage as MainPage;
-            currentPage?.FoodLookup();
-        }
-
-        protected override void OnAppearing()
-        {
-            FoodLookup();
-        }
-        async void FoodLookup()
+        
+        async void FoodLookup(string date)
         {
             List<DailyValues> foodItem = null;
-            foodItem = await _restService.DisplayDailyValuesByUserDayAsync(DisplayDailyValuesByUserDay());
+            foodItem = await _restService.DisplayDailyValuesByUserDayAsync(DisplayDailyValuesByUserDay(date));
             totalCal.Text = foodItem[0].TotalCalories.ToString() + "g";
             transFat.Text = foodItem[0].TotalTrans_Fat.ToString() + "g";
             satFat.Text = foodItem[0].TotalSat_Fat.ToString() + "g";
@@ -114,9 +110,14 @@ namespace CalorieCounter
 
         private void Calendar_OnCalendarTapped(object sender, CalendarTappedEventArgs e)
         {
-            string date = e.DateTime.Date.ToShortDateString();
+            //string date = e.DateTime.Date.ToShortDateString();
+            DateTime date = e.DateTime.Date;
             DateLabel.Text = e.DateTime.Date.ToShortDateString();
-
+            string year = date.Year.ToString();
+            string month = date.Month.ToString();
+            string day = date.Day.ToString();
+            dateString = year + "-" + month + "-" + day;
+            FoodLookup(dateString);
             //if (Preferences.ContainsKey(date))
             //{
             //    Notes.Text = Preferences.Get(date, "No notes yet");
