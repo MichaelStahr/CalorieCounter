@@ -14,7 +14,8 @@ namespace CalorieCounter
     {
 
         const string token = "dasgfdszfe";
-        public string dateString = "2019-11-15";
+        // date is initialized to calendar date of today on start
+        public string dateString;
         const string uniqueId = "hornsl2";
         public static string BaseAddress =
         Device.RuntimePlatform == Device.Android ? "https://10.0.2.2:44341" : "https://localhost:44341";
