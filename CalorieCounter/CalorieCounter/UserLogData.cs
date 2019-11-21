@@ -10,32 +10,13 @@ namespace CalorieCounter
     [JsonObject]
     public class UserLogData
     {
-        [JsonProperty("totalCalories")]
-        public int TotalCalories;
+        [JsonProperty("uniqueId")]
+        public string UniqueId;
 
-        [JsonProperty("totalTrans_fat")]
-        public int TotalTrans_Fat;
+        [JsonProperty("date")]
+        public string Date;
 
-        [JsonProperty("totalSat_fat")]
-        public int TotalSat_Fat;
-
-        [JsonProperty("totalcholesterol")]
-        public int TotalCholesterol;
-
-        [JsonProperty("totalsodium")]
-        public int TotalSodium;
-
-        [JsonProperty("totalcarbs")]
-        public int TotalCarbs;
-
-        [JsonProperty("totalfiber")]
-        public int TotalFiber;
-
-        [JsonProperty("totalsugars")]
-        public int TotalSugars;
-
-        [JsonProperty("totalprotein")]
-        public int TotalProtein;
-
+        [JsonProperty("token")]
+        public string Token;
     }
 }

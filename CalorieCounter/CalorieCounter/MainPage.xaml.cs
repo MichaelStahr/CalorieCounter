@@ -13,9 +13,9 @@ namespace CalorieCounter
     public partial class MainPage : TabbedPage
     {
 
-        const string token = "ddgfdfgdfgdfg";
-        const string dateString = "2019-11-13";
-        const string uniqueId = "Hornsl2";
+        const string token = "dasgfdszfe";
+        const string dateString = "2019-11-15";
+        const string uniqueId = "hornsl2";
         public static string BaseAddress =
         Device.RuntimePlatform == Device.Android ? "https://10.0.2.2:44341" : "https://localhost:44341";
         public static string apiEndpoint = $"{BaseAddress}/api.asmx/";
@@ -61,7 +61,18 @@ namespace CalorieCounter
             DateTime datetime = Calendar.SelectedDate.Value;
             string date = datetime.ToShortDateString();
             //Notes.Text = Preferences.Get(date, "No notes yet!");
+
         }
+
+        protected override void OnCurrentPageChanged()
+        {
+            base.OnCurrentPageChanged();
+            if (_restService != null && this.CurrentPage is ContentPage)
+            {
+                FoodLookup();
+            }
+        }
+
 
         public string DisplayDailyValuesByUserDay()
         {
@@ -73,6 +84,13 @@ namespace CalorieCounter
             requestUri += $"&token={token}";
 
             return requestUri;
+        }
+
+
+        void PageChanged(object sender, EventArgs args)
+        {
+            var currentPage = CurrentPage as MainPage;
+            currentPage?.FoodLookup();
         }
 
         protected override void OnAppearing()
