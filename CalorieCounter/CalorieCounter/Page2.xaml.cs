@@ -19,8 +19,8 @@ namespace CalorieCounter
 
         public static string miamiApiEndpoint = "https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php";
 
-        public const string unique_id = "hornsl2";
-        public const string eatsDate = "2019-11-15";
+        public const string unique_id = "birdaj";
+        public const string eatsDate = "2019-11-20";
         public const string userToken = "dasgfdszfe";
 
         public Page2()
@@ -218,11 +218,6 @@ namespace CalorieCounter
             int location_Id = item.FL_Id;
             // insert food to log
             InsertFood(food_Id, location_Id);
-            UpdateDailyLog();
-        }
-
-        private void UpdateFood_Clicked(object sender, EventArgs e)
-        {
             UpdateDailyLog();
         }
     }
