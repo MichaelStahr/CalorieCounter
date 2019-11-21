@@ -91,7 +91,7 @@
         <ScrollView Orientation="Vertical">
             <StackLayout>
                 <syncfusion:SfCalendar x:Name="Calendar" IsVisible="False"></syncfusion:SfCalendar>
-                <chart:SfChart x:Name="chart" HeightRequest="400" Margin="5">
+                <chart:SfChart x:Name="Chart" HeightRequest="400" Margin="5">
                     <chart:SfChart.PrimaryAxis>
                         <chart:CategoryAxis>
                             <chart:CategoryAxis.Title>

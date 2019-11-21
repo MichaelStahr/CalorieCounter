@@ -163,7 +163,6 @@ namespace CalorieCounter
             return inserted;
         }
         
-        // not implemted yet
         public async Task UpdateDailyLogForUser(string uri, UserLogData data)
         {
             try

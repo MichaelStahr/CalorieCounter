@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using Syncfusion.SfCalendar.XForms;
+using Syncfusion.SfChart.XForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +17,7 @@ namespace CalorieCounter
         const string token = "dasgfdszfe";
         // date is initialized to calendar date of today on start
         public string dateString;
-        const string uniqueId = "hornsl2";
+        const string uniqueId = "birdaj";
         public static string BaseAddress =
         Device.RuntimePlatform == Device.Android ? "https://10.0.2.2:44341" : "https://localhost:44341";
         public static string apiEndpoint = $"{BaseAddress}/api.asmx/";
@@ -150,7 +151,8 @@ namespace CalorieCounter
 
         async void Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ExtraDetailsPage(), true);
+
+            await Navigation.PushAsync(new ExtraDetailsPage(dateString), true);
         }
 
         private void Notes_TextChanged(object sender, TextChangedEventArgs e)

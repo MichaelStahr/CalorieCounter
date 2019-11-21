@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+             xmlns:local="clr-namespace:CalorieCounter"
              mc:Ignorable="d"
              x:Class="CalorieCounter.ExtraDetailsPage">
 
@@ -37,9 +38,7 @@
             <Frame Style="{StaticResource CalorieDetailFrame}">
                 <StackLayout HorizontalOptions="Center">
                     <Label Text="Food" Style="{StaticResource Titles}"></Label>
-                    <Label Text="Cheeesburger" Style="{StaticResource Item}"></Label>
-                    <Label Text="Salad" Style="{StaticResource Item}"></Label>
-                    <Label Text="Peanut Butter Cookie" Style="{StaticResource Item}"></Label>
+                    <ListView x:Name="foodLog"></ListView>
                 </StackLayout>
             </Frame>
             <Frame Style="{StaticResource CalorieDetailFrame}">
