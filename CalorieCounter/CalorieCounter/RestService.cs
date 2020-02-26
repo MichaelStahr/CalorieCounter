@@ -110,11 +110,17 @@ namespace CalorieCounter
                 {
                     
                     string c = await response.Content.ReadAsStringAsync();
+                    // need to start and end file with same word
                     string file = "<items>\n" + c + "\n</items>";
+                    // XElement parse does not like '&'
                     string newFile = file.Replace("&", "and");
                     XElement items = XElement.Parse(newFile);
+                    // all items start and end with '<item>' so put them in a list
                     List<XElement> itemNodes = items.Elements("item").ToList();
+                    // get first item from list (for testing purposes)
                     var s = itemNodes[0].Element("formal_name");
+
+                    // return list of foods to be placed into our db
 
                 }
             }

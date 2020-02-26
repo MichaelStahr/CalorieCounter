@@ -14,7 +14,7 @@
                        ReturnType="Search"
                        PlaceholderColor="LightGray"
                        Margin="20"
-                       WidthRequest="300"
+                       WidthRequest="100"
                        TextChanged="Entry_TextChanged"/>
 
                 <Frame HeightRequest="20">

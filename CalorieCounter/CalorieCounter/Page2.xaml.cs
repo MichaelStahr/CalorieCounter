@@ -12,6 +12,7 @@ namespace CalorieCounter
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Page2 : TabbedPage
     {
+        
         public static string BaseAddress =
         Device.RuntimePlatform == Device.Android ? "https://10.0.2.2:44341" : "https://localhost:44341";
         public static string apiEndpoint = $"{BaseAddress}/api.asmx/";
@@ -133,7 +134,7 @@ namespace CalorieCounter
             //MiamiFoodLookup();
         }
 
-        //get
+        // need to figure out best time and place to call this 
         async void MiamiFoodLookup()
         {
             string foods = null;
@@ -157,7 +158,7 @@ namespace CalorieCounter
             List<FoodItem> foodItem = null;
             if (!string.IsNullOrWhiteSpace(SearchingFoods.Text))
             {
-
+                int num = locations.SelectedIndex;
                 if (locations.SelectedIndex > 0)
                 {
                     foodItem = await _restService.GetFoodDataAsync(GetFoodBySearchAndLocation(locations.SelectedIndex, "token"));

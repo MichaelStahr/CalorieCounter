@@ -99,15 +99,18 @@ namespace CalorieCounter
         {
             List<DailyValues> foodItem = null;
             foodItem = await _restService.DisplayDailyValuesByUserDayAsync(DisplayDailyValuesByUserDay(date));
-            totalCal.Text = foodItem[0].TotalCalories.ToString() + "g";
-            transFat.Text = foodItem[0].TotalTrans_Fat.ToString() + "g";
-            satFat.Text = foodItem[0].TotalSat_Fat.ToString() + "g";
-            cholesterol.Text = foodItem[0].TotalCholesterol.ToString() + "g";
-            sodium.Text = foodItem[0].TotalSodium.ToString() + "g";
-            carbs.Text = foodItem[0].TotalCarbs.ToString() + "g";
-            fiber.Text = foodItem[0].TotalFiber.ToString() + "g";
-            sugar.Text = foodItem[0].TotalSugars.ToString() + "g";
-            protein.Text = foodItem[0].TotalProtein.ToString() + "g";
+            if (foodItem != null)
+            {
+                totalCal.Text = foodItem[0].TotalCalories.ToString() + "g";
+                transFat.Text = foodItem[0].TotalTrans_Fat.ToString() + "g";
+                satFat.Text = foodItem[0].TotalSat_Fat.ToString() + "g";
+                cholesterol.Text = foodItem[0].TotalCholesterol.ToString() + "g";
+                sodium.Text = foodItem[0].TotalSodium.ToString() + "g";
+                carbs.Text = foodItem[0].TotalCarbs.ToString() + "g";
+                fiber.Text = foodItem[0].TotalFiber.ToString() + "g";
+                sugar.Text = foodItem[0].TotalSugars.ToString() + "g";
+                protein.Text = foodItem[0].TotalProtein.ToString() + "g";
+            }
         }
 
         private void Calendar_OnCalendarTapped(object sender, CalendarTappedEventArgs e)
