@@ -99,7 +99,7 @@ namespace CalorieCounter
         {
             List<DailyValues> foodItem = null;
             foodItem = await _restService.DisplayDailyValuesByUserDayAsync(DisplayDailyValuesByUserDay(date));
-            if (foodItem != null)
+            if (foodItem != null && foodItem.Count != 0)
             {
                 totalCal.Text = foodItem[0].TotalCalories.ToString() + "g";
                 transFat.Text = foodItem[0].TotalTrans_Fat.ToString() + "g";

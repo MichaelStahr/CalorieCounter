@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Xml.Linq;
 
 namespace CalorieCounter
 {
@@ -74,15 +75,15 @@ namespace CalorieCounter
 
             //https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php?ThisLocation=Martin
 
-           
-            string food = Uri.EscapeUriString(SearchingFoods.Text);
-            string requestUri = miamiApiEndpoint;
-            requestUri += $"?ThisLocation={location}";
-            requestUri += $"&ThisItem={food}";
 
-            return requestUri;
+            //string food = Uri.EscapeUriString(SearchingFoods.Text);
+            //string requestUri = miamiApiEndpoint;
+            //requestUri += $"?ThisLocation={location}";
+            //requestUri += $"&ThisItem={food}";
+
+            // hard coded for now
+            return "https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php?ThisLocation=Starbucks";
         }
-
 
         public string UpdateDailyLogByUser()
         {
@@ -129,9 +130,9 @@ namespace CalorieCounter
         private void Locations_SelectedIndexChanged(object sender, EventArgs e)
         {
             // access our db
-            FoodLookup();
+            //FoodLookup();
             // access Miami API and pull from db
-            //MiamiFoodLookup();
+            MiamiFoodLookup();
         }
 
         // need to figure out best time and place to call this 
@@ -141,9 +142,10 @@ namespace CalorieCounter
             if (!string.IsNullOrWhiteSpace(SearchingFoods.Text))
             {
                
+                // returns a string representation of an xml file
                 foods = await _restService.GetMiamiFoodDataAsync(GetMiamiFoodByNameAndLocation(locations.SelectedItem.ToString()));
-                
-                // parse foods and store in our db
+                // send xml file to stored procedure to store in DB
+                await _restService.InsertMiamiFoodDataAsync(apiEndpoint + "InsertXml", foods);
 
             }
             else
@@ -219,6 +221,7 @@ namespace CalorieCounter
             int location_Id = item.FL_Id;
             // insert food to log
             InsertFood(food_Id, location_Id);
+            // update home page of app
             UpdateDailyLog();
         }
     }

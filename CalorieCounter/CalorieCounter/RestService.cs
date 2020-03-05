@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -11,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace CalorieCounter
 {
@@ -22,6 +24,8 @@ namespace CalorieCounter
         {
             _client = new HttpClient(GetInsecureHandler());
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/xml"));
+            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"));
 
         }
 
@@ -97,10 +101,10 @@ namespace CalorieCounter
              return listFood; 
         }
 
-        // not complete yet but does access Miami API
-        public async Task<string> GetMiamiFoodDataAsync(string uri)
+        public async Task<String> GetMiamiFoodDataAsync(string uri)
         {
-            string foods = null;
+            string file = null;
+            XElement items = null;
             try
             {
                 HttpResponseMessage response = await _client.GetAsync(uri);
@@ -110,17 +114,15 @@ namespace CalorieCounter
                 {
                     
                     string c = await response.Content.ReadAsStringAsync();
+                    c = c.Replace("\n", String.Empty);
                     // need to start and end file with same word
-                    string file = "<items>\n" + c + "\n</items>";
+                    file = "<items>" + c + "</items>";
+                    
                     // XElement parse does not like '&'
-                    string newFile = file.Replace("&", "and");
-                    XElement items = XElement.Parse(newFile);
-                    // all items start and end with '<item>' so put them in a list
-                    List<XElement> itemNodes = items.Elements("item").ToList();
-                    // get first item from list (for testing purposes)
-                    var s = itemNodes[0].Element("formal_name");
+                    file = file.Replace("&", "and");
+                    file = file.Replace(";", String.Empty);
+                    items = XElement.Parse(file);
 
-                    // return list of foods to be placed into our db
 
                 }
             }
@@ -129,9 +131,41 @@ namespace CalorieCounter
                 Console.WriteLine(e.InnerException.Message);
             }
 
-            return foods;
+            // return list of foods to be placed into our db
+            return items.ToString();
 
         }
+
+        public async Task InsertMiamiFoodDataAsync(string uri, string xmlContent)
+        {
+            try
+            {
+                
+                using (var message = new HttpRequestMessage(HttpMethod.Post, uri))
+                {
+                    xmlContent = "xml=" + xmlContent;
+                    xmlContent = xmlContent.Replace("&", String.Empty);
+                    xmlContent = xmlContent.Replace(";", String.Empty);
+                    message.Version = HttpVersion.Version10;
+                    message.Content = new StringContent(xmlContent, Encoding.UTF8, "application/x-www-form-urlencoded");
+                    
+                    using (var response = await _client.SendAsync(message))
+                    {
+                        string result = await response.Content.ReadAsStringAsync();
+                        if (response.IsSuccessStatusCode)
+                        {
+                            // sucssessful insert into DB
+                        }
+                    }
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.InnerException.Message);
+            }
+        }
+
+       
 
         public async Task<string> InsertFoodIntoLogForUser(string uri, FoodEaten data)
         {
