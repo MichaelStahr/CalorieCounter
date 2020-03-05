@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Xml.Linq;
 
 namespace CalorieCounter
 {
@@ -15,7 +16,7 @@ namespace CalorieCounter
         
         public static string BaseAddress =
         Device.RuntimePlatform == Device.Android ? "https://10.0.2.2:44341" : "https://localhost:44341";
-        public static string apiEndpoint = $"{BaseAddress}/api.asmx/";
+        public static string apiEndpoint = $"{BaseAddress}/api.asmx";
         RestService _restService;
 
         public static string miamiApiEndpoint = "https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php";
@@ -41,7 +42,7 @@ namespace CalorieCounter
             // /api.asmx/GetFoodBySearch?food=string&token=string
             string food = Uri.EscapeUriString(SearchingFoods.Text);
             string requestUri = apiEndpoint;
-            requestUri += "GetFoodBySearch";
+            requestUri += "/GetFoodBySearch";
             requestUri += $"?food=%{food}%";
             requestUri += $"&token={token}";
 
@@ -74,15 +75,26 @@ namespace CalorieCounter
 
             //https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php?ThisLocation=Martin
 
-           
-            string food = Uri.EscapeUriString(SearchingFoods.Text);
-            string requestUri = miamiApiEndpoint;
-            requestUri += $"?ThisLocation={location}";
-            requestUri += $"&ThisItem={food}";
+
+            //string food = Uri.EscapeUriString(SearchingFoods.Text);
+            //string requestUri = miamiApiEndpoint;
+            //requestUri += $"?ThisLocation={location}";
+            //requestUri += $"&ThisItem={food}";
+
+
+            return "https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php?ThisLocation=Martin";
+        }
+
+        public string InsertMiamiFoodItems(string date, int location)
+        {
+
+            string requestUri = apiEndpoint;
+            requestUri += "InsertXml";
+            requestUri += $"?date={date}";
+            requestUri += $"&location={location}";
 
             return requestUri;
         }
-
 
         public string UpdateDailyLogByUser()
         {
@@ -129,20 +141,26 @@ namespace CalorieCounter
         private void Locations_SelectedIndexChanged(object sender, EventArgs e)
         {
             // access our db
-            FoodLookup();
+            //FoodLookup();
             // access Miami API and pull from db
-            //MiamiFoodLookup();
+            MiamiFoodLookup();
         }
 
         // need to figure out best time and place to call this 
         async void MiamiFoodLookup()
         {
             string foods = null;
+            XElement items = null;
             if (!string.IsNullOrWhiteSpace(SearchingFoods.Text))
             {
                
+                //foods = await _restService.GetMiamiFoodDataAsync(GetMiamiFoodByNameAndLocation(locations.SelectedItem.ToString()));
+                // returns an xml file
                 foods = await _restService.GetMiamiFoodDataAsync(GetMiamiFoodByNameAndLocation(locations.SelectedItem.ToString()));
-                
+                // send xml file to stored procedure
+                //await _restService.InsertMiamiFoodDataAsync(apiEndpoint + "InsertXml", foods);
+                await _restService.InsertMiamiFoodDataAsync(apiEndpoint + "/InsertXml", foods);
+
                 // parse foods and store in our db
 
             }
