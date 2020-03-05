@@ -75,11 +75,11 @@ namespace CalorieCounter
 
         }
 
-        public async Task<List<FoodItem>> GetFoodDataAsync(string uri)
+        public async Task<List<MiamiItem>> GetFoodDataAsync(string uri)
         {
             List<FoodItem> listFood = null;
-            FoodItem foodItem = null;
-            
+            List<MiamiItem> miamiFoodList = null;
+
             try
             {
                 HttpResponseMessage response = await _client.GetAsync(uri);
@@ -90,15 +90,15 @@ namespace CalorieCounter
 
                     string c = await response.Content.ReadAsStringAsync();
 
-                    listFood = JsonConvert.DeserializeObject<List<FoodItem>>(c);
-
+                    //listFood = JsonConvert.DeserializeObject<List<FoodItem>>(c);
+                    miamiFoodList = JsonConvert.DeserializeObject<List<MiamiItem>>(c);
                 }
             }
             catch (HttpRequestException e)
             {
                 Console.WriteLine(e.InnerException.Message);
             }
-             return listFood; 
+             return miamiFoodList; 
         }
 
         public async Task<String> GetMiamiFoodDataAsync(string uri)

@@ -50,8 +50,8 @@ namespace CalorieCounter
         async void GetFoodForDay()
         {
             List<FoodItem> foodItems;
-            foodItems = await _restService.GetFoodDataAsync(DisplayDailyValuesByUserDay(dateString));
-            foodLog.ItemsSource = foodItems;
+            //foodItems = await _restService.GetFoodDataAsync(DisplayDailyValuesByUserDay(dateString));
+            //foodLog.ItemsSource = foodItems;
         }
     }
 }

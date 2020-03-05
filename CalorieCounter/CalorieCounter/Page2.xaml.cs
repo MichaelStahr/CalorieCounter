@@ -70,6 +70,16 @@ namespace CalorieCounter
             return requestUri;
         }
 
+        public string SearchFoodByLocation(string location)
+        {
+            // /api.asmx/SearchFoodByLocation?location=string
+            string requestUri = apiEndpoint;
+            requestUri += "SearchFoodByLocation";
+            requestUri += $"?location={location}";
+
+            return requestUri;
+        }
+
         public string GetMiamiFoodByNameAndLocation(string location)
         {
 
@@ -110,7 +120,7 @@ namespace CalorieCounter
 
         private void Entry_TextChanged(object sender, TextChangedEventArgs e)
         {
-            FoodLookup();
+            //FoodLookup();
             
             if(SearchingFoods.Text != "")
             {
@@ -131,8 +141,9 @@ namespace CalorieCounter
         {
             // access our db
             //FoodLookup();
+            LookUpFoodByLocation();
             // access Miami API and pull from db
-            MiamiFoodLookup();
+            //MiamiFoodLookup();
         }
 
         // need to figure out best time and place to call this 
@@ -158,25 +169,44 @@ namespace CalorieCounter
         async void FoodLookup()
         {
             List<FoodItem> foodItem = null;
-            if (!string.IsNullOrWhiteSpace(SearchingFoods.Text))
-            {
+            List<MiamiItem> miamiFoodItem = null;
+
+            //if (!string.IsNullOrWhiteSpace(SearchingFoods.Text))
+            //{
                 int num = locations.SelectedIndex;
                 if (locations.SelectedIndex > 0)
                 {
-                    foodItem = await _restService.GetFoodDataAsync(GetFoodBySearchAndLocation(locations.SelectedIndex, "token"));
+                    //foodItem = await _restService.GetFoodDataAsync(GetFoodBySearchAndLocation(locations.SelectedIndex, "token"));
+                    miamiFoodItem = await _restService.GetFoodDataAsync(SearchFoodByLocation(locations.SelectedItem.ToString()));
 
                 }
                 else
                 {
-                    foodItem = await _restService.GetFoodDataAsync(GetFoodBySearch("token"));
+                    //foodItem = await _restService.GetFoodDataAsync(GetFoodBySearch("token"));
+                    //miamiFoodItem = await _restService.GetFoodDataAsync(SearchFoodByLocation(locations.SelectedItem.ToString());
                 }
-                foodItemslv.ItemsSource = foodItem;
+            //foodItemslv.ItemsSource = foodItem;
+            searchFrame.IsVisible = true;
+            foodItemslv.ItemsSource = miamiFoodItem;
 
-            }
-            else
+            //}
+            //else
+            //{
+            //    foodItemslv.ItemsSource = foodItem;
+            //}
+        }
+
+        async void LookUpFoodByLocation()
+        {
+            List<MiamiItem> miamiFoodItem = null;
+
+            if (locations.SelectedIndex > 0)
             {
-                foodItemslv.ItemsSource = foodItem;
+                miamiFoodItem = await _restService.GetFoodDataAsync(SearchFoodByLocation(locations.SelectedItem.ToString()));
+                searchFrame.IsVisible = true;
+                foodItemslv.ItemsSource = miamiFoodItem;
             }
+            
         }
 
         //post
