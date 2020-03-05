@@ -23,13 +23,14 @@
                                     <x:String>All</x:String>
                                     <x:String>ASC</x:String>
                                     <x:String>Bell Tower</x:String>
-                                    <x:String>Dividend$</x:String>
-                                    <x:String>Garden Commons</x:String>
+                                    <x:String>Dividends</x:String>
+                                    <x:String>Garden Commons (GC)</x:String>
                                     <x:String>King Cafe</x:String>
                                     <x:String>Martin</x:String>
-                                    <x:String>Martin Dining Hall</x:String>
-                                    <x:String>Scoreboard Market</x:String>
-                                    <x:String>MapleStreet Commons</x:String>
+                                    <x:String>MacCracken</x:String>
+                                    <x:String>MapleStreet Commons (MCC)</x:String>
+                                    <x:String>Starbucks</x:String>
+                                    <x:String>Western Dining Commons (WDC)</x:String>
                                 </Picker.Items>
                                 <Picker.SelectedIndex>0</Picker.SelectedIndex>
                             </Picker>
