@@ -101,10 +101,8 @@ namespace CalorieCounter
              return listFood; 
         }
 
-        // not complete yet but does access Miami API
         public async Task<String> GetMiamiFoodDataAsync(string uri)
         {
-            string newFile = null;
             string file = null;
             XElement items = null;
             try

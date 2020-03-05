@@ -81,8 +81,8 @@ namespace CalorieCounter
             //requestUri += $"?ThisLocation={location}";
             //requestUri += $"&ThisItem={food}";
 
-
-            return "https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php?ThisLocation=Bell";
+            // hard coded for now
+            return "https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php?ThisLocation=Starbucks";
         }
 
         public string UpdateDailyLogByUser()
@@ -130,26 +130,22 @@ namespace CalorieCounter
         private void Locations_SelectedIndexChanged(object sender, EventArgs e)
         {
             // access our db
-            FoodLookup();
+            //FoodLookup();
             // access Miami API and pull from db
-            //MiamiFoodLookup();
+            MiamiFoodLookup();
         }
 
         // need to figure out best time and place to call this 
         async void MiamiFoodLookup()
         {
             string foods = null;
-            XElement items = null;
             if (!string.IsNullOrWhiteSpace(SearchingFoods.Text))
             {
                
-                // returns an xml file
+                // returns a string representation of an xml file
                 foods = await _restService.GetMiamiFoodDataAsync(GetMiamiFoodByNameAndLocation(locations.SelectedItem.ToString()));
-                // send xml file to stored procedure
-                
+                // send xml file to stored procedure to store in DB
                 await _restService.InsertMiamiFoodDataAsync(apiEndpoint + "InsertXml", foods);
-
-                // parse foods and store in our db
 
             }
             else
