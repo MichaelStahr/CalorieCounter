@@ -205,6 +205,9 @@ namespace CalorieCounter
                 miamiFoodItem = await _restService.GetFoodDataAsync(SearchFoodByLocation(locations.SelectedItem.ToString()));
                 searchFrame.IsVisible = true;
                 foodItemslv.ItemsSource = miamiFoodItem;
+            } else
+            {
+                foodItemslv.ItemsSource = null;
             }
             
         }
@@ -247,6 +250,8 @@ namespace CalorieCounter
         private void AddFoodToLog_Clicked(object sender, EventArgs e)
         {
             FoodItem item = (FoodItem)foodItemslv.SelectedItem;
+            MiamiItem mItem = (MiamiItem)foodItemslv.SelectedItem;
+            
             int food_Id = item.Food_Id;
             int location_Id = item.FL_Id;
             // insert food to log

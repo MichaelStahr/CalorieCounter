@@ -8,39 +8,59 @@
     <ContentPage Title="All">
         <ScrollView>
             <StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Entry Placeholder="Search Foods" 
-                       x:Name="SearchingFoods"
-                       ReturnType="Search"
-                       PlaceholderColor="LightGray"
-                       Margin="20"
-                       WidthRequest="100"
-                       TextChanged="Entry_TextChanged"/>
+                <Frame BackgroundColor="AliceBlue">
+                    <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+                        <Entry Placeholder="Search Foods" 
+                           x:Name="SearchingFoods"
+                           ReturnType="Search"
+                           PlaceholderColor="LightGray"
+                           Margin="20"
+                           WidthRequest="100"
+                           TextChanged="Entry_TextChanged"/>
 
-                <Frame HeightRequest="20">
-                    <Picker x:Name="locations" Title="Locations" SelectedIndexChanged="Locations_SelectedIndexChanged">
-                        <Picker.Items>
-                            <x:String>All</x:String>
-                            <x:String>UDF</x:String>
-                            <x:String>Bell Tower</x:String>
-                            <x:String>Dividend$</x:String>
-                            <x:String>Garden Commons</x:String>
-                            <x:String>King Cafe</x:String>
-                            <x:String>Martin</x:String>
-                            <x:String>Martin Dining Hall</x:String>
-                            <x:String>Scoreboard Market</x:String>
-                            <x:String>MapleStreet Commons</x:String>
-                        </Picker.Items>
-                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
-                    </Picker>
+                        <Picker x:Name="locations" SelectedIndexChanged="Locations_SelectedIndexChanged">
+                                <Picker.Items>
+                                    <x:String>All</x:String>
+                                    <x:String>ASC</x:String>
+                                    <x:String>Bell Tower</x:String>
+                                    <x:String>Dividend$</x:String>
+                                    <x:String>Garden Commons</x:String>
+                                    <x:String>King Cafe</x:String>
+                                    <x:String>Martin</x:String>
+                                    <x:String>Martin Dining Hall</x:String>
+                                    <x:String>Scoreboard Market</x:String>
+                                    <x:String>MapleStreet Commons</x:String>
+                                </Picker.Items>
+                                <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                            </Picker>
+                    </StackLayout>
                 </Frame>
-            </StackLayout>
-            <StackLayout>
-                <Frame x:Name="searchFrame" BorderColor="LightGray" HeightRequest="500" IsVisible="true">
+                <StackLayout>
+                <Frame x:Name="searchFrame" BorderColor="#C05746" HeightRequest="500" IsVisible="true">
                     <ScrollView>
                         <StackLayout>
                             <Label x:Name="TextOldValue" FontSize="Small"/>
-                            <ListView x:Name="foodItemslv"></ListView>
+                                <ListView x:Name="foodItemslv" ItemsSource="{Binding MiamiItem}">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <StackLayout>
+                                                    <Label Text="{Binding Formalname}" TextColor="#DDA448" FontSize="Medium"></Label>
+                                                    <StackLayout>
+                                                        <StackLayout Orientation="Horizontal">
+                                                            <Label Text="Location: " Padding="20,0,0,0" TextColor="#537D8D"></Label>
+                                                            <Label Text="{Binding ServiceUnit}" TextColor="#537D8D"></Label>
+                                                        </StackLayout>
+                                                        <StackLayout Orientation="Horizontal">
+                                                            <Label Text="Portion: " Padding="20,0,0,0" TextColor="#537D8D"></Label>
+                                                            <Label Text="{Binding PortionSize}" TextColor="#537D8D"></Label>
+                                                        </StackLayout>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
                         </StackLayout>
                     </ScrollView>
                 </Frame>
