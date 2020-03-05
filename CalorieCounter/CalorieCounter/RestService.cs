@@ -117,38 +117,14 @@ namespace CalorieCounter
                     
                     string c = await response.Content.ReadAsStringAsync();
                     c = c.Replace("\n", String.Empty);
-                    //c= c.Replace(" ", String.Empty);
                     // need to start and end file with same word
-                    //file ="<?xml version='1.0' encoding='utf-8'?>"
-                    //    + "<items>"
-                    //    + "< item >  < service_unit > ASC Toasted Bagel</ service_unit >  < meal > Served All Day</ meal >  < meal_number > 13 </ meal_number >  < course > 12 - Proteins </ course >  < key_name > Chickuscan </ key_name >  < formal_name > Tuscan Chicken Strip</ formal_name >  < portion_size > 3 oz serving</ portion_size >  < cost ></ cost >  < sort > 1700 </ sort >  < itemevent_intid > 3240729 </ itemevent_intid >  < eventdate > Feb 27 2020 12:00:00:000AM </ eventdate >  < gram_weight > 85.04850006103516 </ gram_weight >  < PRO > 16.15921501159668 </ PRO >  < FAT > 1.700970001220703 </ FAT >  < CHO > 3.401940002441406 </ CHO >  < KCAL > 100.3572300720215 </ KCAL >  < CA > 20.41164001464844 </ CA >  < FE > 0.8504850006103516 </ FE >  < P > 0 </ P >  < K > 0 </ K >  < NA > 440.5512303161621 </ NA >  < VTAIU > 0 </ VTAIU >  < VITC > 0 </ VITC >  < B1 > 0 </ B1 >  < B2 > 0 </ B2 >  < NIA > 0 </ NIA >  < B6 > 0 </ B6 >  < CHOL > 45.07570503234864 </ CHOL >  < SFA > 0.8504850006103516 </ SFA >  < PUFA > 0 </ PUFA >  < TDFB > 0.8504850006103516 </ TDFB >  < SUGR > 0 </ SUGR >  < FATRN > 0 </ FATRN >  < course_sort > 12 </ course_sort >  < menuplangrp ></ menuplangrp > </ item >" + 
-                    //      "</items>";
                     file = "<items>" + c + "</items>";
-                    //file =
-                       //"<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-                       //"<soap:Envelope xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/'>" +
-                       //"<soap:Body>" +
-                       //"<InsertXml xmlns='http://tempuri.org/'>" +
-                       //file =
-                       //"<items>" +
-                       //"<item><service_unit>Test</service_unit><meal>Served All Day</meal><meal_number>13</meal_number><course>12 - Proteins</course><key_name>Chickuscan</key_name><formal_name>Tuscan Chicken Strip</formal_name><portion_size>3 oz serving</portion_size><cost></cost><sort>1700</sort><itemevent_intid>3240729</itemevent_intid><eventdate>Feb 27 2020 12:00:00:000AM</eventdate><gram_weight>85.04850006103516</gram_weight><PRO>16.15921501159668</PRO><FAT>1.700970001220703</FAT><CHO>3.401940002441406</CHO><KCAL>100.3572300720215</KCAL><CA>20.41164001464844</CA><FE>0.8504850006103516</FE><P>0</P><K>0</K><NA>440.5512303161621</NA><VTAIU>0</VTAIU><VITC>0</VITC><B1>0</B1><B2>0</B2><NIA>0</NIA><B6>0</B6><CHOL>45.07570503234864</CHOL><SFA>0.8504850006103516</SFA><PUFA>0</PUFA><TDFB>0.8504850006103516</TDFB><SUGR>0</SUGR><FATRN>0</FATRN><course_sort>12</course_sort><menuplangrp></menuplangrp></item>" +
-                       //"</items>";
-                       //"</InsertXml>" +
-                       //"</soap:Body>" +
-                       //"</soap:Envelope>";
-
-                    //<xml>c</xml> returns 400 error but <items>c</items> gives 200 but error is parameter expected 
-
+                    
                     // XElement parse does not like '&'
                     file = file.Replace("&", "and");
                     file = file.Replace(";", String.Empty);
                     items = XElement.Parse(file);
-                    // all items start and end with '<item>' so put them in a list
-                    //List<XElement> itemNodes = items.Elements("item").ToList();
-                    // get first item from list (for testing purposes)
-                    //var s = itemNodes[0].Element("formal_name");
 
-                    // return list of foods to be placed into our db
 
                 }
             }
@@ -157,6 +133,7 @@ namespace CalorieCounter
                 Console.WriteLine(e.InnerException.Message);
             }
 
+            // return list of foods to be placed into our db
             return items.ToString();
 
         }
@@ -165,9 +142,7 @@ namespace CalorieCounter
         {
             try
             {
-                //xmlContent = xmlContent.Replace("\r\n", String.Empty);
-
-                //var json = JsonConvert.SerializeObject(xmlContent);
+                
                 using (var message = new HttpRequestMessage(HttpMethod.Post, uri))
                 {
                     xmlContent = "xml=" + xmlContent;
@@ -181,7 +156,7 @@ namespace CalorieCounter
                         string result = await response.Content.ReadAsStringAsync();
                         if (response.IsSuccessStatusCode)
                         {
-                            // yay
+                            // sucssessful insert into DB
                         }
                     }
                 }
@@ -192,31 +167,7 @@ namespace CalorieCounter
             }
         }
 
-        public async Task InsertMiamiFoodDataAsync2(string uri, string xmlContent)
-        {
-            try
-            {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-                byte[] bytes;
-                bytes = System.Text.Encoding.ASCII.GetBytes(xmlContent);
-                request.ContentType = "application/x-www-form-urlencoded";
-                request.ContentLength = bytes.Length;
-                request.Method = "POST";
-                Stream requestStream = request.GetRequestStream();
-                requestStream.Write(bytes, 0, bytes.Length);
-                requestStream.Close();
-                HttpWebResponse response;
-                response = (HttpWebResponse)await request.GetResponseAsync();
-                if (response.StatusCode == HttpStatusCode.OK)
-                {
-                    Stream responseStream = response.GetResponseStream();
-                    string responseStr = new StreamReader(responseStream).ReadToEnd();
-                }
-            } catch(WebException e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
+       
 
         public async Task<string> InsertFoodIntoLogForUser(string uri, FoodEaten data)
         {
