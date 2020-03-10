@@ -76,7 +76,7 @@
                 <Setter Property="TextColor" Value="#DDA448"></Setter>
             </Style>
             <Style x:Key="CalorieDetailFrame" TargetType="Frame">
-                <Setter Property="BorderColor" Value="#C05746"></Setter>
+                <Setter Property="BorderColor" Value="#C05746"></Setter> 
                 <Setter Property="HasShadow" Value="True"></Setter>
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="Margin" Value="5,0,5,0"></Setter>

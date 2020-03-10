@@ -75,11 +75,11 @@ namespace CalorieCounter
 
         }
 
-        public async Task<List<FoodItem>> GetFoodDataAsync(string uri)
+        public async Task<List<MiamiItem>> GetFoodDataAsync(string uri)
         {
             List<FoodItem> listFood = null;
-            FoodItem foodItem = null;
-            
+            List<MiamiItem> miamiFoodList = null;
+
             try
             {
                 HttpResponseMessage response = await _client.GetAsync(uri);
@@ -90,15 +90,15 @@ namespace CalorieCounter
 
                     string c = await response.Content.ReadAsStringAsync();
 
-                    listFood = JsonConvert.DeserializeObject<List<FoodItem>>(c);
-
+                    //listFood = JsonConvert.DeserializeObject<List<FoodItem>>(c);
+                    miamiFoodList = JsonConvert.DeserializeObject<List<MiamiItem>>(c);
                 }
             }
             catch (HttpRequestException e)
             {
                 Console.WriteLine(e.InnerException.Message);
             }
-             return listFood; 
+             return miamiFoodList; 
         }
 
         public async Task<String> GetMiamiFoodDataAsync(string uri)
@@ -202,7 +202,33 @@ namespace CalorieCounter
             }
             return inserted;
         }
-        
+
+        public async Task InsertFoodIntoUserEats(string uri, string data)
+        {
+            try
+            {
+                //var json = JsonConvert.SerializeObject(data);
+                using (var message = new HttpRequestMessage(HttpMethod.Post, uri))
+                {
+                    message.Version = HttpVersion.Version10;
+                    message.Content = new StringContent(data, Encoding.UTF8, "application/x-www-form-urlencoded");
+
+                    using (var response = await _client.SendAsync(message))
+                    {
+                        string result = await response.Content.ReadAsStringAsync();
+                        if (response.IsSuccessStatusCode)
+                        {
+                            // success
+                        }
+                    }
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.InnerException.Message);
+            }
+        }
+
         public async Task UpdateDailyLogForUser(string uri, UserLogData data)
         {
             try
