@@ -22,7 +22,7 @@ namespace CalorieCounter
         public static string miamiApiEndpoint = "https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php";
 
         public const string unique_id = "birdaj";
-        public const string eatsDate = "2019-11-20";
+        public const string eatsDate = "2019-03-10";
         public const string userToken = "dasgfdszfe";
 
         public Page2()
@@ -247,17 +247,27 @@ namespace CalorieCounter
             
         }
 
+        async void InsertFoodForUser(MiamiItem item)
+        {
+            // uniqueId=string&offeredId=string
+            
+            string data = "uniqueId=" + unique_id + "&offeredId=" + item.Offered_id;
+            await _restService.InsertFoodIntoUserEats(apiEndpoint + "UserEatFood", data);
+
+        }
+
         private void AddFoodToLog_Clicked(object sender, EventArgs e)
         {
-            FoodItem item = (FoodItem)foodItemslv.SelectedItem;
+            //FoodItem item = (FoodItem)foodItemslv.SelectedItem;
             MiamiItem mItem = (MiamiItem)foodItemslv.SelectedItem;
             
-            int food_Id = item.Food_Id;
-            int location_Id = item.FL_Id;
+            //int food_Id = item.Food_Id;
+            //int location_Id = item.FL_Id;
             // insert food to log
-            InsertFood(food_Id, location_Id);
+            //InsertFood(food_Id, location_Id);
+            InsertFoodForUser(mItem);
             // update home page of app
-            UpdateDailyLog();
+            //UpdateDailyLog();
         }
     }
 }

@@ -67,7 +67,7 @@
                 </Frame>
             </StackLayout>
             <StackLayout>
-                <Button x:Name="addFoodToLog" Text="Add" Clicked="AddFoodToLog_Clicked" IsVisible="False"></Button>
+                <Button x:Name="addFoodToLog" Text="Add" Clicked="AddFoodToLog_Clicked" IsVisible="True"></Button>
             </StackLayout>
             <StackLayout>
                 <Frame x:Name="historyFrame" BorderColor="LightGray" HeightRequest="250" IsVisible="true">

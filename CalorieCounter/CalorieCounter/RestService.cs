@@ -202,7 +202,33 @@ namespace CalorieCounter
             }
             return inserted;
         }
-        
+
+        public async Task InsertFoodIntoUserEats(string uri, string data)
+        {
+            try
+            {
+                //var json = JsonConvert.SerializeObject(data);
+                using (var message = new HttpRequestMessage(HttpMethod.Post, uri))
+                {
+                    message.Version = HttpVersion.Version10;
+                    message.Content = new StringContent(data, Encoding.UTF8, "application/x-www-form-urlencoded");
+
+                    using (var response = await _client.SendAsync(message))
+                    {
+                        string result = await response.Content.ReadAsStringAsync();
+                        if (response.IsSuccessStatusCode)
+                        {
+                            // success
+                        }
+                    }
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.InnerException.Message);
+            }
+        }
+
         public async Task UpdateDailyLogForUser(string uri, UserLogData data)
         {
             try
