@@ -86,6 +86,7 @@ namespace CalorieCounter
         public string DisplayDailyValuesByUserDay(string date)
         {
             // /api.asmx/DisplayDailyValuesByUserDay
+            //date = "2020-3-05";
             string requestUri = apiEndpoint;
             requestUri += "DisplayDailyValuesByUserDay";
             requestUri += $"?uniqueId={uniqueId}";
@@ -97,20 +98,20 @@ namespace CalorieCounter
         
         async void FoodLookup(string date)
         {
-            List<DailyValues> foodItem = null;
+            List<DailyValues> dailyValues = null;
             
-            foodItem = await _restService.DisplayDailyValuesByUserDayAsync(DisplayDailyValuesByUserDay(date));
-            if (foodItem != null && foodItem.Count != 0)
+
+            dailyValues = await _restService.DisplayDailyValuesByUserDayAsync(DisplayDailyValuesByUserDay(date));
+            if (dailyValues != null && dailyValues.Count != 0)
             {
-                totalCal.Text = foodItem[0].TotalCalories.ToString() + "g";
-                transFat.Text = foodItem[0].TotalTrans_Fat.ToString() + "g";
-                satFat.Text = foodItem[0].TotalSat_Fat.ToString() + "g";
-                cholesterol.Text = foodItem[0].TotalCholesterol.ToString() + "g";
-                sodium.Text = foodItem[0].TotalSodium.ToString() + "g";
-                carbs.Text = foodItem[0].TotalCarbs.ToString() + "g";
-                fiber.Text = foodItem[0].TotalFiber.ToString() + "g";
-                sugar.Text = foodItem[0].TotalSugars.ToString() + "g";
-                protein.Text = foodItem[0].TotalProtein.ToString() + "g";
+                totalCal.Text = dailyValues[0].TotalCalories.ToString() + "k";
+                fat.Text = dailyValues[0].TotalFat.ToString() + "g";
+                cholesterol.Text = dailyValues[0].TotalCholesterol.ToString() + "mg";
+                sodium.Text = dailyValues[0].TotalSodium.ToString() + "mg";
+                carbs.Text = dailyValues[0].TotalCarbs.ToString() + "g";
+                calcium.Text = dailyValues[0].TotalCalcium.ToString() + "mg";
+                sugar.Text = dailyValues[0].TotalSugars.ToString() + "g";
+                protein.Text = dailyValues[0].TotalProtein.ToString() + "g";
             }
         }
 
