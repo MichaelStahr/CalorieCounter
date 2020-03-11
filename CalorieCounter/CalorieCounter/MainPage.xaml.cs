@@ -98,6 +98,7 @@ namespace CalorieCounter
         async void FoodLookup(string date)
         {
             List<DailyValues> foodItem = null;
+            
             foodItem = await _restService.DisplayDailyValuesByUserDayAsync(DisplayDailyValuesByUserDay(date));
             if (foodItem != null && foodItem.Count != 0)
             {

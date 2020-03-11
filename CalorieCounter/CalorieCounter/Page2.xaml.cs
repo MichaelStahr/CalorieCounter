@@ -205,11 +205,14 @@ namespace CalorieCounter
                 miamiFoodItem = await _restService.GetFoodDataAsync(SearchFoodByLocation(locations.SelectedItem.ToString()));
                 searchFrame.IsVisible = true;
                 foodItemslv.ItemsSource = miamiFoodItem;
+                addFoodToLog.IsVisible = true;
             } else
             {
                 foodItemslv.ItemsSource = null;
+                addFoodToLog.IsVisible = false;
+                searchFrame.IsVisible = false;
             }
-            
+
         }
 
         //post
@@ -250,10 +253,12 @@ namespace CalorieCounter
         async void InsertFoodForUser(MiamiItem item)
         {
             // uniqueId=string&offeredId=string
-            
-            string data = "uniqueId=" + unique_id + "&offeredId=" + item.Offered_id;
-            await _restService.InsertFoodIntoUserEats(apiEndpoint + "UserEatFood", data);
-
+            if (item != null)
+            {
+                string data = "uniqueId=" + unique_id + "&offeredId=" + item.Offered_id;
+                await _restService.InsertFoodIntoUserEats(apiEndpoint + "UserEatFood", data);
+            }
+          
         }
 
         private void AddFoodToLog_Clicked(object sender, EventArgs e)
