@@ -5,31 +5,28 @@ namespace CalorieCounter {
     [JsonObject]
     public class DailyValues
     {
-        [JsonProperty("totalCalories")]
-        public int TotalCalories { get; set; }
+        [JsonProperty("caloriesk", NullValueHandling = NullValueHandling.Ignore)]
+        public double TotalCalories { get; set; }
 
-        [JsonProperty("totalTrans_fat")]
-        public int TotalTrans_Fat { get; set; }
+        [JsonProperty("fat", NullValueHandling = NullValueHandling.Ignore)]
+        public double TotalFat { get; set; }
 
-        [JsonProperty("totalSat_fat")]
-        public int TotalSat_Fat { get; set; }
+        [JsonProperty("cholesterol", NullValueHandling = NullValueHandling.Ignore)]
+        public double TotalCholesterol { get; set; }
 
-        [JsonProperty("totalcholesterol")]
-        public int TotalCholesterol { get; set; }
+        [JsonProperty("sodium", NullValueHandling = NullValueHandling.Ignore), ]
+        public double TotalSodium { get; set; }
 
-        [JsonProperty("totalsodium")]
-        public int TotalSodium { get; set; }
+        [JsonProperty("cho", NullValueHandling = NullValueHandling.Ignore)]
+        public double TotalCarbs { get; set; }
 
-        [JsonProperty("totalcarbs")]
-        public int TotalCarbs { get; set; }
+        [JsonProperty("calcium", NullValueHandling = NullValueHandling.Ignore)]
+        public double TotalCalcium { get; set; }
 
-        [JsonProperty("totalfiber")]
-        public int TotalFiber { get; set; }
+        [JsonProperty("sugar", NullValueHandling = NullValueHandling.Ignore)]
+        public double TotalSugars { get; set; }
 
-        [JsonProperty("totalsugars")]
-        public int TotalSugars { get; set; }
-
-        [JsonProperty("totalprotein")]
-        public int TotalProtein { get; set; }
+        [JsonProperty("protein", NullValueHandling = NullValueHandling.Ignore)]
+        public double TotalProtein { get; set; }
     }
 }

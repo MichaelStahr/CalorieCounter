@@ -269,6 +269,7 @@ namespace CalorieCounter
                    
                     string c = await response.Content.ReadAsStringAsync();
 
+                   
                     listFood = JsonConvert.DeserializeObject<List<DailyValues>>(c);
 
 
