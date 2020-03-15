@@ -284,5 +284,30 @@ namespace CalorieCounter
             return listFood;
 
         }
+
+        public async Task AuthenticateUser(string uri)
+        {
+            AuthCode code = null;
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                HttpStatusCode i = response.StatusCode;
+
+                if (response.IsSuccessStatusCode)
+                {
+
+                    string c = await response.Content.ReadAsStringAsync();
+                    
+                    //code = JsonConvert.DeserializeObject<AuthCode>(c);
+
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.InnerException.Message);
+            }
+
+            // return list of foods to be placed into our db
+        }
     }
 }

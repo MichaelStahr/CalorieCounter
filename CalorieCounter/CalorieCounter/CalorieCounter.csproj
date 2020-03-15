@@ -15,6 +15,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="RestSharp" Version="106.10.1" />
     <PackageReference Include="Syncfusion.Xamarin.SfCalendar" Version="17.3.0.17" />
     <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="17.3.0.26" />
     <PackageReference Include="Syncfusion.Xamarin.SfPopupLayout" Version="17.3.0.26" />
