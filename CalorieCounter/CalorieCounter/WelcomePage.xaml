@@ -4,12 +4,15 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="CalorieCounter.SignUpPage">
+             x:Class="CalorieCounter.WelcomePage">
     <ContentPage.Content>
-        <StackLayout Padding="30">
+        <StackLayout>
+            <Label Text="Welcome to Calorie Counter!" VerticalOptions="CenterAndExpand"></Label>
             <Entry Placeholder="Email"></Entry>
             <Entry Placeholder="Password" IsPassword="True"></Entry>
-            <Button x:Name="SignUpButton" Text="Sign Up" Clicked="SignUpButton_Clicked"></Button>
+            <Button x:Name="LoginButton" Text="Login" Clicked="LoginButton_Clicked"></Button>
+            <Button x:Name ="SignUpButton" Text="SignUp" Clicked="SignUpButton_Clicked"></Button>
+            <Button x:Name="AboutButton" Text="About" Clicked="AboutButton_Clicked"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

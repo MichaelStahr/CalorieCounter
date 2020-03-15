@@ -12,7 +12,8 @@ namespace CalorieCounter
             InitializeComponent();
             ColorTypeConverter color = new ColorTypeConverter();
             Color.FromHex("ADC698");
-            MainPage = new NavigationPage(new MainPage())
+            //MainPage = new NavigationPage(new MainPage())
+            MainPage = new NavigationPage(new SignUpPage())
             {
 
                 //#CBDFBD

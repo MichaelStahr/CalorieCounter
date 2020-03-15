@@ -16,5 +16,10 @@ namespace CalorieCounter
         {
             InitializeComponent();
         }
+
+        private void SignUpButton_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }
