@@ -22,12 +22,14 @@ namespace CalorieCounter
         Device.RuntimePlatform == Device.Android ? "https://10.0.2.2:44341" : "https://localhost:44341";
         public static string apiEndpoint = $"{BaseAddress}/api.asmx/";
         RestService _restService;
+        ChartData data;
 
 
         public MainPage()
         {
             InitializeComponent();
             _restService = new RestService();
+            //data = new ChartData();
             NavigationPage.SetBackButtonTitle(this, "Home");
             StackLayout header = new StackLayout
             {
@@ -99,8 +101,8 @@ namespace CalorieCounter
         async void FoodLookup(string date)
         {
             List<DailyValues> dailyValues = null;
-            
 
+            
             dailyValues = await _restService.DisplayDailyValuesByUserDayAsync(DisplayDailyValuesByUserDay(date));
             if (dailyValues != null && dailyValues.Count != 0)
             {
@@ -112,7 +114,14 @@ namespace CalorieCounter
                 calcium.Text = dailyValues[0].TotalCalcium.ToString() + "mg";
                 sugar.Text = dailyValues[0].TotalSugars.ToString() + "g";
                 protein.Text = dailyValues[0].TotalProtein.ToString() + "g";
+
+                //DateTime calDate = Calendar.SelectedDate.Value;
+                //string cals = totalCal.Text.Substring(0, totalCal.Text.Length - 1);
+                ////data.getCalories().Clear();
+                //data.AddDataPoint(DateTime.Today, Double.Parse(cals));
+                //int count = data.getCalories().Count;
             }
+            
         }
 
         private void Calendar_OnCalendarTapped(object sender, CalendarTappedEventArgs e)

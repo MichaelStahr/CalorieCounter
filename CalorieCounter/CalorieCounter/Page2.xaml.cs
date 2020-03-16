@@ -11,7 +11,7 @@ using System.Xml.Linq;
 namespace CalorieCounter
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Page2 : TabbedPage
+    public partial class Page2 : ContentPage
     {
         
         public static string BaseAddress =
