@@ -24,7 +24,7 @@ namespace CalorieCounter
         public const string unique_id = "birdaj";
         public const string eatsDate = "2019-03-10";
         public const string userToken = "dasgfdszfe";
-
+        
         public Page2()
         {
             InitializeComponent();

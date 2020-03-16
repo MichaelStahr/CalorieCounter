@@ -26,7 +26,7 @@ namespace CalorieCounter
 
         private void LoginButton_Clicked(object sender, EventArgs e)
         {
-            Login("birdaj@miamioh.edu", "dsf");
+            Login(email.Text, password.Text);
         }
 
         private void SignUpButton_Clicked(object sender, EventArgs e)
@@ -75,7 +75,7 @@ namespace CalorieCounter
 
 
             string requestUri = "https://accounts.google.com/o/oauth2/v2/auth?";
-            requestUri += $"scope=openid%20email";
+            requestUri += $"scope=openid%20email%20profile";
             requestUri += $"&response_type=code";
             requestUri += "&redirect_uri=com.googleusercontent.apps.1041253101002-dhan7880g5t577r7d6lc8cfcsvqfqqhf:/oauth2redirect";
             requestUri += "&client_id=1041253101002-dhan7880g5t577r7d6lc8cfcsvqfqqhf.apps.googleusercontent.com";

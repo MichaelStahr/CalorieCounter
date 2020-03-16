@@ -8,8 +8,8 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Welcome to Calorie Counter!" VerticalOptions="CenterAndExpand"></Label>
-            <Entry Placeholder="Email"></Entry>
-            <Entry Placeholder="Password" IsPassword="True"></Entry>
+            <Entry x:Name="email" Placeholder="Email"></Entry>
+            <Entry x:Name="password" Placeholder="Password" IsPassword="True"></Entry>
             <Button x:Name="LoginButton" Text="Login" Clicked="LoginButton_Clicked"></Button>
             <Button x:Name ="SignUpButton" Text="SignUp" Clicked="SignUpButton_Clicked"></Button>
             <Button x:Name="AboutButton" Text="About" Clicked="AboutButton_Clicked"></Button>
