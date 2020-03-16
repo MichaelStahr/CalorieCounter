@@ -9,30 +9,17 @@ namespace CalorieCounter
 
     public class ChartData
     {
-        public ObservableCollection<ChartDataPoint> Calories { get; set; }
+        //public ObservableCollection<ChartDataPoint> Calories { get; set; }
+        public string Date { get; set; } 
 
-        public ChartData()
+        public double Calories { get; set; }
+        public ChartData(string date, double calories)
         {
-            Calories = new ObservableCollection<ChartDataPoint>();
-            DateTime today = DateTime.Today;
-
-
-            Calories.Add(new ChartDataPoint(today.AddDays(-2), 200));
-            Calories.Add(new ChartDataPoint(today.AddDays(-1), 300));
-            Calories.Add(new ChartDataPoint(today, 900));
-            Calories.Add(new ChartDataPoint(today.AddDays(1), 145));
-            Calories.Add(new ChartDataPoint(today.AddDays(2), 78));
+            this.Date = date;
+            this.Calories = calories;
         }
 
-        public void AddDataPoint(DateTime date, double amount)
-        {
-            Calories.Add(new ChartDataPoint(date, amount));
-        }
-
-        public ObservableCollection<ChartDataPoint> getCalories()
-        {
-            return Calories;
-        }
+        
 
         
 

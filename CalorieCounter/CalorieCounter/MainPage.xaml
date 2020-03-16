@@ -15,7 +15,7 @@
                 x:Class="CalorieCounter.MainPage">
 
     <TabbedPage.BindingContext>
-        <local:ChartData/>
+        <local:ChartViewModel/>
     </TabbedPage.BindingContext>
     <TabbedPage.Resources>
 
@@ -92,31 +92,38 @@
             <StackLayout>
                 <syncfusion:SfCalendar x:Name="Calendar" IsVisible="False"></syncfusion:SfCalendar>
                 <chart:SfChart x:Name="CalChart" HeightRequest="400" Margin="5">
+                    
+                    <chart:SfChart.BindingContext>
+                        <local:ChartViewModel/>
+                    </chart:SfChart.BindingContext>
+                    
+                    <chart:SfChart.Title>
+                        <chart:ChartTitle Text="Chart"/>
+                    </chart:SfChart.Title>
+
                     <chart:SfChart.PrimaryAxis>
                         <chart:CategoryAxis>
                             <chart:CategoryAxis.Title>
-                                <chart:ChartAxisTitle Text="Day" FontAttributes="Bold"></chart:ChartAxisTitle>
+                                <chart:ChartAxisTitle Text="Day" FontAttributes="Bold"/>
                             </chart:CategoryAxis.Title>
                         </chart:CategoryAxis>
                     </chart:SfChart.PrimaryAxis>
+
                     <chart:SfChart.SecondaryAxis>
                         <chart:NumericalAxis>
                             <chart:NumericalAxis.Title>
-                                <chart:ChartAxisTitle Text="# of Cals" FontAttributes="Bold"></chart:ChartAxisTitle>
+                                <chart:ChartAxisTitle Text="Calories" FontAttributes="Bold"/>
                             </chart:NumericalAxis.Title>
                         </chart:NumericalAxis>
                     </chart:SfChart.SecondaryAxis>
 
-                    <chart:SfChart.BindingContext>
-                        <local:ChartData/>
-                    </chart:SfChart.BindingContext>
-                    <chart:SfChart.Series>
-                        <chart:LineSeries ItemsSource ="{Binding Calories}" x:Name="LineSeries">
-                            <chart:LineSeries.DataMarker>
-                                <chart:ChartDataMarker/>
-                            </chart:LineSeries.DataMarker>
 
-                        </chart:LineSeries>
+                    <chart:SfChart.Series>
+                        <chart:ColumnSeries ItemsSource="{Binding Data1}" XBindingPath="Date" YBindingPath="Calories" EnableTooltip="True">
+                            <chart:ColumnSeries.DataMarker>
+                                <chart:ChartDataMarker/>
+                            </chart:ColumnSeries.DataMarker>
+                        </chart:ColumnSeries>
                     </chart:SfChart.Series>
                 </chart:SfChart>
 
