@@ -4,6 +4,7 @@ using Syncfusion.SfChart.XForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace CalorieCounter
@@ -62,14 +63,17 @@ namespace CalorieCounter
             Color labelColor = Color.FromHex("503047");
             //Preferences.Clear();
             
-            DateTime date = Calendar.SelectedDate.Value;
-            string year = date.Year.ToString();
-            string month = date.Month.ToString();
-            string day = date.Day.ToString();
+            DateTime currentSelectedDate = Calendar.SelectedDate.Value;
+            
+            string year = currentSelectedDate.Year.ToString();
+            string month = currentSelectedDate.Month.ToString();
+            string day = currentSelectedDate.Day.ToString();
             dateString = year + "-" + month + "-" + day;
             //Notes.Text = Preferences.Get(date, "No notes yet!");
 
         }
+
+       
 
         protected override void OnCurrentPageChanged()
         {
@@ -83,6 +87,9 @@ namespace CalorieCounter
         protected override void OnAppearing()
         {
             FoodLookup(dateString);
+            DateTime currentSelectedDate = Calendar.SelectedDate.Value;
+            UpdateCalorieGraph(currentSelectedDate);
+            
         } 
 
         public string DisplayDailyValuesByUserDay(string date)
@@ -115,13 +122,50 @@ namespace CalorieCounter
                 sugar.Text = dailyValues[0].TotalSugars.ToString() + "g";
                 protein.Text = dailyValues[0].TotalProtein.ToString() + "g";
 
-                model.Data1.Clear();
-                double numTotalCal = Double.Parse(totalCal.Text.Substring(0, totalCal.Text.Length - 1));
-                model.Data1.Add(new ChartData(date, numTotalCal));
-                calChart.ItemsSource = model.Data1;
+                //model.Data1.Clear();
+                //UpdateCalorieGraph(date);
                 
             }
             
+        }
+
+        private async void UpdateCalorieGraph(DateTime selectedDate)
+        {
+            // get previous date
+            model.Data1.Clear();
+            
+            DateTime prevDateTime = selectedDate.AddDays(-1);
+            string date = ChangeDateToString(selectedDate);
+            string prevDate = ChangeDateToString(prevDateTime);
+            double prevTotalCals = await GetDailyCaloriesForDate(prevDate);
+
+            // current selecte date
+            double numTotalCal = Double.Parse(totalCal.Text.Substring(0, totalCal.Text.Length - 1));
+
+            model.Data1.Add(new ChartData(prevDate, prevTotalCals));
+            model.Data1.Add(new ChartData(date, numTotalCal));
+            calChart.ItemsSource = model.Data1;
+        }
+
+        private string ChangeDateToString(DateTime date)
+        {
+            string year = date.Year.ToString();
+            string month = date.Month.ToString();
+            string day = date.Day.ToString();
+            string strDate = year + "-" + month + "-" + day;
+            return strDate;
+        }
+
+        public async Task<Double> GetDailyCaloriesForDate(string date)
+        {
+            List<DailyValues> dailyValues = null;
+            dailyValues = await _restService.DisplayDailyValuesByUserDayAsync(DisplayDailyValuesByUserDay(date));
+            double totalCals = 0;
+            if (dailyValues != null && dailyValues.Count != 0)
+            {
+                totalCals = Double.Parse(dailyValues[0].TotalCalories.ToString());
+            }
+            return totalCals;
         }
 
         private void Calendar_OnCalendarTapped(object sender, CalendarTappedEventArgs e)
@@ -134,6 +178,7 @@ namespace CalorieCounter
             string day = date.Day.ToString();
             dateString = year + "-" + month + "-" + day;
             FoodLookup(dateString);
+            UpdateCalorieGraph(date);
             //if (Preferences.ContainsKey(date))
             //{
             //    Notes.Text = Preferences.Get(date, "No notes yet");

@@ -12,13 +12,7 @@ namespace CalorieCounter
 
         public ChartViewModel()
         {
-            Data1 = new ObservableCollection<ChartData>
-            {
-                new ChartData("2020-3-16", 100),
-                new ChartData("2020-3-17", 200),
-                new ChartData("2020-3-18", 50)
-
-            };
+            Data1 = new ObservableCollection<ChartData>();
         }
     }
 
