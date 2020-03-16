@@ -293,19 +293,20 @@ namespace CalorieCounter
             string c = null;
             try
             {
+                //var webreq = (HttpWebRequest)WebRequest.Create(uri);
+                //webreq.Method = "GET";
+                //webreq.Accept = "application/json";
+                //webreq.ContentType = "application/json";
+                //WebResponse re = await webreq.GetResponseAsync();
+                //Stream str = re.GetResponseStream();
                 HttpResponseMessage response = await _client.GetAsync(uri);
-                //await Browser.OpenAsync(uri);
                 HttpStatusCode i = response.StatusCode;
-
                 if (response.IsSuccessStatusCode)
                 {
 
                     c = await response.Content.ReadAsStringAsync();
-                    //var browser = new WebView();
-                    //var htmlSource = new HtmlWebViewSource();
-                    //htmlSource.Html = c;
-                    //browser.Source = htmlSource;
-                    //code = JsonConvert.DeserializeObject<AuthCode>(c);
+                    HttpContent content = response.Content;
+                    //await Browser.OpenAsync(uri);
 
                 }
             }

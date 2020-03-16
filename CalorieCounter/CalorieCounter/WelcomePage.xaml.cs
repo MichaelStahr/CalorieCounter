@@ -74,6 +74,9 @@ namespace CalorieCounter
             requestUri += "&redirect_uri=com.googleusercontent.apps.1041253101002-dhan7880g5t577r7d6lc8cfcsvqfqqhf:/oauth2redirect/code";
             requestUri += "&client_id=1041253101002-dhan7880g5t577r7d6lc8cfcsvqfqqhf.apps.googleusercontent.com";
             requestUri += "&hd=miamioh.edu";
+            requestUri += "&prompt=select_account";
+            requestUri += $"&login_hint={email.Text}";
+            requestUri += "nonce=fdsafsadfdsagds";
             //await Browser.OpenAsync(requestUri);
             string c = await _restService.AuthenticateUser(requestUri);
 
