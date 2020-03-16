@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="CalorieCounter.Page2">
-    <ContentPage Title="All">
+    <ContentPage>
         <ScrollView>
             <StackLayout>
                 <Frame BackgroundColor="AliceBlue">

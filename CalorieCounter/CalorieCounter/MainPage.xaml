@@ -91,7 +91,7 @@
         <ScrollView Orientation="Vertical">
             <StackLayout>
                 <syncfusion:SfCalendar x:Name="Calendar" IsVisible="False"></syncfusion:SfCalendar>
-                <chart:SfChart x:Name="Chart" HeightRequest="400" Margin="5">
+                <chart:SfChart x:Name="CalChart" HeightRequest="400" Margin="5">
                     <chart:SfChart.PrimaryAxis>
                         <chart:CategoryAxis>
                             <chart:CategoryAxis.Title>
@@ -111,7 +111,7 @@
                         <local:ChartData/>
                     </chart:SfChart.BindingContext>
                     <chart:SfChart.Series>
-                        <chart:LineSeries ItemsSource ="{Binding Calories}">
+                        <chart:LineSeries ItemsSource ="{Binding Calories}" x:Name="LineSeries">
                             <chart:LineSeries.DataMarker>
                                 <chart:ChartDataMarker/>
                             </chart:LineSeries.DataMarker>
@@ -240,5 +240,4 @@
 
     <local:Page1 IconImageSource="user.png" Title="User"></local:Page1>
     <local:Page2 IconImageSource="plus.png" Title="Add Food"></local:Page2>
-    <local:Page3 IconImageSource="settings.png" Title="Settings"></local:Page3>
 </TabbedPage>
