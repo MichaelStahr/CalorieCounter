@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace CalorieCounter
 {
@@ -285,19 +287,24 @@ namespace CalorieCounter
 
         }
 
-        public async Task AuthenticateUser(string uri)
+        public async Task<string> AuthenticateUser(string uri)
         {
             AuthCode code = null;
+            string c = null;
             try
             {
                 HttpResponseMessage response = await _client.GetAsync(uri);
+                //await Browser.OpenAsync(uri);
                 HttpStatusCode i = response.StatusCode;
 
                 if (response.IsSuccessStatusCode)
                 {
 
-                    string c = await response.Content.ReadAsStringAsync();
-                    
+                    c = await response.Content.ReadAsStringAsync();
+                    //var browser = new WebView();
+                    //var htmlSource = new HtmlWebViewSource();
+                    //htmlSource.Html = c;
+                    //browser.Source = htmlSource;
                     //code = JsonConvert.DeserializeObject<AuthCode>(c);
 
                 }
@@ -306,7 +313,7 @@ namespace CalorieCounter
             {
                 Console.WriteLine(e.InnerException.Message);
             }
-
+            return c;
             // return list of foods to be placed into our db
         }
     }

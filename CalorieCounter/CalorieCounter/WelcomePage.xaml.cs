@@ -1,12 +1,13 @@
 ﻿using Newtonsoft.Json;
 using RestSharp;
+using RestSharp.Authenticators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -43,22 +44,15 @@ namespace CalorieCounter
 
         public async void Login(string username, string password)
         {
-            //var client = new RestClient("https://{YOUR-AUTH0-DOMAIN}.auth0.com");
-            //var request = new RestRequest("oauth/ro", Method.POST);
-            //request.AddParameter("client_id", "{YOUR-AUTH0-CLIENT-ID");
-            //request.AddParameter("username", username);
-            //request.AddParameter("password", password);
-            //request.AddParameter("connection", "{YOUR-CONNECTION-NAME-FOR-USERNAME-PASSWORD-AUTH}");
-            //request.AddParameter("grant_type", "password");
-            //request.AddParameter("scope", "openid");
 
             //var client = new RestClient("https://accounts.google.com/o/oauth2/v2/auth");
-            //var request = new RestRequest("oauth/ro", Method.POST);
+            //var request = new RestRequest("oauth/ro", Method.GET);
 
-            //request.AddParameter("scope", "email%20profile");
+            //request.AddParameter("scope", "openid%20email%20profile");
             //request.AddParameter("response_type", "code");
-            //request.AddParameter("redirect_uri", "com.googleusercontent.apps.1041253101002-dhan7880g5t577r7d6lc8cfcsvqfqqhf:/oauth2redirect");
+            //request.AddParameter("redirect_uri", "com.googleusercontent.apps.1041253101002-dhan7880g5t577r7d6lc8cfcsvqfqqhf:/oauth2redirect/code");
             //request.AddParameter("client_id", "1041253101002-dhan7880g5t577r7d6lc8cfcsvqfqqhf.apps.googleusercontent.com");
+            //request.AddParameter("hd", "miamioh.edu");
 
             //try
             //{
@@ -77,10 +71,14 @@ namespace CalorieCounter
             string requestUri = "https://accounts.google.com/o/oauth2/v2/auth?";
             requestUri += $"scope=openid%20email%20profile";
             requestUri += $"&response_type=code";
-            requestUri += "&redirect_uri=com.googleusercontent.apps.1041253101002-dhan7880g5t577r7d6lc8cfcsvqfqqhf:/oauth2redirect";
+            requestUri += "&redirect_uri=com.googleusercontent.apps.1041253101002-dhan7880g5t577r7d6lc8cfcsvqfqqhf:/oauth2redirect/code";
             requestUri += "&client_id=1041253101002-dhan7880g5t577r7d6lc8cfcsvqfqqhf.apps.googleusercontent.com";
             requestUri += "&hd=miamioh.edu";
-            await _restService.AuthenticateUser(requestUri);
+            //await Browser.OpenAsync(requestUri);
+            string c = await _restService.AuthenticateUser(requestUri);
+
+
         }
+
     }
 }
