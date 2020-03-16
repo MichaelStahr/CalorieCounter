@@ -29,7 +29,7 @@ namespace CalorieCounter
         {
             InitializeComponent();
             _restService = new RestService();
-            data = new ChartData();
+            //data = new ChartData();
             NavigationPage.SetBackButtonTitle(this, "Home");
             StackLayout header = new StackLayout
             {
@@ -115,11 +115,11 @@ namespace CalorieCounter
                 sugar.Text = dailyValues[0].TotalSugars.ToString() + "g";
                 protein.Text = dailyValues[0].TotalProtein.ToString() + "g";
 
-                DateTime calDate = Calendar.SelectedDate.Value;
-                string cals = totalCal.Text.Substring(0, totalCal.Text.Length - 1);
-                //data.getCalories().Clear();
-                data.AddDataPoint(DateTime.Today, Double.Parse(cals));
-                int count = data.getCalories().Count;
+                //DateTime calDate = Calendar.SelectedDate.Value;
+                //string cals = totalCal.Text.Substring(0, totalCal.Text.Length - 1);
+                ////data.getCalories().Clear();
+                //data.AddDataPoint(DateTime.Today, Double.Parse(cals));
+                //int count = data.getCalories().Count;
             }
             
         }
