@@ -119,7 +119,7 @@
 
 
                     <chart:SfChart.Series>
-                        <chart:ColumnSeries ItemsSource="{Binding Data1}" XBindingPath="Date" YBindingPath="Calories" EnableTooltip="True">
+                        <chart:ColumnSeries x:Name="calChart" ItemsSource="{Binding Data1}" XBindingPath="Date" YBindingPath="Calories" EnableTooltip="True">
                             <chart:ColumnSeries.DataMarker>
                                 <chart:ChartDataMarker/>
                             </chart:ColumnSeries.DataMarker>

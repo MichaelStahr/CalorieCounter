@@ -116,6 +116,9 @@ namespace CalorieCounter
                 protein.Text = dailyValues[0].TotalProtein.ToString() + "g";
 
                 model.Data1.Clear();
+                double numTotalCal = Double.Parse(totalCal.Text.Substring(0, totalCal.Text.Length - 1));
+                model.Data1.Add(new ChartData(date, numTotalCal));
+                calChart.ItemsSource = model.Data1;
                 
             }
             
