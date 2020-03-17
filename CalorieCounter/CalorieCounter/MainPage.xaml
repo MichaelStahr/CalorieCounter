@@ -15,7 +15,7 @@
                 x:Class="CalorieCounter.MainPage">
 
     <TabbedPage.BindingContext>
-        <local:ChartData/>
+        <local:ChartViewModel/>
     </TabbedPage.BindingContext>
     <TabbedPage.Resources>
 
@@ -81,6 +81,13 @@
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="Margin" Value="5,0,5,0"></Setter>
             </Style>
+            <Style x:Key="SimpleFoodFrame" TargetType="Frame">
+                <Setter Property="BorderColor" Value="#C05746"></Setter>
+                <Setter Property="BackgroundColor" Value="#CBDFBD"></Setter>
+                <Setter Property="HasShadow" Value="True"></Setter>
+                <Setter Property="CornerRadius" Value="10"></Setter>
+                <Setter Property="Margin" Value="5,0,5,0"></Setter>
+            </Style>
 
         </ResourceDictionary>
     </TabbedPage.Resources>
@@ -92,31 +99,38 @@
             <StackLayout>
                 <syncfusion:SfCalendar x:Name="Calendar" IsVisible="False"></syncfusion:SfCalendar>
                 <chart:SfChart x:Name="CalChart" HeightRequest="400" Margin="5">
+                    
+                    <chart:SfChart.BindingContext>
+                        <local:ChartViewModel/>
+                    </chart:SfChart.BindingContext>
+                    
+                    <chart:SfChart.Title>
+                        <chart:ChartTitle Text="Total Calories"/>
+                    </chart:SfChart.Title>
+
                     <chart:SfChart.PrimaryAxis>
                         <chart:CategoryAxis>
                             <chart:CategoryAxis.Title>
-                                <chart:ChartAxisTitle Text="Day" FontAttributes="Bold"></chart:ChartAxisTitle>
+                                <chart:ChartAxisTitle Text="Day" FontAttributes="Bold"/>
                             </chart:CategoryAxis.Title>
                         </chart:CategoryAxis>
                     </chart:SfChart.PrimaryAxis>
+
                     <chart:SfChart.SecondaryAxis>
                         <chart:NumericalAxis>
                             <chart:NumericalAxis.Title>
-                                <chart:ChartAxisTitle Text="# of Cals" FontAttributes="Bold"></chart:ChartAxisTitle>
+                                <chart:ChartAxisTitle Text="Calories" FontAttributes="Bold"/>
                             </chart:NumericalAxis.Title>
                         </chart:NumericalAxis>
                     </chart:SfChart.SecondaryAxis>
 
-                    <chart:SfChart.BindingContext>
-                        <local:ChartData/>
-                    </chart:SfChart.BindingContext>
-                    <chart:SfChart.Series>
-                        <chart:LineSeries ItemsSource ="{Binding Calories}" x:Name="LineSeries">
-                            <chart:LineSeries.DataMarker>
-                                <chart:ChartDataMarker/>
-                            </chart:LineSeries.DataMarker>
 
-                        </chart:LineSeries>
+                    <chart:SfChart.Series>
+                        <chart:ColumnSeries x:Name="calChart" ItemsSource="{Binding Data1}" XBindingPath="Date" YBindingPath="Calories" EnableTooltip="True">
+                            <chart:ColumnSeries.DataMarker>
+                                <chart:ChartDataMarker/>
+                            </chart:ColumnSeries.DataMarker>
+                        </chart:ColumnSeries>
                     </chart:SfChart.Series>
                 </chart:SfChart>
 
@@ -229,8 +243,27 @@
                         <Label x:Name="protein" Text="0g" Grid.Row="3" Grid.Column="3" Style="{StaticResource AmountLabel}"></Label>
                     </Grid>
                 </Frame>
-
-                <Editor Style="{d:StaticResource NotesEditor}" x:Name="Notes" TextChanged="Notes_TextChanged" ></Editor>
+                <Frame Style="{StaticResource SimpleFoodFrame}">
+                    <StackLayout HeightRequest="200">
+                        <Label Text="Food Items" HorizontalOptions="CenterAndExpand" FontSize="Medium"></Label>
+                        <ScrollView>
+                            <StackLayout>
+                                <ListView x:Name="simpleFoodlv" ItemsSource="{Binding SimpleFood}">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label Text="{Binding Name}" FontSize="Small"></Label>
+                                                    <Label Text="{Binding Calories}" FontSize="Small"></Label>
+                                                </StackLayout>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackLayout>
+                        </ScrollView>
+                    </StackLayout>
+                </Frame>
                 <Button Text="Extra Details" Style="{StaticResource Buttons}" Clicked="Button_Clicked"></Button>
 
             </StackLayout>
