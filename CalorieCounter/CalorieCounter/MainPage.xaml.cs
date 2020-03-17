@@ -122,9 +122,6 @@ namespace CalorieCounter
                 sugar.Text = dailyValues[0].TotalSugars.ToString() + "g";
                 protein.Text = dailyValues[0].TotalProtein.ToString() + "g";
 
-                //model.Data1.Clear();
-                //UpdateCalorieGraph(date);
-                
             }
             
         }
@@ -133,7 +130,6 @@ namespace CalorieCounter
         {
             // get previous date
             model.Data1.Clear();
-            
             DateTime prevDateTime = selectedDate.AddDays(-1);
             string date = ChangeDateToString(selectedDate);
             string prevDate = ChangeDateToString(prevDateTime);
@@ -194,6 +190,7 @@ namespace CalorieCounter
             Button button = (Button)sender;
             
             DateTime currentDate = Calendar.SelectedDate.Value;
+            
             DateTime newDate;
             if (button.Equals(GoBack))
             {
