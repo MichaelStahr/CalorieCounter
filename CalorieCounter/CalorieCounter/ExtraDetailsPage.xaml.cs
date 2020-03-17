@@ -44,7 +44,7 @@ namespace CalorieCounter
 
         protected override void OnAppearing()
         {
-            GetFoodForDay();
+            //GetFoodForDay();
         }
 
         async void GetFoodForDay()
