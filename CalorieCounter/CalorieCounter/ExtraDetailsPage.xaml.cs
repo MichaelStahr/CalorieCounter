@@ -30,11 +30,11 @@ namespace CalorieCounter
             
         }
 
-        public string DisplayDailyValuesByUserDay(string date)
+        public string DisplayFoodItemsByUserDay(string date)
         {
             // /api.asmx/GetFoodEatenByUserDay?uniqueId=string&date=string&token=string
             string requestUri = apiEndpoint;
-            requestUri += "GetFoodEatenByUserDay";
+            requestUri += "DisplayFoodItemsByUserDay";
             requestUri += $"?uniqueId={uniqueId}";
             requestUri += $"&date={date}";
             requestUri += $"&token={token}";
@@ -49,9 +49,9 @@ namespace CalorieCounter
 
         async void GetFoodForDay()
         {
-            List<FoodItem> foodItems;
-            //foodItems = await _restService.GetFoodDataAsync(DisplayDailyValuesByUserDay(dateString));
-            //foodLog.ItemsSource = foodItems;
+            List<SimpleFood> foods;
+            foods = await _restService.GetSimpleFoodItemForUserAsync(DisplayFoodItemsByUserDay(dateString));
+            foodLog.ItemsSource = foods;
         }
     }
 }
