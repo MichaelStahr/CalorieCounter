@@ -34,8 +34,8 @@ namespace CalorieCounter
             InitializeComponent();
             _restService = new RestService();
             eatsDate = ChangeDateToString(currentDate);
-            //MiamiFoodLookup();
-            //SearchingFoods.Text = "Searching Foods";
+            // access Miami API and put in our DB - currently run manually
+            // MiamiFoodLookup();
         }
 
         private string ChangeDateToString(DateTime date)
@@ -123,16 +123,6 @@ namespace CalorieCounter
             return requestUri;
         }
 
-        //async void QueryClick_Clicked(object sender, EventArgs e)
-        //{
-        //    if (!string.IsNullOrWhiteSpace(testEntry.Text))
-        //    {
-        //        FoodItem foodItem = await _restService.GetFoodCaloriesAsync(CreateFoodQuery());
-        //        BindingContext = foodItem;
-        //    }
-        //}
-
-
         private void Entry_TextChanged(object sender, TextChangedEventArgs e)
         {
             //FoodLookup();
@@ -157,8 +147,6 @@ namespace CalorieCounter
             // access our db
             //FoodLookup();
             LookUpFoodByLocation();
-            // access Miami API and pull from db
-            //MiamiFoodLookup();
         }
 
         // need to figure out best time and place to call this 
@@ -259,7 +247,7 @@ namespace CalorieCounter
 
         async void InsertFoodForUser(MiamiItem item)
         {
-            // uniqueId=string&offeredId=string
+            // uniqueId=string&offeredId=string&date=string
             if (item != null)
             {
                 string date = ChangeDateToString(currentDate);
