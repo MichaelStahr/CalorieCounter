@@ -89,7 +89,7 @@ namespace CalorieCounter
             FoodLookup(dateString);
             DateTime currentSelectedDate = Calendar.SelectedDate.Value;
             UpdateCalorieGraph(currentSelectedDate);
-            
+            //GetFoodForDay();
         } 
 
         public string DisplayDailyValuesByUserDay(string date)
@@ -175,13 +175,8 @@ namespace CalorieCounter
             dateString = year + "-" + month + "-" + day;
             FoodLookup(dateString);
             UpdateCalorieGraph(date);
-            //if (Preferences.ContainsKey(date))
-            //{
-            //    Notes.Text = Preferences.Get(date, "No notes yet");
-            //} else
-            //{
-            //    Preferences.Set(date, "");
-            //}
+            GetFoodForDay();
+            
         }
 
         private void Button_Clicked_1(object sender, EventArgs e)
@@ -222,6 +217,24 @@ namespace CalorieCounter
         private void ClickToShowPopup_Clicked(object sender, EventArgs e)
         {
             popup.Show();
+        }
+
+        public string DisplayFoodItemsByUserDay(string date)
+        {
+            // /api.asmx/GetFoodEatenByUserDay?uniqueId=string&date=string&token=string
+            string requestUri = apiEndpoint;
+            requestUri += "DisplayFoodItemsByUserDay";
+            requestUri += $"?uniqueId={uniqueId}";
+            requestUri += $"&date={date}";
+            requestUri += $"&token={token}";
+
+            return requestUri;
+        }
+        async void GetFoodForDay()
+        {
+            List<SimpleFood> foods;
+            foods = await _restService.GetSimpleFoodItemForUserAsync(DisplayFoodItemsByUserDay(dateString));
+            simpleFoodlv.ItemsSource = foods;
         }
     }
 }
