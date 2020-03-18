@@ -80,7 +80,10 @@ namespace CalorieCounter
             base.OnCurrentPageChanged();
             if (_restService != null && this.CurrentPage is ContentPage)
             {
+                DateTime currentSelectedDate = Calendar.SelectedDate.Value;
                 FoodLookup(dateString);
+                UpdateCalorieGraph(currentSelectedDate);
+                GetFoodForDay();
             }
         }
 
@@ -166,7 +169,6 @@ namespace CalorieCounter
 
         private void Calendar_OnCalendarTapped(object sender, CalendarTappedEventArgs e)
         {
-            //string date = e.DateTime.Date.ToShortDateString();
             DateTime date = e.DateTime.Date;
             DateLabel.Text = e.DateTime.Date.ToShortDateString();
             string year = date.Year.ToString();

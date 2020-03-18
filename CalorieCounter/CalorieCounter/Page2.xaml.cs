@@ -21,15 +21,30 @@ namespace CalorieCounter
 
         public static string miamiApiEndpoint = "https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php";
 
+        DateTime currentDate = DateTime.Today;
+
         public const string unique_id = "birdaj";
-        public const string eatsDate = "2019-03-10";
+        //public const string eatsDate = "2019-03-10";
+        public string eatsDate;
         public const string userToken = "dasgfdszfe";
 
+        
         public Page2()
         {
             InitializeComponent();
             _restService = new RestService();
-            //SearchingFoods.Text = "Searching Foods";
+            eatsDate = ChangeDateToString(currentDate);
+            // access Miami API and put in our DB - currently run manually
+            // MiamiFoodLookup();
+        }
+
+        private string ChangeDateToString(DateTime date)
+        {
+            string year = date.Year.ToString();
+            string month = date.Month.ToString();
+            string day = date.Day.ToString();
+            string strDate = year + "-" + month + "-" + day;
+            return strDate;
         }
 
         protected override void OnAppearing()
@@ -83,7 +98,7 @@ namespace CalorieCounter
         public string GetMiamiFoodByNameAndLocation(string location)
         {
 
-            //https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php?ThisLocation=Martin
+            string search = "https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php?ThisLocation=Bell";
 
 
             //string food = Uri.EscapeUriString(SearchingFoods.Text);
@@ -92,7 +107,7 @@ namespace CalorieCounter
             //requestUri += $"&ThisItem={food}";
 
             // hard coded for now
-            return "https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php?ThisLocation=Starbucks";
+            return search;
         }
 
         public string UpdateDailyLogByUser()
@@ -107,16 +122,6 @@ namespace CalorieCounter
 
             return requestUri;
         }
-
-        //async void QueryClick_Clicked(object sender, EventArgs e)
-        //{
-        //    if (!string.IsNullOrWhiteSpace(testEntry.Text))
-        //    {
-        //        FoodItem foodItem = await _restService.GetFoodCaloriesAsync(CreateFoodQuery());
-        //        BindingContext = foodItem;
-        //    }
-        //}
-
 
         private void Entry_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -142,27 +147,17 @@ namespace CalorieCounter
             // access our db
             //FoodLookup();
             LookUpFoodByLocation();
-            // access Miami API and pull from db
-            //MiamiFoodLookup();
         }
 
         // need to figure out best time and place to call this 
         async void MiamiFoodLookup()
         {
             string foods = null;
-            if (!string.IsNullOrWhiteSpace(SearchingFoods.Text))
-            {
-               
-                // returns a string representation of an xml file
-                foods = await _restService.GetMiamiFoodDataAsync(GetMiamiFoodByNameAndLocation(locations.SelectedItem.ToString()));
-                // send xml file to stored procedure to store in DB
-                await _restService.InsertMiamiFoodDataAsync(apiEndpoint + "InsertXml", foods);
+            // returns a string representation of an xml file
+            foods = await _restService.GetMiamiFoodDataAsync(GetMiamiFoodByNameAndLocation(locations.SelectedItem.ToString()));
+            // send xml file to stored procedure to store in DB
+            await _restService.InsertMiamiFoodDataAsync(apiEndpoint + "InsertXml", foods);
 
-            }
-            else
-            {
-                //foodItemslv.ItemsSource = foodItem;
-            }
         }
 
         //get
@@ -252,10 +247,12 @@ namespace CalorieCounter
 
         async void InsertFoodForUser(MiamiItem item)
         {
-            // uniqueId=string&offeredId=string
+            // uniqueId=string&offeredId=string&date=string
             if (item != null)
             {
-                string data = "uniqueId=" + unique_id + "&offeredId=" + item.Offered_id;
+                string date = ChangeDateToString(currentDate);
+                string data = "uniqueId=" + unique_id + "&offeredId=" + item.Offered_id + "&date=" + date;
+                
                 await _restService.InsertFoodIntoUserEats(apiEndpoint + "UserEatFood", data);
             }
           
