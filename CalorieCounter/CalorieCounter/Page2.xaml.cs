@@ -64,23 +64,16 @@ namespace CalorieCounter
             return requestUri;
         }
 
-        public string GetFoodBySearchAndLocation(int location, string token)
+        public string SearchFoodByNameAndLocation(string location)
         {
 
-            // /api.asmx / GetFoodLocationBySearch ? food = string & location_id = string & token = string
-
-            // for now until location id's get corrected in the DB
-            if (location > 2)
-            {
-                location++;
-            }
+            // /api.asmx/SearchFoodByNameAndLocation?food=string&location=string
 
             string food = Uri.EscapeUriString(SearchingFoods.Text);
             string requestUri = apiEndpoint;
-            requestUri += "GetFoodLocationBySearch";
-            requestUri += $"?food=%{food}%";
-            requestUri += $"&location_id={location}";
-            requestUri += $"&token={token}";
+            requestUri += "SearchFoodByNameAndLocation";
+            requestUri += $"?food={food}";
+            requestUri += $"&location={location}";
 
             return requestUri;
         }
@@ -125,7 +118,9 @@ namespace CalorieCounter
 
         private void Entry_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //FoodLookup();
+            
+            LookUpFoodByName();
+            
             
             if(SearchingFoods.Text != "")
             {
@@ -144,9 +139,13 @@ namespace CalorieCounter
 
         private void Locations_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // access our db
-            //FoodLookup();
-            LookUpFoodByLocation();
+            if (!string.IsNullOrWhiteSpace(SearchingFoods.Text))
+            {
+                LookUpFoodByName();
+            } else
+            {
+                LookUpFoodByLocation();
+            }
         }
 
         // need to figure out best time and place to call this 
@@ -161,34 +160,23 @@ namespace CalorieCounter
         }
 
         //get
-        async void FoodLookup()
+        async void LookUpFoodByName()
         {
-            List<FoodItem> foodItem = null;
             List<MiamiItem> miamiFoodItem = null;
 
-            //if (!string.IsNullOrWhiteSpace(SearchingFoods.Text))
-            //{
-                int num = locations.SelectedIndex;
+            if (!string.IsNullOrWhiteSpace(SearchingFoods.Text))
+            {
                 if (locations.SelectedIndex > 0)
                 {
-                    //foodItem = await _restService.GetFoodDataAsync(GetFoodBySearchAndLocation(locations.SelectedIndex, "token"));
-                    miamiFoodItem = await _restService.GetFoodDataAsync(SearchFoodByLocation(locations.SelectedItem.ToString()));
-
+                    string location = locations.SelectedItem.ToString();
+                    miamiFoodItem = await _restService.GetFoodDataAsync(SearchFoodByNameAndLocation(location));
+                    searchFrame.IsVisible = true;
+                    foodItemslv.ItemsSource = miamiFoodItem;
                 }
-                else
-                {
-                    //foodItem = await _restService.GetFoodDataAsync(GetFoodBySearch("token"));
-                    //miamiFoodItem = await _restService.GetFoodDataAsync(SearchFoodByLocation(locations.SelectedItem.ToString());
-                }
-            //foodItemslv.ItemsSource = foodItem;
-            searchFrame.IsVisible = true;
-            foodItemslv.ItemsSource = miamiFoodItem;
 
-            //}
-            //else
-            //{
-            //    foodItemslv.ItemsSource = foodItem;
-            //}
+               
+            }
+           
         }
 
         async void LookUpFoodByLocation()
