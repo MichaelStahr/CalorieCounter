@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="CalorieCounter.WelcomePage">
+    <ContentPage.Content>
+        <StackLayout Padding="30">
+            <Label Text="Welcome to Calorie Counter!" VerticalOptions="CenterAndExpand"></Label>
+            <Entry x:Name="email" Placeholder="Email"></Entry>
+            <Entry x:Name="password" Placeholder="Password" IsPassword="True"></Entry>
+            <Button x:Name="LoginButton" Text="Login" Clicked="LoginButton_Clicked"></Button>
+            <Button x:Name ="SignUpButton" Text="SignUp" Clicked="SignUpButton_Clicked"></Button>
+            <Button x:Name="AboutButton" Text="About" Clicked="AboutButton_Clicked"></Button>
+            <WebView x:Name="webView" HeightRequest="300" WidthRequest="200"></WebView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
