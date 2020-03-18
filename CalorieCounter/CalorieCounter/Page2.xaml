@@ -71,23 +71,6 @@
                         </StackLayout>
                     </Frame>
                 </StackLayout>
-                
-                <StackLayout>
-                    <Frame x:Name="historyFrame" BorderColor="LightGray" HeightRequest="250" IsVisible="False">
-                        <ScrollView>
-                            <StackLayout>
-                                <Label x:Name="History" Text="History" FontSize="Small"/>
-
-                            </StackLayout>
-                        </ScrollView>
-                    </Frame>
-
-                    <Frame x:Name="favoritesFrame" BorderColor="Red" HeightRequest="250" IsVisible="False">
-                        <ScrollView>
-                            <Label Text="Favorites" FontSize="Small"/>
-                        </ScrollView>
-                    </Frame>
-                </StackLayout>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

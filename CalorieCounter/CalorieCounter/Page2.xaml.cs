@@ -126,14 +126,14 @@ namespace CalorieCounter
             {
                 searchFrame.IsVisible = true;
                 addFoodToLog.IsVisible = true;
-                historyFrame.IsVisible = false;
-                favoritesFrame.IsVisible = false;
+                //historyFrame.IsVisible = false;
+                //favoritesFrame.IsVisible = false;
             } else
             {
                 searchFrame.IsVisible = false;
                 addFoodToLog.IsVisible = false;
-                historyFrame.IsVisible = true;
-                favoritesFrame.IsVisible = true;
+                //historyFrame.IsVisible = true;
+                //favoritesFrame.IsVisible = true;
             }
         }
 
