@@ -198,41 +198,6 @@ namespace CalorieCounter
 
         }
 
-        //post
-        async void UpdateDailyLog()
-        {
-            UserLogData data = new UserLogData
-            {
-                UniqueId = unique_id,
-                Date = eatsDate,
-                Token = userToken,
-            };
-            await _restService.UpdateDailyLogForUser(UpdateDailyLogByUser(), data);
-            
-        }
-
-        //post
-        async void InsertFood(int food_Id, int location_Id)
-        {
-            
-            if (!string.IsNullOrWhiteSpace(SearchingFoods.Text))
-            {
-                
-                FoodEaten foodAdded = new FoodEaten
-                {
-                    UniqueID = unique_id,
-                    FoodID = food_Id,
-                    EatsDate = eatsDate,
-                    LocationID = location_Id,
-                    Multiplier = 1,
-                    Token = userToken,
-                };
-                await _restService.InsertFoodIntoLogForUser(apiEndpoint + "InsertUserEatsFood", foodAdded);
-                
-            }
-            
-        }
-
         async void InsertFoodForUser(MiamiItem item)
         {
             // uniqueId=string&offeredId=string&date=string
@@ -248,16 +213,9 @@ namespace CalorieCounter
 
         private void AddFoodToLog_Clicked(object sender, EventArgs e)
         {
-            //FoodItem item = (FoodItem)foodItemslv.SelectedItem;
             MiamiItem mItem = (MiamiItem)foodItemslv.SelectedItem;
             
-            //int food_Id = item.Food_Id;
-            //int location_Id = item.FL_Id;
-            // insert food to log
-            //InsertFood(food_Id, location_Id);
             InsertFoodForUser(mItem);
-            // update home page of app
-            //UpdateDailyLog();
         }
     }
 }
