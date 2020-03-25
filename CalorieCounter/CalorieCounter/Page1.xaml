@@ -11,7 +11,7 @@
                 <Image Aspect="AspectFill" HeightRequest="70" Source="profileimage.png"
                        HorizontalOptions="Center" Margin="0, 40, 0, 0"></Image>
                 <Button Text="Change Image" FontSize="Micro" HorizontalOptions="Center"></Button>
-                <Label Text="UniqueID: dillonis" HorizontalOptions="CenterAndExpand" FontSize="Small" FontAttributes="Bold"></Label>
+                <Label Text="UniqueID: birdaj" HorizontalOptions="CenterAndExpand" FontSize="Small" FontAttributes="Bold"></Label>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                     <Label Text="Weight:" FontSize="Small" VerticalOptions="Center" ></Label>
                     <Picker x:Name="weightPicker" Title="pounds" VerticalOptions="Center" FontSize="Small"></Picker>
