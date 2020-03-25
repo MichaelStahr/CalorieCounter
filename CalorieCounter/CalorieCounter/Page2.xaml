@@ -5,10 +5,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="CalorieCounter.Page2">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="AddFrame" TargetType="Frame">
+                <Setter Property="BorderColor" Value="#C05746"></Setter>
+                <Setter Property="BackgroundColor" Value="#CBDFBD"></Setter>
+                <Setter Property="HasShadow" Value="True"></Setter>
+                <Setter Property="CornerRadius" Value="10"></Setter>
+                <Setter Property="Margin" Value="5,5,5,5"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                <Frame BackgroundColor="AliceBlue">
+                <Frame Style="{StaticResource AddFrame}">
                     <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
                         <Entry Placeholder="Search Foods" 
                            x:Name="SearchingFoods"
@@ -18,7 +29,7 @@
                            WidthRequest="100"
                            TextChanged="Entry_TextChanged"/>
 
-                        <Picker x:Name="locations" SelectedIndexChanged="Locations_SelectedIndexChanged">
+                        <Picker x:Name="locations" SelectedIndexChanged="Locations_SelectedIndexChanged" WidthRequest="200">
                             <Picker.Items>
                                 <x:String>All</x:String>
                                 <x:String>ASC</x:String>
