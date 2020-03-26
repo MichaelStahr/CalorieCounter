@@ -32,6 +32,7 @@ namespace CalorieCounter.UWP
         /// </summary>
         public App()
         {
+            Rg.Plugins.Popup.Popup.Init();
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }
