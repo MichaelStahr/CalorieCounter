@@ -60,34 +60,10 @@
                                 <Button x:Name="showItemsToBeAdded" HorizontalOptions="FillAndExpand" Text="Show" IsVisible="False" Clicked="ShowFoodsToBeAdded_Clicked"></Button>
                                 <Button x:Name="addFoodToLog" Text="Add" HorizontalOptions="FillAndExpand"  Clicked="AddFoodToLog_Clicked" IsVisible="False"></Button>
                             </StackLayout>
-                            <sfPopup:SfPopupLayout x:Name="itemPopup">
-                                <sfPopup:SfPopupLayout.PopupView>
-                                    <sfPopup:PopupView HeightRequest="400"
-                                        ShowFooter="False" HeaderTitle="Items to be Added">
-                                        <sfPopup:PopupView.ContentTemplate>
-                                            <DataTemplate x:Name="popUpDataTemplate">
-                                                <sfListView:SfListView x:Name="popuplv" ItemsSource="{Binding ItemData}">
-                                                    <sfListView:SfListView.ItemTemplate>
-                                                        <DataTemplate>
-                                                            <ViewCell>
-                                                                <ViewCell.View>
-                                                                    <StackLayout Orientation="Horizontal">
-                                                                        <Label Text="{Binding Formalname}" FontSize="Small"></Label>
-                                                                    </StackLayout>
-                                                                </ViewCell.View>
-                                                            </ViewCell>
-                                                        </DataTemplate>
-                                                    </sfListView:SfListView.ItemTemplate>
-                                                </sfListView:SfListView>
-                                            </DataTemplate>
-                                        </sfPopup:PopupView.ContentTemplate>
-                                    </sfPopup:PopupView>
-                                </sfPopup:SfPopupLayout.PopupView>
-                            </sfPopup:SfPopupLayout>
                             <ScrollView>
                                 <StackLayout>
                                     <Label x:Name="TextOldValue" FontSize="Small"/>
-                                    <ListView x:Name="foodItemslv" ItemsSource="{Binding MiamiItem}" ItemTapped="FoodItemslv_ItemTapped" ItemSelected="FoodItemslv_ItemSelected">
+                                    <ListView x:Name="foodItemslv" ItemsSource="{Binding MiamiItem}" ItemTapped="FoodItemslv_ItemTapped">
                                         <ListView.ItemTemplate>
                                             <DataTemplate>
                                                 <ViewCell>

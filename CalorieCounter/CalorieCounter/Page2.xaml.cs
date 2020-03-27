@@ -27,8 +27,6 @@ namespace CalorieCounter
         //public const string eatsDate = "2019-03-10";
         public string eatsDate;
         public const string userToken = "dasgfdszfe";
-        List<MiamiItem> foodsToBeAdded;
-        public ObservableCollection<MiamiItem> potentialItems;
         AddPopUpViewModel popUpView;
 
         public Page2()
@@ -38,8 +36,6 @@ namespace CalorieCounter
             eatsDate = ChangeDateToString(currentDate);
             // access Miami API and put in our DB - currently run manually
             // MiamiFoodLookup();
-            foodsToBeAdded = new List<MiamiItem>();
-            potentialItems = new ObservableCollection<MiamiItem>();
             popUpView = new AddPopUpViewModel();
         }
 
@@ -228,24 +224,14 @@ namespace CalorieCounter
 
         private async void ShowFoodsToBeAdded_Clicked(object sender, EventArgs e)
         {
-            //itemPopup.Show();
-            await PopupNavigation.PushAsync(new AddItemsPopUp());
+            await PopupNavigation.PushAsync(new AddItemsPopUp(popUpView));
         }
 
         private void FoodItemslv_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             MiamiItem mItem = (MiamiItem)foodItemslv.SelectedItem;
-            foodsToBeAdded.Add(mItem);
-            //popuplv.ItemsSource = foodsToBeAdded;
-            //potentialItems.Add(mItem);
             popUpView.ItemData.Add(mItem);
         }
 
-        private void FoodItemslv_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            MiamiItem mItem = (MiamiItem)foodItemslv.SelectedItem;
-            foodsToBeAdded.Add(mItem);
-            //popuplv.ItemsSource = foodsToBeAdded;
-        }
     }
 }
