@@ -21,6 +21,14 @@
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="Margin" Value="5,5,5,5"></Setter>
             </Style>
+            <Style x:Key="EditButtons" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#C05746"></Setter>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+                <Setter Property="BorderColor" Value="White"></Setter>
+                <Setter Property="BorderWidth" Value="2"></Setter>
+                <Setter Property="CornerRadius" Value="10"></Setter>
+                <Setter Property="TextColor" Value="White"></Setter>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -57,8 +65,8 @@
                     <Frame x:Name="searchFrame" BorderColor="#C05746" HeightRequest="500" IsVisible="true">
                         <StackLayout>
                             <StackLayout Orientation="Horizontal">
-                                <Button x:Name="showItemsToBeAdded" HorizontalOptions="FillAndExpand" Text="Show" IsVisible="False" Clicked="ShowFoodsToBeAdded_Clicked"></Button>
-                                <Button x:Name="addFoodToLog" Text="Add" HorizontalOptions="FillAndExpand"  Clicked="AddFoodToLog_Clicked" IsVisible="False"></Button>
+                                <Button x:Name="showItemsToBeAdded" Text="Show" IsVisible="False" Clicked="ShowFoodsToBeAdded_Clicked" Style="{StaticResource EditButtons}"></Button>
+                                <Button x:Name="addFoodToLog" Text="Add" IsVisible="False" Clicked="AddFoodToLog_Clicked" Style="{StaticResource EditButtons}"></Button>
                             </StackLayout>
                             <ScrollView>
                                 <StackLayout>

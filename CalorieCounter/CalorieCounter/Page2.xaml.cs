@@ -22,11 +22,11 @@ namespace CalorieCounter
 
         public static string miamiApiEndpoint = "https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php";
 
-        DateTime currentDate = DateTime.Today;
-        public const string unique_id = "birdaj";
+        private DateTime currentDate = DateTime.Today;
+        private const string unique_id = "birdaj";
         //public const string eatsDate = "2019-03-10";
-        public string eatsDate;
-        public const string userToken = "dasgfdszfe";
+        private string eatsDate;
+        private const string userToken = "dasgfdszfe";
         AddPopUpViewModel popUpView;
 
         public Page2()
@@ -230,7 +230,21 @@ namespace CalorieCounter
         private void FoodItemslv_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             MiamiItem mItem = (MiamiItem)foodItemslv.SelectedItem;
-            popUpView.ItemData.Add(mItem);
+            bool check = false;
+            
+            foreach (AddItemPopUpModel m in popUpView.ItemData)
+            {
+                if (m.Item.Equals(mItem))
+                {
+                    m.Count++;
+                    check = true;
+                    break;
+                }
+            }
+            if (!check)
+            {
+                popUpView.ItemData.Add(new AddItemPopUpModel(mItem, 1));
+            }
         }
 
     }

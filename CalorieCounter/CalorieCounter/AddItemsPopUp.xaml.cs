@@ -15,19 +15,73 @@ namespace CalorieCounter
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddItemsPopUp : PopupPage
     {
-        private ObservableCollection<MiamiItem> ItemList;
+        public static string BaseAddress =
+        Device.RuntimePlatform == Device.Android ? "https://10.0.2.2:44341" : "https://localhost:44341";
+        public static string apiEndpoint = $"{BaseAddress}/api.asmx/";
+        RestService _restService;
+
+        private ObservableCollection<AddItemPopUpModel> itemData;
+        private DateTime currentDate = DateTime.Today;
+        private const string unique_id = "birdaj";
+        
+        
         public AddItemsPopUp(AddPopUpViewModel viewModel)
         {
-
             InitializeComponent();
-            this.ItemList = viewModel.ItemData;
-            addedItemsLv.ItemsSource = ItemList;
-
+            //this.itemList = viewModel.ItemData;
+            this.itemData = viewModel.ItemData;
+            addedItemsLv.ItemsSource = itemData;
+            _restService = new RestService();
         }
 
         private async void Close_Button_Clicked(object sender, EventArgs e)
         {
             await PopupNavigation.PopAsync(true);
+        }
+
+        private void DeleteButton_Clicked(object sender, EventArgs e)
+        {
+            //MiamiItem mItem = (MiamiItem)addedItemsLv.SelectedItem;
+            AddItemPopUpModel mItem = (AddItemPopUpModel)addedItemsLv.SelectedItem;
+
+            if (mItem != null)
+            {
+                //itemList.Remove(mItem);
+                itemData.Remove(mItem);
+            } else
+            {
+                DisplayAlert("Attention", "Select an item to delete it", "Close");
+            }
+        }
+
+        private void AddAllButton_Clicked(object sender, EventArgs e)
+        {
+            foreach(AddItemPopUpModel item in itemData)
+            {
+                InsertFoodForUser(item.Item);
+            }
+        }
+
+        async void InsertFoodForUser(MiamiItem item)
+        {
+            // uniqueId=string&offeredId=string&date=string
+            if (item != null)
+            {
+                string date = ChangeDateToString(currentDate);
+                string data = "uniqueId=" + unique_id + "&offeredId=" + item.Offered_id + "&date=" + date;
+
+                await _restService.InsertFoodIntoUserEats(apiEndpoint + "UserEatFood", data);
+            }
+
+        }
+
+        private string ChangeDateToString(DateTime date)
+        {
+            string year = date.Year.ToString();
+            string month = date.Month.ToString();
+            string day = date.Day.ToString();
+            string strDate = year + "-" + month + "-" + day;
+            return strDate;
         }
 
 

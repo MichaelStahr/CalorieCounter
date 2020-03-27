@@ -36,18 +36,31 @@
                     <Setter Property="HeightRequest" Value="400"></Setter>
                     <Setter Property="VerticalOptions" Value="Center"></Setter>
                 </Style>
+                <Style x:Key="EditButtons" TargetType="Button">
+                    <Setter Property="BackgroundColor" Value="#C05746"></Setter>
+                    <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+                    <Setter Property="BorderColor" Value="White"></Setter>
+                    <Setter Property="BorderWidth" Value="2"></Setter>
+                    <Setter Property="CornerRadius" Value="10"></Setter>
+                    <Setter Property="TextColor" Value="White"></Setter>
+                </Style>
             </ResourceDictionary>
         </ContentView.Resources>
         <StackLayout Padding="30">
             <Frame Style="{StaticResource ItemListFrame}">
                 <StackLayout>
-                    <Label Text="Items to be Added"></Label>
-                    <ListView x:Name="addedItemsLv" ItemsSource="{Binding ItemData}" >
+                    <Label Text="Items to be Added" FontAttributes="Bold"></Label>
+                    <StackLayout Orientation="Horizontal">
+                        <Button x:Name="DeleteButton" Text="Delete" Style="{StaticResource EditButtons}" Clicked="DeleteButton_Clicked" ></Button>
+                        <Button x:Name="AddAllButton" Text="Add All" Style="{StaticResource EditButtons}" Clicked="AddAllButton_Clicked"></Button>
+                    </StackLayout>
+                    <ListView x:Name="addedItemsLv" ItemsSource="{Binding ItemData}" IsPullToRefreshEnabled="True" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <StackLayout>
-                                        <Label Text="{Binding Formalname}" TextColor="#DDA448" FontSize="Medium"></Label>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding Item.Formalname}" TextColor="#DDA448" FontSize="Medium"></Label>
+                                        <Label Text="{Binding Count}" TextColor="#DDA448" FontSize="Medium"></Label>
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>

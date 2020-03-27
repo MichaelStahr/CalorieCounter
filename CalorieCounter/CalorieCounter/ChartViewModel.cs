@@ -8,7 +8,6 @@ namespace CalorieCounter
     public class ChartViewModel
     {
         public ObservableCollection<ChartData> Data1 { get; set; }
-        public List<ChartData> Data { get; set; }
 
         public ChartViewModel()
         {

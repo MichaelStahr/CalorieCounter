@@ -9,7 +9,6 @@ namespace CalorieCounter
 
     public class ChartData
     {
-        //public ObservableCollection<ChartDataPoint> Calories { get; set; }
         public string Date { get; set; } 
 
         public double Calories { get; set; }
