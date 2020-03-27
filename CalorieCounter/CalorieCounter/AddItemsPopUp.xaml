@@ -8,7 +8,6 @@
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:CalorieCounter"
     mc:Ignorable="d"
-            BackgroundColor="Transparent"
             x:Class="CalorieCounter.AddItemsPopUp">
     <pages:PopupPage.Animation>
         <animations:ScaleAnimation   
@@ -26,22 +25,37 @@
         <ContentView.BindingContext>
             <local:AddPopUpViewModel/>
         </ContentView.BindingContext>
-        <StackLayout Margin="5" HorizontalOptions="Center" Padding="20" VerticalOptions="Center" BackgroundColor="White">
-            <StackLayout>
-                <Label Text="Items to be Added"></Label>
-                <ListView x:Name="addedItemsLv" ItemsSource="{Binding ItemData}" >
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <StackLayout>
-                                    <Label Text="{Binding Formalname}" TextColor="#DDA448" FontSize="Medium"></Label>
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <Button Text="Close" Clicked="Close_Button_Clicked"></Button>
-            </StackLayout>
+        <ContentView.Resources>
+            <ResourceDictionary>
+                <Style x:Key="ItemListFrame" TargetType="Frame">
+                    <Setter Property="BorderColor" Value="#C05746"></Setter>
+                    <Setter Property="BackgroundColor" Value="White"></Setter>
+                    <Setter Property="HasShadow" Value="True"></Setter>
+                    <Setter Property="CornerRadius" Value="10"></Setter>
+                    <Setter Property="Margin" Value="5,5,5,5"></Setter>
+                    <Setter Property="HeightRequest" Value="400"></Setter>
+                    <Setter Property="VerticalOptions" Value="Center"></Setter>
+                </Style>
+            </ResourceDictionary>
+        </ContentView.Resources>
+        <StackLayout Padding="30">
+            <Frame Style="{StaticResource ItemListFrame}">
+                <StackLayout>
+                    <Label Text="Items to be Added"></Label>
+                    <ListView x:Name="addedItemsLv" ItemsSource="{Binding ItemData}" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout>
+                                        <Label Text="{Binding Formalname}" TextColor="#DDA448" FontSize="Medium"></Label>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Button Text="Close" Clicked="Close_Button_Clicked"></Button>
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </ContentView>
     </pages:PopupPage>
