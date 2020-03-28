@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+            xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+            xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:CalorieCounter"
+    mc:Ignorable="d"
+            x:Class="CalorieCounter.AddItemsPopUp">
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation   
+                      PositionIn="Center"  
+                      PositionOut="Center"  
+                      ScaleIn="1.2"  
+                      ScaleOut="0.8"  
+                      DurationIn="400"  
+                      DurationOut="300"  
+                      EasingIn="SinOut"  
+                      EasingOut="SinIn"  
+                      HasBackgroundAnimation="False"/>
+    </pages:PopupPage.Animation>
+    <ContentView>
+        <ContentView.BindingContext>
+            <local:AddPopUpViewModel/>
+        </ContentView.BindingContext>
+        <ContentView.Resources>
+            <ResourceDictionary>
+                <Style x:Key="ItemListFrame" TargetType="Frame">
+                    <Setter Property="BorderColor" Value="#C05746"></Setter>
+                    <Setter Property="BackgroundColor" Value="#CBDFBD"></Setter>
+                    <Setter Property="HasShadow" Value="True"></Setter>
+                    <Setter Property="CornerRadius" Value="10"></Setter>
+                    <Setter Property="Margin" Value="5,5,5,5"></Setter>
+                    <Setter Property="HeightRequest" Value="400"></Setter>
+                    <Setter Property="VerticalOptions" Value="Center"></Setter>
+                </Style>
+                <Style x:Key="EditButton" TargetType="Button">
+                    <Setter Property="BackgroundColor" Value="#C05746"></Setter>
+                    <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+                    <Setter Property="BorderColor" Value="White"></Setter>
+                    <Setter Property="BorderWidth" Value="2"></Setter>
+                    <Setter Property="CornerRadius" Value="10"></Setter>
+                    <Setter Property="TextColor" Value="White"></Setter>
+                </Style>
+                <Style x:Key="ItemLabel" TargetType="Label">
+                    <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+                    <Setter Property="TextColor" Value="Black"></Setter>
+                    <Setter Property="FontSize" Value="Small"></Setter>
+                </Style>
+                <Style x:Key="CountLabel" TargetType="Label">
+                    <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+                    <Setter Property="TextColor" Value="#DDA448"></Setter>
+                    <Setter Property="FontSize" Value="Small"></Setter>
+                </Style>
+                <Style x:Key="CountStepper" TargetType="Stepper">
+                    <Setter Property="BackgroundColor" Value="#DDA448"></Setter>
+                </Style>
+            </ResourceDictionary>
+        </ContentView.Resources>
+        <StackLayout Padding="30">
+            <Frame Style="{StaticResource ItemListFrame}">
+                <StackLayout>
+                    <Label Text="Items to be Added" HorizontalOptions="Center" FontAttributes="Bold"></Label>
+                    <StackLayout Orientation="Horizontal">
+                        <Button x:Name="DeleteButton" Text="Delete" Style="{StaticResource EditButton}" Clicked="DeleteButton_Clicked" IsEnabled="False" ></Button>
+                        <Button x:Name="AddAllButton" Text="Add All" Style="{StaticResource EditButton}" Clicked="AddAllButton_Clicked"></Button>
+                    </StackLayout>
+                    <ListView x:Name="addedItemsLv" ItemsSource="{Binding ItemData}" IsPullToRefreshEnabled="True" ItemSelected="AddedItemsLv_ItemSelected" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="250"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Text="{Binding Item.Formalname}" Style="{StaticResource ItemLabel}" HorizontalTextAlignment="Start" Margin="5,0,0,0" Grid.Row="0" Grid.Column="0"></Label>
+                                        <Label x:Name="countLabel" Text="{Binding Count, Mode=TwoWay}" Style="{StaticResource CountLabel}" HorizontalTextAlignment="Center"  Grid.Row="0" Grid.Column="1"></Label>
+                                        <Stepper x:Name="countStepper" Minimum="1" Value="{Binding Source={x:Reference countLabel}, Path=Text, Mode=TwoWay}" Style="{StaticResource CountStepper}" Grid.Row="0" Grid.Column="2"></Stepper>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Button Text="Close" Clicked="Close_Button_Clicked"></Button>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentView>
+    </pages:PopupPage>

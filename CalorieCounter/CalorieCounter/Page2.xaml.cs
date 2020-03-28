@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Xml.Linq;
+using Rg.Plugins.Popup.Services;
 
 namespace CalorieCounter
 {
@@ -21,14 +22,13 @@ namespace CalorieCounter
 
         public static string miamiApiEndpoint = "https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php";
 
-        DateTime currentDate = DateTime.Today;
-
-        public const string unique_id = "birdaj";
+        private DateTime currentDate = DateTime.Today;
+        private const string unique_id = "birdaj";
         //public const string eatsDate = "2019-03-10";
-        public string eatsDate;
-        public const string userToken = "dasgfdszfe";
+        private string eatsDate;
+        private const string userToken = "dasgfdszfe";
+        AddPopUpViewModel popUpView;
 
-        
         public Page2()
         {
             InitializeComponent();
@@ -36,6 +36,7 @@ namespace CalorieCounter
             eatsDate = ChangeDateToString(currentDate);
             // access Miami API and put in our DB - currently run manually
             // MiamiFoodLookup();
+            popUpView = new AddPopUpViewModel();
         }
 
         private string ChangeDateToString(DateTime date)
@@ -188,11 +189,14 @@ namespace CalorieCounter
                 miamiFoodItem = await _restService.GetFoodDataAsync(SearchFoodByLocation(locations.SelectedItem.ToString()));
                 searchFrame.IsVisible = true;
                 foodItemslv.ItemsSource = miamiFoodItem;
+                
                 addFoodToLog.IsVisible = true;
+                showItemsToBeAdded.IsVisible = true;
             } else
             {
                 foodItemslv.ItemsSource = null;
                 addFoodToLog.IsVisible = false;
+                showItemsToBeAdded.IsVisible = false;
                 searchFrame.IsVisible = false;
             }
 
@@ -217,5 +221,31 @@ namespace CalorieCounter
             
             InsertFoodForUser(mItem);
         }
+
+        private async void ShowFoodsToBeAdded_Clicked(object sender, EventArgs e)
+        {
+            await PopupNavigation.PushAsync(new AddItemsPopUp(popUpView));
+        }
+
+        private void FoodItemslv_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            MiamiItem mItem = (MiamiItem)foodItemslv.SelectedItem;
+            bool check = false;
+            
+            foreach (AddItemPopUpModel m in popUpView.ItemData)
+            {
+                if (m.Item.Equals(mItem))
+                {
+                    m.Count++;
+                    check = true;
+                    break;
+                }
+            }
+            if (!check)
+            {
+                popUpView.ItemData.Add(new AddItemPopUpModel(mItem, 1));
+            }
+        }
+
     }
 }
