@@ -36,13 +36,26 @@
                     <Setter Property="HeightRequest" Value="400"></Setter>
                     <Setter Property="VerticalOptions" Value="Center"></Setter>
                 </Style>
-                <Style x:Key="EditButtons" TargetType="Button">
+                <Style x:Key="EditButton" TargetType="Button">
                     <Setter Property="BackgroundColor" Value="#C05746"></Setter>
                     <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
                     <Setter Property="BorderColor" Value="White"></Setter>
                     <Setter Property="BorderWidth" Value="2"></Setter>
                     <Setter Property="CornerRadius" Value="10"></Setter>
                     <Setter Property="TextColor" Value="White"></Setter>
+                </Style>
+                <Style x:Key="ItemLabel" TargetType="Label">
+                    <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+                    <Setter Property="TextColor" Value="#DDA448"></Setter>
+                    <Setter Property="FontSize" Value="Medium"></Setter>
+                    <Setter Property="HorizontalTextAlignment" Value="Start"></Setter>
+                    <Setter Property="Margin" Value="10,0,0,0"></Setter>
+                </Style>
+                <Style x:Key="CountItemEntry" TargetType="Entry">
+                    <Setter Property="HorizontalOptions" Value="End"></Setter>
+                    <Setter Property="HorizontalTextAlignment" Value="Start"></Setter>
+                    <Setter Property="Margin" Value="0,0,15,0"></Setter>
+                    <Setter Property="BackgroundColor" Value="#CBDFBD"></Setter>     
                 </Style>
             </ResourceDictionary>
         </ContentView.Resources>
@@ -51,16 +64,17 @@
                 <StackLayout>
                     <Label Text="Items to be Added" FontAttributes="Bold"></Label>
                     <StackLayout Orientation="Horizontal">
-                        <Button x:Name="DeleteButton" Text="Delete" Style="{StaticResource EditButtons}" Clicked="DeleteButton_Clicked" ></Button>
-                        <Button x:Name="AddAllButton" Text="Add All" Style="{StaticResource EditButtons}" Clicked="AddAllButton_Clicked"></Button>
+                        <Button x:Name="DeleteButton" Text="Delete" Style="{StaticResource EditButton}" Clicked="DeleteButton_Clicked" ></Button>
+                        <Button x:Name="AddAllButton" Text="Add All" Style="{StaticResource EditButton}" Clicked="AddAllButton_Clicked"></Button>
                     </StackLayout>
                     <ListView x:Name="addedItemsLv" ItemsSource="{Binding ItemData}" IsPullToRefreshEnabled="True" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="{Binding Item.Formalname}" TextColor="#DDA448" FontSize="Medium"></Label>
-                                        <Label Text="{Binding Count}" TextColor="#DDA448" FontSize="Medium"></Label>
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                        <Label Text="{Binding Item.Formalname}" Style="{StaticResource ItemLabel}"></Label>
+                                        <Label x:Name="countLabel" Text="{Binding Count, Mode=TwoWay}" Style="{StaticResource ItemLabel}"></Label>
+                                        <Stepper x:Name="countStepper" Value="{Binding Source={x:Reference countLabel}, Path=Text, Mode=TwoWay}"></Stepper>
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>

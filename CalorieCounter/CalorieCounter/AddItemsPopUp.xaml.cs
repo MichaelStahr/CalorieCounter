@@ -58,7 +58,10 @@ namespace CalorieCounter
         {
             foreach(AddItemPopUpModel item in itemData)
             {
-                InsertFoodForUser(item.Item);
+                for (int i = 1; i <= item.Count; i++)
+                {
+                    InsertFoodForUser(item.Item);
+                }
             }
         }
 
@@ -84,6 +87,6 @@ namespace CalorieCounter
             return strDate;
         }
 
-
+       
     }
 }
