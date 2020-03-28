@@ -46,7 +46,6 @@ namespace CalorieCounter
 
             if (mItem != null)
             {
-                //itemList.Remove(mItem);
                 itemData.Remove(mItem);
             } else
             {
@@ -56,12 +55,18 @@ namespace CalorieCounter
 
         private void AddAllButton_Clicked(object sender, EventArgs e)
         {
-            foreach(AddItemPopUpModel item in itemData)
+            if (itemData != null && itemData.Count > 0)
             {
-                for (int i = 1; i <= item.Count; i++)
+                foreach (AddItemPopUpModel item in itemData)
                 {
-                    InsertFoodForUser(item.Item);
+                    for (int i = 1; i <= item.Count; i++)
+                    {
+                        InsertFoodForUser(item.Item);
+                    }
                 }
+            } else
+            {
+                DisplayAlert("Attention", "Select items in order to add them", "Close");
             }
         }
 
