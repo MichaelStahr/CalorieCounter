@@ -40,6 +40,18 @@ namespace CalorieCounter
             await PopupNavigation.PopAsync(true);
         }
 
+        protected override void OnAppearing()
+        {
+            if (itemData == null || itemData.Count == 0)
+            {
+                DeleteButton.IsEnabled = false;
+                AddAllButton.IsEnabled = false;
+            } else
+            {
+                AddAllButton.IsEnabled = true;
+            }
+        }
+
         private void DeleteButton_Clicked(object sender, EventArgs e)
         {
             //MiamiItem mItem = (MiamiItem)addedItemsLv.SelectedItem;
@@ -48,6 +60,8 @@ namespace CalorieCounter
             if (mItem != null)
             {
                 itemData.Remove(mItem);
+                DeleteButton.IsEnabled = false;
+
             } else
             {
                 DisplayAlert("Attention", "Select an item to delete it", "Close");
@@ -67,6 +81,7 @@ namespace CalorieCounter
                 }
                 itemData.Clear();
                 DisplayAlert("Attention", "Items have been added!", "Close");
+                AddAllButton.IsEnabled = false;
             }
             else
             {
@@ -96,6 +111,9 @@ namespace CalorieCounter
             return strDate;
         }
 
-       
+        private void AddedItemsLv_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            DeleteButton.IsEnabled = true;
+        }
     }
 }
