@@ -132,8 +132,7 @@
                                             ItemsSource="{Binding Data1}" 
                                             XBindingPath="Date" 
                                             YBindingPath="Calories" 
-                                            EnableTooltip="True"
-                                            CornerRadius="5">
+                                            EnableTooltip="True">
                             <chart:ColumnSeries.DataMarker>
                                 <chart:ChartDataMarker/>
                             </chart:ColumnSeries.DataMarker>

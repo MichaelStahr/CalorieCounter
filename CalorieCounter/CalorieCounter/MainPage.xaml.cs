@@ -129,20 +129,75 @@ namespace CalorieCounter
 
         private async void UpdateCalorieGraph(DateTime selectedDate)
         {
-            // get previous date
             model.Data1.Clear();
+
             string formattedSelectedDate = ChangeDateToString(selectedDate);
             double numTotalCal = Double.Parse(totalCal.Text.Substring(0, totalCal.Text.Length - 1));
 
-            for (int i = 6; i > 0; i--)
+            DayOfWeek dayOfWeek = selectedDate.DayOfWeek;
+            int caseSwitch = (int)dayOfWeek;
+
+            // selectedDate is a Sunday if i = 0
+            int daysBack = 0;
+            int daysForward = 7;
+            switch (caseSwitch)
             {
-                DateTime prevDateTime = selectedDate.AddDays(-i);
-                string prevDate = ChangeDateToString(prevDateTime);
-                double prevTotalCals = await GetDailyCaloriesForDate(prevDate);
-                model.Data1.Add(new ChartData(prevDate, prevTotalCals));
+                // Monday
+                case 1:
+                    daysBack = -1;
+                    daysForward = 6;
+                    break;
+                case 2:
+                    daysBack = -2;
+                    daysForward = 5;
+                    break;
+                case 3:
+                    daysBack = -3;
+                    daysForward = 4;
+                    break;
+                case 4:
+                    daysBack = -4;
+                    daysForward = 3;
+                    break;
+                case 5:
+                    daysBack = -5;
+                    daysForward = 2;
+                    break;
+                case 6:
+                    daysBack = -6;
+                    daysForward = 1;
+                    break;
+
             }
 
-            model.Data1.Add(new ChartData(formattedSelectedDate, numTotalCal));
+            for (int k = daysBack; k < daysForward; k++)
+            {
+                if (k == 0)
+                {
+                    model.Data1.Add(new ChartData(formattedSelectedDate, numTotalCal));
+                }
+                else
+                {
+                    DateTime otherDateTime = selectedDate.AddDays(k);
+                    string otherDate = ChangeDateToString(otherDateTime);
+                    int comparison = DateTime.Compare(otherDateTime, DateTime.Today);
+                    double otherTotalCals = 0;
+                    if (comparison < 0)
+                    {
+                        otherTotalCals = await GetDailyCaloriesForDate(otherDate);
+                    }
+                    model.Data1.Add(new ChartData(otherDate, otherTotalCals));
+                }
+            }
+            //for (int g = 6; g > 0; g--)
+            //{
+            //    DateTime prevDateTime = selectedDate.AddDays(-g);
+            //    string prevDate = ChangeDateToString(prevDateTime);
+            //    double prevTotalCals = await GetDailyCaloriesForDate(prevDate);
+            //    model.Data1.Add(new ChartData(prevDate, prevTotalCals));
+            //}
+
+            //model.Data1.Add(new ChartData(formattedSelectedDate, numTotalCal));
             calChart.ItemsSource = model.Data1;
         }
 
