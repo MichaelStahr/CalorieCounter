@@ -61,7 +61,6 @@ namespace CalorieCounter
             };
             NavigationPage.SetTitleView(this, header);
             Color labelColor = Color.FromHex("503047");
-            //Preferences.Clear();
             
             DateTime currentSelectedDate = Calendar.SelectedDate.Value;
             
@@ -69,7 +68,6 @@ namespace CalorieCounter
             string month = currentSelectedDate.Month.ToString();
             string day = currentSelectedDate.Day.ToString();
             dateString = year + "-" + month + "-" + day;
-            //Notes.Text = Preferences.Get(date, "No notes yet!");
 
         }
 
@@ -133,16 +131,18 @@ namespace CalorieCounter
         {
             // get previous date
             model.Data1.Clear();
-            DateTime prevDateTime = selectedDate.AddDays(-1);
-            string date = ChangeDateToString(selectedDate);
-            string prevDate = ChangeDateToString(prevDateTime);
-            double prevTotalCals = await GetDailyCaloriesForDate(prevDate);
-
-            // current selecte date
+            string formattedSelectedDate = ChangeDateToString(selectedDate);
             double numTotalCal = Double.Parse(totalCal.Text.Substring(0, totalCal.Text.Length - 1));
 
-            model.Data1.Add(new ChartData(prevDate, prevTotalCals));
-            model.Data1.Add(new ChartData(date, numTotalCal));
+            for (int i = 6; i > 0; i--)
+            {
+                DateTime prevDateTime = selectedDate.AddDays(-i);
+                string prevDate = ChangeDateToString(prevDateTime);
+                double prevTotalCals = await GetDailyCaloriesForDate(prevDate);
+                model.Data1.Add(new ChartData(prevDate, prevTotalCals));
+            }
+
+            model.Data1.Add(new ChartData(formattedSelectedDate, numTotalCal));
             calChart.ItemsSource = model.Data1;
         }
 
