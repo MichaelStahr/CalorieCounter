@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace CalorieCounter
@@ -17,13 +18,14 @@ namespace CalorieCounter
 
         const string token = "dasgfdszfe";
         // date is initialized to calendar date of today on start
-        public string dateString;
+        private string dateString;
         const string uniqueId = "birdaj";
         public static string BaseAddress =
         Device.RuntimePlatform == Device.Android ? "https://10.0.2.2:44341" : "https://localhost:44341";
         public static string apiEndpoint = $"{BaseAddress}/api.asmx/";
         RestService _restService;
         ChartViewModel model;
+        private DateTime currentSelectedDate;
 
 
         public MainPage()
@@ -61,15 +63,13 @@ namespace CalorieCounter
             };
             NavigationPage.SetTitleView(this, header);
             Color labelColor = Color.FromHex("503047");
-            //Preferences.Clear();
             
-            DateTime currentSelectedDate = Calendar.SelectedDate.Value;
-            
+            currentSelectedDate = Calendar.SelectedDate.Value;
+            Preferences.Set("currentSelectedDate", currentSelectedDate);
             string year = currentSelectedDate.Year.ToString();
             string month = currentSelectedDate.Month.ToString();
             string day = currentSelectedDate.Day.ToString();
             dateString = year + "-" + month + "-" + day;
-            //Notes.Text = Preferences.Get(date, "No notes yet!");
 
         }
 
@@ -80,20 +80,20 @@ namespace CalorieCounter
             base.OnCurrentPageChanged();
             if (_restService != null && this.CurrentPage is ContentPage)
             {
-                DateTime currentSelectedDate = Calendar.SelectedDate.Value;
                 FoodLookup(dateString);
-                UpdateCalorieGraph(currentSelectedDate);
                 GetFoodForDay();
+                currentSelectedDate = Preferences.Get("currentSelectedDate", DateTime.Today);
+                UpdateCalorieGraph(currentSelectedDate);
             }
         }
 
         protected override void OnAppearing()
         {
             FoodLookup(dateString);
-            DateTime currentSelectedDate = Calendar.SelectedDate.Value;
+            currentSelectedDate = Preferences.Get("currentSelectedDate", DateTime.Today);
             UpdateCalorieGraph(currentSelectedDate);
             //GetFoodForDay();
-        } 
+        }
 
         public string DisplayDailyValuesByUserDay(string date)
         {
@@ -131,18 +131,64 @@ namespace CalorieCounter
 
         private async void UpdateCalorieGraph(DateTime selectedDate)
         {
-            // get previous date
             model.Data1.Clear();
-            DateTime prevDateTime = selectedDate.AddDays(-1);
-            string date = ChangeDateToString(selectedDate);
-            string prevDate = ChangeDateToString(prevDateTime);
-            double prevTotalCals = await GetDailyCaloriesForDate(prevDate);
+            DayOfWeek dayOfWeek = selectedDate.DayOfWeek;
+            int caseSwitch = (int)dayOfWeek;
 
-            // current selecte date
-            double numTotalCal = Double.Parse(totalCal.Text.Substring(0, totalCal.Text.Length - 1));
+            // selectedDate is a Sunday if i = 0
+            int daysBack = 0;
+            int daysForward = 7;
+            switch (caseSwitch)
+            {
+                // Monday
+                case 1:
+                    daysBack = -1;
+                    daysForward = 6;
+                    break;
+                case 2:
+                    daysBack = -2;
+                    daysForward = 5;
+                    break;
+                case 3:
+                    daysBack = -3;
+                    daysForward = 4;
+                    break;
+                case 4:
+                    daysBack = -4;
+                    daysForward = 3;
+                    break;
+                case 5:
+                    daysBack = -5;
+                    daysForward = 2;
+                    break;
+                case 6:
+                    daysBack = -6;
+                    daysForward = 1;
+                    break;
 
-            model.Data1.Add(new ChartData(prevDate, prevTotalCals));
-            model.Data1.Add(new ChartData(date, numTotalCal));
+            }
+
+            for (int k = daysBack; k < daysForward; k++)
+            {
+                DateTime otherDateTime = selectedDate.AddDays(k);
+                string otherDate = ChangeDateToString(otherDateTime);
+                int comparison = DateTime.Compare(otherDateTime, DateTime.Today.AddDays(1));
+                double otherTotalCals = 0;
+                if (comparison < 0)
+                {
+                    otherTotalCals = await GetDailyCaloriesForDate(otherDate);
+                }
+                model.Data1.Add(new ChartData(otherDate, otherTotalCals));
+            }
+            //for (int g = 6; g > 0; g--)
+            //{
+            //    DateTime prevDateTime = selectedDate.AddDays(-g);
+            //    string prevDate = ChangeDateToString(prevDateTime);
+            //    double prevTotalCals = await GetDailyCaloriesForDate(prevDate);
+            //    model.Data1.Add(new ChartData(prevDate, prevTotalCals));
+            //}
+
+            //model.Data1.Add(new ChartData(formattedSelectedDate, numTotalCal));
             calChart.ItemsSource = model.Data1;
         }
 
@@ -176,29 +222,35 @@ namespace CalorieCounter
             string day = date.Day.ToString();
             dateString = year + "-" + month + "-" + day;
             FoodLookup(dateString);
-            UpdateCalorieGraph(date);
             GetFoodForDay();
-            
+            UpdateCalorieGraph(date);
+            Preferences.Set("currentSelectedDate", date);
         }
 
         private void Button_Clicked_1(object sender, EventArgs e)
         {
             
             Button button = (Button)sender;
+
+            currentSelectedDate = Preferences.Get("currentSelectedDate", DateTime.Today);
+            //DateTime currentDate = Calendar.SelectedDate.Value;
             
-            DateTime currentDate = Calendar.SelectedDate.Value;
-            
-            DateTime newDate;
             if (button.Equals(GoBack))
             {
-                newDate = currentDate.AddDays(-1);
+                currentSelectedDate = currentSelectedDate.AddDays(-1);
             }
             else
             {
-                newDate = currentDate.AddDays(1);
+                currentSelectedDate = currentSelectedDate.AddDays(1);
             }
-            Calendar.SelectedDate = newDate;
-            DateLabel.Text = newDate.Date.ToShortDateString();
+            Calendar.SelectedDate = currentSelectedDate;
+            DateLabel.Text = currentSelectedDate.Date.ToShortDateString();
+            dateString = ChangeDateToString(currentSelectedDate);
+            FoodLookup(dateString);
+            GetFoodForDay();
+            UpdateCalorieGraph(currentSelectedDate);
+            Preferences.Set("currentSelectedDate", currentSelectedDate);
+
         }
 
 
