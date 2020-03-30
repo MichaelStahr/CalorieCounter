@@ -56,7 +56,7 @@
                 <Setter Property="BackgroundColor" Value="#CBDFBD"></Setter>
                 <Setter Property="Placeholder" Value="Enter your notes here!"></Setter>
             </Style>
-            <Style x:Key="Buttons" TargetType="Button">
+            <Style x:Key="IncDecButton" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="#C05746"></Setter>
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
                 <Setter Property="BorderColor" Value="White"></Setter>
@@ -66,10 +66,8 @@
                 <Setter Property="TextColor" Value="White"></Setter>
             </Style>
             <Style x:Key="DateLabel" TargetType="Label">
-                <Setter Property="HorizontalOptions" Value="CenterAndExpand"></Setter>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
                 <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
-                <Setter Property="WidthRequest" Value="100"></Setter>
-                <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
                 <Setter Property="FontSize" Value="Medium"></Setter>
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
@@ -140,13 +138,19 @@
                     </chart:SfChart.Series>
                 </chart:SfChart>
 
-                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-
-                    <Button x:Name="GoBack" Text="left" Clicked="Button_Clicked_1" Style="{StaticResource Buttons}"></Button>
-                    <Label x:Name="DateLabel" Text="Today" Style="{StaticResource DateLabel}"></Label>
-                    <Button x:Name="GoForward" Text="right" Clicked="Button_Clicked_1" Style="{StaticResource Buttons}"></Button>
-
-                </StackLayout>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="250"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="GoBack" Text="-" Clicked="Button_Clicked_1" Style="{StaticResource IncDecButton}" Grid.Column="0"></Button>
+                        <Label x:Name="DateLabel" Text="Today" Style="{StaticResource DateLabel}" Grid.Column="1"></Label>
+                        <Button x:Name="GoForward" Text="+" Clicked="Button_Clicked_1" Style="{StaticResource IncDecButton}" Grid.Column="2"></Button>
+                    </Grid>
                 <Button x:Name="showCalendar" Text="Show Calendar" 
                             VerticalOptions="Start" HorizontalOptions="FillAndExpand"
                             Clicked="ClickToShowPopup_Clicked" BackgroundColor="#537D8D" TextColor="White">
@@ -270,8 +274,6 @@
                         </ScrollView>
                     </StackLayout>
                 </Frame>
-                <Button Text="Extra Details" Style="{StaticResource Buttons}" Clicked="Button_Clicked"></Button>
-
             </StackLayout>
         </ScrollView>
 
