@@ -4,6 +4,7 @@ using Syncfusion.SfChart.XForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -217,24 +218,41 @@ namespace CalorieCounter
         {
             DateTime date = e.DateTime.Date;
             DateLabel.Text = e.DateTime.Date.ToShortDateString();
-            string year = date.Year.ToString();
-            string month = date.Month.ToString();
-            string day = date.Day.ToString();
-            dateString = year + "-" + month + "-" + day;
-            FoodLookup(dateString);
+            FoodLookup(ChangeDateToString(date));
             GetFoodForDay();
-            UpdateCalorieGraph(date);
+
+            DateTime previousSelected = Preferences.Get("currentSelectedDate", DateTime.Today);
+            if (CheckIfChartNeedsUpdated(previousSelected, date))
+            {
+                UpdateCalorieGraph(date);
+            }
             Preferences.Set("currentSelectedDate", date);
         }
 
-        private void Button_Clicked_1(object sender, EventArgs e)
+        private bool CheckIfChartNeedsUpdated(DateTime previousSelected, DateTime currentSeleceted)
+        {
+            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+            Calendar cal = dfi.Calendar;
+
+            int weekForPreviousDate = cal.GetWeekOfYear(previousSelected, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
+            int weekForCurrentDate = cal.GetWeekOfYear(currentSeleceted, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
+            if (!weekForCurrentDate.Equals(weekForPreviousDate))
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
+        }
+
+        private void PlusOrMinusButton_Clicked(object sender, EventArgs e)
         {
             
             Button button = (Button)sender;
 
             currentSelectedDate = Preferences.Get("currentSelectedDate", DateTime.Today);
-            //DateTime currentDate = Calendar.SelectedDate.Value;
-            
+            DateTime previousSelected = currentSelectedDate;
+
             if (button.Equals(GoBack))
             {
                 currentSelectedDate = currentSelectedDate.AddDays(-1);
@@ -245,10 +263,15 @@ namespace CalorieCounter
             }
             Calendar.SelectedDate = currentSelectedDate;
             DateLabel.Text = currentSelectedDate.Date.ToShortDateString();
+
             dateString = ChangeDateToString(currentSelectedDate);
             FoodLookup(dateString);
             GetFoodForDay();
-            UpdateCalorieGraph(currentSelectedDate);
+
+            if (CheckIfChartNeedsUpdated(previousSelected, currentSelectedDate))
+            {
+                UpdateCalorieGraph(currentSelectedDate);
+            }
             Preferences.Set("currentSelectedDate", currentSelectedDate);
 
         }

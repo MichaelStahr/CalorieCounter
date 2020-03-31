@@ -152,9 +152,9 @@
                             <ColumnDefinition Width="250"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="GoBack" Text="-" Clicked="Button_Clicked_1" Style="{StaticResource IncDecButton}" Grid.Column="0"></Button>
+                        <Button x:Name="GoBack" Text="-" Clicked="PlusOrMinusButton_Clicked" Style="{StaticResource IncDecButton}" Grid.Column="0"></Button>
                         <Label x:Name="DateLabel" Text="Today" Style="{StaticResource DateLabel}" Grid.Column="1"></Label>
-                        <Button x:Name="GoForward" Text="+" Clicked="Button_Clicked_1" Style="{StaticResource IncDecButton}" Grid.Column="2"></Button>
+                        <Button x:Name="GoForward" Text="+" Clicked="PlusOrMinusButton_Clicked" Style="{StaticResource IncDecButton}" Grid.Column="2"></Button>
                     </Grid>
                 <Button x:Name="showCalendar" Text="Show Calendar" 
                             VerticalOptions="Start" HorizontalOptions="FillAndExpand"
