@@ -132,7 +132,9 @@ namespace CalorieCounter
 
         private async void UpdateCalorieGraph(DateTime selectedDate)
         {
+            
             model.Data1.Clear();
+            
             DayOfWeek dayOfWeek = selectedDate.DayOfWeek;
             int caseSwitch = (int)dayOfWeek;
 
@@ -190,7 +192,7 @@ namespace CalorieCounter
             //}
 
             //model.Data1.Add(new ChartData(formattedSelectedDate, numTotalCal));
-            calChart.ItemsSource = model.Data1;
+            calorieChartSeries.ItemsSource = model.Data1;
         }
 
         private string ChangeDateToString(DateTime date)
