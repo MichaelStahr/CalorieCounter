@@ -18,7 +18,12 @@
         <local:ChartViewModel/>
     </TabbedPage.BindingContext>
     <TabbedPage.Resources>
-
+        <!-- COLOR SCHEME
+            Gold: #DDA448
+            Dark Blue: #537D8D 
+            Dirt Red: #C05746
+            Light Green: #CBDFBD
+        -->
         <ResourceDictionary>
             <OnPlatform x:TypeArguments="x:String" x:Key="HomePage">
                 <On Platform="Android" Value="Acme-Regular.ttf#Acme Regular" />
@@ -71,7 +76,7 @@
                 <Setter Property="FontSize" Value="Medium"></Setter>
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
-                <Setter Property="TextColor" Value="#DDA448"></Setter>
+                <Setter Property="TextColor" Value="Black"></Setter>
             </Style>
             <Style x:Key="CalorieDetailFrame" TargetType="Frame">
                 <Setter Property="BorderColor" Value="#C05746"></Setter> 
@@ -104,9 +109,10 @@
             <StackLayout>
                 <syncfusion:SfCalendar x:Name="Calendar" IsVisible="False"></syncfusion:SfCalendar>
                 <Frame Style="{StaticResource ChartFrame}">
-                    <chart:SfChart x:Name="CalChart" 
+                    <chart:SfChart x:Name="calorieChart" 
                                HeightRequest="400"
-                                   >
+                               Margin="5,0,5,0"
+                               >
                     
                     <chart:SfChart.BindingContext>
                         <local:ChartViewModel/>
@@ -130,15 +136,24 @@
 
 
                     <chart:SfChart.Series>
-                        <chart:ColumnSeries x:Name="calChart" 
+                        <chart:ColumnSeries x:Name="calorieChartSeries" 
                                             ItemsSource="{Binding Data1}" 
                                             XBindingPath="Date" 
                                             YBindingPath="Calories" 
                                             EnableTooltip="True"
-                                            Color="#DDA448">
+                                            Color="#DDA448"
+                                            >
                             <chart:ColumnSeries.DataMarker>
-                                <chart:ChartDataMarker/>
-                            </chart:ColumnSeries.DataMarker>
+                                    <chart:ChartDataMarker ShowLabel="True">
+                                        <chart:ChartDataMarker.LabelStyle>
+                                            <chart:DataMarkerLabelStyle TextColor="#DDA448"
+                                                                        BackgroundColor="#537D8D"
+                                                                        FontAttributes="Bold">
+                                            </chart:DataMarkerLabelStyle>
+                                        </chart:ChartDataMarker.LabelStyle>
+                                    </chart:ChartDataMarker>
+                                
+                                </chart:ColumnSeries.DataMarker>
                         </chart:ColumnSeries>
                     </chart:SfChart.Series>
                 </chart:SfChart>
@@ -157,8 +172,8 @@
                         <Button x:Name="GoForward" Text="+" Clicked="PlusOrMinusButton_Clicked" Style="{StaticResource IncDecButton}" Grid.Column="2"></Button>
                     </Grid>
                 <Button x:Name="showCalendar" Text="Show Calendar" 
-                            VerticalOptions="Start" HorizontalOptions="FillAndExpand"
-                            Clicked="ClickToShowPopup_Clicked" BackgroundColor="#537D8D" TextColor="White">
+                            VerticalOptions="Start" Style="{StaticResource IncDecButton}"
+                            Clicked="ClickToShowPopup_Clicked">
                 </Button>
                 <sfPopup:SfPopupLayout x:Name="popup">
                     <sfPopup:SfPopupLayout.PopupView>
