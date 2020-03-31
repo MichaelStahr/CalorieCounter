@@ -99,6 +99,19 @@
                 <Setter Property="Margin" Value="0,5,0,0"></Setter>
                 <Setter Property="BackgroundColor" Value="#CBDFBD"></Setter>
             </Style>
+            <Style x:Key="SimpleFoodCalorieLabel" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+                <Setter Property="TextColor" Value="#DDA448"></Setter>
+                <Setter Property="FontSize" Value="15"></Setter>
+            </Style>
+            <Style x:Key="SimpleFoodItemLabel" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+                <Setter Property="TextColor" Value="Black"></Setter>
+                <Setter Property="FontSize" Value="15"></Setter>
+            </Style>
+            <Style x:Key="SimpleFoodTitleGrid" TargetType="Grid">
+                <Setter Property="RowSpacing" Value="0"></Setter>
+            </Style>
         </ResourceDictionary>
     </TabbedPage.Resources>
 
@@ -275,23 +288,40 @@
                 </Frame>
                 <Frame Style="{StaticResource SimpleFoodFrame}">
                     <StackLayout HeightRequest="200">
-                        <Label Text="Food Items" HorizontalOptions="CenterAndExpand" FontSize="Medium"></Label>
-                        <ScrollView>
+                        <Grid Style="{StaticResource SimpleFoodTitleGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="250"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Daily Items Added" HorizontalOptions="FillAndExpand" FontSize="Medium" HorizontalTextAlignment="Center" TextColor="#537D8D" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"></Label>
+                            <Label Text="Item" HorizontalOptions="FillAndExpand" FontSize="Small" HorizontalTextAlignment="Start" TextColor="#537D8D" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"></Label>
+                            <Label Text="Calories" HorizontalOptions="FillAndExpand" FontSize="Small" HorizontalTextAlignment="End" TextColor="#537D8D" FontAttributes="Bold" Grid.Row="1" Grid.Column="1"></Label>
+                        </Grid>
                             <StackLayout>
                                 <ListView x:Name="simpleFoodlv" ItemsSource="{Binding SimpleFood}">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <ViewCell>
-                                                <StackLayout Orientation="Horizontal">
-                                                    <Label Text="{Binding Name}" FontSize="Small"></Label>
-                                                    <Label Text="{Binding Calories}" FontSize="Small"></Label>
-                                                </StackLayout>
+                                                <Grid Margin="5,0,5,0">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="*"></RowDefinition>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="250"></ColumnDefinition>
+                                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Label Text="{Binding Name}" Style="{StaticResource SimpleFoodItemLabel}" HorizontalTextAlignment="Start" Grid.Column="0"></Label>
+                                                    <Label Text="{Binding Calories}" Style="{StaticResource SimpleFoodCalorieLabel}" HorizontalTextAlignment="End" FontSize="Small" Grid.Column="1"></Label>
+                                                </Grid>
                                             </ViewCell>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
                                 </ListView>
                             </StackLayout>
-                        </ScrollView>
                     </StackLayout>
                 </Frame>
             </StackLayout>
