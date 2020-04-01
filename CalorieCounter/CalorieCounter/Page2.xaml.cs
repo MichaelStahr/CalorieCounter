@@ -35,7 +35,7 @@ namespace CalorieCounter
             _restService = new RestService();
             eatsDate = ChangeDateToString(currentDate);
             // access Miami API and put in our DB - currently run manually
-            // MiamiFoodLookup();
+            //MiamiFoodLookup();
             popUpView = new AddPopUpViewModel();
         }
 
@@ -92,7 +92,7 @@ namespace CalorieCounter
         public string GetMiamiFoodByNameAndLocation(string location)
         {
 
-            string search = "https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php?ThisLocation=Bell";
+            string search = "https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php?ThisLocation=Starbucks";
 
 
             //string food = Uri.EscapeUriString(SearchingFoods.Text);
@@ -120,21 +120,26 @@ namespace CalorieCounter
         private void Entry_TextChanged(object sender, TextChangedEventArgs e)
         {
             
-            LookUpFoodByName();
+            LookUpFoodByNameAndLocation();
             
             
-            if(SearchingFoods.Text != "")
+            if(SearchingFoods.Text != "" && locations.SelectedIndex > 0)
             {
                 searchFrame.IsVisible = true;
                 quickAdd.IsVisible = true;
                 //historyFrame.IsVisible = false;
                 //favoritesFrame.IsVisible = false;
+            } else if (SearchingFoods.Text.Equals("") && locations.SelectedIndex > 0)
+            {
+                searchFrame.IsVisible = true;
+                quickAdd.IsVisible = true;
+                LookUpFoodByLocation();
+                //historyFrame.IsVisible = true;
+                //favoritesFrame.IsVisible = true;
             } else
             {
                 searchFrame.IsVisible = false;
                 quickAdd.IsVisible = false;
-                //historyFrame.IsVisible = true;
-                //favoritesFrame.IsVisible = true;
             }
         }
 
@@ -142,7 +147,7 @@ namespace CalorieCounter
         {
             if (!string.IsNullOrWhiteSpace(SearchingFoods.Text))
             {
-                LookUpFoodByName();
+                LookUpFoodByNameAndLocation();
             } else
             {
                 LookUpFoodByLocation();
@@ -161,7 +166,7 @@ namespace CalorieCounter
         }
 
         //get
-        async void LookUpFoodByName()
+        async void LookUpFoodByNameAndLocation()
         {
             List<MiamiItem> miamiFoodItem = null;
 
