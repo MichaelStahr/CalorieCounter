@@ -32,24 +32,37 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <ScrollView>
             <StackLayout>
-                <Frame Style="{StaticResource AddFrame}">
-                    <StackLayout Orientation="Horizontal">
-                        <Entry Placeholder="Search Foods" 
-                           x:Name="SearchingFoods"
-                           ReturnType="Search"
-                           PlaceholderColor="LightGray"
-                           HorizontalOptions="FillAndExpand"
-                           TextChanged="Entry_TextChanged"/>
+            <Frame Style="{StaticResource AddFrame}">
 
-                        <Picker x:Name="locations" SelectedIndexChanged="Locations_SelectedIndexChanged" HorizontalOptions="FillAndExpand">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                        <SearchBar x:Name="SearchingFoods" 
+                                   Placeholder="Search" 
+                                   TextChanged="Entry_TextChanged"
+                               HorizontalOptions="FillAndExpand"
+                               VerticalOptions="End"
+                                   Grid.Column="0">
+                        </SearchBar>
+
+                        <Picker x:Name="locations" 
+                                SelectedIndexChanged="Locations_SelectedIndexChanged" 
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="End"
+                                Title="Select a location"
+                                Grid.Column="1">
                             <Picker.Items>
                                 <x:String>All</x:String>
                                 <x:String>ASC</x:String>
                                 <x:String>Bell Tower</x:String>
                                 <x:String>Dividends</x:String>
-                                <x:String>Garden Commons (GC)</x:String>
+                                <x:String>GC</x:String>
                                 <x:String>King Cafe</x:String>
                                 <x:String>Martin</x:String>
                                 <x:String>MacCracken</x:String>
@@ -59,16 +72,15 @@
                             </Picker.Items>
                             <Picker.SelectedIndex>0</Picker.SelectedIndex>
                         </Picker>
-                    </StackLayout>
-                </Frame>
-                <StackLayout>
+                </Grid>
+            </Frame>
+            <StackLayout>
                     <Frame x:Name="searchFrame" BorderColor="#C05746" HeightRequest="500" IsVisible="true">
                         <StackLayout>
                             <StackLayout Orientation="Horizontal">
                                 <Button x:Name="showItemsToBeAdded" Text="Show Selected Items" IsVisible="False" Clicked="ShowFoodsToBeAdded_Clicked" Style="{StaticResource EditButtons}"></Button>
                                 <Button x:Name="quickAdd" Text="Quick Add" IsVisible="False" Clicked="QuickAdd_Clicked" Style="{StaticResource EditButtons}"></Button>
                             </StackLayout>
-                            <ScrollView>
                                 <StackLayout>
                                     <Label x:Name="TextOldValue" FontSize="Small"/>
                                     <ListView x:Name="foodItemslv" ItemsSource="{Binding MiamiItem}" ItemTapped="FoodItemslv_ItemTapped">
@@ -93,11 +105,9 @@
                                         </ListView.ItemTemplate>
                                     </ListView>
                                 </StackLayout>
-                            </ScrollView>
                         </StackLayout>
                     </Frame>
                 </StackLayout>
             </StackLayout>
-        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
