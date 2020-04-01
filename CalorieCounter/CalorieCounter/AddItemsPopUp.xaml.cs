@@ -80,12 +80,12 @@ namespace CalorieCounter
                     }
                 }
                 itemData.Clear();
-                DisplayAlert("Attention", "Items have been added!", "Close");
+                DisplayAlert("", "Items have been added!", "Close");
                 AddAllButton.IsEnabled = false;
             }
             else
             {
-                DisplayAlert("Attention", "Select items in order to add them", "Close");
+                DisplayAlert("", "Select items in order to add them.", "Close");
             }
         }
 

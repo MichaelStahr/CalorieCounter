@@ -226,6 +226,7 @@ namespace CalorieCounter
             if (mItem != null)
             {
                 InsertFoodForUser(mItem);
+                DisplayAlert("", "Item added!", "Close");
             }
         }
 
