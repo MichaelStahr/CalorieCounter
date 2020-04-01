@@ -65,8 +65,8 @@
                     <Frame x:Name="searchFrame" BorderColor="#C05746" HeightRequest="500" IsVisible="true">
                         <StackLayout>
                             <StackLayout Orientation="Horizontal">
-                                <Button x:Name="showItemsToBeAdded" Text="Show" IsVisible="False" Clicked="ShowFoodsToBeAdded_Clicked" Style="{StaticResource EditButtons}"></Button>
-                                <Button x:Name="addFoodToLog" Text="Add" IsVisible="False" Clicked="AddFoodToLog_Clicked" Style="{StaticResource EditButtons}"></Button>
+                                <Button x:Name="showItemsToBeAdded" Text="Show Selected Items" IsVisible="False" Clicked="ShowFoodsToBeAdded_Clicked" Style="{StaticResource EditButtons}"></Button>
+                                <Button x:Name="quickAdd" Text="Quick Add" IsVisible="False" Clicked="QuickAdd_Clicked" Style="{StaticResource EditButtons}"></Button>
                             </StackLayout>
                             <ScrollView>
                                 <StackLayout>

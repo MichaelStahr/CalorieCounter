@@ -126,13 +126,13 @@ namespace CalorieCounter
             if(SearchingFoods.Text != "")
             {
                 searchFrame.IsVisible = true;
-                addFoodToLog.IsVisible = true;
+                quickAdd.IsVisible = true;
                 //historyFrame.IsVisible = false;
                 //favoritesFrame.IsVisible = false;
             } else
             {
                 searchFrame.IsVisible = false;
-                addFoodToLog.IsVisible = false;
+                quickAdd.IsVisible = false;
                 //historyFrame.IsVisible = true;
                 //favoritesFrame.IsVisible = true;
             }
@@ -190,12 +190,12 @@ namespace CalorieCounter
                 searchFrame.IsVisible = true;
                 foodItemslv.ItemsSource = miamiFoodItem;
                 
-                addFoodToLog.IsVisible = true;
+                quickAdd.IsVisible = true;
                 showItemsToBeAdded.IsVisible = true;
             } else
             {
                 foodItemslv.ItemsSource = null;
-                addFoodToLog.IsVisible = false;
+                quickAdd.IsVisible = false;
                 showItemsToBeAdded.IsVisible = false;
                 searchFrame.IsVisible = false;
             }
@@ -215,11 +215,13 @@ namespace CalorieCounter
           
         }
 
-        private void AddFoodToLog_Clicked(object sender, EventArgs e)
+        private void QuickAdd_Clicked(object sender, EventArgs e)
         {
             MiamiItem mItem = (MiamiItem)foodItemslv.SelectedItem;
-            
-            InsertFoodForUser(mItem);
+            if (mItem != null)
+            {
+                InsertFoodForUser(mItem);
+            }
         }
 
         private async void ShowFoodsToBeAdded_Clicked(object sender, EventArgs e)
