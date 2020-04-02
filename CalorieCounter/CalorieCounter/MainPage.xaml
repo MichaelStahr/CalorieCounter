@@ -61,7 +61,7 @@
                 <Setter Property="BackgroundColor" Value="#CBDFBD"></Setter>
                 <Setter Property="Placeholder" Value="Enter your notes here!"></Setter>
             </Style>
-            <Style x:Key="IncDecButton" TargetType="Button">
+            <Style x:Key="RedButton" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="#C05746"></Setter>
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
                 <Setter Property="BorderColor" Value="White"></Setter>
@@ -172,22 +172,31 @@
                 </chart:SfChart>
                 </Frame>
                 <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="250"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Button x:Name="GoBack" Text="-" Clicked="PlusOrMinusButton_Clicked" Style="{StaticResource IncDecButton}" Grid.Column="0"></Button>
-                        <Label x:Name="DateLabel" Text="Today" Style="{StaticResource DateLabel}" Grid.Column="1"></Label>
-                        <Button x:Name="GoForward" Text="+" Clicked="PlusOrMinusButton_Clicked" Style="{StaticResource IncDecButton}" Grid.Column="2"></Button>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="200"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="GoBackaWeek" Text="&lt;&lt;" Clicked="GoBackOrForwardAWeek_Clicked" Style="{StaticResource RedButton}" Grid.Column="0"></Button>
+                    <Button x:Name="GoBack" Text="&lt;" Clicked="GoBackOrForwardADay_Clicked" Style="{StaticResource RedButton}" Grid.Column="1"></Button>
+                    <Label x:Name="DateLabel" Text="Today" Style="{StaticResource DateLabel}" Grid.Column="2"></Label>
+                    <Button x:Name="GoForward" Text="&gt;" Clicked="GoBackOrForwardADay_Clicked" Style="{StaticResource RedButton}" Grid.Column="3"></Button>
+                    <Button x:Name="GoForwardAWeek" Text="&gt;&gt;" Clicked="GoBackOrForwardAWeek_Clicked"  Style="{StaticResource RedButton}" Grid.Column="4"></Button>
                     </Grid>
-                <Button x:Name="showCalendar" Text="Show Calendar" 
-                            VerticalOptions="Start" Style="{StaticResource IncDecButton}"
-                            Clicked="ClickToShowPopup_Clicked">
-                </Button>
+                <StackLayout Orientation="Horizontal">
+                    <Button x:Name="showCalendar" Text="Show Calendar" 
+                                VerticalOptions="Start" Style="{StaticResource RedButton}"
+                                Clicked="ClickToShowPopup_Clicked">
+                    </Button>
+                    <Button x:Name="jumpToToday" Text="Jump to Today"
+                            VerticalOptions="Start" Style="{StaticResource RedButton}"
+                            Clicked="JumpToToday_Clicked"></Button>
+                </StackLayout>
                 <sfPopup:SfPopupLayout x:Name="popup">
                     <sfPopup:SfPopupLayout.PopupView>
                         <sfPopup:PopupView HeightRequest="400"

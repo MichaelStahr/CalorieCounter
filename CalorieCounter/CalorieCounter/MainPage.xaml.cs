@@ -247,7 +247,7 @@ namespace CalorieCounter
             }
         }
 
-        private void PlusOrMinusButton_Clicked(object sender, EventArgs e)
+        private void GoBackOrForwardADay_Clicked(object sender, EventArgs e)
         {
             
             Button button = (Button)sender;
@@ -274,6 +274,33 @@ namespace CalorieCounter
             {
                 UpdateCalorieGraph(currentSelectedDate);
             }
+            Preferences.Set("currentSelectedDate", currentSelectedDate);
+
+        }
+
+        private void GoBackOrForwardAWeek_Clicked(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+
+            currentSelectedDate = Preferences.Get("currentSelectedDate", DateTime.Today);
+
+            if (button.Equals(GoBackaWeek))
+            {
+                currentSelectedDate = currentSelectedDate.AddDays(-7);
+            }
+            else
+            {
+                currentSelectedDate = currentSelectedDate.AddDays(7);
+            }
+
+            Calendar.SelectedDate = currentSelectedDate;
+            DateLabel.Text = currentSelectedDate.Date.ToShortDateString();
+
+            dateString = ChangeDateToString(currentSelectedDate);
+            FoodLookup(dateString);
+            GetFoodForDay();
+
+            UpdateCalorieGraph(currentSelectedDate);
             Preferences.Set("currentSelectedDate", currentSelectedDate);
 
         }
@@ -314,6 +341,27 @@ namespace CalorieCounter
             List<SimpleFood> foods;
             foods = await _restService.GetSimpleFoodItemForUserAsync(DisplayFoodItemsByUserDay(dateString));
             simpleFoodlv.ItemsSource = foods;
+        }
+
+        private void JumpToToday_Clicked(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+
+            currentSelectedDate = Preferences.Get("currentSelectedDate", DateTime.Today);
+
+            currentSelectedDate = DateTime.Today;
+
+            Calendar.SelectedDate = currentSelectedDate;
+            DateLabel.Text = currentSelectedDate.Date.ToShortDateString();
+
+            dateString = ChangeDateToString(currentSelectedDate);
+            FoodLookup(dateString);
+            GetFoodForDay();
+
+            UpdateCalorieGraph(currentSelectedDate);
+            Preferences.Set("currentSelectedDate", currentSelectedDate);
+
+
         }
     }
 }
