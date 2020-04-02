@@ -112,6 +112,15 @@
             <Style x:Key="SimpleFoodTitleGrid" TargetType="Grid">
                 <Setter Property="RowSpacing" Value="0"></Setter>
             </Style>
+            <chart:ChartColorCollection x:Key="Colors" x:Name="Colors1">
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+            </chart:ChartColorCollection>
         </ResourceDictionary>
     </TabbedPage.Resources>
 
@@ -154,9 +163,11 @@
                                             XBindingPath="Date" 
                                             YBindingPath="Calories" 
                                             EnableTooltip="True"
-                                            Color="#DDA448"
                                             >
-                            <chart:ColumnSeries.DataMarker>
+                                <chart:ColumnSeries.ColorModel>
+                                    <chart:ChartColorModel Palette="Custom" CustomBrushes="{DynamicResource Colors}"/>
+                                </chart:ColumnSeries.ColorModel>
+                                <chart:ColumnSeries.DataMarker>
                                     <chart:ChartDataMarker ShowLabel="True">
                                         <chart:ChartDataMarker.LabelStyle>
                                             <chart:DataMarkerLabelStyle TextColor="#DDA448"

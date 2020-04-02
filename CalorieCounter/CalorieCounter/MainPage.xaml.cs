@@ -64,7 +64,6 @@ namespace CalorieCounter
             };
             NavigationPage.SetTitleView(this, header);
             Color labelColor = Color.FromHex("503047");
-            
             currentSelectedDate = Calendar.SelectedDate.Value;
             Preferences.Set("currentSelectedDate", currentSelectedDate);
             string year = currentSelectedDate.Year.ToString();
@@ -134,14 +133,14 @@ namespace CalorieCounter
         {
             
             model.Data1.Clear();
-            
+
             DayOfWeek dayOfWeek = selectedDate.DayOfWeek;
-            int caseSwitch = (int)dayOfWeek;
+            int numberDayOfWeek = (int)dayOfWeek;
 
             // selectedDate is a Sunday if i = 0
             int daysBack = 0;
             int daysForward = 7;
-            switch (caseSwitch)
+            switch (numberDayOfWeek)
             {
                 // Monday
                 case 1:
@@ -192,7 +191,23 @@ namespace CalorieCounter
             //}
 
             //model.Data1.Add(new ChartData(formattedSelectedDate, numTotalCal));
+            HighlightSelectedDayOnChart(numberDayOfWeek);
             calorieChartSeries.ItemsSource = model.Data1;
+        }
+
+        private void HighlightSelectedDayOnChart(int numberDayOfWeek)
+        {
+            IList<Color> barColorList = calorieChartSeries.ColorModel.CustomBrushes;
+            for (int i = 0; i < Colors1.Count; i++)
+            {
+                if (i == numberDayOfWeek)
+                {
+                    Colors1[i] = Color.FromHex("#C05746");
+                } else
+                {
+                    Colors1[i] = Color.FromHex("#DDA448");
+                }
+            }
         }
 
         private string ChangeDateToString(DateTime date)
