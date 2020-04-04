@@ -61,7 +61,7 @@
                 <Setter Property="BackgroundColor" Value="#CBDFBD"></Setter>
                 <Setter Property="Placeholder" Value="Enter your notes here!"></Setter>
             </Style>
-            <Style x:Key="IncDecButton" TargetType="Button">
+            <Style x:Key="RedButton" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="#C05746"></Setter>
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
                 <Setter Property="BorderColor" Value="White"></Setter>
@@ -73,10 +73,17 @@
             <Style x:Key="DateLabel" TargetType="Label">
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
                 <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
                 <Setter Property="FontSize" Value="Medium"></Setter>
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
-                <Setter Property="TextColor" Value="Black"></Setter>
+                <Setter Property="TextColor" Value="#DDC948"></Setter>
+            </Style>
+            <Style x:Key="DateFrame" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="#537D8D"></Setter>
+                <Setter Property="BorderColor" Value="White"></Setter>
+                <Setter Property="CornerRadius" Value="10"></Setter>
+                <Setter Property="Padding" Value="0,2,0,2"></Setter>
             </Style>
             <Style x:Key="CalorieDetailFrame" TargetType="Frame">
                 <Setter Property="BorderColor" Value="#C05746"></Setter> 
@@ -112,6 +119,69 @@
             <Style x:Key="SimpleFoodTitleGrid" TargetType="Grid">
                 <Setter Property="RowSpacing" Value="0"></Setter>
             </Style>
+            <chart:ChartColorCollection x:Key="SundayColors">
+                <Color>#DDC948</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+            </chart:ChartColorCollection>
+            <chart:ChartColorCollection x:Key="MondayColors">
+                <Color>#DDA448</Color>
+                <Color>#DDC948</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+            </chart:ChartColorCollection>
+            <chart:ChartColorCollection x:Key="TuesdayColors">
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDC948</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+            </chart:ChartColorCollection>
+            <chart:ChartColorCollection x:Key="WednesdayColors">
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDC948</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+            </chart:ChartColorCollection>
+            <chart:ChartColorCollection x:Key="ThursdayColors">
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDC948</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+            </chart:ChartColorCollection>
+            <chart:ChartColorCollection x:Key="FridayColors">
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDC948</Color>
+                <Color>#DDA448</Color>
+            </chart:ChartColorCollection>
+            <chart:ChartColorCollection x:Key="SaturdayColors">
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDC948</Color>
+            </chart:ChartColorCollection>
         </ResourceDictionary>
     </TabbedPage.Resources>
 
@@ -154,12 +224,15 @@
                                             XBindingPath="Date" 
                                             YBindingPath="Calories" 
                                             EnableTooltip="True"
-                                            Color="#DDA448"
+                                            StrokeColor="#DDA448"
                                             >
-                            <chart:ColumnSeries.DataMarker>
+                                <chart:ColumnSeries.ColorModel>
+                                    <chart:ChartColorModel Palette="Custom" CustomBrushes="{DynamicResource chartStyle}"/>
+                                </chart:ColumnSeries.ColorModel>
+                                <chart:ColumnSeries.DataMarker>
                                     <chart:ChartDataMarker ShowLabel="True">
                                         <chart:ChartDataMarker.LabelStyle>
-                                            <chart:DataMarkerLabelStyle TextColor="#DDA448"
+                                            <chart:DataMarkerLabelStyle TextColor="#DDC948"
                                                                         BackgroundColor="#537D8D"
                                                                         FontAttributes="Bold">
                                             </chart:DataMarkerLabelStyle>
@@ -172,22 +245,33 @@
                 </chart:SfChart>
                 </Frame>
                 <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="250"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Button x:Name="GoBack" Text="-" Clicked="PlusOrMinusButton_Clicked" Style="{StaticResource IncDecButton}" Grid.Column="0"></Button>
-                        <Label x:Name="DateLabel" Text="Today" Style="{StaticResource DateLabel}" Grid.Column="1"></Label>
-                        <Button x:Name="GoForward" Text="+" Clicked="PlusOrMinusButton_Clicked" Style="{StaticResource IncDecButton}" Grid.Column="2"></Button>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="200"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="GoBackaWeek" Text="&lt;&lt;" Clicked="GoBackOrForwardAWeek_Clicked" Style="{StaticResource RedButton}" Grid.Column="0"></Button>
+                    <Button x:Name="GoBack" Text="&lt;" Clicked="GoBackOrForwardADay_Clicked" Style="{StaticResource RedButton}" Grid.Column="1"></Button>
+                    <Frame Style="{StaticResource DateFrame}" Grid.Column="2">
+                        <Label x:Name="DateLabel" Text="Today" Style="{StaticResource DateLabel}"></Label>
+                    </Frame>
+                    <Button x:Name="GoForward" Text="&gt;" Clicked="GoBackOrForwardADay_Clicked" Style="{StaticResource RedButton}" Grid.Column="3"></Button>
+                    <Button x:Name="GoForwardAWeek" Text="&gt;&gt;" Clicked="GoBackOrForwardAWeek_Clicked"  Style="{StaticResource RedButton}" Grid.Column="4"></Button>
                     </Grid>
-                <Button x:Name="showCalendar" Text="Show Calendar" 
-                            VerticalOptions="Start" Style="{StaticResource IncDecButton}"
-                            Clicked="ClickToShowPopup_Clicked">
-                </Button>
+                <StackLayout Orientation="Horizontal">
+                    <Button x:Name="showCalendar" Text="Show Calendar" 
+                                VerticalOptions="Start" Style="{StaticResource RedButton}"
+                                Clicked="ClickToShowPopup_Clicked">
+                    </Button>
+                    <Button x:Name="jumpToToday" Text="Jump to Today"
+                            VerticalOptions="Start" Style="{StaticResource RedButton}"
+                            Clicked="JumpToToday_Clicked"></Button>
+                </StackLayout>
                 <sfPopup:SfPopupLayout x:Name="popup">
                     <sfPopup:SfPopupLayout.PopupView>
                         <sfPopup:PopupView HeightRequest="400"

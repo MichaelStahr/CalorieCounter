@@ -27,7 +27,7 @@ namespace CalorieCounter
         RestService _restService;
         ChartViewModel model;
         private DateTime currentSelectedDate;
-
+        private bool ogStyle = true;
 
         public MainPage()
         {
@@ -63,8 +63,8 @@ namespace CalorieCounter
                 }
             };
             NavigationPage.SetTitleView(this, header);
-            Color labelColor = Color.FromHex("503047");
             
+            Color labelColor = Color.FromHex("503047");
             currentSelectedDate = Calendar.SelectedDate.Value;
             Preferences.Set("currentSelectedDate", currentSelectedDate);
             string year = currentSelectedDate.Year.ToString();
@@ -72,9 +72,16 @@ namespace CalorieCounter
             string day = currentSelectedDate.Day.ToString();
             dateString = year + "-" + month + "-" + day;
 
+            HighlightCurrentSelectedDayOnChart();
         }
 
-       
+        private void HighlightCurrentSelectedDayOnChart()
+        {
+            DateTime date = Preferences.Get("currentSelectedDate", DateTime.Today);
+            DayOfWeek day = date.DayOfWeek;
+            string dayStyle = day.ToString() + "Colors";
+            Resources["chartStyle"] = Resources[dayStyle];
+        }
 
         protected override void OnCurrentPageChanged()
         {
@@ -134,14 +141,14 @@ namespace CalorieCounter
         {
             
             model.Data1.Clear();
-            
+
             DayOfWeek dayOfWeek = selectedDate.DayOfWeek;
-            int caseSwitch = (int)dayOfWeek;
+            int numberDayOfWeek = (int)dayOfWeek;
 
             // selectedDate is a Sunday if i = 0
             int daysBack = 0;
             int daysForward = 7;
-            switch (caseSwitch)
+            switch (numberDayOfWeek)
             {
                 // Monday
                 case 1:
@@ -195,6 +202,8 @@ namespace CalorieCounter
             calorieChartSeries.ItemsSource = model.Data1;
         }
 
+       
+
         private string ChangeDateToString(DateTime date)
         {
             string year = date.Year.ToString();
@@ -229,6 +238,7 @@ namespace CalorieCounter
                 UpdateCalorieGraph(date);
             }
             Preferences.Set("currentSelectedDate", date);
+            HighlightCurrentSelectedDayOnChart();
         }
 
         private bool CheckIfChartNeedsUpdated(DateTime previousSelected, DateTime currentSeleceted)
@@ -247,7 +257,7 @@ namespace CalorieCounter
             }
         }
 
-        private void PlusOrMinusButton_Clicked(object sender, EventArgs e)
+        private void GoBackOrForwardADay_Clicked(object sender, EventArgs e)
         {
             
             Button button = (Button)sender;
@@ -275,6 +285,35 @@ namespace CalorieCounter
                 UpdateCalorieGraph(currentSelectedDate);
             }
             Preferences.Set("currentSelectedDate", currentSelectedDate);
+            HighlightCurrentSelectedDayOnChart();
+
+        }
+
+        private void GoBackOrForwardAWeek_Clicked(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+
+            currentSelectedDate = Preferences.Get("currentSelectedDate", DateTime.Today);
+
+            if (button.Equals(GoBackaWeek))
+            {
+                currentSelectedDate = currentSelectedDate.AddDays(-7);
+            }
+            else
+            {
+                currentSelectedDate = currentSelectedDate.AddDays(7);
+            }
+
+            Calendar.SelectedDate = currentSelectedDate;
+            DateLabel.Text = currentSelectedDate.Date.ToShortDateString();
+
+            dateString = ChangeDateToString(currentSelectedDate);
+            FoodLookup(dateString);
+            GetFoodForDay();
+
+            UpdateCalorieGraph(currentSelectedDate);
+            Preferences.Set("currentSelectedDate", currentSelectedDate);
+            HighlightCurrentSelectedDayOnChart();
 
         }
 
@@ -314,6 +353,27 @@ namespace CalorieCounter
             List<SimpleFood> foods;
             foods = await _restService.GetSimpleFoodItemForUserAsync(DisplayFoodItemsByUserDay(dateString));
             simpleFoodlv.ItemsSource = foods;
+        }
+
+        private void JumpToToday_Clicked(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+
+            currentSelectedDate = Preferences.Get("currentSelectedDate", DateTime.Today);
+
+            currentSelectedDate = DateTime.Today;
+
+            Calendar.SelectedDate = currentSelectedDate;
+            DateLabel.Text = currentSelectedDate.Date.ToShortDateString();
+
+            dateString = ChangeDateToString(currentSelectedDate);
+            FoodLookup(dateString);
+            GetFoodForDay();
+
+            UpdateCalorieGraph(currentSelectedDate);
+            Preferences.Set("currentSelectedDate", currentSelectedDate);
+            HighlightCurrentSelectedDayOnChart();
+
         }
     }
 }
