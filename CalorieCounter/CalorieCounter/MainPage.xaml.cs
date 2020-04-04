@@ -63,6 +63,7 @@ namespace CalorieCounter
                 }
             };
             NavigationPage.SetTitleView(this, header);
+            
             Color labelColor = Color.FromHex("503047");
             currentSelectedDate = Calendar.SelectedDate.Value;
             Preferences.Set("currentSelectedDate", currentSelectedDate);

@@ -73,10 +73,17 @@
             <Style x:Key="DateLabel" TargetType="Label">
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
                 <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
                 <Setter Property="FontSize" Value="Medium"></Setter>
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
-                <Setter Property="TextColor" Value="Black"></Setter>
+                <Setter Property="TextColor" Value="#DDC948"></Setter>
+            </Style>
+            <Style x:Key="DateFrame" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="#537D8D"></Setter>
+                <Setter Property="BorderColor" Value="White"></Setter>
+                <Setter Property="CornerRadius" Value="10"></Setter>
+                <Setter Property="Padding" Value="0,2,0,2"></Setter>
             </Style>
             <Style x:Key="CalorieDetailFrame" TargetType="Frame">
                 <Setter Property="BorderColor" Value="#C05746"></Setter> 
@@ -113,7 +120,7 @@
                 <Setter Property="RowSpacing" Value="0"></Setter>
             </Style>
             <chart:ChartColorCollection x:Key="SundayColors">
-                <Color>#C05746</Color>
+                <Color>#DDC948</Color>
                 <Color>#DDA448</Color>
                 <Color>#DDA448</Color>
                 <Color>#DDA448</Color>
@@ -123,7 +130,7 @@
             </chart:ChartColorCollection>
             <chart:ChartColorCollection x:Key="MondayColors">
                 <Color>#DDA448</Color>
-                <Color>#C05746</Color>
+                <Color>#DDC948</Color>
                 <Color>#DDA448</Color>
                 <Color>#DDA448</Color>
                 <Color>#DDA448</Color>
@@ -133,7 +140,7 @@
             <chart:ChartColorCollection x:Key="TuesdayColors">
                 <Color>#DDA448</Color>
                 <Color>#DDA448</Color>
-                <Color>#C05746</Color>
+                <Color>#DDC948</Color>
                 <Color>#DDA448</Color>
                 <Color>#DDA448</Color>
                 <Color>#DDA448</Color>
@@ -143,7 +150,7 @@
                 <Color>#DDA448</Color>
                 <Color>#DDA448</Color>
                 <Color>#DDA448</Color>
-                <Color>#C05746</Color>
+                <Color>#DDC948</Color>
                 <Color>#DDA448</Color>
                 <Color>#DDA448</Color>
                 <Color>#DDA448</Color>
@@ -153,7 +160,7 @@
                 <Color>#DDA448</Color>
                 <Color>#DDA448</Color>
                 <Color>#DDA448</Color>
-                <Color>#C05746</Color>
+                <Color>#DDC948</Color>
                 <Color>#DDA448</Color>
                 <Color>#DDA448</Color>
             </chart:ChartColorCollection>
@@ -163,7 +170,7 @@
                 <Color>#DDA448</Color>
                 <Color>#DDA448</Color>
                 <Color>#DDA448</Color>
-                <Color>#C05746</Color>
+                <Color>#DDC948</Color>
                 <Color>#DDA448</Color>
             </chart:ChartColorCollection>
             <chart:ChartColorCollection x:Key="SaturdayColors">
@@ -173,7 +180,7 @@
                 <Color>#DDA448</Color>
                 <Color>#DDA448</Color>
                 <Color>#DDA448</Color>
-                <Color>#C05746</Color>
+                <Color>#DDC948</Color>
             </chart:ChartColorCollection>
         </ResourceDictionary>
     </TabbedPage.Resources>
@@ -217,6 +224,7 @@
                                             XBindingPath="Date" 
                                             YBindingPath="Calories" 
                                             EnableTooltip="True"
+                                            StrokeColor="#DDA448"
                                             >
                                 <chart:ColumnSeries.ColorModel>
                                     <chart:ChartColorModel Palette="Custom" CustomBrushes="{DynamicResource chartStyle}"/>
@@ -224,7 +232,7 @@
                                 <chart:ColumnSeries.DataMarker>
                                     <chart:ChartDataMarker ShowLabel="True">
                                         <chart:ChartDataMarker.LabelStyle>
-                                            <chart:DataMarkerLabelStyle TextColor="#DDA448"
+                                            <chart:DataMarkerLabelStyle TextColor="#DDC948"
                                                                         BackgroundColor="#537D8D"
                                                                         FontAttributes="Bold">
                                             </chart:DataMarkerLabelStyle>
@@ -249,7 +257,9 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="GoBackaWeek" Text="&lt;&lt;" Clicked="GoBackOrForwardAWeek_Clicked" Style="{StaticResource RedButton}" Grid.Column="0"></Button>
                     <Button x:Name="GoBack" Text="&lt;" Clicked="GoBackOrForwardADay_Clicked" Style="{StaticResource RedButton}" Grid.Column="1"></Button>
-                    <Label x:Name="DateLabel" Text="Today" Style="{StaticResource DateLabel}" Grid.Column="2"></Label>
+                    <Frame Style="{StaticResource DateFrame}" Grid.Column="2">
+                        <Label x:Name="DateLabel" Text="Today" Style="{StaticResource DateLabel}"></Label>
+                    </Frame>
                     <Button x:Name="GoForward" Text="&gt;" Clicked="GoBackOrForwardADay_Clicked" Style="{StaticResource RedButton}" Grid.Column="3"></Button>
                     <Button x:Name="GoForwardAWeek" Text="&gt;&gt;" Clicked="GoBackOrForwardAWeek_Clicked"  Style="{StaticResource RedButton}" Grid.Column="4"></Button>
                     </Grid>
