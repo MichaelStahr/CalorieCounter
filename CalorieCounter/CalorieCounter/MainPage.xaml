@@ -112,14 +112,68 @@
             <Style x:Key="SimpleFoodTitleGrid" TargetType="Grid">
                 <Setter Property="RowSpacing" Value="0"></Setter>
             </Style>
-            <chart:ChartColorCollection x:Key="Colors" x:Name="Colors1">
+            <chart:ChartColorCollection x:Key="SundayColors">
+                <Color>#C05746</Color>
                 <Color>#DDA448</Color>
                 <Color>#DDA448</Color>
                 <Color>#DDA448</Color>
                 <Color>#DDA448</Color>
                 <Color>#DDA448</Color>
                 <Color>#DDA448</Color>
+            </chart:ChartColorCollection>
+            <chart:ChartColorCollection x:Key="MondayColors">
                 <Color>#DDA448</Color>
+                <Color>#C05746</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+            </chart:ChartColorCollection>
+            <chart:ChartColorCollection x:Key="TuesdayColors">
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#C05746</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+            </chart:ChartColorCollection>
+            <chart:ChartColorCollection x:Key="WednesdayColors">
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#C05746</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+            </chart:ChartColorCollection>
+            <chart:ChartColorCollection x:Key="ThursdayColors">
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#C05746</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+            </chart:ChartColorCollection>
+            <chart:ChartColorCollection x:Key="FridayColors">
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#C05746</Color>
+                <Color>#DDA448</Color>
+            </chart:ChartColorCollection>
+            <chart:ChartColorCollection x:Key="SaturdayColors">
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#DDA448</Color>
+                <Color>#C05746</Color>
             </chart:ChartColorCollection>
         </ResourceDictionary>
     </TabbedPage.Resources>
@@ -165,7 +219,7 @@
                                             EnableTooltip="True"
                                             >
                                 <chart:ColumnSeries.ColorModel>
-                                    <chart:ChartColorModel Palette="Custom" CustomBrushes="{DynamicResource Colors}"/>
+                                    <chart:ChartColorModel Palette="Custom" CustomBrushes="{DynamicResource chartStyle}"/>
                                 </chart:ColumnSeries.ColorModel>
                                 <chart:ColumnSeries.DataMarker>
                                     <chart:ChartDataMarker ShowLabel="True">

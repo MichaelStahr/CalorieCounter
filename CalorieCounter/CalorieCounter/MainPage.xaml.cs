@@ -27,7 +27,7 @@ namespace CalorieCounter
         RestService _restService;
         ChartViewModel model;
         private DateTime currentSelectedDate;
-
+        private bool ogStyle = true;
 
         public MainPage()
         {
@@ -71,9 +71,16 @@ namespace CalorieCounter
             string day = currentSelectedDate.Day.ToString();
             dateString = year + "-" + month + "-" + day;
 
+            HighlightCurrentSelectedDayOnChart();
         }
 
-       
+        private void HighlightCurrentSelectedDayOnChart()
+        {
+            DateTime date = Preferences.Get("currentSelectedDate", DateTime.Today);
+            DayOfWeek day = date.DayOfWeek;
+            string dayStyle = day.ToString() + "Colors";
+            Resources["chartStyle"] = Resources[dayStyle];
+        }
 
         protected override void OnCurrentPageChanged()
         {
@@ -191,24 +198,10 @@ namespace CalorieCounter
             //}
 
             //model.Data1.Add(new ChartData(formattedSelectedDate, numTotalCal));
-            HighlightSelectedDayOnChart(numberDayOfWeek);
             calorieChartSeries.ItemsSource = model.Data1;
         }
 
-        private void HighlightSelectedDayOnChart(int numberDayOfWeek)
-        {
-            IList<Color> barColorList = calorieChartSeries.ColorModel.CustomBrushes;
-            for (int i = 0; i < Colors1.Count; i++)
-            {
-                if (i == numberDayOfWeek)
-                {
-                    Colors1[i] = Color.FromHex("#C05746");
-                } else
-                {
-                    Colors1[i] = Color.FromHex("#DDA448");
-                }
-            }
-        }
+       
 
         private string ChangeDateToString(DateTime date)
         {
@@ -244,6 +237,7 @@ namespace CalorieCounter
                 UpdateCalorieGraph(date);
             }
             Preferences.Set("currentSelectedDate", date);
+            HighlightCurrentSelectedDayOnChart();
         }
 
         private bool CheckIfChartNeedsUpdated(DateTime previousSelected, DateTime currentSeleceted)
@@ -290,6 +284,7 @@ namespace CalorieCounter
                 UpdateCalorieGraph(currentSelectedDate);
             }
             Preferences.Set("currentSelectedDate", currentSelectedDate);
+            HighlightCurrentSelectedDayOnChart();
 
         }
 
@@ -317,6 +312,7 @@ namespace CalorieCounter
 
             UpdateCalorieGraph(currentSelectedDate);
             Preferences.Set("currentSelectedDate", currentSelectedDate);
+            HighlightCurrentSelectedDayOnChart();
 
         }
 
@@ -375,7 +371,7 @@ namespace CalorieCounter
 
             UpdateCalorieGraph(currentSelectedDate);
             Preferences.Set("currentSelectedDate", currentSelectedDate);
-
+            HighlightCurrentSelectedDayOnChart();
 
         }
     }
