@@ -77,10 +77,10 @@
                 <Setter Property="FontSize" Value="Medium"></Setter>
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
-                <Setter Property="TextColor" Value="#DDC948"></Setter>
+                <Setter Property="TextColor" Value="#DDA448"></Setter>
             </Style>
             <Style x:Key="DateFrame" TargetType="Frame">
-                <Setter Property="BackgroundColor" Value="#537D8D"></Setter>
+                <Setter Property="BackgroundColor" Value="#446774"></Setter>
                 <Setter Property="BorderColor" Value="White"></Setter>
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="Padding" Value="0,2,0,2"></Setter>
@@ -120,67 +120,67 @@
                 <Setter Property="RowSpacing" Value="0"></Setter>
             </Style>
             <chart:ChartColorCollection x:Key="SundayColors">
-                <Color>#DDC948</Color>
                 <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
             </chart:ChartColorCollection>
             <chart:ChartColorCollection x:Key="MondayColors">
+                <Color>#537D8D</Color>
                 <Color>#DDA448</Color>
-                <Color>#DDC948</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
             </chart:ChartColorCollection>
             <chart:ChartColorCollection x:Key="TuesdayColors">
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
                 <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDC948</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
             </chart:ChartColorCollection>
             <chart:ChartColorCollection x:Key="WednesdayColors">
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
                 <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDC948</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
             </chart:ChartColorCollection>
             <chart:ChartColorCollection x:Key="ThursdayColors">
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
                 <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDC948</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
             </chart:ChartColorCollection>
             <chart:ChartColorCollection x:Key="FridayColors">
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
                 <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDC948</Color>
-                <Color>#DDA448</Color>
+                <Color>#537D8D</Color>
             </chart:ChartColorCollection>
             <chart:ChartColorCollection x:Key="SaturdayColors">
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
+                <Color>#537D8D</Color>
                 <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDA448</Color>
-                <Color>#DDC948</Color>
             </chart:ChartColorCollection>
         </ResourceDictionary>
     </TabbedPage.Resources>
@@ -224,7 +224,6 @@
                                             XBindingPath="Date" 
                                             YBindingPath="Calories" 
                                             EnableTooltip="True"
-                                            StrokeColor="#DDA448"
                                             >
                                 <chart:ColumnSeries.ColorModel>
                                     <chart:ChartColorModel Palette="Custom" CustomBrushes="{DynamicResource chartStyle}"/>
@@ -232,9 +231,11 @@
                                 <chart:ColumnSeries.DataMarker>
                                     <chart:ChartDataMarker ShowLabel="True">
                                         <chart:ChartDataMarker.LabelStyle>
-                                            <chart:DataMarkerLabelStyle TextColor="#DDC948"
+                                            <chart:DataMarkerLabelStyle TextColor="#DDA448"
                                                                         BackgroundColor="#537D8D"
-                                                                        FontAttributes="Bold">
+                                                                        FontAttributes="Bold"
+                                                                        BorderColor="#C05746"
+                                                                        BorderThickness="2">
                                             </chart:DataMarkerLabelStyle>
                                         </chart:ChartDataMarker.LabelStyle>
                                     </chart:ChartDataMarker>
