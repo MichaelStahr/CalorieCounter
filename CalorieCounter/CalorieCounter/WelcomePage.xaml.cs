@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -52,10 +52,17 @@ namespace CalorieCounter
 
         }
 
-        public void Login(string username, string password)
+        public async void Login(string username, string password)
         {
             // to do: verify login through stored procedure
-            Navigation.PushModalAsync(new MainPage());
+            //Navigation.PushModalAsync(new MainPage());
+            
+            WebAuthenticatorResult authResult = await WebAuthenticator.AuthenticateAsync(
+                new Uri("https://accounts.google.com/o/oauth2/v2/auth?client_id=1041253101002-dhan7880g5t577r7d6lc8cfcsvqfqqhf.apps.googleusercontent.com&response_type=code&scope=email%20profile&redirect_uri=com.googleusercontent.apps.1041253101002-dhan7880g5t577r7d6lc8cfcsvqfqqhf:/oauth2redirect"),
+                new Uri("com.googleusercontent.apps.1041253101002-dhan7880g5t577r7d6lc8cfcsvqfqqhf:/oauth2redirect"));
+            string code = authResult.Properties["code"];
+            var accessToken = authResult?.AccessToken;
         }
+
     }
 }
