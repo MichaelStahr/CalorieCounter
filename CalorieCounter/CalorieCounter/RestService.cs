@@ -308,5 +308,35 @@ namespace CalorieCounter
             }
             return simpleFoodList;
         }
+
+        public async Task<TokenResponse> ObtainAccessToken(string uri, string content)
+        {
+
+            string result = "";
+            TokenResponse tokenData = null;
+            try
+            {
+                using (var message = new HttpRequestMessage(HttpMethod.Post, uri))
+                {
+                    
+                    message.Version = HttpVersion.Version10;
+                    message.Content = new StringContent(content, Encoding.UTF8, "application/x-www-form-urlencoded");
+
+                    using (var response = await _client.SendAsync(message))
+                    {
+                        result = await response.Content.ReadAsStringAsync();
+                        if (response.IsSuccessStatusCode)
+                        {
+                            tokenData = JsonConvert.DeserializeObject<TokenResponse>(result);
+                        }
+                    }
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.InnerException.Message);
+            }
+            return tokenData;
+        }
     }
 }
