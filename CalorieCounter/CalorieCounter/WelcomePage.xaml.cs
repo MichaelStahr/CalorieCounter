@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.Xaml;
 
 namespace CalorieCounter
@@ -63,8 +64,21 @@ namespace CalorieCounter
         public async void Login(string username, string password)
         {
             // authenticate
-            string client_id = "1041253101002-dhan7880g5t577r7d6lc8cfcsvqfqqhf.apps.googleusercontent.com";
-            string redirect_uri = "com.googleusercontent.apps.1041253101002-dhan7880g5t577r7d6lc8cfcsvqfqqhf:/oauth2redirect";
+            string client_id = "";
+            string redirect_uri = "";
+            if (Device.RuntimePlatform == Device.Android)
+            {
+                client_id = "1041253101002-dhan7880g5t577r7d6lc8cfcsvqfqqhf.apps.googleusercontent.com";
+                redirect_uri = "com.googleusercontent.apps.1041253101002-dhan7880g5t577r7d6lc8cfcsvqfqqhf:/oauth2redirect";
+
+            }
+            else if (Device.RuntimePlatform == Device.UWP)
+            {
+                client_id = "1041253101002-hbmvlv5gofcv8fkh3du3eb1sd0jputfp.apps.googleusercontent.com";
+                redirect_uri = "caloriecounter.oauth2:/oauth2redirect";
+
+            }
+           
             string requestUri = "https://accounts.google.com/o/oauth2/v2/auth?";
             requestUri += $"scope=openid%20email%20profile";
             requestUri += $"&response_type=code";
@@ -75,8 +89,8 @@ namespace CalorieCounter
             requestUri += $"&login_hint={email.Text}";
             WebAuthenticatorResult authResult = await WebAuthenticator.AuthenticateAsync(
                 new Uri(requestUri),
-                new Uri("com.googleusercontent.apps.1041253101002-dhan7880g5t577r7d6lc8cfcsvqfqqhf:/oauth2redirect"));
-
+                new Uri(redirect_uri));
+            
             string code = authResult.Properties["code"];
             string content = $"code={code}&client_id={client_id}&redirect_uri={redirect_uri}&grant_type=authorization_code";
             string tokenUrl = "https://oauth2.googleapis.com/token";
