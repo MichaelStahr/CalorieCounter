@@ -3,6 +3,7 @@ using Jose;
 using JWT;
 using JWT.Algorithms;
 using JWT.Serializers;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,10 +80,9 @@ namespace CalorieCounter
             string code = authResult.Properties["code"];
             string content = $"code={code}&client_id={client_id}&redirect_uri={redirect_uri}&grant_type=authorization_code";
             string tokenUrl = "https://oauth2.googleapis.com/token";
-         
-            
-            TokenResponse result = await _restService.ObtainAccessToken(tokenUrl, content);
 
+            IdToken token;
+            TokenResponse result = await _restService.ObtainAccessToken(tokenUrl, content);
             try
             {
                 IJsonSerializer serializer = new JsonNetSerializer();
@@ -92,7 +92,9 @@ namespace CalorieCounter
                 IJwtAlgorithm algorithm = new HMACSHA256Algorithm();
                 IJwtDecoder decoder = new JwtDecoder(serializer, validator, urlEncoder, algorithm);
 
-                var j = decoder.Decode(result.IdToken);
+                string j = decoder.Decode(result.IdToken);
+                token = JsonConvert.DeserializeObject<IdToken>(j);
+                
             }
             catch (TokenExpiredException)
             {
