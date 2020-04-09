@@ -7,12 +7,24 @@
              x:Class="CalorieCounter.WelcomePage">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="HomePage">
+                <On Platform="Android" Value="Acme-Regular.ttf#Acme Regular" />
+            </OnPlatform>
             <Style x:Key="loginFrame" TargetType="Frame">
                 <Setter Property="BorderColor" Value="#C05746"></Setter>
-                <Setter Property="BackgroundColor" Value="#CBDFBD"></Setter>
+                <Setter Property="BackgroundColor" Value="#DDA448"></Setter>
                 <Setter Property="HasShadow" Value="True"></Setter>
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="Margin" Value="5,5,5,5"></Setter>
+            </Style>
+            <Style x:Key="RedButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#C05746"></Setter>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+                <Setter Property="BorderColor" Value="White"></Setter>
+                <Setter Property="BorderWidth" Value="2"></Setter>
+                <Setter Property="CornerRadius" Value="10"></Setter>
+                <Setter Property="FontFamily" Value="{d:StaticResource HomePage}"></Setter>
+                <Setter Property="TextColor" Value="White"></Setter>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -21,12 +33,10 @@
             <Frame Style="{StaticResource loginFrame}">
                 <StackLayout>
                     <Label Text="Welcome to Calorie Counter!" VerticalOptions="CenterAndExpand"></Label>
-                    <Entry x:Name="email" Placeholder="Email"></Entry>
-                    <Entry x:Name="password" Placeholder="Password" IsPassword="True"></Entry>
-                    <Button x:Name="LoginButton" Text="Login" Clicked="LoginButton_Clicked"></Button>
-                    <Button x:Name ="SignUpButton" Text="SignUp" Clicked="SignUpButton_Clicked"></Button>
-                    <Button x:Name="AboutButton" Text="About" Clicked="AboutButton_Clicked"></Button>
-                    <WebView x:Name="webView" HeightRequest="300" WidthRequest="200"></WebView> 
+                    <Button x:Name="LoginButton" Text="Google Login" Clicked="LoginButton_Clicked" Style="{StaticResource RedButton}"></Button>
+                    <Button x:Name ="SignUpButton" Text="SignUp" Clicked="SignUpButton_Clicked" Style="{StaticResource RedButton}"></Button>
+                    <Button x:Name="AboutButton" Text="About" Clicked="AboutButton_Clicked" Style="{StaticResource RedButton}"></Button>
+                    <ActivityIndicator x:Name="activityIndicator" Color="#537D8D" IsRunning="False"></ActivityIndicator>
                 </StackLayout>
         </Frame>
         </StackLayout>

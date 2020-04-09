@@ -48,7 +48,7 @@ namespace CalorieCounter
 
         private void LoginButton_Clicked(object sender, EventArgs e)
         {
-            Login(email.Text, password.Text);
+            Login();
         }
 
         private void SignUpButton_Clicked(object sender, EventArgs e)
@@ -61,7 +61,7 @@ namespace CalorieCounter
 
         }
 
-        public async void Login(string username, string password)
+        public async void Login()
         {
             // authenticate
             string client_id = "";
@@ -86,11 +86,11 @@ namespace CalorieCounter
             requestUri += $"&client_id={client_id}";
             requestUri += "&hd=miamioh.edu";
             requestUri += "&prompt=select_account";
-            requestUri += $"&login_hint={email.Text}";
             WebAuthenticatorResult authResult = await WebAuthenticator.AuthenticateAsync(
                 new Uri(requestUri),
                 new Uri(redirect_uri));
-            
+
+            activityIndicator.IsRunning = true;
             string code = authResult.Properties["code"];
             string content = $"code={code}&client_id={client_id}&redirect_uri={redirect_uri}&grant_type=authorization_code";
             string tokenUrl = "https://oauth2.googleapis.com/token";
@@ -120,6 +120,7 @@ namespace CalorieCounter
             }
 
             // if user exists (if idToken matches idToken of user in DB) then login
+            activityIndicator.IsRunning = false;
             await Navigation.PushModalAsync(new MainPage(idToken));
 
         }
