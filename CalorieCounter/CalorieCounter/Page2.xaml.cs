@@ -23,6 +23,7 @@ namespace CalorieCounter
         public static string miamiApiEndpoint = "https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php";
 
         private DateTime currentDate = DateTime.Today;
+        
         private const string unique_id = "birdaj";
         //public const string eatsDate = "2019-03-10";
         private string eatsDate;

@@ -20,7 +20,7 @@ namespace CalorieCounter
         private void SignUpButton_Clicked(object sender, EventArgs e)
         {
             // to do: verify Miami email and add user to our DB through stored procedure
-            Navigation.PushModalAsync(new MainPage());
+            //Navigation.PushModalAsync(new MainPage());
         }
     }
 }

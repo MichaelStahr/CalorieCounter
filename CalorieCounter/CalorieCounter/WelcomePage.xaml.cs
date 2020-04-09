@@ -95,7 +95,7 @@ namespace CalorieCounter
             string content = $"code={code}&client_id={client_id}&redirect_uri={redirect_uri}&grant_type=authorization_code";
             string tokenUrl = "https://oauth2.googleapis.com/token";
 
-            IdToken token;
+            IdToken idToken = null;
             TokenResponse result = await _restService.ObtainAccessToken(tokenUrl, content);
             try
             {
@@ -107,7 +107,7 @@ namespace CalorieCounter
                 IJwtDecoder decoder = new JwtDecoder(serializer, validator, urlEncoder, algorithm);
 
                 string j = decoder.Decode(result.IdToken);
-                token = JsonConvert.DeserializeObject<IdToken>(j);
+                idToken = JsonConvert.DeserializeObject<IdToken>(j);
                 
             }
             catch (TokenExpiredException)
@@ -120,7 +120,7 @@ namespace CalorieCounter
             }
 
             // if user exists (if idToken matches idToken of user in DB) then login
-            //Navigation.PushModalAsync(new MainPage());
+            await Navigation.PushModalAsync(new MainPage(idToken));
 
         }
 

@@ -9,9 +9,7 @@
              xmlns:local="clr-namespace:CalorieCounter"
              mc:Ignorable="d"
              x:Class="CalorieCounter.Page2">
-    <ContentPage.BindingContext>
-        <local:AddPopUpViewModel/>
-    </ContentPage.BindingContext>
+    
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="AddFrame" TargetType="Frame">

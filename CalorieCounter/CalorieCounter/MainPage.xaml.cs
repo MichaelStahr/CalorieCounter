@@ -18,23 +18,23 @@ namespace CalorieCounter
     {
 
         const string token = "dasgfdszfe";
-        // date is initialized to calendar date of today on start
         private string dateString;
-        const string uniqueId = "birdaj";
+        private string uniqueId;
         public static string BaseAddress =
         Device.RuntimePlatform == Device.Android ? "https://10.0.2.2:44341" : "https://localhost:44341";
         public static string apiEndpoint = $"{BaseAddress}/api.asmx/";
         RestService _restService;
         ChartViewModel model;
         private DateTime currentSelectedDate;
-        private bool ogStyle = true;
 
-        public MainPage()
+        public MainPage(IdToken idToken)
         {
             InitializeComponent();
             _restService = new RestService();
             model = new ChartViewModel();
+            uniqueId = idToken.Email.Substring(0, idToken.Email.IndexOf('@'));
             NavigationPage.SetBackButtonTitle(this, "Home");
+
             StackLayout header = new StackLayout
             {
                 Orientation = StackOrientation.Horizontal,
@@ -65,6 +65,7 @@ namespace CalorieCounter
             NavigationPage.SetTitleView(this, header);
             
             Color labelColor = Color.FromHex("503047");
+
             currentSelectedDate = Calendar.SelectedDate.Value;
             Preferences.Set("currentSelectedDate", currentSelectedDate);
             string year = currentSelectedDate.Year.ToString();
