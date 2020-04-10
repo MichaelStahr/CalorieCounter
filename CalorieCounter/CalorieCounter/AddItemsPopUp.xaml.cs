@@ -115,5 +115,10 @@ namespace CalorieCounter
         {
             DeleteButton.IsEnabled = true;
         }
+
+        private void addedItemsLv_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            
+        }
     }
 }
