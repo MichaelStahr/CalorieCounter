@@ -5,14 +5,9 @@ using JWT.Algorithms;
 using JWT.Serializers;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.Xaml;
 
 namespace CalorieCounter
@@ -64,6 +59,9 @@ namespace CalorieCounter
         private async void LoginButton_Clicked(object sender, EventArgs e)
         {
             IdToken idToken = await AuthenticateUser();
+           
+            // if idToken.sub = id field of user in DB, login
+            // if not, direct user to sign up page with prefilled entries for name and email 
             await Navigation.PushModalAsync(new MainPage(idToken));
 
         }
@@ -127,7 +125,7 @@ namespace CalorieCounter
             activityIndicator.IsRunning = false;
             LoggingIn.IsVisible = false;
 
-            // if user exists (if idToken matches idToken of user in DB) then login
+            // if user exists (idToken.sub matches token field of user in DB) then login
             return idToken;
 
         }

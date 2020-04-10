@@ -17,6 +17,9 @@ namespace CalorieCounter
         [JsonProperty("aud")]
         public string Aud { get; set; }
 
+        [JsonProperty("sub")]
+        public string Sub { get; set; }
+
         [JsonProperty("hd")]
         public string Hd { get; set; }
 
