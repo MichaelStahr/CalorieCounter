@@ -6,9 +6,7 @@
              xmlns:local="clr-namespace:CalorieCounter"
              mc:Ignorable="d"
              x:Class="CalorieCounter.WelcomePage">
-    <ContentPage.BindingContext>
-        <local:SingleUserToken></local:SingleUserToken>
-    </ContentPage.BindingContext>
+   
     <ContentPage.Resources>
         <ResourceDictionary>
             <OnPlatform x:TypeArguments="x:String" x:Key="HomePage">

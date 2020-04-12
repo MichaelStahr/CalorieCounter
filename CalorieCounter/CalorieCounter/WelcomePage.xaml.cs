@@ -5,6 +5,7 @@ using JWT.Algorithms;
 using JWT.Serializers;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -15,6 +16,10 @@ namespace CalorieCounter
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class WelcomePage : ContentPage
     {
+
+        public static string BaseAddress =
+        Device.RuntimePlatform == Device.Android ? "https://10.0.2.2:44341" : "https://localhost:44341";
+        public static string apiEndpoint = $"{BaseAddress}/api.asmx/";
         RestService _restService;
         private string client_id;
         private string redirect_uri;
@@ -59,6 +64,19 @@ namespace CalorieCounter
         private async void LoginButton_Clicked(object sender, EventArgs e)
         {
             IdToken idToken = await AuthenticateUser();
+
+            // if user exists (idToken.sub matches token field of user in DB) then login
+            string uniqueId = idToken.Email.Substring(0, idToken.Email.IndexOf('@'));
+            List<User> user = await _restService.GetUser(GetUserUri(uniqueId));
+
+            // user doesn't exist, sign up user with idToken info
+            if (user.Count == 0)
+            {
+                //uniqueId=string&firstName=string&lastName=string&email=string
+                string content = $"uniqueId={uniqueId}&firstName={idToken.Name}&lastName={idToken.FamilyName}&email={idToken.Email}";
+                string requestUri = apiEndpoint + "InsertNewUser";
+                await _restService.InsertNewsUser(requestUri, content);
+            }
             try
             {
                 await SecureStorage.SetAsync("id_token", idToken.Sub);
@@ -67,10 +85,9 @@ namespace CalorieCounter
             {
                 // Possible that device doesn't support secure storage on device.
             }
-            string uniqueId = idToken.Email.Substring(0, idToken.Email.IndexOf('@'));
+
             Preferences.Set("user", uniqueId);
-            // if idToken.sub = id field of user in DB, login
-            // if not, direct user to sign up page with prefilled entries for name and email 
+            
             await Navigation.PushModalAsync(new MainPage(idToken));
         }
 
@@ -132,10 +149,19 @@ namespace CalorieCounter
 
             activityIndicator.IsRunning = false;
             LoggingIn.IsVisible = false;
-
-            // if user exists (idToken.sub matches token field of user in DB) then login
+            
             return idToken;
 
+        }
+
+        public string GetUserUri(string uniqueId)
+        {
+            // api.asmx/GetUser?uniqueId=string
+            string requestUri = apiEndpoint;
+            requestUri += "GetUser";
+            requestUri += $"?uniqueId={uniqueId}";
+
+            return requestUri;
         }
 
     }
