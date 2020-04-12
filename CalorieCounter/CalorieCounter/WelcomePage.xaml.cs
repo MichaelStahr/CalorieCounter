@@ -59,11 +59,19 @@ namespace CalorieCounter
         private async void LoginButton_Clicked(object sender, EventArgs e)
         {
             IdToken idToken = await AuthenticateUser();
-           
+            try
+            {
+                await SecureStorage.SetAsync("id_token", idToken.Sub);
+            }
+            catch (Exception ex)
+            {
+                // Possible that device doesn't support secure storage on device.
+            }
+            string uniqueId = idToken.Email.Substring(0, idToken.Email.IndexOf('@'));
+            Preferences.Set("user", uniqueId);
             // if idToken.sub = id field of user in DB, login
             // if not, direct user to sign up page with prefilled entries for name and email 
             await Navigation.PushModalAsync(new MainPage(idToken));
-
         }
 
         private void SignUpButton_Clicked(object sender, EventArgs e)

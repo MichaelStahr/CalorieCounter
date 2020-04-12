@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Xml.Linq;
 using Rg.Plugins.Popup.Services;
+using Xamarin.Essentials;
 
 namespace CalorieCounter
 {
@@ -23,13 +24,14 @@ namespace CalorieCounter
         public static string miamiApiEndpoint = "https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php";
 
         private DateTime currentDate = DateTime.Today;
-        
-        private const string unique_id = "birdaj";
+
+        //private const string unique_id = "birdaj";
+        private readonly string unique_id;
         //public const string eatsDate = "2019-03-10";
         private string eatsDate;
         private const string userToken = "dasgfdszfe";
         AddPopUpViewModel popUpView;
-
+        IdToken token;
         public Page2()
         {
             InitializeComponent();
@@ -38,6 +40,7 @@ namespace CalorieCounter
             // access Miami API and put in our DB - currently run manually
             //MiamiFoodLookup();
             popUpView = new AddPopUpViewModel();
+            unique_id = Preferences.Get("user", "");
         }
 
         private string ChangeDateToString(DateTime date)

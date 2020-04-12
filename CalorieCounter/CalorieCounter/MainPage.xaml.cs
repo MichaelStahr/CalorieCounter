@@ -26,15 +26,18 @@ namespace CalorieCounter
         RestService _restService;
         ChartViewModel model;
         private DateTime currentSelectedDate;
+        
 
         public MainPage(IdToken idToken)
         {
             InitializeComponent();
             _restService = new RestService();
             model = new ChartViewModel();
+           
             uniqueId = idToken.Email.Substring(0, idToken.Email.IndexOf('@'));
-            NavigationPage.SetBackButtonTitle(this, "Home");
 
+
+            NavigationPage.SetBackButtonTitle(this, "Home");
             StackLayout header = new StackLayout
             {
                 Orientation = StackOrientation.Horizontal,
