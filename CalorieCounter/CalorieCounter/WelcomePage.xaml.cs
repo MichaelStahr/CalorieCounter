@@ -72,11 +72,10 @@ namespace CalorieCounter
             // user doesn't exist, sign up user with idToken info
             if (user.Count == 0)
             {
-                //uniqueId=string&firstName=string&lastName=string&email=string
-                string content = $"uniqueId={uniqueId}&firstName={idToken.Name}&lastName={idToken.FamilyName}&email={idToken.Email}";
-                string requestUri = apiEndpoint + "InsertNewUser";
-                await _restService.InsertNewsUser(requestUri, content);
+                SignUpUser(uniqueId, idToken);
             }
+
+            // store their unique ID token 
             try
             {
                 await SecureStorage.SetAsync("id_token", idToken.Sub);
@@ -85,7 +84,6 @@ namespace CalorieCounter
             {
                 // Possible that device doesn't support secure storage on device.
             }
-
             Preferences.Set("user", uniqueId);
             
             await Navigation.PushModalAsync(new MainPage(idToken));
@@ -162,6 +160,13 @@ namespace CalorieCounter
             requestUri += $"?uniqueId={uniqueId}";
 
             return requestUri;
+        }
+
+        public async void SignUpUser(string uniqueId, IdToken idToken)
+        {
+            string content = $"uniqueId={uniqueId}&firstName={idToken.GivenName}&lastName={idToken.FamilyName}&email={idToken.Email}";
+            string requestUri = apiEndpoint + "InsertNewUser";
+            await _restService.InsertNewsUser(requestUri, content);
         }
 
     }
