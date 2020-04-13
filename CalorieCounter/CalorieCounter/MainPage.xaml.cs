@@ -17,7 +17,7 @@ namespace CalorieCounter
     public partial class MainPage : TabbedPage
     {
 
-        const string token = "dasgfdszfe";
+        private string userTokenId;
         private string dateString;
         private string uniqueId;
         public static string BaseAddress =
@@ -35,7 +35,7 @@ namespace CalorieCounter
             model = new ChartViewModel();
            
             uniqueId = idToken.Email.Substring(0, idToken.Email.IndexOf('@'));
-
+            GetUserIdToken();
 
             NavigationPage.SetBackButtonTitle(this, "Home");
             StackLayout header = new StackLayout
@@ -79,6 +79,17 @@ namespace CalorieCounter
             HighlightCurrentSelectedDayOnChart();
         }
 
+        private async void GetUserIdToken()
+        {
+            try
+            {
+                userTokenId = await SecureStorage.GetAsync("id_token");
+            }
+            catch (Exception ex)
+            {
+                // Possible that device doesn't support secure storage on device.
+            }
+        }
         private void HighlightCurrentSelectedDayOnChart()
         {
             DateTime date = Preferences.Get("currentSelectedDate", DateTime.Today);
@@ -115,7 +126,7 @@ namespace CalorieCounter
             requestUri += "DisplayDailyValuesByUserDay";
             requestUri += $"?uniqueId={uniqueId}";
             requestUri += $"&date={date}";
-            requestUri += $"&token={token}";
+            requestUri += $"&token={userTokenId}";
 
             return requestUri;
         }
@@ -348,7 +359,7 @@ namespace CalorieCounter
             requestUri += "DisplayFoodItemsByUserDay";
             requestUri += $"?uniqueId={uniqueId}";
             requestUri += $"&date={date}";
-            requestUri += $"&token={token}";
+            requestUri += $"&token={userTokenId}";
 
             return requestUri;
         }

@@ -25,22 +25,33 @@ namespace CalorieCounter
 
         private DateTime currentDate = DateTime.Today;
 
-        //private const string unique_id = "birdaj";
         private readonly string unique_id;
-        //public const string eatsDate = "2019-03-10";
         private string eatsDate;
-        private const string userToken = "dasgfdszfe";
+        private string userTokenId;
         AddPopUpViewModel popUpView;
-        IdToken token;
         public Page2()
         {
             InitializeComponent();
             _restService = new RestService();
             eatsDate = ChangeDateToString(currentDate);
-            // access Miami API and put in our DB - currently run manually
-            //MiamiFoodLookup();
-            popUpView = new AddPopUpViewModel();
             unique_id = Preferences.Get("user", "");
+            GetUserIdToken();
+            // access Miami API and put in our DB - currently uncomment and run manually
+            // MiamiFoodLookup();
+            popUpView = new AddPopUpViewModel();
+            
+        }
+
+        private async void GetUserIdToken()
+        {
+            try
+            {
+                userTokenId = await SecureStorage.GetAsync("id_token");
+            }
+            catch (Exception ex)
+            {
+                // Possible that device doesn't support secure storage on device.
+            }
         }
 
         private string ChangeDateToString(DateTime date)
@@ -116,7 +127,7 @@ namespace CalorieCounter
             requestUri += "UpdateDailyLogByUserDay";
             requestUri += $"?uniqueId={unique_id}";
             requestUri += $"&date={eatsDate}";
-            requestUri += $"&token={userToken}";
+            requestUri += $"&token={userTokenId}";
 
             return requestUri;
         }
