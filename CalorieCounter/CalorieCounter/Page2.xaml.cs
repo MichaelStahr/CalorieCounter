@@ -68,18 +68,6 @@ namespace CalorieCounter
             searchFrame.IsVisible = false;
         }
 
-        public string GetFoodBySearch(string token)
-        {
-            // /api.asmx/GetFoodBySearch?food=string&token=string
-            string food = Uri.EscapeUriString(SearchingFoods.Text);
-            string requestUri = apiEndpoint;
-            requestUri += "GetFoodBySearch";
-            requestUri += $"?food=%{food}%";
-            requestUri += $"&token={token}";
-
-            return requestUri;
-        }
-
         public string SearchFoodByNameAndLocation(string location)
         {
 

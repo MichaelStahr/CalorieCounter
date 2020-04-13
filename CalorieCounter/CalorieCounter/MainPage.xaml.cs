@@ -339,14 +339,6 @@ namespace CalorieCounter
             await Navigation.PushAsync(new ExtraDetailsPage(dateString), true);
         }
 
-        private void Notes_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            DateTime datetime = Calendar.SelectedDate.Value;
-            string date = datetime.ToShortDateString();
-
-            //Preferences.Set(date, Notes.Text);
-
-        }
         private void ClickToShowPopup_Clicked(object sender, EventArgs e)
         {
             popup.Show();
