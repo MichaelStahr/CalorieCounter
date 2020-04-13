@@ -89,9 +89,23 @@ namespace CalorieCounter
             await Navigation.PushModalAsync(new MainPage(idToken));
         }
 
-        private void SignUpButton_Clicked(object sender, EventArgs e)
+        private async void SignUpButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new SignUpPage());
+            //Navigation.PushAsync(new SignUpPage());
+            IdToken idToken = await AuthenticateUser();
+            string uniqueId = idToken.Email.Substring(0, idToken.Email.IndexOf('@'));
+
+            try
+            {
+                await SecureStorage.SetAsync("id_token", idToken.Sub);
+            }
+            catch (Exception ex)
+            {
+                // Possible that device doesn't support secure storage on device.
+            }
+            Preferences.Set("user", uniqueId);
+
+            await Navigation.PushModalAsync(new MainPage(idToken));
         }
 
         private void AboutButton_Clicked(object sender, EventArgs e)
