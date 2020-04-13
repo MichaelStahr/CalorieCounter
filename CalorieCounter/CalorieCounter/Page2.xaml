@@ -9,9 +9,7 @@
              xmlns:local="clr-namespace:CalorieCounter"
              mc:Ignorable="d"
              x:Class="CalorieCounter.Page2">
-    <ContentPage.BindingContext>
-        <local:AddPopUpViewModel/>
-    </ContentPage.BindingContext>
+    
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="AddFrame" TargetType="Frame">
@@ -77,6 +75,7 @@
             <StackLayout>
                     <Frame x:Name="searchFrame" BorderColor="#C05746" HeightRequest="500" IsVisible="true">
                         <StackLayout>
+                        <Label x:Name="tokenLabel" Text="{Binding token}"></Label>
                             <StackLayout Orientation="Horizontal">
                                 <Button x:Name="showItemsToBeAdded" Text="Show Selected Items" IsVisible="False" Clicked="ShowFoodsToBeAdded_Clicked" Style="{StaticResource EditButtons}"></Button>
                                 <Button x:Name="quickAdd" Text="Quick Add" IsVisible="False" Clicked="QuickAdd_Clicked" Style="{StaticResource EditButtons}"></Button>

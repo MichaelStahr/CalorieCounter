@@ -17,23 +17,26 @@ namespace CalorieCounter
     public partial class MainPage : TabbedPage
     {
 
-        const string token = "dasgfdszfe";
-        // date is initialized to calendar date of today on start
+        private string userTokenId;
         private string dateString;
-        const string uniqueId = "birdaj";
+        private string uniqueId;
         public static string BaseAddress =
         Device.RuntimePlatform == Device.Android ? "https://10.0.2.2:44341" : "https://localhost:44341";
         public static string apiEndpoint = $"{BaseAddress}/api.asmx/";
         RestService _restService;
         ChartViewModel model;
         private DateTime currentSelectedDate;
-        private bool ogStyle = true;
+        
 
-        public MainPage()
+        public MainPage(IdToken idToken)
         {
             InitializeComponent();
             _restService = new RestService();
             model = new ChartViewModel();
+           
+            uniqueId = idToken.Email.Substring(0, idToken.Email.IndexOf('@'));
+            GetUserIdToken();
+
             NavigationPage.SetBackButtonTitle(this, "Home");
             StackLayout header = new StackLayout
             {
@@ -65,6 +68,7 @@ namespace CalorieCounter
             NavigationPage.SetTitleView(this, header);
             
             Color labelColor = Color.FromHex("503047");
+
             currentSelectedDate = Calendar.SelectedDate.Value;
             Preferences.Set("currentSelectedDate", currentSelectedDate);
             string year = currentSelectedDate.Year.ToString();
@@ -75,6 +79,17 @@ namespace CalorieCounter
             HighlightCurrentSelectedDayOnChart();
         }
 
+        private async void GetUserIdToken()
+        {
+            try
+            {
+                userTokenId = await SecureStorage.GetAsync("id_token");
+            }
+            catch (Exception ex)
+            {
+                // Possible that device doesn't support secure storage on device.
+            }
+        }
         private void HighlightCurrentSelectedDayOnChart()
         {
             DateTime date = Preferences.Get("currentSelectedDate", DateTime.Today);
@@ -111,7 +126,7 @@ namespace CalorieCounter
             requestUri += "DisplayDailyValuesByUserDay";
             requestUri += $"?uniqueId={uniqueId}";
             requestUri += $"&date={date}";
-            requestUri += $"&token={token}";
+            requestUri += $"&token={userTokenId}";
 
             return requestUri;
         }
@@ -324,14 +339,6 @@ namespace CalorieCounter
             await Navigation.PushAsync(new ExtraDetailsPage(dateString), true);
         }
 
-        private void Notes_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            DateTime datetime = Calendar.SelectedDate.Value;
-            string date = datetime.ToShortDateString();
-
-            //Preferences.Set(date, Notes.Text);
-
-        }
         private void ClickToShowPopup_Clicked(object sender, EventArgs e)
         {
             popup.Show();
@@ -344,7 +351,7 @@ namespace CalorieCounter
             requestUri += "DisplayFoodItemsByUserDay";
             requestUri += $"?uniqueId={uniqueId}";
             requestUri += $"&date={date}";
-            requestUri += $"&token={token}";
+            requestUri += $"&token={userTokenId}";
 
             return requestUri;
         }

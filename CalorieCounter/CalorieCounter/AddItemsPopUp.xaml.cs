@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -23,7 +23,7 @@ namespace CalorieCounter
 
         private ObservableCollection<AddItemPopUpModel> itemData;
         private DateTime currentDate = DateTime.Today;
-        private const string unique_id = "birdaj";
+        private readonly string unique_id;
         
         
         public AddItemsPopUp(AddPopUpViewModel viewModel)
@@ -32,6 +32,7 @@ namespace CalorieCounter
             //this.itemList = viewModel.ItemData;
             this.itemData = viewModel.ItemData;
             addedItemsLv.ItemsSource = itemData;
+            unique_id = Preferences.Get("user", "");
             _restService = new RestService();
         }
 

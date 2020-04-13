@@ -7,8 +7,9 @@
              x:Class="CalorieCounter.SignUpPage">
     <ContentPage.Content>
         <StackLayout Padding="30">
-            <Entry Placeholder="Email"></Entry>
-            <Entry Placeholder="Password" IsPassword="True"></Entry>
+            <Entry x:Name="firstNameEntry" Placeholder="First Name"></Entry>
+            <Entry x:Name="lastNameEntry" Placeholder="Last Name"></Entry>
+            <Label x:Name="emailLabel" Text=""></Label>
             <Button x:Name="SignUpButton" Text="Sign Up" Clicked="SignUpButton_Clicked"></Button>
         </StackLayout>
     </ContentPage.Content>

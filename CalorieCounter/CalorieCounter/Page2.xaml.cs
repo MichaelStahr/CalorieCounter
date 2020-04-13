@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Xml.Linq;
 using Rg.Plugins.Popup.Services;
+using Xamarin.Essentials;
 
 namespace CalorieCounter
 {
@@ -23,20 +24,34 @@ namespace CalorieCounter
         public static string miamiApiEndpoint = "https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php";
 
         private DateTime currentDate = DateTime.Today;
-        private const string unique_id = "birdaj";
-        //public const string eatsDate = "2019-03-10";
-        private string eatsDate;
-        private const string userToken = "dasgfdszfe";
-        AddPopUpViewModel popUpView;
 
+        private readonly string unique_id;
+        private string eatsDate;
+        private string userTokenId;
+        AddPopUpViewModel popUpView;
         public Page2()
         {
             InitializeComponent();
             _restService = new RestService();
             eatsDate = ChangeDateToString(currentDate);
-            // access Miami API and put in our DB - currently run manually
-            //MiamiFoodLookup();
+            unique_id = Preferences.Get("user", "");
+            GetUserIdToken();
+            // access Miami API and put in our DB - currently uncomment and run manually
+            // MiamiFoodLookup();
             popUpView = new AddPopUpViewModel();
+            
+        }
+
+        private async void GetUserIdToken()
+        {
+            try
+            {
+                userTokenId = await SecureStorage.GetAsync("id_token");
+            }
+            catch (Exception ex)
+            {
+                // Possible that device doesn't support secure storage on device.
+            }
         }
 
         private string ChangeDateToString(DateTime date)
@@ -51,18 +66,6 @@ namespace CalorieCounter
         protected override void OnAppearing()
         {
             searchFrame.IsVisible = false;
-        }
-
-        public string GetFoodBySearch(string token)
-        {
-            // /api.asmx/GetFoodBySearch?food=string&token=string
-            string food = Uri.EscapeUriString(SearchingFoods.Text);
-            string requestUri = apiEndpoint;
-            requestUri += "GetFoodBySearch";
-            requestUri += $"?food=%{food}%";
-            requestUri += $"&token={token}";
-
-            return requestUri;
         }
 
         public string SearchFoodByNameAndLocation(string location)
@@ -112,7 +115,7 @@ namespace CalorieCounter
             requestUri += "UpdateDailyLogByUserDay";
             requestUri += $"?uniqueId={unique_id}";
             requestUri += $"&date={eatsDate}";
-            requestUri += $"&token={userToken}";
+            requestUri += $"&token={userTokenId}";
 
             return requestUri;
         }
