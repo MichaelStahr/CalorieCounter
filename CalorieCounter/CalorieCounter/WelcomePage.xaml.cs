@@ -65,17 +65,17 @@ namespace CalorieCounter
         {
             IdToken idToken = await AuthenticateUser();
 
-            // if user exists (idToken.sub matches token field of user in DB) then login
             string uniqueId = idToken.Email.Substring(0, idToken.Email.IndexOf('@'));
-            List<User> user = await _restService.GetUser(GetUserUri(uniqueId));
+            // if user exists (idToken.sub matches token field of user in DB) then login
+            bool userExists = await _restService.GetUser(GetUserUri(uniqueId, idToken.Sub));
 
             // user doesn't exist, sign up user with idToken info
-            if (user.Count == 0)
+            if (!userExists)
             {
                 SignUpUser(uniqueId, idToken);
             }
 
-            // store their unique ID token 
+            // store their tokenID returned from Google Auth (always unique)
             try
             {
                 await SecureStorage.SetAsync("id_token", idToken.Sub);
@@ -152,19 +152,20 @@ namespace CalorieCounter
 
         }
 
-        public string GetUserUri(string uniqueId)
+        public string GetUserUri(string uniqueId, string tokenId)
         {
-            // api.asmx/GetUser?uniqueId=string
+            // api.asmx/GetUser?uniqueId=string&tokenId=string
             string requestUri = apiEndpoint;
             requestUri += "GetUser";
             requestUri += $"?uniqueId={uniqueId}";
+            requestUri += $"&tokenId={tokenId}";
 
             return requestUri;
         }
 
         public async void SignUpUser(string uniqueId, IdToken idToken)
         {
-            string content = $"uniqueId={uniqueId}&firstName={idToken.GivenName}&lastName={idToken.FamilyName}&email={idToken.Email}";
+            string content = $"uniqueId={uniqueId}&firstName={idToken.GivenName}&lastName={idToken.FamilyName}&email={idToken.Email}&tokenId={idToken.Sub}";
             string requestUri = apiEndpoint + "InsertNewUser";
             await _restService.InsertNewsUser(requestUri, content);
         }

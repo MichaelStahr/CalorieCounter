@@ -19,5 +19,9 @@ namespace CalorieCounter
 
         [JsonProperty("Email")]
         public string Email { get; set; }
+
+        [JsonProperty("TokenID")]
+        public string TokenID { get; set; }
+
     }
 }

@@ -339,10 +339,9 @@ namespace CalorieCounter
             return tokenData;
         }
 
-        public async Task<List<User>> GetUser(string uri)
+        public async Task<bool> GetUser(string uri)
         {
             List<User> users = null;
-
             try
             {
                 HttpResponseMessage response = await _client.GetAsync(uri);
@@ -354,13 +353,17 @@ namespace CalorieCounter
                     string c = await response.Content.ReadAsStringAsync();
 
                     users = JsonConvert.DeserializeObject<List<User>>(c);
+                    if (users.Count == 1)
+                    {
+                        return true;
+                    }
                 }
             }
             catch (HttpRequestException e)
             {
                 Console.WriteLine(e.InnerException.Message);
             }
-            return users;
+            return false;
         }
 
         public async Task InsertNewsUser(string uri, string content)
