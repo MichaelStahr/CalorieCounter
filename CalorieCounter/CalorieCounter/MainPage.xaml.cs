@@ -28,13 +28,13 @@ namespace CalorieCounter
         private DateTime currentSelectedDate;
         
 
-        public MainPage(IdToken idToken)
+        public MainPage()
         {
             InitializeComponent();
             _restService = new RestService();
             model = new ChartViewModel();
-           
-            uniqueId = idToken.Email.Substring(0, idToken.Email.IndexOf('@'));
+
+            uniqueId = Preferences.Get("user", "");
             GetUserIdToken();
 
             NavigationPage.SetBackButtonTitle(this, "Home");
