@@ -56,7 +56,7 @@
                                 Title="Select a location"
                                 Grid.Column="1">
                             <Picker.Items>
-                                <x:String>All</x:String>
+                                <x:String>Search</x:String>
                                 <x:String>ASC</x:String>
                                 <x:String>Bell Tower</x:String>
                                 <x:String>Dividends</x:String>
