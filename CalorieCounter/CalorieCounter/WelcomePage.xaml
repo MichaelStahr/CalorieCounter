@@ -38,14 +38,15 @@
                 <Setter Property="FontSize" Value="Medium"></Setter>
                 <Setter Property="FontFamily" Value="{d:StaticResource HomePage}"></Setter>
                 <Setter Property="TextColor" Value="Black"></Setter>
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <Image Source="miami.jpg" Style="{StaticResource MiamiLogo}"></Image>
             <Frame Style="{StaticResource loginFrame}">
                 <StackLayout Padding="0">
+                    <Image Source="miami.jpg" Style="{StaticResource MiamiLogo}"></Image>
                     <Label Text="Welcome to Calorie Counter!" Style="{StaticResource WelcomeLabel}"></Label>
                     <Button x:Name="LoginButton" Text="Google Login" Clicked="LoginButton_Clicked" Style="{StaticResource RedButton}"></Button>
                     <Button x:Name ="SignUpButton" Text="Sign Up" Clicked="SignUpButton_Clicked" Style="{StaticResource RedButton}"></Button>
