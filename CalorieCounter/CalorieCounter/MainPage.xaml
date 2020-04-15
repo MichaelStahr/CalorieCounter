@@ -190,19 +190,6 @@
                                         BorderThickness="2"
                                         >
             </chart:DataMarkerLabelStyle>
-            
-            <DataTemplate x:Key="dataMarkerTemplate">
-                    <StackLayout>
-                        <Frame BackgroundColor="#537D8D" BorderColor="#C05746" CornerRadius="5">
-                            <Label Text="{Binding Calories}" 
-                                    VerticalOptions="Center" 
-                                    FontSize = "Small"
-                                    FontAttributes="Bold"
-                                    TextColor="#DDA448">
-                            </Label>
-                        </Frame>
-                    </StackLayout>
-                </DataTemplate>
         </ResourceDictionary>
     </TabbedPage.Resources>
 
