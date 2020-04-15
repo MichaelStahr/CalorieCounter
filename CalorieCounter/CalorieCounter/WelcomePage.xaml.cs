@@ -63,30 +63,34 @@ namespace CalorieCounter
 
         private async void LoginButton_Clicked(object sender, EventArgs e)
         {
-            IdToken idToken = await AuthenticateUser();
-
-            string uniqueId = idToken.Email.Substring(0, idToken.Email.IndexOf('@'));
-            // if user exists (idToken.sub matches token field of user in DB) then login
-            bool userExists = await _restService.GetUser(GetUserUri(uniqueId, idToken.Sub));
-
-            // user doesn't exist, sign up user with idToken info
-            if (!userExists)
-            {
-                SignUpUser(uniqueId, idToken);
-            }
-
-            // store their tokenID returned from Google Auth (always unique)
             try
             {
-                await SecureStorage.SetAsync("id_token", idToken.Sub);
-            }
-            catch (Exception ex)
-            {
-                // Possible that device doesn't support secure storage on device.
-            }
-            Preferences.Set("user", uniqueId);
+                IdToken idToken = await AuthenticateUser();
+                string uniqueId = idToken.Email.Substring(0, idToken.Email.IndexOf('@'));
+                // if user exists (idToken.sub matches token field of user in DB) then login
+                bool userExists = await _restService.GetUser(GetUserUri(uniqueId, idToken.Sub));
+
+                // user doesn't exist, sign up user with idToken info
+                if (!userExists)
+                {
+                    SignUpUser(uniqueId, idToken);
+                }
+
+                // store their tokenID returned from Google Auth (always unique)
+                try
+                {
+                    await SecureStorage.SetAsync("id_token", idToken.Sub);
+                }
+                catch (Exception ex)
+                {
+                    // Possible that device doesn't support secure storage on device.
+                }
+                Preferences.Set("user", uniqueId);
+
+                await Navigation.PushModalAsync(new MainPage());
+            } catch { }
+
             
-            await Navigation.PushModalAsync(new MainPage());
         }
 
         private async void SignUpButton_Clicked(object sender, EventArgs e)
