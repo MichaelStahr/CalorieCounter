@@ -46,10 +46,10 @@ namespace CalorieCounter
             if (itemData == null || itemData.Count == 0)
             {
                 DeleteButton.IsEnabled = false;
-                AddAllButton.IsEnabled = false;
+                SaveButton.IsEnabled = false;
             } else
             {
-                AddAllButton.IsEnabled = true;
+                SaveButton.IsEnabled = true;
             }
         }
 
@@ -62,14 +62,17 @@ namespace CalorieCounter
             {
                 itemData.Remove(mItem);
                 DeleteButton.IsEnabled = false;
-
+                if (itemData.Count == 0)
+                {
+                    SaveButton.IsEnabled = false;
+                }
             } else
             {
                 DisplayAlert("Attention", "Select an item to delete it", "Close");
             }
         }
 
-        private void AddAllButton_Clicked(object sender, EventArgs e)
+        private async void SaveButton_Clicked(object sender, EventArgs e)
         {
             if (itemData != null && itemData.Count > 0)
             {
@@ -81,12 +84,9 @@ namespace CalorieCounter
                     }
                 }
                 itemData.Clear();
-                DisplayAlert("", "Items have been added!", "Close");
-                AddAllButton.IsEnabled = false;
-            }
-            else
-            {
-                DisplayAlert("", "Select items in order to add them.", "Close");
+                //DisplayAlert("", "Items have been added!", "Close");
+                SaveButton.IsEnabled = false;
+                await PopupNavigation.PopAsync(true);
             }
         }
 
