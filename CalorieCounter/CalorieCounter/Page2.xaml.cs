@@ -65,7 +65,8 @@ namespace CalorieCounter
 
         protected override void OnAppearing()
         {
-            searchFrame.IsVisible = false;
+            //searchFrame.IsVisible = false;
+            //SaveSelectedItems.IsEnabled = true;
         }
 
         public string SearchFoodByNameAndLocation(string location)
@@ -128,18 +129,19 @@ namespace CalorieCounter
             
             if(SearchingFoods.Text != "" && locations.SelectedIndex > 0)
             {
-                searchFrame.IsVisible = true;
-                //historyFrame.IsVisible = false;
-                //favoritesFrame.IsVisible = false;
+                //searchFrame.IsVisible = true;
+                SaveSelectedItems.IsEnabled = true;
+                
             } else if (SearchingFoods.Text.Equals("") && locations.SelectedIndex > 0)
             {
-                searchFrame.IsVisible = true;
+                //searchFrame.IsVisible = true;
+                SaveSelectedItems.IsEnabled = true;
                 LookUpFoodByLocation();
-                //historyFrame.IsVisible = true;
-                //favoritesFrame.IsVisible = true;
+                
             } else 
             {
-                searchFrame.IsVisible = false;
+                //searchFrame.IsVisible = false;
+                SaveSelectedItems.IsEnabled = false;
             }
         }
 
@@ -168,7 +170,7 @@ namespace CalorieCounter
         //get
         async void LookUpFoodByNameAndLocation()
         {
-            List<MiamiItem> miamiFoodItem = null;
+            List<MiamiItem> miamiFoodItem = new List<MiamiItem>();
 
             if (!string.IsNullOrWhiteSpace(SearchingFoods.Text))
             {
@@ -176,8 +178,14 @@ namespace CalorieCounter
                 {
                     string location = locations.SelectedItem.ToString();
                     miamiFoodItem = await _restService.GetFoodDataAsync(SearchFoodByNameAndLocation(location));
-                    searchFrame.IsVisible = true;
                     foodItemslv.ItemsSource = miamiFoodItem;
+                    if (miamiFoodItem.Count > 0)
+                    {
+                        SaveSelectedItems.IsEnabled = true;
+                    } else
+                    {
+                        SaveSelectedItems.IsEnabled = false;
+                    }
                 }
 
                
@@ -187,20 +195,26 @@ namespace CalorieCounter
 
         async void LookUpFoodByLocation()
         {
-            List<MiamiItem> miamiFoodItem = null;
+            List<MiamiItem> miamiFoodItem = new List<MiamiItem>();
 
             if (locations.SelectedIndex > 0)
             {
                 miamiFoodItem = await _restService.GetFoodDataAsync(SearchFoodByLocation(locations.SelectedItem.ToString()));
-                searchFrame.IsVisible = true;
+                //searchFrame.IsVisible = true;
                 foodItemslv.ItemsSource = miamiFoodItem;
-                showItemsToBeAdded.IsVisible = true;
+                if (miamiFoodItem.Count > 0)
+                {
+                    SaveSelectedItems.IsEnabled = true;
+                } else
+                {
+                    SaveSelectedItems.IsEnabled = false;
+                }
             } else
             {
                 foodItemslv.ItemsSource = null;
-                showItemsToBeAdded.IsVisible = false;
-                searchFrame.IsVisible = false;
-
+                //SaveSelectedItems.IsVisible = false;
+                //searchFrame.IsVisible = false;
+                SaveSelectedItems.IsEnabled = false;
             }
 
         }
