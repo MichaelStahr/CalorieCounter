@@ -88,8 +88,8 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <Button x:Name="AddAllButton" Text="Save" Style="{StaticResource EditButton}" Clicked="AddAllButton_Clicked"></Button>
-                    <Button Text="Close" Clicked="Close_Button_Clicked"></Button>
+                    <Button x:Name="SaveButton" Text="Save" Style="{StaticResource EditButton}" Clicked="SaveButton_Clicked"></Button>
+                    <Button Text="Close" Clicked="Close_Button_Clicked" Style="{StaticResource EditButton}"></Button>
                 </StackLayout>
             </Frame>
         </StackLayout>
