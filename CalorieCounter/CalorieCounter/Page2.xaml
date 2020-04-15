@@ -77,8 +77,7 @@
                         <StackLayout>
                         <Label x:Name="tokenLabel" Text="{Binding token}"></Label>
                             <StackLayout Orientation="Horizontal">
-                                <Button x:Name="showItemsToBeAdded" Text="Show Selected Items" IsVisible="False" Clicked="ShowFoodsToBeAdded_Clicked" Style="{StaticResource EditButtons}"></Button>
-                                <Button x:Name="quickAdd" Text="Quick Add" IsVisible="False" Clicked="QuickAdd_Clicked" Style="{StaticResource EditButtons}"></Button>
+                                <Button x:Name="showItemsToBeAdded" Text="Save Selected Items" IsVisible="False" Clicked="ShowFoodsToBeAdded_Clicked" Style="{StaticResource EditButtons}"></Button>
                             </StackLayout>
                                 <StackLayout>
                                     <Label x:Name="TextOldValue" FontSize="Small"/>

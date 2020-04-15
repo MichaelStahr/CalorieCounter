@@ -129,20 +129,17 @@ namespace CalorieCounter
             if(SearchingFoods.Text != "" && locations.SelectedIndex > 0)
             {
                 searchFrame.IsVisible = true;
-                quickAdd.IsVisible = true;
                 //historyFrame.IsVisible = false;
                 //favoritesFrame.IsVisible = false;
             } else if (SearchingFoods.Text.Equals("") && locations.SelectedIndex > 0)
             {
                 searchFrame.IsVisible = true;
-                quickAdd.IsVisible = true;
                 LookUpFoodByLocation();
                 //historyFrame.IsVisible = true;
                 //favoritesFrame.IsVisible = true;
-            } else
+            } else 
             {
                 searchFrame.IsVisible = false;
-                quickAdd.IsVisible = false;
             }
         }
 
@@ -197,15 +194,13 @@ namespace CalorieCounter
                 miamiFoodItem = await _restService.GetFoodDataAsync(SearchFoodByLocation(locations.SelectedItem.ToString()));
                 searchFrame.IsVisible = true;
                 foodItemslv.ItemsSource = miamiFoodItem;
-                
-                quickAdd.IsVisible = true;
                 showItemsToBeAdded.IsVisible = true;
             } else
             {
                 foodItemslv.ItemsSource = null;
-                quickAdd.IsVisible = false;
                 showItemsToBeAdded.IsVisible = false;
                 searchFrame.IsVisible = false;
+
             }
 
         }

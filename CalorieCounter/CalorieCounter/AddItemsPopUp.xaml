@@ -65,7 +65,7 @@
                     <Label Text="Items to be Added" HorizontalOptions="Center" FontAttributes="Bold"></Label>
                     <StackLayout Orientation="Horizontal">
                         <Button x:Name="DeleteButton" Text="Delete" Style="{StaticResource EditButton}" Clicked="DeleteButton_Clicked" IsEnabled="False" ></Button>
-                        <Button x:Name="AddAllButton" Text="Add All" Style="{StaticResource EditButton}" Clicked="AddAllButton_Clicked"></Button>
+                        <!--<Button x:Name="AddAllButton" Text="Save" Style="{StaticResource EditButton}" Clicked="AddAllButton_Clicked"></Button>-->
                     </StackLayout>
                     <ListView x:Name="addedItemsLv" ItemsSource="{Binding ItemData}" IsPullToRefreshEnabled="True" ItemSelected="AddedItemsLv_ItemSelected" >
                         <ListView.ItemTemplate>
@@ -88,6 +88,7 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
+                    <Button x:Name="AddAllButton" Text="Save" Style="{StaticResource EditButton}" Clicked="AddAllButton_Clicked"></Button>
                     <Button Text="Close" Clicked="Close_Button_Clicked"></Button>
                 </StackLayout>
             </Frame>
