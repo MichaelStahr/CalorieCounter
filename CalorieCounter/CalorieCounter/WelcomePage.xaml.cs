@@ -30,12 +30,15 @@ namespace CalorieCounter
             StackLayout header = new StackLayout
             {
                 Orientation = StackOrientation.Horizontal,
-                HorizontalOptions = LayoutOptions.EndAndExpand,
+                HorizontalOptions = LayoutOptions.CenterAndExpand,
+                VerticalOptions = LayoutOptions.CenterAndExpand,
                 Spacing = 3,
                 Children =
                 {
-                    
+
                     new Label {Text = "Miami University",
+                    HorizontalTextAlignment = TextAlignment.Center,
+                    TextColor = Color.FromHex("C05746"),
                     FontSize = 25,
                     FontFamily = Device.RuntimePlatform == Device.Android ? "Acme-Regular.ttf#Acme-Regular" : null,
                     HorizontalOptions = LayoutOptions.EndAndExpand},

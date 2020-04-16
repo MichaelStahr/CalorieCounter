@@ -321,7 +321,7 @@
 
                 <Frame Style="{StaticResource CalorieDetailFrame}">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                        <Label Text="Total Calories" HorizontalOptions="Center" FontSize="22" TextColor="#537D8D" FontAttributes="Bold" FontFamily="{StaticResource HomePage}"></Label>
+                        <Label Text="Total Calories:" HorizontalOptions="Center" FontSize="22" TextColor="#537D8D" FontAttributes="Bold" FontFamily="{StaticResource HomePage}"></Label>
                         <Label x:Name="totalCal" Text="0k" HorizontalOptions="Center" VerticalOptions="Center" FontSize="22" FontAttributes="Bold" TextColor="#DDA448" FontFamily="{StaticResource HomePage}"></Label>
 
                     </StackLayout>
@@ -343,25 +343,25 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Label Text="Total Fat" Grid.Row="0" Grid.Column="0" Style="{StaticResource FactLabel}"></Label>
+                        <Label Text="Total Fat:" Grid.Row="0" Grid.Column="0" Style="{StaticResource FactLabel}"></Label>
                         <Label x:Name="fat" Text="0g" Grid.Row="0" Grid.Column="1" Style="{StaticResource AmountLabel}"></Label>
 
-                        <Label Text="Total Cholesterol" Grid.Row="0" Grid.Column="2" Style="{StaticResource FactLabel}"></Label>
+                        <Label Text="Total Cholesterol:" Grid.Row="0" Grid.Column="2" Style="{StaticResource FactLabel}"></Label>
                         <Label x:Name="cholesterol" Text="0g" Grid.Row="0" Grid.Column="3" Style="{StaticResource AmountLabel}"></Label>
 
-                        <Label Text="Total Sodium" Grid.Row="1" Grid.Column="0" Style="{StaticResource FactLabel}"></Label>
+                        <Label Text="Total Sodium:" Grid.Row="1" Grid.Column="0" Style="{StaticResource FactLabel}"></Label>
                         <Label x:Name="sodium" Text="0g" Grid.Row="1" Grid.Column="1" Style="{StaticResource AmountLabel}"></Label>
 
-                        <Label Text="Total Carbs" Grid.Row="1" Grid.Column="2" Style="{StaticResource FactLabel}"></Label>
+                        <Label Text="Total Carbs:" Grid.Row="1" Grid.Column="2" Style="{StaticResource FactLabel}"></Label>
                         <Label x:Name="carbs" Text="0g" Grid.Row="1" Grid.Column="3" Style="{StaticResource AmountLabel}"></Label>
 
-                        <Label Text="Total Calcium" Grid.Row="2" Grid.Column="0" Style="{StaticResource FactLabel}"></Label>
+                        <Label Text="Total Calcium:" Grid.Row="2" Grid.Column="0" Style="{StaticResource FactLabel}"></Label>
                         <Label x:Name="calcium" Text="0g" Grid.Row="2" Grid.Column="1" Style="{StaticResource AmountLabel}"></Label>
 
-                        <Label Text="Total Sugar" Grid.Row="2" Grid.Column="2" Style="{StaticResource FactLabel}"></Label>
+                        <Label Text="Total Sugar:" Grid.Row="2" Grid.Column="2" Style="{StaticResource FactLabel}"></Label>
                         <Label x:Name="sugar" Text="0g" Grid.Row="2" Grid.Column="3" Style="{StaticResource AmountLabel}"></Label>
 
-                        <Label Text="Total Protein" Grid.Row="3" Grid.Column="0" Style="{StaticResource FactLabel}"></Label>
+                        <Label Text="Total Protein:" Grid.Row="3" Grid.Column="0" Style="{StaticResource FactLabel}"></Label>
                         <Label x:Name="protein" Text="0g" Grid.Row="3" Grid.Column="1" Style="{StaticResource AmountLabel}"></Label>
                     </Grid>
                 </Frame>
