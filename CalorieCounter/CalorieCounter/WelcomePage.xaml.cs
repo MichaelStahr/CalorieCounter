@@ -110,11 +110,6 @@ namespace CalorieCounter
             await Navigation.PushModalAsync(new MainPage());
         }
 
-        private void AboutButton_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
         public async Task<IdToken> AuthenticateUser()
         {
             string requestUri = "https://accounts.google.com/o/oauth2/v2/auth?";
