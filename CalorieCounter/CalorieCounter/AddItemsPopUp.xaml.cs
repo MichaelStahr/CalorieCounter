@@ -49,27 +49,30 @@ namespace CalorieCounter
                 SaveButton.IsEnabled = false;
             } else
             {
+                DeleteButton.IsEnabled = true;
                 SaveButton.IsEnabled = true;
             }
         }
 
         private void DeleteButton_Clicked(object sender, EventArgs e)
         {
-            //MiamiItem mItem = (MiamiItem)addedItemsLv.SelectedItem;
-            AddItemPopUpModel mItem = (AddItemPopUpModel)addedItemsLv.SelectedItem;
 
-            if (mItem != null)
-            {
-                itemData.Remove(mItem);
-                DeleteButton.IsEnabled = false;
-                if (itemData.Count == 0)
-                {
-                    SaveButton.IsEnabled = false;
-                }
-            } else
-            {
-                DisplayAlert("Attention", "Select an item to delete it", "Close");
-            }
+            //AddItemPopUpModel mItem = (AddItemPopUpModel)addedItemsLv.SelectedItem;
+            itemData.Clear();
+            DeleteButton.IsEnabled = false;
+            SaveButton.IsEnabled = false;
+            //if (mItem != null)
+            //{
+            //    itemData.Remove(mItem);
+            //    DeleteButton.IsEnabled = false;
+            //    if (itemData.Count == 0)
+            //    {
+            //        SaveButton.IsEnabled = false;
+            //    }
+            //} else
+            //{
+            //    DisplayAlert("Attention", "Select an item to delete it", "Close");
+            //}
         }
 
         private async void SaveButton_Clicked(object sender, EventArgs e)
@@ -80,7 +83,10 @@ namespace CalorieCounter
                 {
                     for (int i = 1; i <= item.Count; i++)
                     {
-                        InsertFoodForUser(item.Item);
+                        if (item.Count > 0)
+                        {
+                            InsertFoodForUser(item.Item);
+                        }
                     }
                 }
                 itemData.Clear();
@@ -110,11 +116,6 @@ namespace CalorieCounter
             string day = date.Day.ToString();
             string strDate = year + "-" + month + "-" + day;
             return strDate;
-        }
-
-        private void AddedItemsLv_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            DeleteButton.IsEnabled = true;
         }
     }
 }
