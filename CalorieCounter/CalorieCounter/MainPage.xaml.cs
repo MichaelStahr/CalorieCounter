@@ -75,6 +75,7 @@ namespace CalorieCounter
             string month = currentSelectedDate.Month.ToString();
             string day = currentSelectedDate.Day.ToString();
             dateString = year + "-" + month + "-" + day;
+            DateLabel.Text = currentSelectedDate.Date.ToShortDateString();
 
             HighlightCurrentSelectedDayOnChart();
         }
@@ -90,6 +91,22 @@ namespace CalorieCounter
                 // Possible that device doesn't support secure storage on device.
             }
         }
+
+        private void EnableOrDisableForwardButtons(DateTime date)
+        {
+            if (DateTime.Compare(date, DateTime.Today) == 0)
+            {
+                GoForward.IsEnabled = false; 
+                GoForwardAWeek.IsEnabled = false;
+                jumpToToday.IsEnabled = false;
+            } else
+            {
+                GoForward.IsEnabled = true;
+                GoForwardAWeek.IsEnabled = true;
+                jumpToToday.IsEnabled = true;
+            }
+        }
+
         private void HighlightCurrentSelectedDayOnChart()
         {
             DateTime date = Preferences.Get("currentSelectedDate", DateTime.Today);
@@ -253,6 +270,7 @@ namespace CalorieCounter
                 UpdateCalorieGraph(date);
             }
             Preferences.Set("currentSelectedDate", date);
+            EnableOrDisableForwardButtons(date);
             HighlightCurrentSelectedDayOnChart();
         }
 
@@ -300,6 +318,7 @@ namespace CalorieCounter
                 UpdateCalorieGraph(currentSelectedDate);
             }
             Preferences.Set("currentSelectedDate", currentSelectedDate);
+            EnableOrDisableForwardButtons(currentSelectedDate);
             HighlightCurrentSelectedDayOnChart();
 
         }
@@ -316,7 +335,14 @@ namespace CalorieCounter
             }
             else
             {
-                currentSelectedDate = currentSelectedDate.AddDays(7);
+                if (DateTime.Compare(currentSelectedDate.AddDays(7), DateTime.Today) > 0)
+                {
+                    currentSelectedDate = DateTime.Today;
+                }
+                else
+                {
+                    currentSelectedDate = currentSelectedDate.AddDays(7);
+                }
             }
 
             Calendar.SelectedDate = currentSelectedDate;
@@ -328,6 +354,7 @@ namespace CalorieCounter
 
             UpdateCalorieGraph(currentSelectedDate);
             Preferences.Set("currentSelectedDate", currentSelectedDate);
+            EnableOrDisableForwardButtons(currentSelectedDate);
             HighlightCurrentSelectedDayOnChart();
 
         }
@@ -379,6 +406,9 @@ namespace CalorieCounter
 
             UpdateCalorieGraph(currentSelectedDate);
             Preferences.Set("currentSelectedDate", currentSelectedDate);
+            GoForward.IsEnabled = false;
+            GoForwardAWeek.IsEnabled = false;
+            jumpToToday.IsEnabled = false;
             HighlightCurrentSelectedDayOnChart();
 
         }

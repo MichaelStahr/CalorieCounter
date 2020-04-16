@@ -3,7 +3,8 @@
             xmlns:syncfusion="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
-            BarBackgroundColor="LightBlue"
+            BarBackgroundColor="#DDA448"
+            BarTextColor="White"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -103,7 +104,7 @@
                 <Setter Property="HasShadow" Value="True"></Setter>
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="Padding" Value=".5"></Setter>
-                <Setter Property="Margin" Value="0,5,0,0"></Setter>
+                <Setter Property="Margin" Value="5,5,5,0"></Setter>
                 <Setter Property="BackgroundColor" Value="#CBDFBD"></Setter>
             </Style>
             <Style x:Key="SimpleFoodCalorieLabel" TargetType="Label">
@@ -186,8 +187,8 @@
                                         TextColor="White"
                                         BackgroundColor="#537D8D"
                                         FontAttributes="Bold"
-                                        BorderColor="#C05746"
-                                        BorderThickness="2"
+                                        BorderColor="Silver"
+                                        BorderThickness="1"
                                         >
             </chart:DataMarkerLabelStyle>
         </ResourceDictionary>
@@ -232,7 +233,8 @@
                                             XBindingPath="Date" 
                                             YBindingPath="Calories" 
                                             EnableTooltip="True"
-                                            CornerRadius="2" >
+                                            CornerRadius="2"
+                                            >
                                 <chart:ColumnSeries.ColorModel>
                                     <chart:ChartColorModel Palette="Custom" CustomBrushes="{DynamicResource chartStyle}"/>
                                 </chart:ColumnSeries.ColorModel>
@@ -260,10 +262,10 @@
                     <Button x:Name="GoBackaWeek" Text="&lt;&lt;" Clicked="GoBackOrForwardAWeek_Clicked" Style="{StaticResource RedButton}" Grid.Column="0"></Button>
                     <Button x:Name="GoBack" Text="&lt;" Clicked="GoBackOrForwardADay_Clicked" Style="{StaticResource RedButton}" Grid.Column="1"></Button>
                     <Frame Style="{StaticResource DateFrame}" Grid.Column="2">
-                        <Label x:Name="DateLabel" Text="Today" Style="{StaticResource DateLabel}"></Label>
+                        <Label x:Name="DateLabel" Style="{StaticResource DateLabel}"></Label>
                     </Frame>
-                    <Button x:Name="GoForward" Text="&gt;" Clicked="GoBackOrForwardADay_Clicked" Style="{StaticResource RedButton}" Grid.Column="3"></Button>
-                    <Button x:Name="GoForwardAWeek" Text="&gt;&gt;" Clicked="GoBackOrForwardAWeek_Clicked"  Style="{StaticResource RedButton}" Grid.Column="4"></Button>
+                    <Button x:Name="GoForward" Text="&gt;" Clicked="GoBackOrForwardADay_Clicked" IsEnabled="False" Style="{StaticResource RedButton}" Grid.Column="3"></Button>
+                    <Button x:Name="GoForwardAWeek" Text="&gt;&gt;" Clicked="GoBackOrForwardAWeek_Clicked" IsEnabled="False" Style="{StaticResource RedButton}" Grid.Column="4"></Button>
                     </Grid>
                 <StackLayout Orientation="Horizontal">
                     <Button x:Name="showCalendar" Text="Show Calendar" 
@@ -272,7 +274,8 @@
                     </Button>
                     <Button x:Name="jumpToToday" Text="Jump to Today"
                             VerticalOptions="Start" Style="{StaticResource RedButton}"
-                            Clicked="JumpToToday_Clicked"></Button>
+                            Clicked="JumpToToday_Clicked"
+                            IsEnabled="False"></Button>
                 </StackLayout>
                 <sfPopup:SfPopupLayout x:Name="popup">
                     <sfPopup:SfPopupLayout.PopupView>
@@ -291,13 +294,14 @@
                                                 HeaderTextColor="#DDA448"
                                                 HeaderFontAttributes="Bold"
                                                 HeaderFontSize="30"
-                                                CurrentMonthBackgroundColor="#CBDFBD"
+                                                CurrentMonthBackgroundColor="#C05746"
                                                 PreviousMonthBackgroundColor="#537D8D"
                                                 TodaySelectionBackgroundColor="#DDA448"
                                                 SelectedDayTextColor="White"
                                                 DateSelectionColor="#DDA448"
                                                 DayHeaderTextColor="#DDA448"
-                                                TodayBorderColor="#DDA448"> 
+                                                TodayBorderColor="#DDA448"
+                                                CurrentMonthTextColor="White"> 
 
                                                 <syncfusion:MonthViewSettings.HeaderFontFamily>
                                                     <OnPlatform x:TypeArguments="x:String" Android="Acme-Regular.ttf" />
