@@ -17,7 +17,7 @@ namespace CalorieCounter {
         [JsonProperty("sodium", NullValueHandling = NullValueHandling.Ignore), ]
         public double TotalSodium { get; set; }
 
-        [JsonProperty("cho", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("carbs", NullValueHandling = NullValueHandling.Ignore)]
         public double TotalCarbs { get; set; }
 
         [JsonProperty("calcium", NullValueHandling = NullValueHandling.Ignore)]

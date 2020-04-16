@@ -31,29 +31,30 @@
             </OnPlatform>
 
             <Style x:Key="CaloriesLabel" TargetType="Label">
-                <Setter Property="FontSize" Value="20"></Setter>
+                <Setter Property="FontSize" Value="18"></Setter>
                 <Setter Property="HorizontalOptions" Value="Center"></Setter>
                 <Setter Property="TextColor" Value="#537D8D"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
             </Style>
             <Style x:Key="CaloriesAmount" TargetType="Label">
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
-                <Setter Property="FontSize" Value="20"></Setter>
+                <Setter Property="FontSize" Value="18"></Setter>
                 <Setter Property="TextColor" Value="#DDA448"></Setter>
                 <Setter Property="VerticalOptions" Value="Center"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
             </Style>
             <Style x:Key="AmountLabel" TargetType="Label">
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
-                <Setter Property="FontSize" Value="Medium"></Setter>
-                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                <Setter Property="FontSize" Value="15"></Setter>
+                <Setter Property="HorizontalOptions" Value="Start"></Setter>
                 <Setter Property="TextColor" Value="#DDA448"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
             </Style>
             <Style x:Key="FactLabel" TargetType="Label">
-                <Setter Property="FontSize" Value="20"></Setter>
+                <Setter Property="FontSize" Value="15"></Setter>
                 <Setter Property="HorizontalOptions" Value="Start"></Setter>
                 <Setter Property="TextColor" Value="#537D8D"></Setter>
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
             </Style>
             <Style x:Key="NotesEditor" TargetType="Editor">
@@ -75,7 +76,7 @@
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
                 <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
                 <Setter Property="VerticalOptions" Value="Center"></Setter>
-                <Setter Property="FontSize" Value="Medium"></Setter>
+                <Setter Property="FontSize" Value="22"></Setter>
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
                 <Setter Property="TextColor" Value="#DDA448"></Setter>
@@ -320,18 +321,9 @@
 
                 <Frame Style="{StaticResource CalorieDetailFrame}">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                        <Label Text="Total Calories" HorizontalOptions="Center" FontSize="25" TextColor="#537D8D" FontAttributes="Bold" FontFamily="{StaticResource HomePage}"></Label>
-                        <Label x:Name="totalCal" Text="0k" HorizontalOptions="Center" VerticalOptions="Center" FontSize="25" FontAttributes="Bold" TextColor="#DDA448" FontFamily="{StaticResource HomePage}"></Label>
+                        <Label Text="Total Calories" HorizontalOptions="Center" FontSize="22" TextColor="#537D8D" FontAttributes="Bold" FontFamily="{StaticResource HomePage}"></Label>
+                        <Label x:Name="totalCal" Text="0k" HorizontalOptions="Center" VerticalOptions="Center" FontSize="22" FontAttributes="Bold" TextColor="#DDA448" FontFamily="{StaticResource HomePage}"></Label>
 
-                    </StackLayout>
-                </Frame>
-
-                <Frame Style="{StaticResource CalorieDetailFrame}" IsVisible="False">
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                        <Label Text="Consumed" Grid.Row="0" Grid.Column="0"  Style="{StaticResource CaloriesLabel}"></Label>
-                        <Label Text="500g" Grid.Row="0" Grid.Column="1" Style="{StaticResource CaloriesAmount}" Margin="0,0,10,0"></Label>
-                        <Label Text="Burned" Grid.Row="0" Grid.Column="3" Style="{StaticResource CaloriesLabel}"></Label>
-                        <Label Text="100g" Grid.Row="0" Grid.Column="4" Style="{StaticResource CaloriesAmount}"></Label>
                     </StackLayout>
                 </Frame>
 
@@ -354,26 +346,23 @@
                         <Label Text="Total Fat" Grid.Row="0" Grid.Column="0" Style="{StaticResource FactLabel}"></Label>
                         <Label x:Name="fat" Text="0g" Grid.Row="0" Grid.Column="1" Style="{StaticResource AmountLabel}"></Label>
 
-                        <Label Text="Total Saturated Fat" Grid.Row="0" Grid.Column="2" Style="{StaticResource FactLabel}"></Label>
-                        <Label x:Name="satFat" Text="n/a" Grid.Row="0" Grid.Column="3" Style="{StaticResource AmountLabel}"></Label>
+                        <Label Text="Total Cholesterol" Grid.Row="0" Grid.Column="2" Style="{StaticResource FactLabel}"></Label>
+                        <Label x:Name="cholesterol" Text="0g" Grid.Row="0" Grid.Column="3" Style="{StaticResource AmountLabel}"></Label>
 
-                        <Label Text="Total Cholesterol" Grid.Row="1" Grid.Column="0" Style="{StaticResource FactLabel}"></Label>
-                        <Label x:Name="cholesterol" Text="0g" Grid.Row="1" Grid.Column="1" Style="{StaticResource AmountLabel}"></Label>
+                        <Label Text="Total Sodium" Grid.Row="1" Grid.Column="0" Style="{StaticResource FactLabel}"></Label>
+                        <Label x:Name="sodium" Text="0g" Grid.Row="1" Grid.Column="1" Style="{StaticResource AmountLabel}"></Label>
 
-                        <Label Text="Total Sodium" Grid.Row="1" Grid.Column="2" Style="{StaticResource FactLabel}"></Label>
-                        <Label x:Name="sodium" Text="0g" Grid.Row="1" Grid.Column="3" Style="{StaticResource AmountLabel}"></Label>
+                        <Label Text="Total Carbs" Grid.Row="1" Grid.Column="2" Style="{StaticResource FactLabel}"></Label>
+                        <Label x:Name="carbs" Text="0g" Grid.Row="1" Grid.Column="3" Style="{StaticResource AmountLabel}"></Label>
 
-                        <Label Text="Total Carbs" Grid.Row="2" Grid.Column="0" Style="{StaticResource FactLabel}"></Label>
-                        <Label x:Name="carbs" Text="0g" Grid.Row="2" Grid.Column="1" Style="{StaticResource AmountLabel}"></Label>
+                        <Label Text="Total Calcium" Grid.Row="2" Grid.Column="0" Style="{StaticResource FactLabel}"></Label>
+                        <Label x:Name="calcium" Text="0g" Grid.Row="2" Grid.Column="1" Style="{StaticResource AmountLabel}"></Label>
 
-                        <Label Text="Total Calcium" Grid.Row="2" Grid.Column="2" Style="{StaticResource FactLabel}"></Label>
-                        <Label x:Name="calcium" Text="0g" Grid.Row="2" Grid.Column="3" Style="{StaticResource AmountLabel}"></Label>
+                        <Label Text="Total Sugar" Grid.Row="2" Grid.Column="2" Style="{StaticResource FactLabel}"></Label>
+                        <Label x:Name="sugar" Text="0g" Grid.Row="2" Grid.Column="3" Style="{StaticResource AmountLabel}"></Label>
 
-                        <Label Text="Total Sugar" Grid.Row="3" Grid.Column="0" Style="{StaticResource FactLabel}"></Label>
-                        <Label x:Name="sugar" Text="0g" Grid.Row="3" Grid.Column="1" Style="{StaticResource AmountLabel}"></Label>
-
-                        <Label Text="Total Protein" Grid.Row="3" Grid.Column="2" Style="{StaticResource FactLabel}"></Label>
-                        <Label x:Name="protein" Text="0g" Grid.Row="3" Grid.Column="3" Style="{StaticResource AmountLabel}"></Label>
+                        <Label Text="Total Protein" Grid.Row="3" Grid.Column="0" Style="{StaticResource FactLabel}"></Label>
+                        <Label x:Name="protein" Text="0g" Grid.Row="3" Grid.Column="1" Style="{StaticResource AmountLabel}"></Label>
                     </Grid>
                 </Frame>
                 <Frame Style="{StaticResource SimpleFoodFrame}">
@@ -387,9 +376,9 @@
                                 <ColumnDefinition Width="250"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Label Text="Daily Items Added" HorizontalOptions="FillAndExpand" FontSize="Medium" HorizontalTextAlignment="Center" TextColor="#537D8D" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"></Label>
-                            <Label Text="Item" HorizontalOptions="FillAndExpand" FontSize="Small" HorizontalTextAlignment="Start" TextColor="#537D8D" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"></Label>
-                            <Label Text="Calories" HorizontalOptions="FillAndExpand" FontSize="Small" HorizontalTextAlignment="End" TextColor="#537D8D" FontAttributes="Bold" Grid.Row="1" Grid.Column="1"></Label>
+                            <Label Text="Daily Items Added" HorizontalOptions="FillAndExpand" FontSize="20" HorizontalTextAlignment="Center" TextColor="#537D8D" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"></Label>
+                            <Label Text="Item" HorizontalOptions="FillAndExpand" FontSize="18" HorizontalTextAlignment="Start" TextColor="#537D8D" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"></Label>
+                            <Label Text="Calories" HorizontalOptions="FillAndExpand" FontSize="18" HorizontalTextAlignment="End" TextColor="#537D8D" FontAttributes="Bold" Grid.Row="1" Grid.Column="1"></Label>
                         </Grid>
                             <StackLayout>
                                 <ListView x:Name="simpleFoodlv" ItemsSource="{Binding SimpleFood}">
