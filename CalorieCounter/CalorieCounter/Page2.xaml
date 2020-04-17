@@ -73,7 +73,7 @@
                 </Grid>
             </Frame>
             <StackLayout>
-                    <Frame x:Name="searchFrame" BorderColor="#C05746" HeightRequest="500" IsVisible="true">
+                    <Frame x:Name="searchFrame" BorderColor="#C05746" HeightRequest="500" IsVisible="true" Margin="5,0,5,5">
                         <StackLayout>
                         <Label x:Name="tokenLabel" Text="{Binding token}"></Label>
                             <StackLayout Orientation="Horizontal">

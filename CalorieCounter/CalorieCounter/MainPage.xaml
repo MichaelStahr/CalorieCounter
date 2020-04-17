@@ -71,6 +71,7 @@
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="FontFamily" Value="{d:StaticResource HomePage}"></Setter>
                 <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="Margin" Value="0"></Setter>
             </Style>
             <Style x:Key="DateLabel" TargetType="Label">
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
@@ -256,27 +257,28 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="200"></ColumnDefinition>
+                        <ColumnDefinition Width="150"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="GoBackaWeek" Text="&lt;&lt;" Clicked="GoBackOrForwardAWeek_Clicked" Style="{StaticResource RedButton}" Grid.Column="0"></Button>
+                    <Button x:Name="GoBackaWeek" Text="&lt;&lt;" Clicked="GoBackOrForwardAWeek_Clicked" Style="{StaticResource RedButton}" Grid.Column="0" Margin="5,0,0,0"></Button>
                     <Button x:Name="GoBack" Text="&lt;" Clicked="GoBackOrForwardADay_Clicked" Style="{StaticResource RedButton}" Grid.Column="1"></Button>
                     <Frame Style="{StaticResource DateFrame}" Grid.Column="2">
                         <Label x:Name="DateLabel" Style="{StaticResource DateLabel}"></Label>
                     </Frame>
                     <Button x:Name="GoForward" Text="&gt;" Clicked="GoBackOrForwardADay_Clicked" IsEnabled="False" Style="{StaticResource RedButton}" Grid.Column="3"></Button>
-                    <Button x:Name="GoForwardAWeek" Text="&gt;&gt;" Clicked="GoBackOrForwardAWeek_Clicked" IsEnabled="False" Style="{StaticResource RedButton}" Grid.Column="4"></Button>
+                    <Button x:Name="GoForwardAWeek" Text="&gt;&gt;" Clicked="GoBackOrForwardAWeek_Clicked" IsEnabled="False" Style="{StaticResource RedButton}" Grid.Column="4" Margin="0,0,5,0"></Button>
                     </Grid>
                 <StackLayout Orientation="Horizontal">
                     <Button x:Name="showCalendar" Text="Show Calendar" 
                                 VerticalOptions="Start" Style="{StaticResource RedButton}"
-                                Clicked="ClickToShowPopup_Clicked">
+                                Clicked="ClickToShowPopup_Clicked" Margin="5,0,0,0">
                     </Button>
                     <Button x:Name="jumpToToday" Text="Jump to Today"
                             VerticalOptions="Start" Style="{StaticResource RedButton}"
                             Clicked="JumpToToday_Clicked"
-                            IsEnabled="False"></Button>
+                            IsEnabled="False"
+                            Margin="0,0,5,0"></Button>
                 </StackLayout>
                 <sfPopup:SfPopupLayout x:Name="popup">
                     <sfPopup:SfPopupLayout.PopupView>
@@ -322,7 +324,7 @@
                 <Frame Style="{StaticResource CalorieDetailFrame}">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                         <Label Text="Total Calories:" HorizontalOptions="Center" FontSize="22" TextColor="#537D8D" FontAttributes="Bold" FontFamily="{StaticResource HomePage}"></Label>
-                        <Label x:Name="totalCal" Text="0k" HorizontalOptions="Center" VerticalOptions="Center" FontSize="22" FontAttributes="Bold" TextColor="#DDA448" FontFamily="{StaticResource HomePage}"></Label>
+                        <Label x:Name="totalCal" Text="0" HorizontalOptions="Center" VerticalOptions="Center" FontSize="22" FontAttributes="Bold" TextColor="#DDA448" FontFamily="{StaticResource HomePage}"></Label>
 
                     </StackLayout>
                 </Frame>

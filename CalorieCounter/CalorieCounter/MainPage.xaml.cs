@@ -156,7 +156,7 @@ namespace CalorieCounter
             dailyValues = await _restService.DisplayDailyValuesByUserDayAsync(DisplayDailyValuesByUserDay(date));
             if (dailyValues != null && dailyValues.Count != 0)
             {
-                totalCal.Text = dailyValues[0].TotalCalories.ToString() + "k";
+                totalCal.Text = dailyValues[0].TotalCalories.ToString();
                 fat.Text = dailyValues[0].TotalFat.ToString() + "g";
                 cholesterol.Text = dailyValues[0].TotalCholesterol.ToString() + "mg";
                 sodium.Text = dailyValues[0].TotalSodium.ToString() + "mg";
