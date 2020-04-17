@@ -20,8 +20,8 @@ namespace CalorieCounter
         private string userTokenId;
         private string dateString;
         private string uniqueId;
-        public static string BaseAddress =
-        Device.RuntimePlatform == Device.Android ? "https://10.0.2.2:44341" : "https://localhost:44341";
+        public static string BaseAddress = "http://caloriecounter.mikestahr.com";
+        //Device.RuntimePlatform == Device.Android ? "https://10.0.2.2:44341" : "https://localhost:44341";
         public static string apiEndpoint = $"{BaseAddress}/api.asmx/";
         RestService _restService;
         ChartViewModel model;
@@ -220,17 +220,10 @@ namespace CalorieCounter
                 {
                     otherTotalCals = await GetDailyCaloriesForDate(otherDate);
                 }
+                //model.Data1.Add(new ChartData(otherDate, 20));
                 model.Data1.Add(new ChartData(otherDate, otherTotalCals));
             }
-            //for (int g = 6; g > 0; g--)
-            //{
-            //    DateTime prevDateTime = selectedDate.AddDays(-g);
-            //    string prevDate = ChangeDateToString(prevDateTime);
-            //    double prevTotalCals = await GetDailyCaloriesForDate(prevDate);
-            //    model.Data1.Add(new ChartData(prevDate, prevTotalCals));
-            //}
-
-            //model.Data1.Add(new ChartData(formattedSelectedDate, numTotalCal));
+            
             calorieChartSeries.ItemsSource = model.Data1;
         }
 
