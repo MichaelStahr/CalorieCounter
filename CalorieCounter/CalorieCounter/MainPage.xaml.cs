@@ -225,6 +225,7 @@ namespace CalorieCounter
             }
             
             calorieChartSeries.ItemsSource = model.Data1;
+            
         }
 
        
