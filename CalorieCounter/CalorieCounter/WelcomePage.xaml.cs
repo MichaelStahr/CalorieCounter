@@ -17,8 +17,8 @@ namespace CalorieCounter
     public partial class WelcomePage : ContentPage
     {
 
-        public static string BaseAddress =
-        Device.RuntimePlatform == Device.Android ? "https://10.0.2.2:44341" : "https://localhost:44341";
+        public static string BaseAddress = "http://caloriecounter.mikestahr.com";
+        //Device.RuntimePlatform == Device.Android ? "https://10.0.2.2:44341" : "https://localhost:44341";
         public static string apiEndpoint = $"{BaseAddress}/api.asmx/";
         RestService _restService;
         private string client_id;
@@ -60,7 +60,6 @@ namespace CalorieCounter
             {
                 client_id = "1041253101002-hbmvlv5gofcv8fkh3du3eb1sd0jputfp.apps.googleusercontent.com";
                 redirect_uri = "caloriecounter.oauth2:/oauth2redirect";
-
             }
         }
 

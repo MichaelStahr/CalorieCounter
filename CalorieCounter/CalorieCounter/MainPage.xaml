@@ -105,7 +105,7 @@
                 <Setter Property="BorderColor" Value="#C05746"></Setter>
                 <Setter Property="HasShadow" Value="True"></Setter>
                 <Setter Property="CornerRadius" Value="10"></Setter>
-                <Setter Property="Padding" Value=".5"></Setter>
+                <Setter Property="Padding" Value="3"></Setter>
                 <Setter Property="Margin" Value="5,5,5,0"></Setter>
                 <Setter Property="BackgroundColor" Value="#CBDFBD"></Setter>
             </Style>
@@ -205,8 +205,8 @@
                 <Frame Style="{StaticResource ChartFrame}">
                     <chart:SfChart x:Name="calorieChart" 
                                HeightRequest="400"
-                               Margin="5,0,5,0"
-                               >
+                               Margin="5,0,5,0" 
+                               AreaBackgroundColor="#CBDFBD" BackgroundColor="#CBDFBD">
                     
                     <chart:SfChart.BindingContext>
                         <local:ChartViewModel/>
@@ -236,6 +236,8 @@
                                             YBindingPath="Calories" 
                                             EnableTooltip="True"
                                             CornerRadius="2"
+                                            EnableDataPointSelection="True"
+                                            SelectedDataPointColor="Gold"
                                             >
                                 <chart:ColumnSeries.ColorModel>
                                     <chart:ChartColorModel Palette="Custom" CustomBrushes="{DynamicResource chartStyle}"/>
@@ -330,7 +332,7 @@
                 </Frame>
 
                 <Frame Style="{StaticResource CalorieDetailFrame}">
-                    <Grid>
+                    <Grid HorizontalOptions="CenterAndExpand">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
@@ -375,7 +377,7 @@
                                 <RowDefinition Height="Auto"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="250"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Label Text="Daily Items Added" HorizontalOptions="FillAndExpand" FontSize="20" HorizontalTextAlignment="Center" TextColor="#537D8D" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"></Label>

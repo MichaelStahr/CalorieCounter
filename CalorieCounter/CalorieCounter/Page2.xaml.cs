@@ -15,9 +15,10 @@ namespace CalorieCounter
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Page2 : ContentPage
     {
+
+        public static string BaseAddress = "http://caloriecounter.mikestahr.com";
+        //Device.RuntimePlatform == Device.Android ? "https://10.0.2.2:44341" : "https://localhost:44341";
         
-        public static string BaseAddress =
-        Device.RuntimePlatform == Device.Android ? "https://10.0.2.2:44341" : "https://localhost:44341";
         public static string apiEndpoint = $"{BaseAddress}/api.asmx/";
         RestService _restService;
 
@@ -37,7 +38,7 @@ namespace CalorieCounter
             unique_id = Preferences.Get("user", "");
             GetUserIdToken();
             // access Miami API and put in our DB - currently uncomment and run manually
-            // MiamiFoodLookup();
+            //MiamiFoodLookup();
             popUpView = new AddPopUpViewModel();
             
         }
@@ -96,7 +97,7 @@ namespace CalorieCounter
         public string GetMiamiFoodByNameAndLocation(string location)
         {
 
-            string search = "https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php?ThisLocation=Starbucks";
+            string search = "https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php?ThisLocation=ASC";
 
 
             //string food = Uri.EscapeUriString(SearchingFoods.Text);
