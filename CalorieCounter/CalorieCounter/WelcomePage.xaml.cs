@@ -47,7 +47,7 @@ namespace CalorieCounter
                     
                 }
             };
-            NavigationPage.SetTitleView(this, header);
+            //NavigationPage.SetTitleView(this, header);
             _restService = new RestService();
 
             if (Device.RuntimePlatform == Device.Android)

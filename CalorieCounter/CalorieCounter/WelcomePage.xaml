@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:CalorieCounter"
+             NavigationPage.HasNavigationBar="false"
              mc:Ignorable="d"
              x:Class="CalorieCounter.WelcomePage">
    
@@ -14,14 +15,14 @@
             </OnPlatform>
             <Style x:Key="loginFrame" TargetType="Frame">
                 <Setter Property="BorderColor" Value="#C05746"></Setter>
-                <Setter Property="BackgroundColor" Value="#DDA448"></Setter>
+                <Setter Property="BackgroundColor" Value="#537D8D"></Setter>
                 <Setter Property="HasShadow" Value="True"></Setter>
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="Margin" Value="5,5,5,5"></Setter>
                 <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
             </Style>
             <Style x:Key="RedButton" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="#C05746"></Setter>
+                <Setter Property="BackgroundColor" Value="#DDA448"></Setter>
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
                 <Setter Property="BorderColor" Value="White"></Setter>
                 <Setter Property="BorderWidth" Value="2"></Setter>
