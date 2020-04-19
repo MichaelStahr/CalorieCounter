@@ -27,6 +27,21 @@
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="TextColor" Value="White"></Setter>
             </Style>
+            <Style x:Key="ItemSubNameLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="15"></Setter>
+                <Setter Property="TextColor" Value="#537D8D"></Setter>
+                <Setter Property="Margin" Value="20,0,0,0"></Setter>
+            </Style>
+            <Style x:Key="ItemSubValueLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="15"></Setter>
+                <Setter Property="TextColor" Value="#537D8D"></Setter>
+                <Setter Property="HorizontalOptions" Value="Start"></Setter>
+                <Setter Property="Margin" Value="5,0,0,0"></Setter>
+            </Style>
+            <Style x:Key="ItemsGrid" TargetType="Grid">
+                <Setter Property="ColumnSpacing" Value="0"></Setter>
+            </Style>
+            
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -85,22 +100,23 @@
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
-                                            <Grid>
+                                            <Grid Style="{StaticResource ItemsGrid}">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="*"></RowDefinition>
                                                     <RowDefinition Height="*"></RowDefinition>
                                                     <RowDefinition Height="*"></RowDefinition>
                                                 </Grid.RowDefinitions>
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
                                                     <ColumnDefinition Width="*"></ColumnDefinition>
 
                                                 </Grid.ColumnDefinitions>
+                                               
                                                 <Label Text="{Binding Formalname}" TextColor="#DDA448" FontSize="18" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"></Label>
-                                                <Label Text="Location: " Margin="5,0,0,0" TextColor="#537D8D" FontSize="15" Grid.Row="1" Grid.Column="0"></Label>
-                                                <Label Text="{Binding ServiceUnit}" TextColor="#537D8D"  FontSize="15" Grid.Row="1" Grid.Column="1"></Label>
-                                                <Label Text="Calories: " Margin="5,0,0,0" TextColor="#537D8D"  FontSize="15" Grid.Row="2" Grid.Column="0"></Label>
-                                                <Label Text="{Binding CaloriesK}" TextColor="#537D8D"  FontSize="15" Grid.Row="2" Grid.Column="1"></Label>
+                                                <Label Text="Location: " Style="{StaticResource ItemSubNameLabel}" Grid.Row="1" Grid.Column="0"></Label>
+                                                <Label Text="{Binding ServiceUnit}" Style="{StaticResource ItemSubValueLabel}" Grid.Row="1" Grid.Column="1"></Label>
+                                                <Label Text="Calories: " Style="{StaticResource ItemSubNameLabel}" Grid.Row="2" Grid.Column="0"></Label>
+                                                <Label Text="{Binding CaloriesK}" Style="{StaticResource ItemSubValueLabel}" Grid.Row="2" Grid.Column="1"></Label>
                                             </Grid>
                                         </ViewCell>
                                     </DataTemplate>
