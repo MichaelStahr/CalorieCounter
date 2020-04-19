@@ -46,7 +46,7 @@
         <StackLayout>
             <Frame Style="{StaticResource loginFrame}">
                 <StackLayout Padding="0">
-                    <Image Source="miami.jpg" Style="{StaticResource MiamiLogo}"></Image>
+                    <Image Source="miamiEdit1.png" Style="{StaticResource MiamiLogo}"></Image>
                     <Label Text="Welcome to Calorie Counter!" Style="{StaticResource WelcomeLabel}"></Label>
                     <Button x:Name="LoginButton" Text="Google Login" Clicked="LoginButton_Clicked" Style="{StaticResource RedButton}"></Button>
                     <Button x:Name ="SignUpButton" Text="Enter" Clicked="SignUpButton_Clicked" Style="{StaticResource RedButton}"></Button>
