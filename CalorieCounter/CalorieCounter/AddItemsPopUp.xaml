@@ -47,23 +47,24 @@
                 <Style x:Key="ItemLabel" TargetType="Label">
                     <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
                     <Setter Property="TextColor" Value="Black"></Setter>
-                    <Setter Property="FontSize" Value="Small"></Setter>
+                    <Setter Property="FontSize" Value="15"></Setter>
                 </Style>
                 <Style x:Key="CountLabel" TargetType="Label">
                     <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
                     <Setter Property="TextColor" Value="#DDA448"></Setter>
-                    <Setter Property="FontSize" Value="Small"></Setter>
+                    <Setter Property="FontSize" Value="15"></Setter>
                 </Style>
                 <Style x:Key="CountStepper" TargetType="Stepper">
                     <Setter Property="BackgroundColor" Value="#DDA448"></Setter>
+                    <Setter Property="HorizontalOptions" Value="Center"></Setter>
                 </Style>
             </ResourceDictionary>
         </ContentView.Resources>
         <StackLayout Padding="30">
             <Frame Style="{StaticResource ItemListFrame}">
                 <StackLayout>
-                    <Label Text="Items to be Added" HorizontalOptions="Center" FontAttributes="Bold"></Label>
-                    <ListView x:Name="addedItemsLv" ItemsSource="{Binding ItemData}" IsPullToRefreshEnabled="True" SelectionMode="None">
+                    <Label Text="Items to be Added" HorizontalOptions="Center" FontAttributes="Bold" FontSize="18"></Label>
+                    <ListView x:Name="addedItemsLv" ItemsSource="{Binding ItemData}" SelectionMode="None">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
@@ -72,7 +73,7 @@
                                             <RowDefinition Height="*"></RowDefinition>
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="250"></ColumnDefinition>
+                                            <ColumnDefinition Width="150"></ColumnDefinition>
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>

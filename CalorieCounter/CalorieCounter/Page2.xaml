@@ -27,6 +27,21 @@
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="TextColor" Value="White"></Setter>
             </Style>
+            <Style x:Key="ItemSubNameLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="15"></Setter>
+                <Setter Property="TextColor" Value="#537D8D"></Setter>
+                <Setter Property="Margin" Value="20,0,0,0"></Setter>
+            </Style>
+            <Style x:Key="ItemSubValueLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="15"></Setter>
+                <Setter Property="TextColor" Value="#537D8D"></Setter>
+                <Setter Property="HorizontalOptions" Value="Start"></Setter>
+                <Setter Property="Margin" Value="5,0,0,0"></Setter>
+            </Style>
+            <Style x:Key="ItemsGrid" TargetType="Grid">
+                <Setter Property="ColumnSpacing" Value="0"></Setter>
+            </Style>
+            
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -73,39 +88,44 @@
                 </Grid>
             </Frame>
             <StackLayout>
-                    <Frame x:Name="searchFrame" BorderColor="#C05746" HeightRequest="500" IsVisible="true" Margin="5,0,5,5">
-                        <StackLayout>
+                <Frame x:Name="searchFrame" BorderColor="#C05746" HeightRequest="500" IsVisible="true" Margin="5,0,5,5">
+                    <StackLayout>
                         <Label x:Name="tokenLabel" Text="{Binding token}"></Label>
-                            <StackLayout Orientation="Horizontal">
-                                <Button x:Name="SaveSelectedItems" Text="Save Selected Items" IsVisible="True" IsEnabled="False" Clicked="ShowFoodsToBeAdded_Clicked" Style="{StaticResource EditButtons}"></Button>
-                            </StackLayout>
-                                <StackLayout>
-                                    <Label x:Name="TextOldValue" FontSize="Small"/>
-                                    <ListView x:Name="foodItemslv" ItemsSource="{Binding MiamiItem}" ItemTapped="FoodItemslv_ItemTapped">
-                                        <ListView.ItemTemplate>
-                                            <DataTemplate>
-                                                <ViewCell>
-                                                    <StackLayout>
-                                                        <Label Text="{Binding Formalname}" TextColor="#DDA448" FontSize="Medium"></Label>
-                                                        <StackLayout>
-                                                            <StackLayout Orientation="Horizontal">
-                                                                <Label Text="Location: " Padding="20,0,0,0" TextColor="#537D8D"></Label>
-                                                                <Label Text="{Binding ServiceUnit}" TextColor="#537D8D"></Label>
-                                                            </StackLayout>
-                                                            <StackLayout Orientation="Horizontal">
-                                                                <Label Text="Portion: " Padding="20,0,0,0" TextColor="#537D8D"></Label>
-                                                                <Label Text="{Binding PortionSize}" TextColor="#537D8D"></Label>
-                                                            </StackLayout>
-                                                        </StackLayout>
-                                                    </StackLayout>
-                                                </ViewCell>
-                                            </DataTemplate>
-                                        </ListView.ItemTemplate>
-                                    </ListView>
-                                </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Button x:Name="SaveSelectedItems" Text="Save Selected Items" IsVisible="True" IsEnabled="False" Clicked="ShowFoodsToBeAdded_Clicked" Style="{StaticResource EditButtons}"></Button>
                         </StackLayout>
-                    </Frame>
-                </StackLayout>
+                        <StackLayout>
+                            <Label x:Name="TextOldValue" FontSize="Small"/>
+                            <ListView x:Name="foodItemslv" RowHeight="75" ItemsSource="{Binding MiamiItem}" ItemTapped="FoodItemslv_ItemTapped">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid Style="{StaticResource ItemsGrid}">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"></RowDefinition>
+                                                    <RowDefinition Height="*"></RowDefinition>
+                                                    <RowDefinition Height="*"></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+
+                                                </Grid.ColumnDefinitions>
+                                               
+                                                <Label Text="{Binding Formalname}" TextColor="#DDA448" FontSize="18" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"></Label>
+                                                <Label Text="Location: " Style="{StaticResource ItemSubNameLabel}" Grid.Row="1" Grid.Column="0"></Label>
+                                                <Label Text="{Binding ServiceUnit}" Style="{StaticResource ItemSubValueLabel}" Grid.Row="1" Grid.Column="1"></Label>
+                                                <Label Text="Calories: " Style="{StaticResource ItemSubNameLabel}" Grid.Row="2" Grid.Column="0"></Label>
+                                                <Label Text="{Binding CaloriesK}" Style="{StaticResource ItemSubValueLabel}" Grid.Row="2" Grid.Column="1"></Label>
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
             </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
