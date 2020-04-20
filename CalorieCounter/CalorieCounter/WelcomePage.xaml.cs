@@ -88,7 +88,8 @@ namespace CalorieCounter
                     // Possible that device doesn't support secure storage on device.
                 }
                 Preferences.Set("user", uniqueId);
-
+                activityIndicator.IsRunning = false;
+                LoggingIn.IsVisible = false;
                 await Navigation.PushModalAsync(new MainPage());
             } catch { }
 
@@ -158,8 +159,8 @@ namespace CalorieCounter
                 Console.WriteLine("Token has invalid signature");
             }
 
-            activityIndicator.IsRunning = false;
-            LoggingIn.IsVisible = false;
+            //activityIndicator.IsRunning = false;
+            //LoggingIn.IsVisible = false;
             
             return idToken;
 
