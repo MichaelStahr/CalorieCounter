@@ -75,19 +75,23 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="150"></ColumnDefinition>
                                             <ColumnDefinition Width="*"></ColumnDefinition>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
                                         <Label Text="{Binding Item.Formalname}" Style="{StaticResource ItemLabel}" HorizontalTextAlignment="Start" Margin="5,0,0,0" Grid.Row="0" Grid.Column="0"></Label>
                                         <Label x:Name="countLabel" Text="{Binding Count, Mode=TwoWay}" Style="{StaticResource CountLabel}" HorizontalTextAlignment="Center"  Grid.Row="0" Grid.Column="1"></Label>
-                                        <Stepper x:Name="countStepper" Minimum="0" Value="{Binding Source={x:Reference countLabel}, Path=Text, Mode=TwoWay}" Style="{StaticResource CountStepper}" Grid.Row="0" Grid.Column="2"></Stepper>
+                                        <!--<Stepper x:Name="countStepper" Minimum="0" Value="{Binding Source={x:Reference countLabel}, Path=Text, Mode=TwoWay}" Style="{StaticResource CountStepper}" Grid.Row="0" Grid.Column="2"></Stepper>-->
+                                        <Button x:Name="minusButton" Clicked="MinusButton_Clicked" Grid.Row="0" Grid.Column="2"></Button>
                                     </Grid>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
+                    <StackLayout>
+                        <Label x:Name="Test" Text="test"></Label>
                     <Button x:Name="SaveButton" Text="Save" Style="{StaticResource EditButton}" Clicked="SaveButton_Clicked"></Button>
                     <Button x:Name="DeleteButton" Text="Delete All" Style="{StaticResource EditButton}" Clicked="DeleteButton_Clicked" ></Button>
                     <Button Text="Close" Clicked="Close_Button_Clicked" Style="{StaticResource EditButton}"></Button>
+                    </StackLayout>
                 </StackLayout>
             </Frame>
         </StackLayout>

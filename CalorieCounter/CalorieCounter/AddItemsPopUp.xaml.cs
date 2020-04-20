@@ -117,5 +117,12 @@ namespace CalorieCounter
             string strDate = year + "-" + month + "-" + day;
             return strDate;
         }
+
+        private void MinusButton_Clicked(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            Grid g = (Grid)button.Parent;
+            Label countL = (Label)g.Children[1];
+        }
     }
 }
