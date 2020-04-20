@@ -137,6 +137,7 @@ namespace CalorieCounter
                 minusButton.IsEnabled = true;
             }
             countLabel.Text = num.ToString();
+            
         }
 
         private void PlusButton_Clicked(object sender, EventArgs e)
