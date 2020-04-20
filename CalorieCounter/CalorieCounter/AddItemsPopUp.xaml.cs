@@ -117,5 +117,40 @@ namespace CalorieCounter
             string strDate = year + "-" + month + "-" + day;
             return strDate;
         }
+
+        private void MinusButton_Clicked(object sender, EventArgs e)
+        {
+            Button minusButton = (Button)sender;
+            StackLayout layout = (StackLayout)minusButton.Parent;
+            Grid g = (Grid)layout.Parent;
+            Label countLabel = (Label)g.Children[1];
+            int num = Int32.Parse(countLabel.Text);
+            if (num > 0)
+            {
+                num--;
+            }
+            if (num == 0)
+            {
+                minusButton.IsEnabled = false;
+            } else
+            {
+                minusButton.IsEnabled = true;
+            }
+            countLabel.Text = num.ToString();
+            
+        }
+
+        private void PlusButton_Clicked(object sender, EventArgs e)
+        {
+            Button plusButton = (Button)sender;
+            StackLayout layout = (StackLayout)plusButton.Parent;
+            Button minusButton = (Button)layout.Children[0];
+            Grid g = (Grid)layout.Parent;
+            Label countLabel = (Label)g.Children[1];
+            int num = Int32.Parse(countLabel.Text);
+            num++;
+            countLabel.Text = num.ToString();
+            minusButton.IsEnabled = true;
+        }
     }
 }
