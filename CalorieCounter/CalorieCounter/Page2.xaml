@@ -96,7 +96,7 @@
                         </StackLayout>
                         <StackLayout>
                             <Label x:Name="TextOldValue" FontSize="Small"/>
-                            <ListView x:Name="foodItemslv" RowHeight="75" ItemsSource="{Binding MiamiItem}" ItemTapped="FoodItemslv_ItemTapped">
+                            <ListView x:Name="foodItemslv" RowHeight="75" ItemsSource="{Binding MiamiItem}" SeparatorColor="#C05746" ItemTapped="FoodItemslv_ItemTapped">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
@@ -112,7 +112,7 @@
 
                                                 </Grid.ColumnDefinitions>
                                                
-                                                <Label Text="{Binding Formalname}" TextColor="#DDA448" FontSize="18" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"></Label>
+                                                <Label Text="{Binding Formalname}" TextColor="#DDA448" FontAttributes="Bold" FontSize="18" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"></Label>
                                                 <Label Text="Location: " Style="{StaticResource ItemSubNameLabel}" Grid.Row="1" Grid.Column="0"></Label>
                                                 <Label Text="{Binding ServiceUnit}" Style="{StaticResource ItemSubValueLabel}" Grid.Row="1" Grid.Column="1"></Label>
                                                 <Label Text="Calories: " Style="{StaticResource ItemSubNameLabel}" Grid.Row="2" Grid.Column="0"></Label>

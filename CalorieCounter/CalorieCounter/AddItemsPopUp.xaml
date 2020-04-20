@@ -54,8 +54,8 @@
                 </Style>
                 <Style x:Key="CountLabel" TargetType="Label">
                     <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
-                    <Setter Property="TextColor" Value="#DDA448"></Setter>
-                    <Setter Property="FontSize" Value="15"></Setter>
+                    <Setter Property="TextColor" Value="#C05746"></Setter>
+                    <Setter Property="FontSize" Value="18"></Setter>
                     <Setter Property="FontAttributes" Value="Bold"></Setter>
                     <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
                     <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
@@ -76,7 +76,7 @@
         <StackLayout Padding="30">
             <Frame Style="{StaticResource ItemListFrame}">
                 <StackLayout>
-                    <Label Text="Items to be Added" HorizontalOptions="Center" FontAttributes="Bold" FontSize="18"></Label>
+                    <Label Text="Items to be Added" TextColor="#537D8D" HorizontalOptions="Center" FontAttributes="Bold" FontSize="18"></Label>
                     <ListView x:Name="addedItemsLv" ItemsSource="{Binding ItemData}" SelectionMode="None">
                         <ListView.ItemTemplate>
                             <DataTemplate>
