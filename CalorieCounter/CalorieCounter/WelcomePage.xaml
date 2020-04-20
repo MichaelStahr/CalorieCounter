@@ -53,6 +53,7 @@
                     <Button x:Name ="SignUpButton" Text="Enter" Clicked="SignUpButton_Clicked" Style="{StaticResource LoginButton}"></Button>
                     <ActivityIndicator x:Name="activityIndicator" Color="#DDA448" IsRunning="False"></ActivityIndicator>
                     <Label x:Name="LoggingIn" Text="Logging in..." FontSize="Small" TextColor="White" HorizontalOptions="Center" IsVisible="False"></Label>
+                    <Label x:Name="welcomeName" FontSize="Small" TextColor="White" HorizontalOptions="Center" IsVisible="False"></Label>
                 </StackLayout>
             </Frame>
         </StackLayout>

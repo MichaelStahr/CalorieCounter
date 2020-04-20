@@ -68,6 +68,8 @@ namespace CalorieCounter
             try
             {
                 IdToken idToken = await AuthenticateUser();
+                welcomeName.Text = "Welcome " + idToken.GivenName + "!";
+                welcomeName.IsVisible = true;
                 string uniqueId = idToken.Email.Substring(0, idToken.Email.IndexOf('@'));
                 // if user exists (idToken.sub matches token field of user in DB) then login
                 bool userExists = await _restService.GetUser(GetUserUri(uniqueId, idToken.Sub));
@@ -88,8 +90,7 @@ namespace CalorieCounter
                     // Possible that device doesn't support secure storage on device.
                 }
                 Preferences.Set("user", uniqueId);
-                activityIndicator.IsRunning = false;
-                LoggingIn.IsVisible = false;
+                
                 await Navigation.PushModalAsync(new MainPage());
             } catch { }
 
@@ -161,7 +162,6 @@ namespace CalorieCounter
 
             //activityIndicator.IsRunning = false;
             //LoggingIn.IsVisible = false;
-            
             return idToken;
 
         }

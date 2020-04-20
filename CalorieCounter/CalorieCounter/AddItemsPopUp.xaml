@@ -48,11 +48,17 @@
                     <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
                     <Setter Property="TextColor" Value="Black"></Setter>
                     <Setter Property="FontSize" Value="15"></Setter>
+                    <Setter Property="FontAttributes" Value="Bold"></Setter>
+                    <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+                    <Setter Property="VerticalOptions" Value="Center"></Setter>
                 </Style>
                 <Style x:Key="CountLabel" TargetType="Label">
                     <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
                     <Setter Property="TextColor" Value="#DDA448"></Setter>
                     <Setter Property="FontSize" Value="15"></Setter>
+                    <Setter Property="FontAttributes" Value="Bold"></Setter>
+                    <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+                    <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
                 </Style>
                 <Style x:Key="CountStepper" TargetType="Stepper">
                     <Setter Property="BackgroundColor" Value="#DDA448"></Setter>

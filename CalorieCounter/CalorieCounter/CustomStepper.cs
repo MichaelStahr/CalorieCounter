@@ -28,25 +28,28 @@ namespace CalorieCounter
             PlusBtn = new Button {
                 Text = "+",
                 WidthRequest = 30,
-                FontAttributes = FontAttributes.Bold,
                 Margin = 0,
                 CornerRadius = 5,
                 BackgroundColor = Color.FromHex("DDA448"),
-                TextColor = Color.White
+                TextColor = Color.White,
+                FontSize = 13
+                
             };
             MinusBtn = new Button { 
                 Text = "-", 
                 WidthRequest = 30, 
-                FontAttributes = FontAttributes.Bold, 
                 Margin = 0, 
                 CornerRadius = 5,
                 BackgroundColor = Color.FromHex("DDA448"),
-                TextColor = Color.White
+                TextColor = Color.White,
+                FontSize = 13
             };
 
             Orientation = StackOrientation.Horizontal;
             Spacing = 1;
-            Margin = 0;
+            Margin = new Thickness (0,3,0,3);
+            HorizontalOptions = LayoutOptions.Center;
+            VerticalOptions = LayoutOptions.Center;
             PlusBtn.Clicked += PlusBtn_Clicked;
             MinusBtn.Clicked += MinusBtn_Clicked;
           
