@@ -52,7 +52,7 @@
                 <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
             </Style>
             <Style x:Key="FactLabel" TargetType="Label">
-                <Setter Property="FontSize" Value="18"></Setter>
+                <Setter Property="FontSize" Value="18"></Setter>  
                 <Setter Property="HorizontalOptions" Value="Start"></Setter>
                 <Setter Property="TextColor" Value="#537D8D"></Setter>
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
