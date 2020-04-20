@@ -21,7 +21,7 @@
                 <Setter Property="Margin" Value="5,5,5,5"></Setter>
                 <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
             </Style>
-            <Style x:Key="RedButton" TargetType="Button">
+            <Style x:Key="LoginButton" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="#DDA448"></Setter>
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
                 <Setter Property="BorderColor" Value="White"></Setter>
@@ -49,9 +49,9 @@
                 <StackLayout Padding="0" VerticalOptions="CenterAndExpand">
                     <Image Source="miamiEdit1.png" Style="{StaticResource MiamiLogo}"></Image>
                     <Label Text="Welcome to Calorie Counter!" Style="{StaticResource WelcomeLabel}"></Label>
-                    <Button x:Name="LoginButton" Text="Google Login" Clicked="LoginButton_Clicked" Style="{StaticResource RedButton}"></Button>
-                    <Button x:Name ="SignUpButton" Text="Enter" Clicked="SignUpButton_Clicked" Style="{StaticResource RedButton}"></Button>
-                    <ActivityIndicator x:Name="activityIndicator" Color="#537D8D" IsRunning="False"></ActivityIndicator>
+                    <Button x:Name="LoginButton" Text="Google Login" Clicked="LoginButton_Clicked" Style="{StaticResource LoginButton}"></Button>
+                    <Button x:Name ="SignUpButton" Text="Enter" Clicked="SignUpButton_Clicked" Style="{StaticResource LoginButton}"></Button>
+                    <ActivityIndicator x:Name="activityIndicator" Color="#DDA448" IsRunning="False"></ActivityIndicator>
                     <Label x:Name="LoggingIn" Text="Logging in..." FontSize="Small" TextColor="White" HorizontalOptions="Center" IsVisible="False"></Label>
                 </StackLayout>
             </Frame>
