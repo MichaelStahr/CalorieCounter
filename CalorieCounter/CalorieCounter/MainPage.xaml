@@ -45,13 +45,14 @@
             </Style>
             <Style x:Key="AmountLabel" TargetType="Label">
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
-                <Setter Property="FontSize" Value="15"></Setter>
+                <Setter Property="FontSize" Value="18"></Setter>
                 <Setter Property="HorizontalOptions" Value="Start"></Setter>
                 <Setter Property="TextColor" Value="#DDA448"></Setter>
+                <Setter Property="Margin" Value="0,0,5,0"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
             </Style>
             <Style x:Key="FactLabel" TargetType="Label">
-                <Setter Property="FontSize" Value="15"></Setter>
+                <Setter Property="FontSize" Value="18"></Setter>  
                 <Setter Property="HorizontalOptions" Value="Start"></Setter>
                 <Setter Property="TextColor" Value="#537D8D"></Setter>
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
@@ -113,11 +114,13 @@
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
                 <Setter Property="TextColor" Value="#DDA448"></Setter>
                 <Setter Property="FontSize" Value="15"></Setter>
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
             </Style>
             <Style x:Key="SimpleFoodItemLabel" TargetType="Label">
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
                 <Setter Property="TextColor" Value="Black"></Setter>
                 <Setter Property="FontSize" Value="15"></Setter>
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
             </Style>
             <Style x:Key="SimpleFoodTitleGrid" TargetType="Grid">
                 <Setter Property="RowSpacing" Value="0"></Setter>
@@ -196,7 +199,7 @@
         </ResourceDictionary>
     </TabbedPage.Resources>
 
-    <ContentPage IconImageSource="home.png" Title="Main Page">
+    <ContentPage IconImageSource="home.png" Title="Home">
 
 
         <ScrollView Orientation="Vertical">
@@ -380,12 +383,12 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Label Text="Daily Items Added" HorizontalOptions="FillAndExpand" FontSize="20" HorizontalTextAlignment="Center" TextColor="#537D8D" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"></Label>
-                            <Label Text="Item" HorizontalOptions="FillAndExpand" FontSize="18" HorizontalTextAlignment="Start" TextColor="#537D8D" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"></Label>
-                            <Label Text="Calories" HorizontalOptions="FillAndExpand" FontSize="18" HorizontalTextAlignment="End" TextColor="#537D8D" FontAttributes="Bold" Grid.Row="1" Grid.Column="1"></Label>
+                            <Label Text="Daily Items Added" HorizontalOptions="FillAndExpand" FontSize="18" HorizontalTextAlignment="Center" TextColor="#537D8D" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"></Label>
+                            <Label Text="Item" HorizontalOptions="FillAndExpand" FontSize="16" HorizontalTextAlignment="Start" TextColor="#537D8D" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"></Label>
+                            <Label Text="Calories" HorizontalOptions="FillAndExpand" FontSize="16" HorizontalTextAlignment="End" TextColor="#537D8D" FontAttributes="Bold" Grid.Row="1" Grid.Column="1"></Label>
                         </Grid>
                             <StackLayout>
-                                <ListView x:Name="simpleFoodlv" ItemsSource="{Binding SimpleFood}">
+                                <ListView x:Name="simpleFoodlv" ItemsSource="{Binding SimpleFood}" SelectionMode="None">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <ViewCell>
@@ -413,5 +416,5 @@
     </ContentPage>
 
     <local:Page1 IconImageSource="user.png" Title="User"></local:Page1>
-    <local:Page2 IconImageSource="plus.png" Title="Add Food"></local:Page2>
+    <local:Page2 IconImageSource="plus.png" Title="Find Food"></local:Page2>
 </TabbedPage>

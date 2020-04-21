@@ -76,7 +76,7 @@ namespace CalorieCounter
             string day = currentSelectedDate.Day.ToString();
             dateString = year + "-" + month + "-" + day;
             DateLabel.Text = currentSelectedDate.Date.ToShortDateString();
-
+           
             HighlightCurrentSelectedDayOnChart();
         }
 

@@ -31,9 +31,10 @@ namespace CalorieCounter
                 Margin = 0,
                 CornerRadius = 5,
                 BackgroundColor = Color.FromHex("DDA448"),
-                TextColor = Color.White,
-                FontSize = 13
-                
+                TextColor = Color.Black,
+                FontSize = 13,
+                FontAttributes = FontAttributes.Bold
+
             };
             MinusBtn = new Button { 
                 Text = "-", 
@@ -41,8 +42,9 @@ namespace CalorieCounter
                 Margin = 0, 
                 CornerRadius = 5,
                 BackgroundColor = Color.FromHex("DDA448"),
-                TextColor = Color.White,
-                FontSize = 13
+                TextColor = Color.Black,
+                FontSize = 13,
+                FontAttributes = FontAttributes.Bold
             };
 
             Orientation = StackOrientation.Horizontal;
