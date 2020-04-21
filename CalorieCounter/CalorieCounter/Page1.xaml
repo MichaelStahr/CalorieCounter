@@ -5,10 +5,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="CalorieCounter.Page1">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="frame" TargetType="Frame">
+                <Setter Property="BorderColor" Value="#C05746"></Setter>
+                <Setter Property="BackgroundColor" Value="#CBDFBD"></Setter>
+                <Setter Property="HasShadow" Value="True"></Setter>
+                <Setter Property="CornerRadius" Value="10"></Setter>
+                <Setter Property="Margin" Value="5,5,5,5"></Setter>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout Margin="80">
+        <Frame Style="{StaticResource frame}">
+            <StackLayout Margin="40">
                 <Label x:Name="name" HorizontalOptions="CenterAndExpand" FontSize="Title" FontAttributes="Bold"
-                       TextColor="#C05746" Margin="30"></Label>
+                       TextColor="#C05746" Margin="0,0"></Label>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                     <Label Text="Weight:" FontSize="Large" VerticalOptions="Center" TextColor="#537D8D"></Label>
                     <Picker x:Name="weightPicker" Title="pounds" VerticalOptions="Center" FontSize="Large"></Picker>
@@ -19,5 +32,6 @@
                     <Picker x:Name="inchesPicker" Title="inches" VerticalOptions="Center" FontSize="Large"></Picker>
                 </StackLayout>
         </StackLayout>
+        </Frame>
     </ContentPage.Content>
 </ContentPage>
