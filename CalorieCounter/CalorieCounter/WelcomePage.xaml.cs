@@ -90,7 +90,9 @@ namespace CalorieCounter
                     // Possible that device doesn't support secure storage on device.
                 }
                 Preferences.Set("user", uniqueId);
-                
+                Preferences.Set("firstName", idToken.GivenName);
+                Preferences.Set("lastName", idToken.FamilyName);
+                Preferences.Set("email", idToken.Email);
                 await Navigation.PushModalAsync(new MainPage());
             } catch { }
 
@@ -110,7 +112,9 @@ namespace CalorieCounter
                 // Possible that device doesn't support secure storage on device.
             }
             Preferences.Set("user", "birdaj");
-
+            Preferences.Set("firstName", "Alec");
+            Preferences.Set("lastName", "Bird");
+            Preferences.Set("email", "birdaj@miamioh.edu");
             await Navigation.PushModalAsync(new MainPage());
         }
 

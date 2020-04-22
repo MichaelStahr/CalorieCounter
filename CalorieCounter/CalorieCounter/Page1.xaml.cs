@@ -18,7 +18,10 @@ namespace CalorieCounter
             genPicker();
             genFeetPicker();
             genInchesPicker();
+            firstName.Text = Preferences.Get("firstName", "");
+            lastName.Text = Preferences.Get("lastName", "");
             name.Text = Preferences.Get("user", "");
+            email.Text = Preferences.Get("email", "");
             NavigationPage.SetHasNavigationBar(this, false);
 
         }

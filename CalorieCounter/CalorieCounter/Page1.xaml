@@ -19,9 +19,21 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <Frame Style="{StaticResource frame}">
-            <StackLayout Margin="40">
-                <Label x:Name="name" HorizontalOptions="CenterAndExpand" FontSize="Title" FontAttributes="Bold"
-                       TextColor="#C05746" Margin="0,0"></Label>
+            <StackLayout Margin="10">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0">
+                    <Label x:Name="firstName" FontSize="Title" FontAttributes="Bold" TextColor="#C05746"></Label>
+                    <Label x:Name="lastName" FontSize="Title" FontAttributes="Bold" TextColor="#C05746"></Label>
+                </StackLayout>
+                <StackLayout Padding="0">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                        <Label x:Name="uniqueIdLabel" Text="UniqueId: " FontSize="Small" TextColor="#C05746" VerticalTextAlignment="End"></Label>
+                        <Label x:Name="name" FontSize="Large" FontAttributes="Bold" TextColor="#C05746" VerticalTextAlignment="End"></Label>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                        <Label x:Name="emailLabel" Text="Email: " FontSize="Small" TextColor="#C05746" VerticalTextAlignment="End"></Label>
+                        <Label x:Name="email" FontSize="Large" FontAttributes="Bold" TextColor="#C05746" VerticalTextAlignment="End"></Label>
+                    </StackLayout>
+                </StackLayout>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                     <Label Text="Weight:" FontSize="Large" VerticalOptions="Center" TextColor="#537D8D"></Label>
                     <Picker x:Name="weightPicker" Title="pounds" VerticalOptions="Center" FontSize="Large"></Picker>
@@ -31,7 +43,7 @@
                     <Picker x:Name="feetPicker" Title="feet" VerticalOptions="Center" FontSize="Large"></Picker>
                     <Picker x:Name="inchesPicker" Title="inches" VerticalOptions="Center" FontSize="Large"></Picker>
                 </StackLayout>
-        </StackLayout>
+            </StackLayout>
         </Frame>
     </ContentPage.Content>
 </ContentPage>
