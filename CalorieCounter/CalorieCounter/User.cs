@@ -23,5 +23,11 @@ namespace CalorieCounter
         [JsonProperty("TokenID")]
         public string TokenID { get; set; }
 
+        [JsonProperty("Weight")]
+        public int Weight { get; set; }
+
+        [JsonProperty("Height")]
+        public int Height { get; set; }
+
     }
 }

@@ -366,6 +366,30 @@ namespace CalorieCounter
             return false;
         }
 
+        public async Task<List<User>> GetUserInfo(string uri)
+        {
+            List<User> users = null;
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                HttpStatusCode i = response.StatusCode;
+
+                if (response.IsSuccessStatusCode)
+                {
+
+                    string c = await response.Content.ReadAsStringAsync();
+
+                    users = JsonConvert.DeserializeObject<List<User>>(c);
+                   
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.InnerException.Message);
+            }
+            return users;
+        }
+
         public async Task InsertNewsUser(string uri, string content)
         {
             string result = "";

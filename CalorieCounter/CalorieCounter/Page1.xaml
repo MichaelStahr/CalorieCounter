@@ -7,6 +7,9 @@
              x:Class="CalorieCounter.Page1">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="HomePage">
+                <On Platform="Android" Value="Acme-Regular.ttf#Acme Regular" />
+            </OnPlatform>
             <Style x:Key="frame" TargetType="Frame">
                 <Setter Property="BorderColor" Value="#C05746"></Setter>
                 <Setter Property="BackgroundColor" Value="#CBDFBD"></Setter>
@@ -14,6 +17,15 @@
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="Margin" Value="5,5,5,5"></Setter>
                 <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
+            </Style>
+            <Style x:Key="saveButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#DDA448"></Setter>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+                <Setter Property="BorderColor" Value="White"></Setter>
+                <Setter Property="BorderWidth" Value="2"></Setter>
+                <Setter Property="CornerRadius" Value="10"></Setter>
+                <Setter Property="FontFamily" Value="{d:StaticResource HomePage}"></Setter>
+                <Setter Property="TextColor" Value="White"></Setter>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -37,14 +49,14 @@
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0">
                     <Label Text="Weight:" FontSize="Medium" VerticalOptions="Center" TextColor="#537D8D"></Label>
-                    <Picker x:Name="weightPicker" Title="Pounds" VerticalOptions="Center" FontSize="Medium" TextColor="#C05746"></Picker>
+                    <Picker x:Name="weightPicker" Title="Pounds" VerticalOptions="Center" FontSize="Medium" TextColor="#C05746" SelectedIndexChanged="Pickers_SelectedIndexChanged"></Picker>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0">
                     <Label Text="Height:" FontSize="Medium" VerticalOptions="Center" TextColor="#537D8D"></Label>
-                    <Picker x:Name="feetPicker" Title="Feet" VerticalOptions="Center" FontSize="Medium" TextColor="#C05746"></Picker>
-                    <Picker x:Name="inchesPicker" Title="Inches" VerticalOptions="Center" FontSize="Medium" TextColor="#C05746"></Picker>
+                    <Picker x:Name="feetPicker" Title="Feet" VerticalOptions="Center" FontSize="Medium" TextColor="#C05746" SelectedIndexChanged="Pickers_SelectedIndexChanged"></Picker>
+                    <Picker x:Name="inchesPicker" Title="Inches" VerticalOptions="Center" FontSize="Medium" TextColor="#C05746" SelectedIndexChanged="Pickers_SelectedIndexChanged"></Picker>
                 </StackLayout>
-                <Button x:Name="saveButton" Text="Save" Clicked="SaveButton_Clicked" ></Button>
+                <Button x:Name="saveButton" Text="Save" Style="{StaticResource saveButton}" IsEnabled="False" Clicked="SaveButton_Clicked" ></Button>
             </StackLayout>
         </Frame>
     </ContentPage.Content>
