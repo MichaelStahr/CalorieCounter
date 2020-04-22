@@ -37,13 +37,14 @@
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0">
                     <Label Text="Weight:" FontSize="Medium" VerticalOptions="Center" TextColor="#537D8D"></Label>
-                    <Picker x:Name="weightPicker" Title="Pounds" VerticalOptions="Center" FontSize="Medium" TextColor="#DDA448"></Picker>
+                    <Picker x:Name="weightPicker" Title="Pounds" VerticalOptions="Center" FontSize="Medium" TextColor="#C05746"></Picker>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0">
                     <Label Text="Height:" FontSize="Medium" VerticalOptions="Center" TextColor="#537D8D"></Label>
-                    <Picker x:Name="feetPicker" Title="Feet" VerticalOptions="Center" FontSize="Medium" TextColor="#DDA448"></Picker>
-                    <Picker x:Name="inchesPicker" Title="Inches" VerticalOptions="Center" FontSize="Medium" TextColor="#DDA448"></Picker>
+                    <Picker x:Name="feetPicker" Title="Feet" VerticalOptions="Center" FontSize="Medium" TextColor="#C05746"></Picker>
+                    <Picker x:Name="inchesPicker" Title="Inches" VerticalOptions="Center" FontSize="Medium" TextColor="#C05746"></Picker>
                 </StackLayout>
+                <Button x:Name="saveButton" Text="Save" Clicked="SaveButton_Clicked" ></Button>
             </StackLayout>
         </Frame>
     </ContentPage.Content>
