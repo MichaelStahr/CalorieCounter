@@ -20,28 +20,29 @@
     <ContentPage.Content>
         <Frame Style="{StaticResource frame}">
             <StackLayout Margin="10">
-                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0">
+                <Image x:Name="profilePic" WidthRequest="70" HeightRequest="70"></Image>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="5">
                     <Label x:Name="firstName" FontSize="Title" FontAttributes="Bold" TextColor="#C05746"></Label>
                     <Label x:Name="lastName" FontSize="Title" FontAttributes="Bold" TextColor="#C05746"></Label>
                 </StackLayout>
                 <StackLayout Padding="0">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                        <Label x:Name="uniqueIdLabel" Text="UniqueId: " FontSize="Small" TextColor="#C05746" VerticalTextAlignment="End"></Label>
-                        <Label x:Name="name" FontSize="Large" FontAttributes="Bold" TextColor="#C05746" VerticalTextAlignment="End"></Label>
+                        <Label x:Name="uniqueIdLabel" Text="UniqueId: " FontSize="Small" TextColor="#537D8D" VerticalTextAlignment="End"></Label>
+                        <Label x:Name="name" FontSize="Medium" FontAttributes="Bold" TextColor="#C05746" VerticalTextAlignment="End"></Label>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                        <Label x:Name="emailLabel" Text="Email: " FontSize="Small" TextColor="#C05746" VerticalTextAlignment="End"></Label>
-                        <Label x:Name="email" FontSize="Large" FontAttributes="Bold" TextColor="#C05746" VerticalTextAlignment="End"></Label>
+                        <Label x:Name="emailLabel" Text="Email: " FontSize="Small" TextColor="#537D8D" VerticalTextAlignment="End"></Label>
+                        <Label x:Name="email" FontSize="Medium" FontAttributes="Bold" TextColor="#C05746" VerticalTextAlignment="End"></Label>
                     </StackLayout>
                 </StackLayout>
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <Label Text="Weight:" FontSize="Large" VerticalOptions="Center" TextColor="#537D8D"></Label>
-                    <Picker x:Name="weightPicker" Title="pounds" VerticalOptions="Center" FontSize="Large"></Picker>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0">
+                    <Label Text="Weight:" FontSize="Medium" VerticalOptions="Center" TextColor="#537D8D"></Label>
+                    <Picker x:Name="weightPicker" Title="Pounds" VerticalOptions="Center" FontSize="Medium" TextColor="#DDA448"></Picker>
                 </StackLayout>
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <Label Text="Height:" FontSize="Large" VerticalOptions="Center" TextColor="#537D8D"></Label>
-                    <Picker x:Name="feetPicker" Title="feet" VerticalOptions="Center" FontSize="Large"></Picker>
-                    <Picker x:Name="inchesPicker" Title="inches" VerticalOptions="Center" FontSize="Large"></Picker>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0">
+                    <Label Text="Height:" FontSize="Medium" VerticalOptions="Center" TextColor="#537D8D"></Label>
+                    <Picker x:Name="feetPicker" Title="Feet" VerticalOptions="Center" FontSize="Medium" TextColor="#DDA448"></Picker>
+                    <Picker x:Name="inchesPicker" Title="Inches" VerticalOptions="Center" FontSize="Medium" TextColor="#DDA448"></Picker>
                 </StackLayout>
             </StackLayout>
         </Frame>

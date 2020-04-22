@@ -93,6 +93,7 @@ namespace CalorieCounter
                 Preferences.Set("firstName", idToken.GivenName);
                 Preferences.Set("lastName", idToken.FamilyName);
                 Preferences.Set("email", idToken.Email);
+                Preferences.Set("picture", idToken.Picture);
                 await Navigation.PushModalAsync(new MainPage());
             } catch { }
 
@@ -115,6 +116,7 @@ namespace CalorieCounter
             Preferences.Set("firstName", "Alec");
             Preferences.Set("lastName", "Bird");
             Preferences.Set("email", "birdaj@miamioh.edu");
+            Preferences.Set("picture", "https://lh3.googleusercontent.com/-P5lBiBQZ1i0/AAAAAAAAAAI/AAAAAAAAAAA/AAKWJJMf0a_ABrMXci_Omledzhi_YGtBTw/s96-c/photo.jpg");
             await Navigation.PushModalAsync(new MainPage());
         }
 

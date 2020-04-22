@@ -415,6 +415,6 @@
 
     </ContentPage>
 
-    <local:Page1 IconImageSource="user.png" Title="User"></local:Page1>
+    <local:Page1 IconImageSource="user.png" Title="Profile"></local:Page1>
     <local:Page2 IconImageSource="plus.png" Title="Find Food"></local:Page2>
 </TabbedPage>

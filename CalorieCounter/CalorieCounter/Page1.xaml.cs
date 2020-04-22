@@ -18,6 +18,8 @@ namespace CalorieCounter
             genPicker();
             genFeetPicker();
             genInchesPicker();
+            string picUrl = Preferences.Get("picture", "");
+            profilePic.Source = ImageSource.FromUri(new Uri(picUrl));
             firstName.Text = Preferences.Get("firstName", "");
             lastName.Text = Preferences.Get("lastName", "");
             name.Text = Preferences.Get("user", "");
@@ -28,7 +30,7 @@ namespace CalorieCounter
 
         private void genPicker()
         {
-            for (int i = 1; i <= 700; i++)
+            for (int i = 50; i <= 500; i++)
             {
                 weightPicker.Items.Add(i + "");
             }
