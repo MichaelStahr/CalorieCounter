@@ -28,7 +28,7 @@
                 <Setter Property="TextColor" Value="White"></Setter>
             </Style>
             <Style x:Key="nameLabel" TargetType="Label">
-                <Setter Property="FontSize" Value="Title"></Setter>
+                <Setter Property="FontSize" Value="25"></Setter>
                 <Setter Property="TextColor" Value="#C05746"></Setter>
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
                 <Setter Property="FontFamily" Value="{d:StaticResource HomePage}"></Setter>
@@ -51,7 +51,7 @@
     <ContentPage.Content>
         <Frame Style="{StaticResource frame}">
             <StackLayout Margin="10">
-                <Image x:Name="profilePic" WidthRequest="70" HeightRequest="70"></Image>
+                <Image x:Name="profilePic" WidthRequest="100" HeightRequest="100"></Image>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="5">
                     <Label x:Name="firstName" Style="{StaticResource nameLabel}"></Label>
                     <Label x:Name="lastName" Style="{StaticResource nameLabel}"></Label>
