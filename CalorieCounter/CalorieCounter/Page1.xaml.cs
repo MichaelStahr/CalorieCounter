@@ -18,7 +18,7 @@ namespace CalorieCounter
         //public static string BaseAddress = "https://localhost:44341";
         public static string apiEndpoint = $"{BaseAddress}/api.asmx/";
         RestService _restService;
-        
+        string uniqueId;
         public Page1()
         {
             InitializeComponent();
@@ -30,7 +30,7 @@ namespace CalorieCounter
             profilePic.Source = ImageSource.FromUri(new Uri(picUrl));
             firstName.Text = Preferences.Get("firstName", "");
             lastName.Text = Preferences.Get("lastName", "");
-            name.Text = Preferences.Get("user", "");
+            uniqueId = Preferences.Get("user", "");
             email.Text = Preferences.Get("email", "");
             GetUserInfo();
             NavigationPage.SetHasNavigationBar(this, false);
@@ -42,7 +42,7 @@ namespace CalorieCounter
             try
             {
                 string id = await SecureStorage.GetAsync("id_token");
-                List<User> users = await _restService.GetUserInfo(GetUserUri(name.Text, id));
+                List<User> users = await _restService.GetUserInfo(GetUserUri(uniqueId, id));
                 weightPicker.SelectedIndex = users[0].Weight - 50;
                 feetPicker.SelectedIndex = users[0].Height / 12 - 1;
                 inchesPicker.SelectedIndex = users[0].Height % 12 - 1;
@@ -101,7 +101,7 @@ namespace CalorieCounter
                 string id = await SecureStorage.GetAsync("id_token");
                 int weight = Int32.Parse(weightPicker.SelectedItem.ToString());
                 int height = (Int32.Parse(feetPicker.SelectedItem.ToString())*12) + Int32.Parse(inchesPicker.SelectedItem.ToString());
-                UpdateUserWeightAndHeight(name.Text, id, weight, height);
+                UpdateUserWeightAndHeight(uniqueId, id, weight, height);
 
             }
             catch { };

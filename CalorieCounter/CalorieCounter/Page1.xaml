@@ -27,6 +27,25 @@
                 <Setter Property="FontFamily" Value="{d:StaticResource HomePage}"></Setter>
                 <Setter Property="TextColor" Value="White"></Setter>
             </Style>
+            <Style x:Key="nameLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="Title"></Setter>
+                <Setter Property="TextColor" Value="#C05746"></Setter>
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
+                <Setter Property="FontFamily" Value="{d:StaticResource HomePage}"></Setter>
+            </Style>
+            <Style x:Key="layoutLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="Small"></Setter>
+                <Setter Property="TextColor" Value="#537D8D"></Setter>
+                <Setter Property="FontFamily" Value="{d:StaticResource HomePage}"></Setter>
+                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+            </Style>
+            <Style x:Key="whpicker" TargetType="Picker">
+                <Setter Property="TextColor" Value="#C05746"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+                <Setter Property="FontSize" Value="20"></Setter>
+                <Setter Property="FontFamily" Value="{d:StaticResource HomePage}"></Setter>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -34,27 +53,24 @@
             <StackLayout Margin="10">
                 <Image x:Name="profilePic" WidthRequest="70" HeightRequest="70"></Image>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="5">
-                    <Label x:Name="firstName" FontSize="Title" FontAttributes="Bold" TextColor="#C05746"></Label>
-                    <Label x:Name="lastName" FontSize="Title" FontAttributes="Bold" TextColor="#C05746"></Label>
+                    <Label x:Name="firstName" Style="{StaticResource nameLabel}"></Label>
+                    <Label x:Name="lastName" Style="{StaticResource nameLabel}"></Label>
                 </StackLayout>
+
                 <StackLayout Padding="0">
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                        <Label x:Name="uniqueIdLabel" Text="UniqueId: " FontSize="Small" TextColor="#537D8D" VerticalTextAlignment="End"></Label>
-                        <Label x:Name="name" FontSize="Medium" FontAttributes="Bold" TextColor="#C05746" VerticalTextAlignment="End"></Label>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                        <Label x:Name="emailLabel" Text="Email: " FontSize="Small" TextColor="#537D8D" VerticalTextAlignment="End"></Label>
-                        <Label x:Name="email" FontSize="Medium" FontAttributes="Bold" TextColor="#C05746" VerticalTextAlignment="End"></Label>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0">
+                        <Label x:Name="emailLabel" Text="Email: " Style="{StaticResource layoutLabel}"></Label>
+                        <Label x:Name="email" FontSize="20" FontAttributes="Bold" TextColor="#C05746" VerticalOptions="Center" HorizontalOptions="Center" FontFamily="{d:StaticResource HomePage}"></Label>
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0">
-                    <Label Text="Weight:" FontSize="Medium" VerticalOptions="Center" TextColor="#537D8D"></Label>
-                    <Picker x:Name="weightPicker" Title="Pounds" VerticalOptions="Center" FontSize="Medium" TextColor="#C05746" SelectedIndexChanged="Pickers_SelectedIndexChanged"></Picker>
+                    <Label Text="Weight:" Style="{StaticResource layoutLabel}"></Label>
+                    <Picker x:Name="weightPicker" Title="Pounds" SelectedIndexChanged="Pickers_SelectedIndexChanged" Style="{StaticResource whpicker}"></Picker>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0">
-                    <Label Text="Height:" FontSize="Medium" VerticalOptions="Center" TextColor="#537D8D"></Label>
-                    <Picker x:Name="feetPicker" Title="Feet" VerticalOptions="Center" FontSize="Medium" TextColor="#C05746" SelectedIndexChanged="Pickers_SelectedIndexChanged"></Picker>
-                    <Picker x:Name="inchesPicker" Title="Inches" VerticalOptions="Center" FontSize="Medium" TextColor="#C05746" SelectedIndexChanged="Pickers_SelectedIndexChanged"></Picker>
+                    <Label Text="Height:" Style="{StaticResource layoutLabel}" ></Label>
+                    <Picker x:Name="feetPicker" Title="Feet" SelectedIndexChanged="Pickers_SelectedIndexChanged" Style="{StaticResource whpicker}"></Picker>
+                    <Picker x:Name="inchesPicker" Title="Inches" SelectedIndexChanged="Pickers_SelectedIndexChanged" Style="{StaticResource whpicker}"></Picker>
                 </StackLayout>
                 <Button x:Name="saveButton" Text="Save" Style="{StaticResource saveButton}" IsEnabled="False" Clicked="SaveButton_Clicked" ></Button>
             </StackLayout>
