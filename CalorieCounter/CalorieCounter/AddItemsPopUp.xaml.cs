@@ -1,4 +1,5 @@
-﻿using Rg.Plugins.Popup.Pages;
+﻿using Rg.Plugins.Popup.Contracts;
+using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
@@ -24,9 +25,10 @@ namespace CalorieCounter
         private ObservableCollection<AddItemPopUpModel> itemData;
         private DateTime currentDate = DateTime.Today;
         private readonly string unique_id;
+        private Label count;
         
         
-        public AddItemsPopUp(AddPopUpViewModel viewModel)
+        public AddItemsPopUp(AddPopUpViewModel viewModel, Label count)
         {
             InitializeComponent();
             //this.itemList = viewModel.ItemData;
@@ -34,11 +36,18 @@ namespace CalorieCounter
             addedItemsLv.ItemsSource = itemData;
             unique_id = Preferences.Get("user", "");
             _restService = new RestService();
+            this.count = count;
         }
 
         private async void Close_Button_Clicked(object sender, EventArgs e)
         {
-            await PopupNavigation.PopAsync(true);
+            int totalCount = 0;
+            foreach(AddItemPopUpModel i in itemData)
+            {
+                totalCount += i.Count;
+            }
+            count.Text = totalCount.ToString();
+            await PopupNavigation.Instance.PopAsync(true);
         }
 
         protected override void OnAppearing()
@@ -56,23 +65,10 @@ namespace CalorieCounter
 
         private void DeleteButton_Clicked(object sender, EventArgs e)
         {
-
-            //AddItemPopUpModel mItem = (AddItemPopUpModel)addedItemsLv.SelectedItem;
             itemData.Clear();
+            count.Text = 0.ToString();
             DeleteButton.IsEnabled = false;
             SaveButton.IsEnabled = false;
-            //if (mItem != null)
-            //{
-            //    itemData.Remove(mItem);
-            //    DeleteButton.IsEnabled = false;
-            //    if (itemData.Count == 0)
-            //    {
-            //        SaveButton.IsEnabled = false;
-            //    }
-            //} else
-            //{
-            //    DisplayAlert("Attention", "Select an item to delete it", "Close");
-            //}
         }
 
         private async void SaveButton_Clicked(object sender, EventArgs e)
@@ -92,8 +88,9 @@ namespace CalorieCounter
                 itemData.Clear();
                 //DisplayAlert("", "Items have been added!", "Close");
                 SaveButton.IsEnabled = false;
-                await PopupNavigation.PopAsync(true);
+                await PopupNavigation.Instance.PopAsync(true);
             }
+            count.Text = 0.ToString();
         }
 
         async void InsertFoodForUser(MiamiItem item)
@@ -120,6 +117,7 @@ namespace CalorieCounter
 
         private void MinusButton_Clicked(object sender, EventArgs e)
         {
+            int minus = Int32.Parse(count.Text);
             Button minusButton = (Button)sender;
             StackLayout layout = (StackLayout)minusButton.Parent;
             Grid g = (Grid)layout.Parent;
@@ -128,6 +126,7 @@ namespace CalorieCounter
             if (num > 0)
             {
                 num--;
+                minus--;
             }
             if (num == 0)
             {
@@ -137,11 +136,13 @@ namespace CalorieCounter
                 minusButton.IsEnabled = true;
             }
             countLabel.Text = num.ToString();
+            count.Text = minus.ToString();
             
         }
 
         private void PlusButton_Clicked(object sender, EventArgs e)
         {
+            int add = Int32.Parse(count.Text);
             Button plusButton = (Button)sender;
             StackLayout layout = (StackLayout)plusButton.Parent;
             Button minusButton = (Button)layout.Children[0];
@@ -149,8 +150,10 @@ namespace CalorieCounter
             Label countLabel = (Label)g.Children[1];
             int num = Int32.Parse(countLabel.Text);
             num++;
+            add++;
             countLabel.Text = num.ToString();
             minusButton.IsEnabled = true;
+            count.Text = add.ToString();
         }
     }
 }
