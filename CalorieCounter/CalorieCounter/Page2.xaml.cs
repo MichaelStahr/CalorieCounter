@@ -191,6 +191,12 @@ namespace CalorieCounter
                 {
                     string location = locations.SelectedItem.ToString();
                     miamiFoodItem = await _restService.GetFoodDataAsync(SearchFoodByNameAndLocation(location));
+                    foreach (MiamiItem m in miamiFoodItem)
+                    {
+                        double d = Double.Parse(m.CaloriesK);
+                        d = Math.Round(d, 2);
+                        m.CaloriesK = d.ToString();
+                    }
                     foodItemslv.ItemsSource = miamiFoodItem;
                     if (miamiFoodItem.Count > 0)
                     {
@@ -212,6 +218,12 @@ namespace CalorieCounter
             {
                 miamiFoodItem = await _restService.GetFoodDataAsync(SearchFoodByLocation(locations.SelectedItem.ToString()));
                 //searchFrame.IsVisible = true;
+                foreach (MiamiItem m in miamiFoodItem)
+                {
+                    double d = Double.Parse(m.CaloriesK);
+                    d = Math.Round(d, 2);
+                    m.CaloriesK = d.ToString();
+                }
                 foodItemslv.ItemsSource = miamiFoodItem;
                 if (miamiFoodItem.Count > 0)
                 {

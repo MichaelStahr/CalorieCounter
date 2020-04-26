@@ -257,6 +257,7 @@ namespace CalorieCounter
             DateTime date = e.DateTime.Date;
             DateLabel.Text = e.DateTime.Date.ToShortDateString();
             FoodLookup(ChangeDateToString(date));
+            dateString = ChangeDateToString(date);
             GetFoodForDay();
 
             DateTime previousSelected = Preferences.Get("currentSelectedDate", DateTime.Today);

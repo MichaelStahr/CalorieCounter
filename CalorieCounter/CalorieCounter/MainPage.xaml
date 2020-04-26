@@ -221,14 +221,24 @@
 
                     <chart:SfChart.PrimaryAxis>
                         <chart:CategoryAxis>
-                            
-                        </chart:CategoryAxis>
+                                <chart:CategoryAxis.LabelStyle>
+
+                                    <chart:ChartAxisLabelStyle Font="Bold, 10"/>
+
+                                </chart:CategoryAxis.LabelStyle>
+
+                            </chart:CategoryAxis>
                     </chart:SfChart.PrimaryAxis>
 
                     <chart:SfChart.SecondaryAxis>
                         <chart:NumericalAxis>
-                           
-                        </chart:NumericalAxis>
+                                <chart:NumericalAxis.LabelStyle>
+
+                                    <chart:ChartAxisLabelStyle Font="Bold, 10"/>
+
+                                </chart:NumericalAxis.LabelStyle>
+
+                            </chart:NumericalAxis>
                     </chart:SfChart.SecondaryAxis>
 
 
