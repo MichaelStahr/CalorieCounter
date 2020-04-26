@@ -366,7 +366,58 @@ namespace CalorieCounter
             return false;
         }
 
+        public async Task<List<User>> GetUserInfo(string uri)
+        {
+            List<User> users = null;
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                HttpStatusCode i = response.StatusCode;
+
+                if (response.IsSuccessStatusCode)
+                {
+
+                    string c = await response.Content.ReadAsStringAsync();
+
+                    users = JsonConvert.DeserializeObject<List<User>>(c);
+                   
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.InnerException.Message);
+            }
+            return users;
+        }
+
         public async Task InsertNewsUser(string uri, string content)
+        {
+            string result = "";
+            try
+            {
+                using (var message = new HttpRequestMessage(HttpMethod.Post, uri))
+                {
+
+                    message.Version = HttpVersion.Version10;
+                    message.Content = new StringContent(content, Encoding.UTF8, "application/x-www-form-urlencoded");
+
+                    using (var response = await _client.SendAsync(message))
+                    {
+                        result = await response.Content.ReadAsStringAsync();
+                        if (response.IsSuccessStatusCode)
+                        {
+                            // user inserted successfully
+                        }
+                    }
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.InnerException.Message);
+            }
+        }
+
+        public async Task UpdateWeightAndHeightForUser(string uri, string content)
         {
             string result = "";
             try

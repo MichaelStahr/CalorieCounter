@@ -41,6 +41,12 @@
                 <Setter Property="TextColor" Value="White"></Setter>
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
             </Style>
+            <Style x:Key="LoggingInLabel" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                <Setter Property="FontSize" Value="Medium"></Setter>
+                <Setter Property="FontFamily" Value="{d:StaticResource HomePage}"></Setter>
+                <Setter Property="TextColor" Value="White"></Setter>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -52,8 +58,8 @@
                     <Button x:Name="LoginButton" Text="Google Login" Clicked="LoginButton_Clicked" Style="{StaticResource LoginButton}"></Button>
                     <Button x:Name ="SignUpButton" Text="Enter" Clicked="SignUpButton_Clicked" Style="{StaticResource LoginButton}"></Button>
                     <ActivityIndicator x:Name="activityIndicator" Color="#DDA448" IsRunning="False"></ActivityIndicator>
-                    <Label x:Name="LoggingIn" Text="Logging in..." FontSize="Small" TextColor="White" HorizontalOptions="Center" IsVisible="False"></Label>
-                    <Label x:Name="welcomeName" FontSize="Small" TextColor="White" HorizontalOptions="Center" IsVisible="False"></Label>
+                    <Label x:Name="LoggingIn" Text="Logging in..." IsVisible="False" Style="{StaticResource LoggingInLabel}"></Label>
+                    <Label x:Name="welcomeName" IsVisible="False" Style="{StaticResource LoggingInLabel}"></Label>
                 </StackLayout>
             </Frame>
         </StackLayout>

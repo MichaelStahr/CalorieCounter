@@ -84,7 +84,7 @@
                 <Setter Property="TextColor" Value="#DDA448"></Setter>
             </Style>
             <Style x:Key="DateFrame" TargetType="Frame">
-                <Setter Property="BackgroundColor" Value="#446774"></Setter>
+                <Setter Property="BackgroundColor" Value="#537D8D"></Setter>
                 <Setter Property="BorderColor" Value="White"></Setter>
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="Padding" Value="0,2,0,2"></Setter>
@@ -275,7 +275,7 @@
                     <Button x:Name="GoForwardAWeek" Text="&gt;&gt;" Clicked="GoBackOrForwardAWeek_Clicked" IsEnabled="False" Style="{StaticResource RedButton}" Grid.Column="4" Margin="0,0,5,0"></Button>
                     </Grid>
                 <StackLayout Orientation="Horizontal">
-                    <Button x:Name="showCalendar" Text="Show Calendar" 
+                    <Button x:Name="showCalendar" Text="Calendar" 
                                 VerticalOptions="Start" Style="{StaticResource RedButton}"
                                 Clicked="ClickToShowPopup_Clicked" Margin="5,0,0,0">
                     </Button>
@@ -335,7 +335,7 @@
                 </Frame>
 
                 <Frame Style="{StaticResource CalorieDetailFrame}">
-                    <Grid HorizontalOptions="CenterAndExpand">
+                    <Grid HorizontalOptions="CenterAndExpand" ColumnSpacing="8">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="*" />
@@ -415,6 +415,6 @@
 
     </ContentPage>
 
-    <local:Page1 IconImageSource="user.png" Title="User"></local:Page1>
+    <local:Page1 IconImageSource="user.png" Title="Profile"></local:Page1>
     <local:Page2 IconImageSource="plus.png" Title="Find Food"></local:Page2>
 </TabbedPage>

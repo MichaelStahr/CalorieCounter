@@ -7,6 +7,9 @@
              x:Class="CalorieCounter.Page1">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="HomePage">
+                <On Platform="Android" Value="Acme-Regular.ttf#Acme Regular" />
+            </OnPlatform>
             <Style x:Key="frame" TargetType="Frame">
                 <Setter Property="BorderColor" Value="#C05746"></Setter>
                 <Setter Property="BackgroundColor" Value="#CBDFBD"></Setter>
@@ -15,23 +18,62 @@
                 <Setter Property="Margin" Value="5,5,5,5"></Setter>
                 <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
             </Style>
+            <Style x:Key="saveButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#DDA448"></Setter>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+                <Setter Property="BorderColor" Value="White"></Setter>
+                <Setter Property="BorderWidth" Value="2"></Setter>
+                <Setter Property="CornerRadius" Value="10"></Setter>
+                <Setter Property="FontFamily" Value="{d:StaticResource HomePage}"></Setter>
+                <Setter Property="TextColor" Value="White"></Setter>
+            </Style>
+            <Style x:Key="nameLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="25"></Setter>
+                <Setter Property="TextColor" Value="#C05746"></Setter>
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
+                <Setter Property="FontFamily" Value="{d:StaticResource HomePage}"></Setter>
+            </Style>
+            <Style x:Key="layoutLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="Small"></Setter>
+                <Setter Property="TextColor" Value="#537D8D"></Setter>
+                <Setter Property="FontFamily" Value="{d:StaticResource HomePage}"></Setter>
+                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+            </Style>
+            <Style x:Key="whpicker" TargetType="Picker">
+                <Setter Property="TextColor" Value="#C05746"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+                <Setter Property="FontSize" Value="20"></Setter>
+                <Setter Property="FontFamily" Value="{d:StaticResource HomePage}"></Setter>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
         <Frame Style="{StaticResource frame}">
-            <StackLayout Margin="40">
-                <Label x:Name="name" HorizontalOptions="CenterAndExpand" FontSize="Title" FontAttributes="Bold"
-                       TextColor="#C05746" Margin="0,0"></Label>
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <Label Text="Weight:" FontSize="Large" VerticalOptions="Center" TextColor="#537D8D"></Label>
-                    <Picker x:Name="weightPicker" Title="pounds" VerticalOptions="Center" FontSize="Large"></Picker>
+            <StackLayout Margin="10">
+                <Image x:Name="profilePic" WidthRequest="100" HeightRequest="100"></Image>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="5">
+                    <Label x:Name="firstName" Style="{StaticResource nameLabel}"></Label>
+                    <Label x:Name="lastName" Style="{StaticResource nameLabel}"></Label>
                 </StackLayout>
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <Label Text="Height:" FontSize="Large" VerticalOptions="Center" TextColor="#537D8D"></Label>
-                    <Picker x:Name="feetPicker" Title="feet" VerticalOptions="Center" FontSize="Large"></Picker>
-                    <Picker x:Name="inchesPicker" Title="inches" VerticalOptions="Center" FontSize="Large"></Picker>
+
+                <StackLayout Padding="0">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0">
+                        <Label x:Name="emailLabel" Text="Email: " Style="{StaticResource layoutLabel}"></Label>
+                        <Label x:Name="email" FontSize="20" FontAttributes="Bold" TextColor="#C05746" VerticalOptions="Center" HorizontalOptions="Center" FontFamily="{d:StaticResource HomePage}"></Label>
+                    </StackLayout>
                 </StackLayout>
-        </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0">
+                    <Label Text="Weight:" Style="{StaticResource layoutLabel}"></Label>
+                    <Picker x:Name="weightPicker" Title="Pounds" SelectedIndexChanged="Pickers_SelectedIndexChanged" Style="{StaticResource whpicker}"></Picker>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0">
+                    <Label Text="Height:" Style="{StaticResource layoutLabel}" ></Label>
+                    <Picker x:Name="feetPicker" Title="Feet" SelectedIndexChanged="Pickers_SelectedIndexChanged" Style="{StaticResource whpicker}"></Picker>
+                    <Picker x:Name="inchesPicker" Title="Inches" SelectedIndexChanged="Pickers_SelectedIndexChanged" Style="{StaticResource whpicker}"></Picker>
+                </StackLayout>
+                <Button x:Name="saveButton" Text="Save" Style="{StaticResource saveButton}" IsEnabled="False" Clicked="SaveButton_Clicked" ></Button>
+            </StackLayout>
         </Frame>
     </ContentPage.Content>
 </ContentPage>
