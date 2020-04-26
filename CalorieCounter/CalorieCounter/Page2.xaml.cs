@@ -9,13 +9,13 @@ using System.Collections.ObjectModel;
 using System.Xml.Linq;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Essentials;
+using Rg.Plugins.Popup.Contracts;
 
 namespace CalorieCounter
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Page2 : ContentPage
     {
-
         public static string BaseAddress = "http://caloriecounter.mikestahr.com";
         //Device.RuntimePlatform == Device.Android ? "https://10.0.2.2:44341" : "https://localhost:44341";
         
@@ -30,6 +30,9 @@ namespace CalorieCounter
         private string eatsDate;
         private string userTokenId;
         AddPopUpViewModel popUpView;
+        AddPopUpViewModel selectedItems;
+        AddItemsPopUp selectedItemsCount;
+        int count;
         public Page2()
         {
             InitializeComponent();
@@ -40,7 +43,8 @@ namespace CalorieCounter
             // access Miami API and put in our DB - currently uncomment and run manually
             //MiamiFoodLookup();
             popUpView = new AddPopUpViewModel();
-            
+            selectedItems = new AddPopUpViewModel();
+            count = 0;
         }
 
         private async void GetUserIdToken()
@@ -62,6 +66,14 @@ namespace CalorieCounter
             string day = date.Day.ToString();
             string strDate = year + "-" + month + "-" + day;
             return strDate;
+        }
+
+        protected void OnCurrentPageChanged()
+        {
+            if (popUpView.ItemData.Count == 0)
+            {
+                count = 0;
+            }
         }
 
         protected override void OnAppearing()
@@ -188,8 +200,6 @@ namespace CalorieCounter
                         SaveSelectedItems.IsEnabled = false;
                     }
                 }
-
-               
             }
            
         }
@@ -245,13 +255,23 @@ namespace CalorieCounter
 
         private async void ShowFoodsToBeAdded_Clicked(object sender, EventArgs e)
         {
-            await PopupNavigation.PushAsync(new AddItemsPopUp(popUpView));
+            await PopupNavigation.Instance.PushAsync(new AddItemsPopUp(popUpView, counterLabel));
         }
 
         private void FoodItemslv_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             MiamiItem mItem = (MiamiItem)foodItemslv.SelectedItem;
             bool check = false;
+            if(popUpView.ItemData.Count == 0)
+            {
+                count = 0;
+            }
+            else
+            {
+                count = Int32.Parse(counterLabel.Text);
+            }
+            count++;
+            counterLabel.Text = count.ToString();
             
             foreach (AddItemPopUpModel m in popUpView.ItemData)
             {
@@ -267,6 +287,5 @@ namespace CalorieCounter
                 popUpView.ItemData.Add(new AddItemPopUpModel(mItem, 1));
             }
         }
-
     }
 }

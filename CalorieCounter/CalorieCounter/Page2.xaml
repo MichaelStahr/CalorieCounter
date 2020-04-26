@@ -44,32 +44,37 @@
             
         </ResourceDictionary>
     </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <local:AddPopUpViewModel></local:AddPopUpViewModel>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
             <StackLayout>
             <Frame Style="{StaticResource AddFrame}">
-
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
+                <StackLayout>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
                         <SearchBar x:Name="SearchingFoods" 
                                    Placeholder="Search" 
                                    TextChanged="Entry_TextChanged"
-                               HorizontalOptions="FillAndExpand"
-                               VerticalOptions="End"
-                                   Grid.Column="0">
+                                   HorizontalOptions="FillAndExpand"
+                                   VerticalOptions="End"
+                                   Grid.Column="1"
+                                   Grid.Row="0">
                         </SearchBar>
-
                         <Picker x:Name="locations" 
                                 SelectedIndexChanged="Locations_SelectedIndexChanged" 
                                 HorizontalOptions="FillAndExpand"
                                 VerticalOptions="End"
                                 Title="Select a location"
-                                Grid.Column="1">
+                                Grid.Column="0"
+                                Grid.Row="0">
                             <Picker.Items>
                                 <x:String>Search</x:String>
                                 <x:String>ASC</x:String>
@@ -85,18 +90,19 @@
                             </Picker.Items>
                             <Picker.SelectedIndex>0</Picker.SelectedIndex>
                         </Picker>
-                </Grid>
+                        <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+                            <Label x:Name="counterLabel" Text="0"></Label>
+                            <Label Text=" Items Selected"></Label>
+                        </StackLayout>
+                    </Grid>
+                </StackLayout>
             </Frame>
             <StackLayout>
                 <Frame x:Name="searchFrame" BorderColor="#C05746" HeightRequest="500" IsVisible="true" Margin="5,0,5,5">
                     <StackLayout>
-                        <Label x:Name="tokenLabel" Text="{Binding token}"></Label>
-                        <StackLayout Orientation="Horizontal">
-                            <Button x:Name="SaveSelectedItems" Text="Save Selected Items" IsVisible="True" IsEnabled="False" Clicked="ShowFoodsToBeAdded_Clicked" Style="{StaticResource EditButtons}"></Button>
-                        </StackLayout>
                         <StackLayout>
                             <Label x:Name="TextOldValue" FontSize="Small"/>
-                            <ListView x:Name="foodItemslv" RowHeight="75" ItemsSource="{Binding MiamiItem}" SeparatorColor="#C05746" ItemTapped="FoodItemslv_ItemTapped">
+                            <ListView x:Name="foodItemslv" RowHeight="75" SeparatorColor="#C05746" ItemsSource="{Binding MiamiItem}" ItemTapped="FoodItemslv_ItemTapped" >
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
@@ -111,7 +117,7 @@
                                                     <ColumnDefinition Width="*"></ColumnDefinition>
 
                                                 </Grid.ColumnDefinitions>
-                                               
+
                                                 <Label Text="{Binding Formalname}" TextColor="#DDA448" FontAttributes="Bold" FontSize="18" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"></Label>
                                                 <Label Text="Location: " Style="{StaticResource ItemSubNameLabel}" Grid.Row="1" Grid.Column="0"></Label>
                                                 <Label Text="{Binding ServiceUnit}" Style="{StaticResource ItemSubValueLabel}" Grid.Row="1" Grid.Column="1"></Label>
@@ -122,6 +128,10 @@
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Button x:Name="SaveSelectedItems" Text="Save Selected Items" IsVisible="True" IsEnabled="False"
+                                    Clicked="ShowFoodsToBeAdded_Clicked" Style="{StaticResource EditButtons}"></Button>
                         </StackLayout>
                     </StackLayout>
                 </Frame>
