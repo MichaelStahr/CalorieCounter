@@ -59,6 +59,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <SearchBar x:Name="SearchingFoods" 
                                    Placeholder="Search" 
@@ -66,6 +67,7 @@
                                    HorizontalOptions="FillAndExpand"
                                    VerticalOptions="End"
                                    Grid.Column="1"
+                                   Grid.ColumnSpan="2"
                                    Grid.Row="0">
                         </SearchBar>
                         <Picker x:Name="locations" 
@@ -90,7 +92,7 @@
                             </Picker.Items>
                             <Picker.SelectedIndex>0</Picker.SelectedIndex>
                         </Picker>
-                        <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+                        <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1">
                             <Label x:Name="counterLabel" Text="0"></Label>
                             <Label Text=" Items Selected"></Label>
                         </StackLayout>
