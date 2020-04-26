@@ -84,7 +84,7 @@
                 <Setter Property="TextColor" Value="#DDA448"></Setter>
             </Style>
             <Style x:Key="DateFrame" TargetType="Frame">
-                <Setter Property="BackgroundColor" Value="#446774"></Setter>
+                <Setter Property="BackgroundColor" Value="#537D8D"></Setter>
                 <Setter Property="BorderColor" Value="White"></Setter>
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="Padding" Value="0,2,0,2"></Setter>

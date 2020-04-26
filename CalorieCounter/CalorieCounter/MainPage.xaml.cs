@@ -214,6 +214,7 @@ namespace CalorieCounter
             {
                 DateTime otherDateTime = selectedDate.AddDays(k);
                 string otherDate = ChangeDateToString(otherDateTime);
+                string formattedOtherDate = otherDateTime.ToShortDateString();
                 int comparison = DateTime.Compare(otherDateTime, DateTime.Today.AddDays(1));
                 double otherTotalCals = 0;
                 if (comparison < 0)
@@ -221,7 +222,7 @@ namespace CalorieCounter
                     otherTotalCals = await GetDailyCaloriesForDate(otherDate);
                 }
                 //model.Data1.Add(new ChartData(otherDate, 20));
-                model.Data1.Add(new ChartData(otherDate, otherTotalCals));
+                model.Data1.Add(new ChartData(formattedOtherDate, otherTotalCals));
             }
             
             calorieChartSeries.ItemsSource = model.Data1;
