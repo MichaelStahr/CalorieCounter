@@ -443,5 +443,30 @@ namespace CalorieCounter
                 Console.WriteLine(e.InnerException.Message);
             }
         }
+
+        public async Task<List<Location>> GetActiveLocations(string uri)
+        {
+            List<Location> locations = null;
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                HttpStatusCode i = response.StatusCode;
+
+                if (response.IsSuccessStatusCode)
+                {
+
+                    string c = await response.Content.ReadAsStringAsync();
+
+                    locations = JsonConvert.DeserializeObject<List<Location>>(c);
+
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.InnerException.Message);
+            }
+            return locations;
+        }
+
     }
 }

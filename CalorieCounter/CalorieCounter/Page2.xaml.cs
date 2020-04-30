@@ -45,6 +45,7 @@ namespace CalorieCounter
             popUpView = new AddPopUpViewModel();
             selectedItems = new AddPopUpViewModel();
             count = 0;
+            GetActiveLocations();
         }
 
         private async void GetUserIdToken()
@@ -76,10 +77,30 @@ namespace CalorieCounter
             }
         }
 
-        protected override void OnAppearing()
+        public async void GetActiveLocations()
         {
-            //searchFrame.IsVisible = false;
-            //SaveSelectedItems.IsEnabled = true;
+            // /api.asmx/GetActiveLocations?
+            List<Location> activeLocations = new List<Location>();
+            activeLocations = await _restService.GetActiveLocations(apiEndpoint + "GetActiveLocations?");
+            
+            for (int i = 0; i < locationsPicker.Items.Count; i++)
+            {
+                bool isOpen = false;
+                string locationName = locationsPicker.Items[i];
+                foreach (Location l in activeLocations)
+                {
+                    if (l.ServiceUnit.Equals(locationName))
+                    {
+                        isOpen = true;
+                        break;
+                    }
+                }
+                if (!isOpen)
+                {
+                    locationsPicker.Items[i] = locationName + " (not open)";
+                }
+            }
+            
         }
 
         public string SearchFoodByNameAndLocation(string location)
@@ -140,12 +161,12 @@ namespace CalorieCounter
             LookUpFoodByNameAndLocation();
             
             
-            if(SearchingFoods.Text != "" && locations.SelectedIndex > 0)
+            if(SearchingFoods.Text != "")
             {
                 //searchFrame.IsVisible = true;
                 SaveSelectedItems.IsEnabled = true;
                 
-            } else if (SearchingFoods.Text.Equals("") && locations.SelectedIndex > 0)
+            } else if (SearchingFoods.Text.Equals(""))
             {
                 //searchFrame.IsVisible = true;
                 SaveSelectedItems.IsEnabled = true;
@@ -174,7 +195,7 @@ namespace CalorieCounter
         {
             string foods = null;
             // returns a string representation of an xml file
-            foods = await _restService.GetMiamiFoodDataAsync(GetMiamiFoodByNameAndLocation(locations.SelectedItem.ToString()));
+            foods = await _restService.GetMiamiFoodDataAsync(GetMiamiFoodByNameAndLocation(locationsPicker.SelectedItem.ToString()));
             // send xml file to stored procedure to store in DB
             await _restService.InsertMiamiFoodDataAsync(apiEndpoint + "InsertXml", foods);
 
@@ -187,9 +208,8 @@ namespace CalorieCounter
 
             if (!string.IsNullOrWhiteSpace(SearchingFoods.Text))
             {
-                if (locations.SelectedIndex > 0)
-                {
-                    string location = locations.SelectedItem.ToString();
+                
+                    string location = locationsPicker.SelectedItem.ToString();
                     miamiFoodItem = await _restService.GetFoodDataAsync(SearchFoodByNameAndLocation(location));
                     foreach (MiamiItem m in miamiFoodItem)
                     {
@@ -205,7 +225,7 @@ namespace CalorieCounter
                     {
                         SaveSelectedItems.IsEnabled = false;
                     }
-                }
+                
             }
            
         }
@@ -214,9 +234,8 @@ namespace CalorieCounter
         {
             List<MiamiItem> miamiFoodItem = new List<MiamiItem>();
 
-            if (locations.SelectedIndex > 0)
-            {
-                miamiFoodItem = await _restService.GetFoodDataAsync(SearchFoodByLocation(locations.SelectedItem.ToString()));
+            
+                miamiFoodItem = await _restService.GetFoodDataAsync(SearchFoodByLocation(locationsPicker.SelectedItem.ToString()));
                 //searchFrame.IsVisible = true;
                 foreach (MiamiItem m in miamiFoodItem)
                 {
@@ -232,14 +251,7 @@ namespace CalorieCounter
                 {
                     SaveSelectedItems.IsEnabled = false;
                 }
-            } else
-            {
-                foodItemslv.ItemsSource = null;
-                //SaveSelectedItems.IsVisible = false;
-                //searchFrame.IsVisible = false;
-                SaveSelectedItems.IsEnabled = false;
-            }
-
+            
         }
 
         async void InsertFoodForUser(MiamiItem item)
