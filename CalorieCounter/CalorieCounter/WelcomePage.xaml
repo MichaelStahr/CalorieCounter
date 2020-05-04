@@ -14,21 +14,21 @@
                 <On Platform="Android" Value="Acme-Regular.ttf#Acme Regular" />
             </OnPlatform>
             <Style x:Key="loginFrame" TargetType="Frame">
-                <Setter Property="BorderColor" Value="#C05746"></Setter>
-                <Setter Property="BackgroundColor" Value="#537D8D"></Setter>
+                <Setter Property="BorderColor" Value="#941728"></Setter>
+                <Setter Property="BackgroundColor" Value="#C3142D"></Setter>
                 <Setter Property="HasShadow" Value="True"></Setter>
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="Margin" Value="5,5,5,5"></Setter>
                 <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
             </Style>
             <Style x:Key="LoginButton" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="#DDA448"></Setter>
+                <Setter Property="BackgroundColor" Value="White"></Setter>
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
-                <Setter Property="BorderColor" Value="White"></Setter>
+                <Setter Property="BorderColor" Value="Black"></Setter>
                 <Setter Property="BorderWidth" Value="2"></Setter>
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="FontFamily" Value="{d:StaticResource HomePage}"></Setter>
-                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="TextColor" Value="#C3142D"></Setter>
             </Style>
             <Style x:Key="MiamiLogo" TargetType="Image">
                 <Setter Property="HeightRequest" Value="150"></Setter>
@@ -53,11 +53,11 @@
         <StackLayout>
             <Frame Style="{StaticResource loginFrame}">
                 <StackLayout Padding="0" VerticalOptions="CenterAndExpand">
-                    <Image Source="miamiEdit1.png" Style="{StaticResource MiamiLogo}"></Image>
+                    <Image Source="miamiEdit.png" Style="{StaticResource MiamiLogo}"></Image>
                     <Label Text="Welcome to Calorie Counter!" Style="{StaticResource WelcomeLabel}"></Label>
                     <Button x:Name="LoginButton" Text="Login" Clicked="LoginButton_Clicked" Style="{StaticResource LoginButton}"></Button>
                     <!--<Button x:Name ="SignUpButton" Text="Enter" Clicked="SignUpButton_Clicked" Style="{StaticResource LoginButton}"></Button>-->
-                    <ActivityIndicator x:Name="activityIndicator" Color="#DDA448" IsRunning="False"></ActivityIndicator>
+                    <ActivityIndicator x:Name="activityIndicator" Color="#C3142D" IsRunning="False"></ActivityIndicator>
                     <Label x:Name="LoggingIn" Text="Logging in..." IsVisible="False" Style="{StaticResource LoggingInLabel}"></Label>
                     <Label x:Name="welcomeName" IsVisible="False" Style="{StaticResource LoggingInLabel}"></Label>
                 </StackLayout>

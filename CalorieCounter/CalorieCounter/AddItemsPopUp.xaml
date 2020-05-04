@@ -28,7 +28,7 @@
         <ContentView.Resources>
             <ResourceDictionary>
                 <Style x:Key="ItemListFrame" TargetType="Frame">
-                    <Setter Property="BorderColor" Value="#C05746"></Setter>
+                    <Setter Property="BorderColor" Value="#941728"></Setter>
                     <Setter Property="BackgroundColor" Value="#CBDFBD"></Setter>
                     <Setter Property="HasShadow" Value="True"></Setter>
                     <Setter Property="CornerRadius" Value="10"></Setter>
@@ -37,7 +37,7 @@
                     <Setter Property="VerticalOptions" Value="Center"></Setter>
                 </Style>
                 <Style x:Key="EditButton" TargetType="Button">
-                    <Setter Property="BackgroundColor" Value="#C05746"></Setter>
+                    <Setter Property="BackgroundColor" Value="#941728"></Setter>
                     <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
                     <Setter Property="BorderColor" Value="White"></Setter>
                     <Setter Property="BorderWidth" Value="2"></Setter>
@@ -54,18 +54,18 @@
                 </Style>
                 <Style x:Key="CountLabel" TargetType="Label">
                     <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
-                    <Setter Property="TextColor" Value="#C05746"></Setter>
+                    <Setter Property="TextColor" Value="#941728"></Setter>
                     <Setter Property="FontSize" Value="18"></Setter>
                     <Setter Property="FontAttributes" Value="Bold"></Setter>
                     <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
                     <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
                 </Style>
                 <Style x:Key="CountStepper" TargetType="Stepper">
-                    <Setter Property="BackgroundColor" Value="#DDA448"></Setter>
+                    <Setter Property="BackgroundColor" Value="#C3142D"></Setter>
                     <Setter Property="HorizontalOptions" Value="Center"></Setter>
                 </Style>
                 <Style x:Key="PlusMinusButton" TargetType="Button">
-                    <Setter Property="BackgroundColor" Value="#DDA448"></Setter>
+                    <Setter Property="BackgroundColor" Value="#C3142D"></Setter>
                     <Setter Property="CornerRadius" Value="5"></Setter>
                     <Setter Property="TextColor" Value="White"></Setter>
                     <Setter Property="Margin" Value="0"></Setter>

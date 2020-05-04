@@ -38,7 +38,7 @@ namespace CalorieCounter
 
                     new Label {Text = "Miami University",
                     HorizontalTextAlignment = TextAlignment.Center,
-                    TextColor = Color.FromHex("C05746"),
+                    TextColor = Color.FromHex("941728"),
                     FontSize = 25,
                     FontFamily = Device.RuntimePlatform == Device.Android ? "Acme-Regular.ttf#Acme-Regular" : null,
                     HorizontalOptions = LayoutOptions.EndAndExpand},

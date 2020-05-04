@@ -30,7 +30,7 @@ namespace CalorieCounter
                 WidthRequest = 30,
                 Margin = 0,
                 CornerRadius = 5,
-                BackgroundColor = Color.FromHex("DDA448"),
+                BackgroundColor = Color.FromHex("C3142D"),
                 TextColor = Color.Black,
                 FontSize = 13,
                 FontAttributes = FontAttributes.Bold
@@ -41,7 +41,7 @@ namespace CalorieCounter
                 WidthRequest = 30, 
                 Margin = 0, 
                 CornerRadius = 5,
-                BackgroundColor = Color.FromHex("DDA448"),
+                BackgroundColor = Color.FromHex("C3142D"),
                 TextColor = Color.Black,
                 FontSize = 13,
                 FontAttributes = FontAttributes.Bold

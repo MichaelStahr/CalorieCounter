@@ -13,14 +13,14 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="AddFrame" TargetType="Frame">
-                <Setter Property="BorderColor" Value="#C05746"></Setter>
+                <Setter Property="BorderColor" Value="#941728"></Setter>
                 <Setter Property="BackgroundColor" Value="#CBDFBD"></Setter>
                 <Setter Property="HasShadow" Value="True"></Setter>
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="Margin" Value="5,5,5,5"></Setter>
             </Style>
             <Style x:Key="EditButtons" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="#C05746"></Setter>
+                <Setter Property="BackgroundColor" Value="#941728"></Setter>
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
                 <Setter Property="BorderColor" Value="White"></Setter>
                 <Setter Property="BorderWidth" Value="2"></Setter>
@@ -94,14 +94,14 @@
                 </StackLayout>
             </Frame>
             <StackLayout>
-                <Frame x:Name="searchFrame" BorderColor="#C05746" HeightRequest="500" IsVisible="true" Margin="5,0,5,5">
+                <Frame x:Name="searchFrame" BorderColor="#941728" HeightRequest="500" IsVisible="true" Margin="5,0,5,5">
                     <StackLayout>
                         <StackLayout>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0" Margin="2">
                                 <Label x:Name="counterLabel" Text="0" HorizontalOptions="End" FontAttributes="Bold"></Label>
                                 <Label Text=" Items Selected" HorizontalOptions="End" FontAttributes="Bold"></Label>
                             </StackLayout>
-                            <ListView x:Name="foodItemslv" RowHeight="75" SeparatorColor="#C05746" ItemsSource="{Binding MiamiItem}" ItemTapped="FoodItemslv_ItemTapped" >
+                            <ListView x:Name="foodItemslv" RowHeight="75" SeparatorColor="#941728" ItemsSource="{Binding MiamiItem}" ItemTapped="FoodItemslv_ItemTapped" >
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
@@ -117,7 +117,7 @@
 
                                                 </Grid.ColumnDefinitions>
 
-                                                <Label Text="{Binding Formalname}" TextColor="#DDA448" FontAttributes="Bold" FontSize="18" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"></Label>
+                                                <Label Text="{Binding Formalname}" TextColor="#C3142D" FontAttributes="Bold" FontSize="18" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"></Label>
                                                 <Label Text="Location: " Style="{StaticResource ItemSubNameLabel}" Grid.Row="1" Grid.Column="0"></Label>
                                                 <Label Text="{Binding ServiceUnit}" Style="{StaticResource ItemSubValueLabel}" Grid.Row="1" Grid.Column="1"></Label>
                                                 <Label Text="Calories: " Style="{StaticResource ItemSubNameLabel}" Grid.Row="2" Grid.Column="0"></Label>

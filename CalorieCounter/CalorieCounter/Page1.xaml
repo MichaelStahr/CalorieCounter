@@ -11,7 +11,7 @@
                 <On Platform="Android" Value="Acme-Regular.ttf#Acme Regular" />
             </OnPlatform>
             <Style x:Key="frame" TargetType="Frame">
-                <Setter Property="BorderColor" Value="#C05746"></Setter>
+                <Setter Property="BorderColor" Value="#941728"></Setter>
                 <Setter Property="BackgroundColor" Value="#CBDFBD"></Setter>
                 <Setter Property="HasShadow" Value="True"></Setter>
                 <Setter Property="CornerRadius" Value="10"></Setter>
@@ -19,7 +19,7 @@
                 <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
             </Style>
             <Style x:Key="saveButton" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="#DDA448"></Setter>
+                <Setter Property="BackgroundColor" Value="#C3142D"></Setter>
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
                 <Setter Property="BorderColor" Value="White"></Setter>
                 <Setter Property="BorderWidth" Value="2"></Setter>
@@ -29,7 +29,7 @@
             </Style>
             <Style x:Key="nameLabel" TargetType="Label">
                 <Setter Property="FontSize" Value="25"></Setter>
-                <Setter Property="TextColor" Value="#C05746"></Setter>
+                <Setter Property="TextColor" Value="#941728"></Setter>
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
                 <Setter Property="FontFamily" Value="{d:StaticResource HomePage}"></Setter>
             </Style>
@@ -41,7 +41,7 @@
                 <Setter Property="VerticalOptions" Value="Center"></Setter>
             </Style>
             <Style x:Key="whpicker" TargetType="Picker">
-                <Setter Property="TextColor" Value="#C05746"></Setter>
+                <Setter Property="TextColor" Value="#941728"></Setter>
                 <Setter Property="VerticalOptions" Value="Center"></Setter>
                 <Setter Property="FontSize" Value="20"></Setter>
                 <Setter Property="FontFamily" Value="{d:StaticResource HomePage}"></Setter>
@@ -60,7 +60,7 @@
                 <StackLayout Padding="0">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0">
                         <Label x:Name="emailLabel" Text="Email: " Style="{StaticResource layoutLabel}"></Label>
-                        <Label x:Name="email" FontSize="20" FontAttributes="Bold" TextColor="#C05746" VerticalOptions="Center" HorizontalOptions="Center" FontFamily="{d:StaticResource HomePage}"></Label>
+                        <Label x:Name="email" FontSize="20" FontAttributes="Bold" TextColor="#941728" VerticalOptions="Center" HorizontalOptions="Center" FontFamily="{d:StaticResource HomePage}"></Label>
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0">

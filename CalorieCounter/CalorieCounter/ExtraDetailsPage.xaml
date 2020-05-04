@@ -14,7 +14,7 @@
                 <On Platform="Android" Value="Acme-Regular.ttf#Acme Regular" />
             </OnPlatform>
             <Style x:Key="CalorieDetailFrame" TargetType="Frame">
-                <Setter Property="BorderColor" Value="#C05746"></Setter>
+                <Setter Property="BorderColor" Value="#941728"></Setter>
                 <Setter Property="HasShadow" Value="True"></Setter>
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="Margin" Value="5,5,5,5"></Setter>
@@ -22,7 +22,7 @@
             <Style x:Key="Item" TargetType="Label">
                 <Setter Property="FontSize" Value="15"></Setter>
                 <Setter Property="HorizontalOptions" Value="Center"></Setter>
-                <Setter Property="TextColor" Value="#DDA448"></Setter>
+                <Setter Property="TextColor" Value="#C3142D"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
             </Style>
             <Style x:Key="Titles" TargetType="Label">

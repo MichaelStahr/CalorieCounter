@@ -3,7 +3,8 @@
             xmlns:syncfusion="clr-namespace:Syncfusion.SfCalendar.XForms;assembly=Syncfusion.SfCalendar.XForms"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
-            BarBackgroundColor="#DDA448"
+            BarBackgroundColor="#941728"
+            BackgroundColor="#C3142D"
             BarTextColor="White"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
@@ -20,10 +21,12 @@
     </TabbedPage.BindingContext>
     <TabbedPage.Resources>
         <!-- COLOR SCHEME
-            Gold: #DDA448
-            Dark Blue: #537D8D 
-            Dirt Red: #C05746
+            Gold: #000000
+            Dark Blue: #C3142D 
+            Dirt Red: #941728
             Light Green: #CBDFBD
+            Miami red: #C3142D
+            Miami dark red: #941728 
         -->
         <ResourceDictionary>
             <OnPlatform x:TypeArguments="x:String" x:Key="HomePage">
@@ -33,13 +36,13 @@
             <Style x:Key="CaloriesLabel" TargetType="Label">
                 <Setter Property="FontSize" Value="18"></Setter>
                 <Setter Property="HorizontalOptions" Value="Center"></Setter>
-                <Setter Property="TextColor" Value="#537D8D"></Setter>
+                <Setter Property="TextColor" Value="Black"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
             </Style>
             <Style x:Key="CaloriesAmount" TargetType="Label">
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
                 <Setter Property="FontSize" Value="18"></Setter>
-                <Setter Property="TextColor" Value="#DDA448"></Setter>
+                <Setter Property="TextColor" Value="#C3142D"></Setter>
                 <Setter Property="VerticalOptions" Value="Center"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
             </Style>
@@ -47,31 +50,31 @@
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
                 <Setter Property="FontSize" Value="18"></Setter>
                 <Setter Property="HorizontalOptions" Value="Start"></Setter>
-                <Setter Property="TextColor" Value="#DDA448"></Setter>
+                <Setter Property="TextColor" Value="#C3142D"></Setter>
                 <Setter Property="Margin" Value="0,0,5,0"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
             </Style>
             <Style x:Key="FactLabel" TargetType="Label">
                 <Setter Property="FontSize" Value="18"></Setter>  
                 <Setter Property="HorizontalOptions" Value="Start"></Setter>
-                <Setter Property="TextColor" Value="#537D8D"></Setter>
+                <Setter Property="TextColor" Value="Black"></Setter>
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
             </Style>
             <Style x:Key="NotesEditor" TargetType="Editor">
                 <Setter Property="HeightRequest" Value="100"></Setter>
                 <Setter Property="VerticalOptions" Value="Start"></Setter>
-                <Setter Property="BackgroundColor" Value="#CBDFBD"></Setter>
+                <Setter Property="BackgroundColor" Value="White"></Setter>
                 <Setter Property="Placeholder" Value="Enter your notes here!"></Setter>
             </Style>
             <Style x:Key="RedButton" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="#C05746"></Setter>
+                <Setter Property="BackgroundColor" Value="White"></Setter>
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
-                <Setter Property="BorderColor" Value="White"></Setter>
+                <Setter Property="BorderColor" Value="Black"></Setter>
                 <Setter Property="BorderWidth" Value="2"></Setter>
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="FontFamily" Value="{d:StaticResource HomePage}"></Setter>
-                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="TextColor" Value="#C3142D"></Setter>
                 <Setter Property="Margin" Value="0"></Setter>
             </Style>
             <Style x:Key="DateLabel" TargetType="Label">
@@ -81,38 +84,38 @@
                 <Setter Property="FontSize" Value="22"></Setter>
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
                 <Setter Property="FontFamily" Value="{StaticResource HomePage}"></Setter>
-                <Setter Property="TextColor" Value="#DDA448"></Setter>
+                <Setter Property="TextColor" Value="White"></Setter>
             </Style>
             <Style x:Key="DateFrame" TargetType="Frame">
-                <Setter Property="BackgroundColor" Value="#537D8D"></Setter>
+                <Setter Property="BackgroundColor" Value="#941728"></Setter>
                 <Setter Property="BorderColor" Value="White"></Setter>
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="Padding" Value="0,2,0,2"></Setter>
             </Style>
             <Style x:Key="CalorieDetailFrame" TargetType="Frame">
-                <Setter Property="BorderColor" Value="#C05746"></Setter> 
+                <Setter Property="BorderColor" Value="#941728"></Setter> 
                 <Setter Property="HasShadow" Value="True"></Setter>
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="Margin" Value="5,0,5,0"></Setter>
             </Style>
             <Style x:Key="SimpleFoodFrame" TargetType="Frame">
-                <Setter Property="BorderColor" Value="#C05746"></Setter>
-                <Setter Property="BackgroundColor" Value="#CBDFBD"></Setter>
+                <Setter Property="BorderColor" Value="#941728"></Setter>
+                <Setter Property="BackgroundColor" Value="White"></Setter>
                 <Setter Property="HasShadow" Value="True"></Setter>
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="Margin" Value="5,0,5,5"></Setter>
             </Style>
             <Style x:Key="ChartFrame" TargetType="Frame">
-                <Setter Property="BorderColor" Value="#C05746"></Setter>
+                <Setter Property="BorderColor" Value="#941728"></Setter>
                 <Setter Property="HasShadow" Value="True"></Setter>
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="Padding" Value="3"></Setter>
                 <Setter Property="Margin" Value="5,5,5,0"></Setter>
-                <Setter Property="BackgroundColor" Value="#CBDFBD"></Setter>
+                <Setter Property="BackgroundColor" Value="White"></Setter>
             </Style>
             <Style x:Key="SimpleFoodCalorieLabel" TargetType="Label">
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
-                <Setter Property="TextColor" Value="#DDA448"></Setter>
+                <Setter Property="TextColor" Value="#C3142D"></Setter>
                 <Setter Property="FontSize" Value="15"></Setter>
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
             </Style>
@@ -126,73 +129,73 @@
                 <Setter Property="RowSpacing" Value="0"></Setter>
             </Style>
             <chart:ChartColorCollection x:Key="SundayColors">
-                <Color>#DDA448</Color>
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
+                <Color>#000000</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
             </chart:ChartColorCollection>
             <chart:ChartColorCollection x:Key="MondayColors">
-                <Color>#537D8D</Color>
-                <Color>#DDA448</Color>
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
+                <Color>#C3142D</Color>
+                <Color>#000000</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
             </chart:ChartColorCollection>
             <chart:ChartColorCollection x:Key="TuesdayColors">
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
-                <Color>#DDA448</Color>
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
+                <Color>#000000</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
             </chart:ChartColorCollection>
             <chart:ChartColorCollection x:Key="WednesdayColors">
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
-                <Color>#DDA448</Color>
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
+                <Color>#000000</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
             </chart:ChartColorCollection>
             <chart:ChartColorCollection x:Key="ThursdayColors">
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
-                <Color>#DDA448</Color>
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
+                <Color>#000000</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
             </chart:ChartColorCollection>
             <chart:ChartColorCollection x:Key="FridayColors">
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
-                <Color>#DDA448</Color>
-                <Color>#537D8D</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
+                <Color>#000000</Color>
+                <Color>#C3142D</Color>
             </chart:ChartColorCollection>
             <chart:ChartColorCollection x:Key="SaturdayColors">
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
-                <Color>#537D8D</Color>
-                <Color>#DDA448</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
+                <Color>#C3142D</Color>
+                <Color>#000000</Color>
             </chart:ChartColorCollection>
             <chart:DataMarkerLabelStyle x:Key="markerStyle" 
                                         TextColor="White"
-                                        BackgroundColor="#537D8D"
+                                        BackgroundColor="#941728"
                                         FontAttributes="Bold"
-                                        BorderColor="Silver"
+                                        BorderColor="Black"
                                         BorderThickness="1"
                                         >
             </chart:DataMarkerLabelStyle>
@@ -209,7 +212,7 @@
                     <chart:SfChart x:Name="calorieChart" 
                                HeightRequest="400"
                                Margin="5,0,5,0" 
-                               AreaBackgroundColor="#CBDFBD" BackgroundColor="#CBDFBD">
+                               AreaBackgroundColor="White" BackgroundColor="White">
                     
                     <chart:SfChart.BindingContext>
                         <local:ChartViewModel/>
@@ -309,16 +312,16 @@
                                            IsVisible="True">
                                         <syncfusion:SfCalendar.MonthViewSettings>
                                             <syncfusion:MonthViewSettings
-                                                HeaderTextColor="#DDA448"
+                                                HeaderTextColor="#000000"
                                                 HeaderFontAttributes="Bold"
                                                 HeaderFontSize="30"
-                                                CurrentMonthBackgroundColor="#C05746"
-                                                PreviousMonthBackgroundColor="#537D8D"
-                                                TodaySelectionBackgroundColor="#DDA448"
+                                                CurrentMonthBackgroundColor="#941728"
+                                                PreviousMonthBackgroundColor="#C3142D"
+                                                TodaySelectionBackgroundColor="#000000"
                                                 SelectedDayTextColor="White"
-                                                DateSelectionColor="#DDA448"
-                                                DayHeaderTextColor="#DDA448"
-                                                TodayBorderColor="#DDA448"
+                                                DateSelectionColor="#000000"
+                                                DayHeaderTextColor="#000000"
+                                                TodayBorderColor="#000000"
                                                 CurrentMonthTextColor="White"> 
 
                                                 <syncfusion:MonthViewSettings.HeaderFontFamily>
@@ -338,8 +341,8 @@
 
                 <Frame Style="{StaticResource CalorieDetailFrame}">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                        <Label Text="Total Calories:" HorizontalOptions="Center" FontSize="22" TextColor="#537D8D" FontAttributes="Bold" FontFamily="{StaticResource HomePage}"></Label>
-                        <Label x:Name="totalCal" Text="0" HorizontalOptions="Center" VerticalOptions="Center" FontSize="22" FontAttributes="Bold" TextColor="#DDA448" FontFamily="{StaticResource HomePage}"></Label>
+                        <Label Text="Total Calories:" HorizontalOptions="Center" FontSize="22" TextColor="Black" FontAttributes="Bold" FontFamily="{StaticResource HomePage}"></Label>
+                        <Label x:Name="totalCal" Text="0" HorizontalOptions="Center" VerticalOptions="Center" FontSize="22" FontAttributes="Bold" TextColor="#C3142D" FontFamily="{StaticResource HomePage}"></Label>
 
                     </StackLayout>
                 </Frame>
@@ -393,9 +396,9 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Label Text="Daily Items Added" HorizontalOptions="FillAndExpand" FontSize="18" HorizontalTextAlignment="Center" TextColor="#537D8D" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"></Label>
-                            <Label Text="Item" HorizontalOptions="FillAndExpand" FontSize="16" HorizontalTextAlignment="Start" TextColor="#537D8D" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"></Label>
-                            <Label Text="Calories" HorizontalOptions="FillAndExpand" FontSize="16" HorizontalTextAlignment="End" TextColor="#537D8D" FontAttributes="Bold" Grid.Row="1" Grid.Column="1"></Label>
+                            <Label Text="Daily Items Added" HorizontalOptions="FillAndExpand" FontSize="18" HorizontalTextAlignment="Center" TextColor="#C3142D" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"></Label>
+                            <Label Text="Item" HorizontalOptions="FillAndExpand" FontSize="16" HorizontalTextAlignment="Start" TextColor="#C3142D" FontAttributes="Bold" Grid.Row="1" Grid.Column="0"></Label>
+                            <Label Text="Calories" HorizontalOptions="FillAndExpand" FontSize="16" HorizontalTextAlignment="End" TextColor="#C3142D" FontAttributes="Bold" Grid.Row="1" Grid.Column="1"></Label>
                         </Grid>
                             <StackLayout>
                                 <ListView x:Name="simpleFoodlv" ItemsSource="{Binding SimpleFood}" SelectionMode="None">
