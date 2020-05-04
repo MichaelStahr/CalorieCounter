@@ -5,6 +5,9 @@ using Xamarin.Forms;
 
 namespace CalorieCounter
 {
+    /// <summary>
+    /// A custom Stepper for increasing/decreasing item count on AddItemsPopUp page
+    /// </summary>
     public class CustomStepper : StackLayout
     {
         Button PlusBtn;

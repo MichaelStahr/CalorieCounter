@@ -6,6 +6,9 @@ using System.Text;
 
 namespace CalorieCounter
 {
+    /// <summary>
+    /// An item in the food list at the bottom of the Home page
+    /// </summary>
     [JsonObject]
     public class SimpleFood
     {

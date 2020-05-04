@@ -56,7 +56,6 @@
                     <Image Source="miamiEdit1.png" Style="{StaticResource MiamiLogo}"></Image>
                     <Label Text="Welcome to Calorie Counter!" Style="{StaticResource WelcomeLabel}"></Label>
                     <Button x:Name="LoginButton" Text="Login" Clicked="LoginButton_Clicked" Style="{StaticResource LoginButton}"></Button>
-                    <!--<Button x:Name ="SignUpButton" Text="Enter" Clicked="SignUpButton_Clicked" Style="{StaticResource LoginButton}"></Button>-->
                     <ActivityIndicator x:Name="activityIndicator" Color="#DDA448" IsRunning="False"></ActivityIndicator>
                     <Label x:Name="LoggingIn" Text="Logging in..." IsVisible="False" Style="{StaticResource LoggingInLabel}"></Label>
                     <Label x:Name="welcomeName" IsVisible="False" Style="{StaticResource LoggingInLabel}"></Label>

@@ -6,7 +6,9 @@ using System.Text;
 
 namespace CalorieCounter
 {
-
+    /// <summary>
+    /// A data point on the bar chart on the Main page
+    /// </summary>
     public class ChartData
     {
         public string Date { get; set; } 

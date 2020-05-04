@@ -14,6 +14,7 @@ using Xamarin.Forms.Xaml;
 namespace CalorieCounter
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+    
     public partial class AddItemsPopUp : PopupPage
     {
 
@@ -26,7 +27,6 @@ namespace CalorieCounter
         private DateTime currentDate = DateTime.Today;
         private readonly string unique_id;
         private Label count;
-        
         
         public AddItemsPopUp(AddPopUpViewModel viewModel, Label count)
         {
@@ -93,6 +93,10 @@ namespace CalorieCounter
             count.Text = 0.ToString();
         }
 
+        /// <summary>
+        /// Inserts an item that a user added into the UserEats table
+        /// </summary>
+        /// <param name="item"></param>
         async void InsertFoodForUser(MiamiItem item)
         {
             // uniqueId=string&offeredId=string&date=string
@@ -106,6 +110,11 @@ namespace CalorieCounter
 
         }
 
+        /// <summary>
+        /// Changes a date into a string verison of itself
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         private string ChangeDateToString(DateTime date)
         {
             string year = date.Year.ToString();

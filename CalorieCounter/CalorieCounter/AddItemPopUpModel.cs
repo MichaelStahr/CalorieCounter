@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace CalorieCounter
 {
+    /// <summary>
+    /// A model for an item appearing in the listview of AddItemsPopUp page
+    /// </summary>
     public class AddItemPopUpModel
     {
         public MiamiItem Item { get; set; }

@@ -80,6 +80,9 @@ namespace CalorieCounter
             HighlightCurrentSelectedDayOnChart();
         }
 
+        /// <summary>
+        /// Gets the signed in user's IdToken 
+        /// </summary>
         private async void GetUserIdToken()
         {
             try
@@ -92,6 +95,10 @@ namespace CalorieCounter
             }
         }
 
+        /// <summary>
+        /// Enable or disable forward a day or week buttons 
+        /// </summary>
+        /// <param name="date"></param>
         private void EnableOrDisableForwardButtons(DateTime date)
         {
             if (DateTime.Compare(date, DateTime.Today) == 0)
@@ -107,6 +114,9 @@ namespace CalorieCounter
             }
         }
 
+        /// <summary>
+        /// Change the chart style to highlight current selected day
+        /// </summary>
         private void HighlightCurrentSelectedDayOnChart()
         {
             DateTime date = Preferences.Get("currentSelectedDate", DateTime.Today);
@@ -135,6 +145,13 @@ namespace CalorieCounter
             //GetFoodForDay();
         }
 
+        /// <summary>
+        /// Gets the requestUri for displaying the selected day's nutritional values
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns>
+        /// The request Uri
+        /// </returns>
         public string DisplayDailyValuesByUserDay(string date)
         {
             // /api.asmx/DisplayDailyValuesByUserDay
@@ -148,6 +165,10 @@ namespace CalorieCounter
             return requestUri;
         }
         
+        /// <summary>
+        /// Looks up and displays the selected day's nutritional values
+        /// </summary>
+        /// <param name="date"></param>
         async void FoodLookup(string date)
         {
             List<DailyValues> dailyValues = null;
@@ -169,6 +190,10 @@ namespace CalorieCounter
             
         }
 
+        /// <summary>
+        /// Update/Refresh the graph if the selected day changes
+        /// </summary>
+        /// <param name="selectedDate"></param>
         private async void UpdateCalorieGraph(DateTime selectedDate)
         {
             
@@ -228,9 +253,12 @@ namespace CalorieCounter
             calorieChartSeries.ItemsSource = model.Data1;
             
         }
-
-       
-
+        
+        /// <summary>
+        /// Updated
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         private string ChangeDateToString(DateTime date)
         {
             string year = date.Year.ToString();
@@ -240,6 +268,13 @@ namespace CalorieCounter
             return strDate;
         }
 
+        /// <summary>
+        /// Returns the total calories a user has consumed for a day
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns>
+        /// The total calories
+        /// </returns>
         public async Task<Double> GetDailyCaloriesForDate(string date)
         {
             List<DailyValues> dailyValues = null;
@@ -270,6 +305,14 @@ namespace CalorieCounter
             HighlightCurrentSelectedDayOnChart();
         }
 
+        /// <summary>
+        /// Checks if the chart needs updated
+        /// </summary>
+        /// <param name="previousSelected"></param>
+        /// <param name="currentSeleceted"></param>
+        /// <returns>
+        /// True if it needs updated, false if not
+        /// </returns>
         private bool CheckIfChartNeedsUpdated(DateTime previousSelected, DateTime currentSeleceted)
         {
             DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
@@ -355,18 +398,18 @@ namespace CalorieCounter
 
         }
 
-
-        async void Button_Clicked(object sender, EventArgs e)
-        {
-
-            await Navigation.PushAsync(new ExtraDetailsPage(dateString), true);
-        }
-
         private void ClickToShowPopup_Clicked(object sender, EventArgs e)
         {
             popup.Show();
         }
 
+        /// <summary>
+        /// Returns the request Uri for getting the foods eaten by the user on a specific date
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns>
+        /// The request Uri
+        /// </returns>
         public string DisplayFoodItemsByUserDay(string date)
         {
             // /api.asmx/GetFoodEatenByUserDay?uniqueId=string&date=string&token=string
@@ -378,6 +421,10 @@ namespace CalorieCounter
 
             return requestUri;
         }
+
+        /// <summary>
+        /// Gets the list of items a user ate for the selected day
+        /// </summary>
         async void GetFoodForDay()
         {
             List<SimpleFood> foods;

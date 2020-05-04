@@ -2,6 +2,9 @@
 
 namespace CalorieCounter
 {
+    /// <summary>
+    /// The values accociated with food items in our database
+    /// </summary>
     [JsonObject]
     public class MiamiItem
     {

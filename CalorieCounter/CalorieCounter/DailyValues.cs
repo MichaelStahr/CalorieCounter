@@ -2,6 +2,9 @@
 
 namespace CalorieCounter { 
 
+    /// <summary>
+    /// The nutritional values associated with each food item returned from Miami's API
+    /// </summary>
     [JsonObject]
     public class DailyValues
     {

@@ -7,6 +7,9 @@ using System.Text;
 
 namespace CalorieCounter
 {
+    /// <summary>
+    /// Values returned from Google authentication 
+    /// </summary>
     [JsonObject]
     public class TokenResponse
     {

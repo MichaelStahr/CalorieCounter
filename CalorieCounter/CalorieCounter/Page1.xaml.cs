@@ -37,6 +37,9 @@ namespace CalorieCounter
 
         }
 
+        /// <summary>
+        /// Gets the user's hieght and weight
+        /// </summary>
         public async void GetUserInfo()
         {
             try
@@ -75,6 +78,14 @@ namespace CalorieCounter
             }
         }
 
+        /// <summary>
+        /// Returns the request Uri for gettin a specific user
+        /// </summary>
+        /// <param name="uniqueId"></param>
+        /// <param name="tokenId"></param>
+        /// <returns>
+        /// The request Uri
+        /// </returns>
         public string GetUserUri(string uniqueId, string tokenId)
         {
             // api.asmx/GetUser?uniqueId=string&tokenId=string
@@ -86,6 +97,13 @@ namespace CalorieCounter
             return requestUri;
         }
 
+        /// <summary>
+        /// Updated the user's weight and height 
+        /// </summary>
+        /// <param name="uniqueId"></param>
+        /// <param name="idToken"></param>
+        /// <param name="weight"></param>
+        /// <param name="height"></param>
         public async void UpdateUserWeightAndHeight(string uniqueId, string idToken, int weight, int height)
         {
             //uniqueId = string & tokenId = string & weight = string & height = string

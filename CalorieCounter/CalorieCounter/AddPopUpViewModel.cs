@@ -5,14 +5,15 @@ using System.Text;
 
 namespace CalorieCounter
 {
+    /// <summary>
+    /// The collection of items on the AddItemsPopUp page
+    /// </summary>
     public class AddPopUpViewModel
     {
-       //public ObservableCollection<MiamiItem> ItemData { get; set; }
-
+      
        public ObservableCollection<AddItemPopUpModel> ItemData { get; set; }
         public AddPopUpViewModel()
         {
-            //ItemData = new ObservableCollection<MiamiItem>();
             ItemData = new ObservableCollection<AddItemPopUpModel>();
         }
 

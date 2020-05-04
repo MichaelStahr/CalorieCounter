@@ -30,8 +30,8 @@ namespace CalorieCounter
         private string eatsDate;
         private string userTokenId;
         AddPopUpViewModel popUpView;
-        AddPopUpViewModel selectedItems;
-        AddItemsPopUp selectedItemsCount;
+        //AddPopUpViewModel selectedItems;
+        //AddItemsPopUp selectedItemsCount;
         int count;
         public Page2()
         {
@@ -43,11 +43,14 @@ namespace CalorieCounter
             // access Miami API and put in our DB - currently uncomment and run manually
             //MiamiFoodLookup();
             popUpView = new AddPopUpViewModel();
-            selectedItems = new AddPopUpViewModel();
+            //selectedItems = new AddPopUpViewModel();
             count = 0;
             GetActiveLocations();
         }
 
+        /// <summary>
+        /// Get the user's IdToken
+        /// </summary>
         private async void GetUserIdToken()
         {
             try
@@ -60,6 +63,11 @@ namespace CalorieCounter
             }
         }
 
+        /// <summary>
+        /// Change a date to a string version of itself
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         private string ChangeDateToString(DateTime date)
         {
             string year = date.Year.ToString();
@@ -77,6 +85,9 @@ namespace CalorieCounter
             }
         }
 
+        /// <summary>
+        /// Gets active or open dining locations
+        /// </summary>
         public async void GetActiveLocations()
         {
             // /api.asmx/GetActiveLocations?
@@ -103,6 +114,13 @@ namespace CalorieCounter
             
         }
 
+        /// <summary>
+        /// Returns the request Uri for searching a food by it's name and location
+        /// </summary>
+        /// <param name="location"></param>
+        /// <returns>
+        /// The request Uri
+        /// </returns>
         public string SearchFoodByNameAndLocation(string location)
         {
 
@@ -117,6 +135,11 @@ namespace CalorieCounter
             return requestUri;
         }
 
+        /// <summary>
+        /// Returns the request Uri for searching foods by location only
+        /// </summary>
+        /// <param name="location"></param>
+        /// <returns></returns>
         public string SearchFoodByLocation(string location)
         {
             // /api.asmx/SearchFoodByLocation?location=string
@@ -127,32 +150,18 @@ namespace CalorieCounter
             return requestUri;
         }
 
-        public string GetMiamiFoodByNameAndLocation(string location)
+        /// <summary>
+        /// Returns the request Uri for retrieving all items at a location on Miami's campus
+        /// Change the last param (the location) to get another location's items
+        /// </summary>
+        /// <param name="location"></param>
+        /// <returns></returns>
+        public string GetMiamiFoodByLocation(string location)
         {
-
+            // Locations: ASC, King, Martin...
             string search = "https://www.hdg.miamioh.edu/Code/MyCard/MyFSSNutritionalAPI.php?ThisLocation=ASC";
 
-
-            //string food = Uri.EscapeUriString(SearchingFoods.Text);
-            //string requestUri = miamiApiEndpoint;
-            //requestUri += $"?ThisLocation={location}";
-            //requestUri += $"&ThisItem={food}";
-
-            // hard coded for now
             return search;
-        }
-
-        public string UpdateDailyLogByUser()
-        {
-            // /api.asmx / UpdateDailyValuesByUserDay ? uniqueId = string & date = string & token = string
-
-            string requestUri = apiEndpoint;
-            requestUri += "UpdateDailyLogByUserDay";
-            requestUri += $"?uniqueId={unique_id}";
-            requestUri += $"&date={eatsDate}";
-            requestUri += $"&token={userTokenId}";
-
-            return requestUri;
         }
 
         private void Entry_TextChanged(object sender, TextChangedEventArgs e)
@@ -190,18 +199,23 @@ namespace CalorieCounter
             }
         }
 
-        // need to figure out best time and place to call this 
+        /// <summary>
+        /// Stores all Miami items at a location in our database
+        /// Currently have to uncomment in the contructor and run manually for each location you want food to be added
+        /// </summary>
         async void MiamiFoodLookup()
         {
             string foods = null;
             // returns a string representation of an xml file
-            foods = await _restService.GetMiamiFoodDataAsync(GetMiamiFoodByNameAndLocation(locationsPicker.SelectedItem.ToString()));
+            foods = await _restService.GetMiamiFoodDataAsync(GetMiamiFoodByLocation(""));
             // send xml file to stored procedure to store in DB
             await _restService.InsertMiamiFoodDataAsync(apiEndpoint + "InsertXml", foods);
 
         }
 
-        //get
+        /// <summary>
+        /// Displays food by it's name and location
+        /// </summary>
         async void LookUpFoodByNameAndLocation()
         {
             List<MiamiItem> miamiFoodItem = new List<MiamiItem>();
@@ -230,6 +244,9 @@ namespace CalorieCounter
            
         }
 
+        /// <summary>
+        /// Displays food by location only
+        /// </summary>
         async void LookUpFoodByLocation()
         {
             List<MiamiItem> miamiFoodItem = new List<MiamiItem>();
@@ -254,34 +271,16 @@ namespace CalorieCounter
             
         }
 
-        async void InsertFoodForUser(MiamiItem item)
-        {
-            // uniqueId=string&offeredId=string&date=string
-            if (item != null)
-            {
-                string date = ChangeDateToString(currentDate);
-                string data = "uniqueId=" + unique_id + "&offeredId=" + item.Offered_id + "&date=" + date;
-                
-                await _restService.InsertFoodIntoUserEats(apiEndpoint + "UserEatFood", data);
-            }
-          
-        }
-
-        private void QuickAdd_Clicked(object sender, EventArgs e)
-        {
-            MiamiItem mItem = (MiamiItem)foodItemslv.SelectedItem;
-            if (mItem != null)
-            {
-                InsertFoodForUser(mItem);
-                DisplayAlert("", "Item added!", "Close");
-            }
-        }
-
         private async void ShowFoodsToBeAdded_Clicked(object sender, EventArgs e)
         {
             await PopupNavigation.Instance.PushAsync(new AddItemsPopUp(popUpView, counterLabel));
         }
 
+        /// <summary>
+        /// When an item in the food list is tapped, keep track of the count and add it to the AddItemsPopup list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FoodItemslv_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             MiamiItem mItem = (MiamiItem)foodItemslv.SelectedItem;

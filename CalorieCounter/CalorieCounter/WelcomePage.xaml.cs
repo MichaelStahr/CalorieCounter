@@ -63,6 +63,11 @@ namespace CalorieCounter
             }
         }
 
+        /// <summary>
+        /// Login the user
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void LoginButton_Clicked(object sender, EventArgs e)
         {
             try
@@ -100,26 +105,10 @@ namespace CalorieCounter
             
         }
 
-        private async void SignUpButton_Clicked(object sender, EventArgs e)
-        {
-            //Navigation.PushAsync(new SignUpPage());
-            
-            try
-            {
-                await SecureStorage.SetAsync("id_token", "");
-            }
-            catch (Exception ex)
-            {
-                // Possible that device doesn't support secure storage on device.
-            }
-            Preferences.Set("user", "birdaj");
-            Preferences.Set("firstName", "Alec");
-            Preferences.Set("lastName", "Bird");
-            Preferences.Set("email", "birdaj@miamioh.edu");
-            Preferences.Set("picture", "https://lh3.googleusercontent.com/-P5lBiBQZ1i0/AAAAAAAAAAI/AAAAAAAAAAA/AAKWJJMf0a_ABrMXci_Omledzhi_YGtBTw/s96-c/photo.jpg");
-            await Navigation.PushModalAsync(new MainPage());
-        }
-
+        /// <summary>
+        /// Authenticate the user through Google
+        /// </summary>
+        /// <returns></returns>
         public async Task<IdToken> AuthenticateUser()
         {
             string requestUri = "https://accounts.google.com/o/oauth2/v2/auth?";
@@ -172,6 +161,14 @@ namespace CalorieCounter
 
         }
 
+        /// <summary>
+        /// Returns the request Uri for getting a user
+        /// </summary>
+        /// <param name="uniqueId"></param>
+        /// <param name="tokenId"></param>
+        /// <returns>
+        /// The request Uri
+        /// </returns>
         public string GetUserUri(string uniqueId, string tokenId)
         {
             // api.asmx/GetUser?uniqueId=string&tokenId=string
@@ -183,6 +180,11 @@ namespace CalorieCounter
             return requestUri;
         }
 
+        /// <summary>
+        /// Signs up the user
+        /// </summary>
+        /// <param name="uniqueId"></param>
+        /// <param name="idToken"></param>
         public async void SignUpUser(string uniqueId, IdToken idToken)
         {
             string content = $"uniqueId={uniqueId}&firstName={idToken.GivenName}&lastName={idToken.FamilyName}&email={idToken.Email}&tokenId={idToken.Sub}";

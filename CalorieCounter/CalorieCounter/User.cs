@@ -5,6 +5,9 @@ using System.Text;
 
 namespace CalorieCounter
 {
+    /// <summary>
+    /// A user's characteristics
+    /// </summary>
     [JsonObject]
     public class User
     {

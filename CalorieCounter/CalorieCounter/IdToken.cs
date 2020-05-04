@@ -5,6 +5,9 @@ using System.Text;
 
 namespace CalorieCounter
 {
+    /// <summary>
+    /// The values returned with the IdToken retrieved from Google auth
+    /// </summary>
     [JsonObject]
     public class IdToken
     {
