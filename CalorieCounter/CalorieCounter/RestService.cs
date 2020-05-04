@@ -43,38 +43,15 @@ namespace CalorieCounter
             return handler;
         }
 
-        public async Task<FoodItem> GetFoodCaloriesAsync(string uri)
-        {
-            List<FoodItem> foodItems = null;
-            FoodItem item = null;
-            try
-            {
-                HttpResponseMessage response = await _client.GetAsync(uri);
-                HttpStatusCode i = response.StatusCode;
+        
 
-                if (response.IsSuccessStatusCode)
-                {
-                    string c = await response.Content.ReadAsStringAsync();
-
-                    foodItems = JsonConvert.DeserializeObject<List<FoodItem>>(c);
-
-                }
-            }
-            catch (HttpRequestException e)
-            {
-                Console.WriteLine(e.InnerException.Message);
-            }
-            if (foodItems == null)
-            {
-                return item;
-            }
-            else
-            {
-                return foodItems[0];
-            }
-
-        }
-
+        /// <summary>
+        /// Get foods in our database
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <returns>
+        /// List of food items
+        /// </returns>
         public async Task<List<MiamiItem>> GetFoodDataAsync(string uri)
         {
             //List<FoodItem> listFood = null;
@@ -101,6 +78,13 @@ namespace CalorieCounter
              return miamiFoodList; 
         }
 
+        /// <summary>
+        /// Get Miami foods by calling their API
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <returns>
+        /// List a string representation of Miami items in xml
+        /// </returns>
         public async Task<String> GetMiamiFoodDataAsync(string uri)
         {
             string file = null;
@@ -136,6 +120,11 @@ namespace CalorieCounter
 
         }
 
+        /// <summary>
+        /// Insert Miami items into our database
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="xmlContent"></param>
         public async Task InsertMiamiFoodDataAsync(string uri, string xmlContent)
         {
             try
@@ -165,44 +154,11 @@ namespace CalorieCounter
             }
         }
 
-       
-
-        public async Task<string> InsertFoodIntoLogForUser(string uri, FoodEaten data)
-        {
-            string inserted = "false";
-            try
-            {
-                var json = JsonConvert.SerializeObject(data);
-                using (var message = new HttpRequestMessage(HttpMethod.Post, uri))
-                {
-                    message.Version = HttpVersion.Version10;
-                    message.Content = new StringContent(json, Encoding.UTF8, "application/json");
-
-                    using (var response = await _client.SendAsync(message))
-                    {
-                        string result = await response.Content.ReadAsStringAsync();
-                        if (response.IsSuccessStatusCode)
-                        {
-                            inserted = "success";
-                        }
-                    }
-                }
-                //var content = new StringContent(data, Encoding.UTF8, "application/json");
-                //HttpResponseMessage response = await _client.PostAsync(uri, content);
-                //HttpStatusCode i = response.StatusCode;
-                //string result = response.Content.ReadAsStringAsync().Result;
-                //if (response.IsSuccessStatusCode)
-                //{
-                //    inserted = "success";
-                //}
-            }
-            catch (HttpRequestException e)
-            {
-                Console.WriteLine(e.InnerException.Message);
-            }
-            return inserted;
-        }
-
+        /// <summary>
+        /// Insert food into a user eats into the UserEats table
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="data"></param>
         public async Task InsertFoodIntoUserEats(string uri, string data)
         {
             try
@@ -229,31 +185,13 @@ namespace CalorieCounter
             }
         }
 
-        public async Task UpdateDailyLogForUser(string uri, UserLogData data)
-        {
-            try
-            {
-                var json = JsonConvert.SerializeObject(data);
-                using (var message = new HttpRequestMessage(HttpMethod.Post, uri))
-                {
-                    message.Version = HttpVersion.Version10;
-                    message.Content = new StringContent(json, Encoding.UTF8, "application/json");
-
-                    var response = await _client.SendAsync(message);
-                    
-                    string result = await response.Content.ReadAsStringAsync();
-                    if (response.IsSuccessStatusCode)
-                    {
-                         //yay   
-                    }
-                }
-            }
-            catch (HttpRequestException e)
-            {
-                Console.WriteLine(e.InnerException.Message);
-            }
-        }
-
+        /// <summary>
+        /// Get the daily nutritional values of a day for a user
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <returns>
+        /// A list of nutrional values
+        /// </returns>
         public async Task<List<DailyValues>> DisplayDailyValuesByUserDayAsync(string uri)
         {
             List<DailyValues> listFood = null;
@@ -285,6 +223,13 @@ namespace CalorieCounter
 
         }
 
+        /// <summary>
+        /// Get food items and their calories
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <returns>
+        /// A list of foods with their calories
+        /// </returns>
         public async Task<List<SimpleFood>> GetSimpleFoodItemForUserAsync(string uri)
         {
             List<SimpleFood> simpleFoodList = null;
@@ -309,6 +254,14 @@ namespace CalorieCounter
             return simpleFoodList;
         }
 
+        /// <summary>
+        /// Get a token authenticating a user
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="content"></param>
+        /// <returns>
+        /// A token's info
+        /// </returns>
         public async Task<TokenResponse> ObtainAccessToken(string uri, string content)
         {
 
@@ -339,6 +292,13 @@ namespace CalorieCounter
             return tokenData;
         }
 
+        /// <summary>
+        /// Checks if a user exists
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <returns>
+        /// True if the user exists, false otherwise
+        /// </returns>
         public async Task<bool> GetUser(string uri)
         {
             List<User> users = null;
@@ -366,6 +326,13 @@ namespace CalorieCounter
             return false;
         }
 
+        /// <summary>
+        /// Get a user's info
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <returns>
+        /// A list containing one user
+        /// </returns>
         public async Task<List<User>> GetUserInfo(string uri)
         {
             List<User> users = null;
@@ -390,6 +357,11 @@ namespace CalorieCounter
             return users;
         }
 
+        /// <summary>
+        /// Insert a user into the Person table
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="content"></param>
         public async Task InsertNewsUser(string uri, string content)
         {
             string result = "";
@@ -417,6 +389,11 @@ namespace CalorieCounter
             }
         }
 
+        /// <summary>
+        /// Update the user weight and height
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="content"></param>
         public async Task UpdateWeightAndHeightForUser(string uri, string content)
         {
             string result = "";
@@ -444,6 +421,13 @@ namespace CalorieCounter
             }
         }
 
+        /// <summary>
+        /// Get locations that are active/open
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <returns>
+        /// A list of locations 
+        /// </returns>
         public async Task<List<Location>> GetActiveLocations(string uri)
         {
             List<Location> locations = null;
