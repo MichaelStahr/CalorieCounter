@@ -14,7 +14,7 @@
         <ResourceDictionary>
             <Style x:Key="AddFrame" TargetType="Frame">
                 <Setter Property="BorderColor" Value="#941728"></Setter>
-                <Setter Property="BackgroundColor" Value="#CBDFBD"></Setter>
+                <Setter Property="BackgroundColor" Value="White"></Setter>
                 <Setter Property="HasShadow" Value="True"></Setter>
                 <Setter Property="CornerRadius" Value="10"></Setter>
                 <Setter Property="Margin" Value="5,5,5,5"></Setter>
@@ -29,12 +29,12 @@
             </Style>
             <Style x:Key="ItemSubNameLabel" TargetType="Label">
                 <Setter Property="FontSize" Value="15"></Setter>
-                <Setter Property="TextColor" Value="#537D8D"></Setter>
+                <Setter Property="TextColor" Value="Black"></Setter>
                 <Setter Property="Margin" Value="20,0,0,0"></Setter>
             </Style>
             <Style x:Key="ItemSubValueLabel" TargetType="Label">
                 <Setter Property="FontSize" Value="15"></Setter>
-                <Setter Property="TextColor" Value="#537D8D"></Setter>
+                <Setter Property="TextColor" Value="Black"></Setter>
                 <Setter Property="HorizontalOptions" Value="Start"></Setter>
                 <Setter Property="Margin" Value="5,0,0,0"></Setter>
             </Style>
@@ -63,6 +63,7 @@
                         <SearchBar x:Name="SearchingFoods" 
                                    Placeholder="Search" 
                                    TextChanged="Entry_TextChanged"
+                                   TextColor="#C3142D"
                                    HorizontalOptions="FillAndExpand"
                                    VerticalOptions="End"
                                    Grid.Column="1"
@@ -73,6 +74,7 @@
                                 SelectedIndexChanged="Locations_SelectedIndexChanged" 
                                 HorizontalOptions="FillAndExpand"
                                 VerticalOptions="End"
+                                TextColor="#C3142D"
                                 Title="Select a location"
                                 Grid.Column="0"
                                 Grid.Row="0">
