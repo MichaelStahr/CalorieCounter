@@ -13,6 +13,7 @@ namespace CalorieCounter
         Button PlusBtn;
         Button MinusBtn;
 
+        //https://forums.xamarin.com/discussion/140026/stepper-in-xamarin-forms
         public static readonly BindableProperty TextProperty =
           BindableProperty.Create(
              propertyName: "Text",

@@ -18,7 +18,6 @@ namespace CalorieCounter
     {
 
         public static string BaseAddress = "http://caloriecounter.mikestahr.com";
-        //Device.RuntimePlatform == Device.Android ? "https://10.0.2.2:44341" : "https://localhost:44341";
         public static string apiEndpoint = $"{BaseAddress}/api.asmx/";
         RestService _restService;
         private string client_id;
